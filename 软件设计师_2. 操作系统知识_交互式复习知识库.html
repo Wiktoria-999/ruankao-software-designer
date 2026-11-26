@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><script>(function(){try{document.documentElement.dataset.theme=JSON.parse(localStorage.getItem('sd_os_v1_theme'))==='dark'?'dark':'light'}catch(e){document.documentElement.dataset.theme='light'}})();</script><title>操作系统知识 · 软件设计师备考知识库</title>
+<style>
+:root{--ink:#1e2733;--muted:#657385;--soft:#8b95a1;--bg:#f5f6f8;--panel:#fff;--nav:#1d2633;--nav2:#293646;--line:#e5e9ee;--accent:#2773d4;--accent-bg:#eef5fe;--darkblue:#203b61;--card-shadow:0 6px 30px rgba(28,40,59,.045);--amber:#aa6c1c;--red:#b84b4b;--green:#167966;--radius:14px}*{box-sizing:border-box}html,body{margin:0;height:100%;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:var(--bg);font-size:15px;-webkit-font-smoothing:antialiased}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #8abaff;outline-offset:2px}button:disabled{cursor:not-allowed;opacity:.45}a{color:inherit}p{line-height:1.88}h1,h2,h3{letter-spacing:-.025em}h1{font-size:32px}h2{font-size:22px}h3{font-size:17px}.hidden{display:none!important}
+.app{height:100dvh;min-height:530px;display:grid;grid-template-columns:264px minmax(0,1fr)}.side{background:var(--nav);color:#cbd5e2;display:flex;flex-direction:column;overflow-y:auto;min-height:0;border-right:1px solid #0f1b29}.brand{padding:27px 20px 24px;border-bottom:1px solid #ffffff12}.brand .mono{color:#95bbf4;font-weight:800;letter-spacing:1.4px;font-size:10px}.brand h2{color:white;margin:12px 0 8px;font-size:19px;line-height:1.45}.brand p{font-size:12px;color:#9baebf;line-height:1.65;margin:0}.side-head{display:flex;justify-content:space-between;align-items:center;margin:27px 20px 10px;color:#8b9aad;font-size:11px;font-weight:800;letter-spacing:1px}.nav-list{padding:0 11px 18px}.nav-group{margin:3px 0}.chap-button{width:100%;background:none;border:0;color:#bbc8d7;display:flex;gap:10px;align-items:flex-start;border-radius:9px;padding:12px 11px;text-align:left;font-size:13px;font-weight:650;line-height:1.55}.chap-button:hover,.chap-button.active{background:#2b3a4d;color:white}.chap-num{font-size:11px;font-weight:800;color:#86b9fd;min-width:23px;margin-top:2px}.chap-chevron{margin-left:auto;color:#8293a4;font-size:13px}.subnav{padding:3px 5px 9px 42px;display:grid;gap:2px}.subnav button{background:none;border:0;text-align:left;color:#9daebe;padding:8px 9px;border-radius:7px;font-size:12px;line-height:1.52}.subnav button:hover{background:#2b3949;color:#e4ebf4}.subnav button.selected{background:#354962;color:white;box-shadow:inset 2px 0 #87b5ff}.subnav button.complete:after{content:'✓';color:#81d1ba;margin-left:5px}.side-footer{margin-top:auto;padding:18px 18px 26px;border-top:1px solid #ffffff12}.side-footer .frow{display:flex;align-items:center;justify-content:space-between;font-size:12px;margin-bottom:11px}.side-footer strong{color:white}.progressbar{height:7px;border-radius:10px;background:#425065;overflow:hidden}.progressbar>span{display:block;height:100%;width:0;background:#76aefa;transition:width .2s}.side-footer small{display:block;color:#8da0b2;line-height:1.8;margin-top:10px;font-size:11px}
+.workspace{min-width:0;display:flex;flex-direction:column;overflow:hidden}.topbar{background:white;border-bottom:1px solid var(--line);height:70px;padding:0 32px;flex:none;display:flex;align-items:center;justify-content:space-between;gap:18px}.top-left{display:flex;align-items:center;gap:13px;min-width:0}.toptitle{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:780;font-size:15px}.top-small{color:#8a95a0;font-size:11px;margin-top:3px}.mobile-toggle{display:none}.tabs{display:flex;align-items:center;gap:4px;background:#f3f5f8;padding:5px;border-radius:11px}.tab{background:none;border:0;padding:10px 14px;color:#657387;border-radius:8px;font-size:13px;white-space:nowrap;font-weight:690}.tab.on{color:#183a67;background:white;box-shadow:0 2px 8px #16233815}.tab:hover{color:#153b71}.top-actions{display:flex;gap:10px;align-items:center}.iconbutton{display:inline-flex;align-items:center;justify-content:center;width:39px;height:39px;background:white;border:1px solid #dce3ea;border-radius:10px;color:#5c6b7b;font-size:19px}.iconbutton:hover{background:#f4f8fd;border-color:#bfd3eb}.content-shell{flex:1;display:flex;min-height:0;overflow:auto;scroll-behavior:smooth}.content{width:100%;max-width:1130px;padding:38px 42px 90px;margin:0 auto;min-width:0}.content.reading{max-width:1000px}.kicker{font-size:11px;font-weight:820;color:#2972c2;letter-spacing:1.5px;text-transform:uppercase}.muted{color:var(--muted)}.tiny{font-size:12px;color:var(--soft)}.crumb{font-size:12px;color:#8b97a2;margin-bottom:15px}.title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.big-title{font-size:31px;line-height:1.35;letter-spacing:-.4px;margin:10px 0 10px}.lede{font-size:15px;line-height:1.95;color:#536477;max-width:860px;margin:0 0 25px}.pill{display:inline-flex;align-items:center;font-size:11px;border-radius:6px;padding:4px 8px;font-weight:720;background:#eef2f6;color:#607285;margin-right:6px;white-space:nowrap}.pill.must{background:#fff0ed;color:#bf594e}.pill.frequent{background:#fff4e7;color:#a46e24}.pill.understand{background:#edf5ff;color:#527baa}.small-button{border:1px solid #dbe4ed;border-radius:9px;padding:10px 14px;background:white;color:#485b71;font-size:12px;font-weight:740;white-space:nowrap}.small-button:hover{background:#f0f6fe;border-color:#8fb6df}.small-button.primary{background:#2266c3;color:white;border-color:#2266c3}.small-button.primary:hover{background:#1753a6}.small-button.tinted{background:#edf5ff;border-color:#d7e9fc;color:#2367aa}.small-button.done{background:#ecf8f3;color:#08755e;border-color:#b8ddcf}.small-button.danger{color:#b55b5b}
+.hero{background:linear-gradient(115deg,#182b46,#284b70);border-radius:18px;color:white;padding:39px 42px;position:relative;overflow:hidden;box-shadow:0 12px 28px #1b34551e}.hero:after{content:'';position:absolute;border-radius:100%;width:320px;height:320px;border:1px solid #ffffff17;right:-110px;top:-130px;box-shadow:0 0 0 65px #ffffff07,0 0 0 138px #ffffff04;pointer-events:none}.hero .kicker{color:#b2d2ff}.hero h1{font-size:35px;margin:13px 0 15px;max-width:720px}.hero p{line-height:1.95;font-size:15px;color:#d5e0ee;max-width:680px;margin:0 0 23px}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:1}.hero-actions .small-button{padding:11px 16px}.statbar{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0 36px}.stat{background:white;border:1px solid var(--line);border-radius:13px;padding:18px 20px}.stat b{font-size:23px;display:block;color:#233349;margin-bottom:5px}.stat small{color:#7b8898;font-size:12px}.section-label{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:26px 0 14px}.section-label h2{font-size:20px;margin:0}.section-label p{margin:0;color:#8490a0;font-size:12px}.chap-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.chap-card{border:1px solid #e0e6ec;background:#fff;border-radius:14px;padding:20px;box-shadow:var(--card-shadow);transition:transform .15s,border-color .15s}.chap-card:hover{transform:translateY(-2px);border-color:#bed4eb}.chap-card .num{font-size:12px;font-weight:800;color:#296ab8}.chap-card h3{font-size:17px;margin:10px 0 10px}.chap-card p{font-size:12px;line-height:1.8;color:#728091;margin:0 0 16px;min-height:42px}.chap-card .foot{display:flex;align-items:center;justify-content:space-between;gap:8px}.chap-card .foot span{font-size:11px;color:#8996a5}.chap-card .foot button{border:0;background:#edf4fd;color:#2869b6;font-size:12px;font-weight:760;padding:9px 11px;border-radius:8px}.chap-card .bar{height:5px;border-radius:8px;background:#edf1f5;margin:15px 0 12px;overflow:hidden}.chap-card .bar i{display:block;height:100%;background:#75abf2}
+.card{background:white;border:1px solid var(--line);border-radius:14px;padding:25px 29px;margin:19px 0;box-shadow:var(--card-shadow)}.card h2{font-size:20px;margin:0 0 17px}.card h3{font-size:15px;margin:20px 0 10px}.card p{margin:8px 0 0;color:#546477;line-height:1.95}.intro-card{background:#fff;border-left:4px solid #3376c6;padding:22px 26px;border-radius:0 12px 12px 0;box-shadow:0 3px 16px #1d3c6509;margin:23px 0}.intro-card .head{font-size:12px;color:#2674c7;font-weight:850;margin-bottom:11px}.intro-card p{margin:0;color:#43556a;font-size:15px;line-height:1.95}.point-list{display:grid;grid-template-columns:1fr;gap:9px}.point{padding:14px 16px 13px;border:1px solid #ebeff4;border-radius:10px;background:#fcfdfe;display:flex;gap:12px;align-items:flex-start}.point-marker{flex:none;width:7px;height:7px;border-radius:50%;background:#8db6e7;margin-top:9px}.point.must .point-marker{background:#e17d65}.point.frequent .point-marker{background:#dbad5c}.point .ptext{font-weight:650;font-size:14px;line-height:1.7}.point .pnote{font-size:12px;line-height:1.8;color:#6a7d8e;margin-top:5px}.source{font-size:11px;color:#8a97a5;margin:16px 0 0;line-height:1.9}.lesson-footer{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-top:24px}.step{display:flex;gap:13px;align-items:flex-start;padding:13px 0;border-bottom:1px solid #edf0f3}.step:last-child{border:0}.step-num{background:#edf4fc;color:#2670c1;border:1px solid #dae8f8;min-width:27px;height:27px;border-radius:8px;font-size:12px;font-weight:800;display:grid;place-items:center}.step>div:last-child{font-size:14px;line-height:1.8;padding-top:3px}.example{background:#f8fafc;border:1px solid #e3eaf1;border-radius:12px;padding:18px 21px;margin-top:14px}.example h3{margin:0 0 6px;font-size:15px}.given{color:#567089;font-size:13px;background:#edf3f9;padding:10px 12px;border-radius:7px;margin:10px 0}.answer{margin-top:13px;padding:12px 13px;background:#eaf5f0;color:#116a57;border-radius:8px;font-size:14px;font-weight:750;line-height:1.75}.notice{background:#fff8ed;color:#94672f;border-radius:9px;padding:13px 14px;margin-top:13px;font-size:13px;line-height:1.9}.smalltags{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0}.topic-jump{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.topic-jump button{border:1px solid #e0e7ee;border-radius:9px;padding:9px 12px;font-size:12px;background:white;color:#56718e}.topic-jump button:hover{border-color:#88bae9;background:#f0f7fd}.topic-jump button.current{background:#266cc4;color:white;border-color:#266cc4}
+.diagram{background:#fbfcfe;border:1px solid #e7eef4;border-radius:12px;padding:22px;overflow-x:auto}.diagram-title{font-size:11px;color:#748b9e;font-weight:800;letter-spacing:.8px;margin-bottom:16px}.d-row{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}.d-box{border:1px solid #cfdced;background:white;border-radius:10px;text-align:center;padding:14px 19px;min-width:103px;font-size:13px;font-weight:740;color:#244766;box-shadow:0 2px 8px #1e324609}.d-box small{display:block;font-weight:500;font-size:11px;color:#8392a2;margin-top:5px}.d-box.accent{background:#ecf4ff;border-color:#9fc0ea;color:#2359a2}.d-arrow{font-size:22px;color:#a3b5c7}.d-sub{font-size:12px;color:#667b8e;text-align:center;line-height:1.8;margin-top:13px}.d-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.d-grid.two{grid-template-columns:repeat(2,1fr)}.d-grid.three{grid-template-columns:repeat(3,1fr)}.d-grid .d-box{min-width:0;padding:13px 9px}.d-chip{border:1px solid #d8e3ed;border-radius:10px;padding:13px 14px;background:white;color:#31506d;font-size:12px;line-height:1.8}.d-chip b{display:block;color:#234566;font-size:14px}.d-chip strong{color:#1e65af}.formula{font-size:16px;font-weight:780;color:#214d89;line-height:1.9;padding:17px 20px;background:#eef5fe;border-radius:10px;overflow-wrap:anywhere}.formula small{display:block;font-size:12px;color:#6e859f;font-weight:500;margin-top:3px}.times{display:grid;grid-template-columns:58px repeat(7,36px);gap:4px;justify-content:center;min-width:340px}.times>div{height:33px;display:grid;place-items:center;font-size:11px;border-radius:5px;background:#eff2f6;color:#637b91}.times .work{background:#dceafc;color:#265b95;font-weight:800}.times .work.dark{background:#a9d0f9}.levelstack{display:flex;flex-direction:column;align-items:center;gap:6px}.levelstack .level{border-radius:6px;text-align:center;padding:10px 12px;color:#18426b;background:#dfeeff;font-size:12px;font-weight:780}.levelstack .level:nth-child(1){width:32%}.levelstack .level:nth-child(2){width:50%}.levelstack .level:nth-child(3){width:71%}.levelstack .level:nth-child(4){width:95%}.mini-table{border-collapse:collapse;width:100%;font-size:13px;line-height:1.75}.mini-table th,.mini-table td{border-bottom:1px solid #e3e9ef;padding:12px 10px;text-align:left;vertical-align:top}.mini-table th{background:#f1f5fa;color:#46617c;font-weight:760}.mini-table td{color:#40566b}.mini-table tbody tr:last-child td{border-bottom:none}.bits{display:flex;justify-content:center;gap:5px;flex-wrap:wrap}.bit{width:40px;height:44px;display:grid;place-items:center;border:1px solid #cbd9e7;background:white;border-radius:7px;font-weight:830;font-family:ui-monospace,monospace;font-size:18px;color:#345b83}.bit.highlight{background:#ddebfc;border-color:#8fb3e2;color:#1e62b2}.bit.red{background:#fff0e9;border-color:#f1bdac;color:#aa594c}.brow{display:flex;align-items:center;gap:7px;justify-content:center;flex-wrap:wrap}.chain{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}.chain .link{height:2px;background:#9fb8d0;width:25px}.chain .unit{padding:13px 19px;border:1px solid #9fc2e7;border-radius:9px;background:#eaf4ff;color:#255d9c;font-weight:790;font-size:13px}.parallel{display:flex;flex-direction:column;align-items:center;gap:12px}.parallel .unit{padding:13px 54px;background:#edf5fd;border:1px solid #acc9e6;border-radius:9px;color:#2c639b;font-weight:800}.d-note{font-size:12px;color:#6d7f92;text-align:center;margin-top:14px;line-height:1.9}
+.map-root{padding:18px 23px;border-radius:14px;background:linear-gradient(125deg,#203953,#305778);color:#fff;font-size:19px;font-weight:800;display:inline-flex;box-shadow:0 8px 22px #12314e19}.map-rail{display:flex;gap:16px;flex-direction:column;margin:22px 0}.map-branch{display:grid;grid-template-columns:250px minmax(0,1fr);gap:17px;align-items:start;position:relative}.map-branch:before{content:'';height:1px;width:17px;position:absolute;left:235px;top:23px;background:#bad0e4}.map-chap{padding:15px 18px;text-align:left;background:#e8f1fb;color:#285a95;border:1px solid #bfd7f1;border-radius:10px;font-size:13px;font-weight:780;display:flex;justify-content:space-between;gap:9px}.map-chap.on{background:#2d6baf;color:white;border-color:#2d6baf}.map-topics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.map-topic{border:1px solid #e1e8ef;background:white;border-radius:9px;text-align:left;padding:12px 13px;font-size:12px;color:#486079;line-height:1.55}.map-topic:hover{border-color:#8db9e5;background:#f6faff}.map-topic small{display:block;color:#94a2b0;margin-top:6px}.map-topic.expanded{border-color:#aac8e6;background:#f9fcff}.map-details{grid-column:1/-1;margin-top:10px;padding-top:10px;border-top:1px dashed #d8e5ee;color:#6e7f8c;font-size:11px;line-height:1.85}.map-details span{display:block;padding:3px 0}.qgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.quick-card{border:1px solid #e2e9ef;border-radius:12px;background:white;padding:18px;display:flex;flex-direction:column;gap:11px}.quick-card .qtag{font-size:11px;color:#7c8da0}.quick-card h3{margin:0;font-size:15px}.quick-card p{font-size:13px;line-height:1.85;color:#476079;margin:0;flex:1}.quick-card button{align-self:flex-start;color:#2068b6;font-size:12px;border:0;background:#edf5ff;border-radius:8px;padding:9px 11px;font-weight:770}.quiz-wrap{max-width:760px}.quiz-top{display:flex;align-items:center;justify-content:space-between;gap:15px;margin:22px 0}.quiz-progress{height:8px;border-radius:10px;background:#e7edf4;overflow:hidden;flex:1}.quiz-progress i{display:block;background:#5b9ee8;height:100%;transition:width .2s}.quiz-card{background:white;border:1px solid #e0e8f0;border-radius:15px;padding:32px;box-shadow:var(--card-shadow)}.quiz-card h2{font-size:22px;margin:9px 0 22px;line-height:1.6}.options{display:grid;gap:10px}.option{display:flex;gap:13px;align-items:flex-start;text-align:left;border:1px solid #dce5ef;background:white;border-radius:10px;padding:15px 17px;color:#41556a;font-size:14px;line-height:1.7}.option i{font-style:normal;font-weight:800;color:#4973a6}.option:not(:disabled):hover{border-color:#76aae6;background:#f5f9ff}.option.selected{border-color:#5997d8;background:#ebf5ff}.option.correct{border-color:#65bda2;background:#e8f6f0}.option.incorrect{border-color:#e4a2a0;background:#fff1f0}.explain{background:#f4f8fc;border-left:3px solid #4b96dd;padding:15px 17px;border-radius:0 9px 9px 0;color:#476179;line-height:1.9;margin-top:16px;font-size:13px}.quiz-bottom{display:flex;justify-content:space-between;gap:12px;margin-top:22px}.quiz-filter{display:flex;gap:9px;flex-wrap:wrap;margin:16px 0 24px}.quiz-filter button{background:#fff;border:1px solid #dee6ed;color:#697f92;border-radius:8px;padding:9px 12px;font-size:12px;font-weight:670}.quiz-filter button.chosen{background:#e8f2ff;border-color:#a6c8ef;color:#2262a7}.score-card{background:#fff;border:1px solid #e4ebf1;border-radius:14px;padding:34px;text-align:center}.score-card .huge{font-size:58px;color:#236cb5;font-weight:850}.score-card p{font-size:14px;color:#5d7286}.score-card .small-button{margin:8px}
+.rail{display:none}.overlay{position:fixed;inset:0;background:#142336a6;z-index:25;display:flex;justify-content:center;align-items:flex-start;padding:11vh 17px}.dialog{background:white;border-radius:16px;box-shadow:0 25px 100px #101c2f35;width:min(650px,100%);padding:23px;max-height:80vh;overflow:auto}.dialoghead{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.dialoghead h2{font-size:19px;margin:0}.searchinput{width:100%;border:1px solid #cad8e5;padding:14px 16px;border-radius:10px;outline:none;font-size:15px}.search-results{margin-top:16px;display:grid;gap:7px}.sr{display:block;width:100%;border:1px solid #e6ebf1;background:white;border-radius:9px;padding:12px 15px;text-align:left;color:#3b526a;font-size:13px}.sr:hover{background:#f2f7fe;border-color:#afcfed}.sr small{display:block;color:#8496a7;margin-top:5px}.scrim{display:none}
+@media(min-width:1320px){.workspace .content-shell.withrail .content{max-width:1000px;padding-right:35px}.content-shell.withrail .rail{display:block;width:235px;min-width:235px;padding:40px 22px 40px 0}.rail-card{position:sticky;top:0;background:white;border:1px solid #e4e9ef;border-radius:12px;padding:17px 15px}.rail-card h3{font-size:12px;color:#7a8ca1;margin:0 0 12px;letter-spacing:.4px}.rail-card .rail-topic{display:block;text-align:left;width:100%;border:0;background:none;color:#76879b;font-size:12px;line-height:1.55;padding:10px 6px;border-left:2px solid transparent}.rail-card .rail-topic.current{border-color:#347ecb;color:#2466ae;background:#f4f8fe;font-weight:720}.rail-card .rail-topic:hover{color:#234f83}.rail-memory{border-top:1px solid #edf0f3;margin-top:14px;padding-top:14px;color:#49637d;font-size:12px;line-height:1.8}}
+@media(max-width:1100px){.topbar{padding:0 20px}.content{padding:32px 28px 70px}.tabs .tab{padding:9px 10px;font-size:12px}.app{grid-template-columns:230px minmax(0,1fr)}.map-branch{grid-template-columns:180px 1fr}.map-branch:before{left:165px}}
+@media(max-width:800px){.app{display:block}.side{position:fixed;top:0;bottom:0;left:0;width:275px;transform:translateX(-110%);z-index:21;transition:transform .2s;box-shadow:10px 0 50px #15243c22}.side.open{transform:translateX(0)}.scrim.open{display:block;position:fixed;inset:0;background:#121d2a88;z-index:20}.workspace{height:100dvh}.topbar{height:auto;min-height:67px;padding:11px 14px;gap:10px;flex-wrap:wrap}.top-left{flex:1}.mobile-toggle{display:flex;align-items:center;justify-content:center;width:35px;height:35px;border:1px solid #e1e6ed;border-radius:8px;background:#fff;font-size:19px}.toptitle{font-size:13px}.top-small{display:none}.tabs{order:3;width:100%;justify-content:space-between}.tabs .tab{flex:1}.top-actions{gap:5px}.content{padding:25px 18px 65px}.big-title{font-size:25px}.hero{padding:30px 23px}.hero h1{font-size:26px}.statbar{gap:8px}.stat{padding:15px 12px}.stat b{font-size:19px}.chap-grid,.qgrid,.map-topics{grid-template-columns:1fr}.card{padding:19px 17px}.map-branch{grid-template-columns:1fr;gap:8px}.map-branch:before{display:none}.d-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.quiz-card{padding:21px 17px}.title-row{flex-wrap:wrap}.lesson-footer{justify-content:flex-start}}
+@media print{.side,.topbar,.rail,.overlay,.scrim,.small-button,.topic-jump{display:none!important}.app{display:block;height:auto}.workspace,.content-shell{overflow:visible;height:auto}.content{padding:0!important;max-width:none}.card{box-shadow:none;break-inside:avoid}.content-shell{display:block}body{background:white}}
+
+/* v1.1 — controls, priority navigation & theme */
+.nav-empty{font-size:11px;color:#8da4bb;padding:8px 10px;line-height:1.65}
+.iconbutton{flex:none;display:inline-flex;align-items:center;justify-content:center;padding:0;line-height:1}
+.iconbutton svg{display:block;width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.theme-switch .sun-icon{display:none}
+html[data-theme="dark"] .theme-switch .moon-icon{display:none}
+html[data-theme="dark"] .theme-switch .sun-icon{display:block}
+.side-priority-tools{padding:1px 16px 12px}
+.priority-legend{display:flex;align-items:center;justify-content:space-between;gap:7px;margin:0 1px 11px}
+.legend-entry{display:inline-flex;gap:5px;align-items:center;color:#bdcad7;font-size:11px;white-space:nowrap;font-weight:650}
+.legend-entry b{color:#edf5ff;font-size:11px;font-variant-numeric:tabular-nums}
+.legend-dot{display:inline-block;flex:none;width:7px;height:7px;border-radius:3px}
+.legend-dot.must{background:#fc8989;box-shadow:0 0 0 2px #fc898927}
+.legend-dot.frequent{background:#f9ba65;box-shadow:0 0 0 2px #f9ba6527}
+.focus-toggle{width:100%;border:1px solid #40556d;color:#bed0e2;background:#243449;border-radius:9px;display:flex;align-items:center;gap:8px;padding:9px 11px;text-align:left;font-size:12px;font-weight:720;transition:background .15s,border-color .15s}
+.focus-toggle:hover{background:#304760;border-color:#6285ae}
+.focus-toggle .focus-icon{font-size:13px;color:#f4c37e}
+.focus-toggle .focus-label{flex:1}
+.focus-indicator{width:26px;height:15px;border:1px solid #6a8199;background:#566779;border-radius:12px;position:relative;flex:none}
+.focus-indicator:before{content:'';position:absolute;width:9px;height:9px;border-radius:50%;top:2px;left:2px;background:#d7e1ec;transition:transform .18s}
+.focus-toggle[aria-pressed="true"]{background:#344761;border-color:#efbb76;color:#fff}
+.focus-toggle[aria-pressed="true"] .focus-indicator{background:#d49347;border-color:#e6b06b}
+.focus-toggle[aria-pressed="true"] .focus-indicator:before{transform:translateX(11px);background:white}
+.chap-button{align-items:center;gap:8px}
+.chap-button>span:nth-child(2){flex:1;min-width:0}
+.chap-focus-count{color:#b8cadf;font-size:10px;white-space:nowrap;background:#34465b;border-radius:5px;padding:2px 5px;line-height:1.4;font-variant-numeric:tabular-nums}
+.chap-button.active .chap-focus-count{background:#445c7b;color:#e6f2ff}
+.chap-chevron{margin-left:0}
+.subnav{padding-left:25px;padding-right:3px;gap:4px}
+.subnav button{width:100%;display:flex;gap:7px;align-items:center;border-left:3px solid transparent;padding:9px 8px 9px 9px;min-height:37px;font-size:12px}
+.subnav button.nav-pr-must{border-left-color:#f58e93;color:#e7d1d6}
+.subnav button.nav-pr-frequent{border-left-color:#e3ac67;color:#e3d9cc}
+.subnav button.selected{background:#3a4c64;border-left-color:#91c0ff;color:#fff;box-shadow:none}
+.subnav button.selected.nav-pr-must{border-left-color:#ff8f96}
+.subnav button.selected.nav-pr-frequent{border-left-color:#f3bb71}
+.subnav button.complete:after{content:none}
+.nav-topic-title{flex:1;min-width:0;line-height:1.55}
+.nav-level{flex:none;font-size:10px;font-weight:750;padding:2px 4px;border-radius:4px;white-space:nowrap;letter-spacing:0}
+.nav-level.must{color:#ffd3d4;background:#642f3b;border:1px solid #86505b}
+.nav-level.frequent{color:#ffdcac;background:#584630;border:1px solid #7b6242}
+.nav-done{font-size:11px;color:#94e5c9;flex:none}
+.lesson-footer{margin:28px 0 50px;padding:17px 0 22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.lesson-footer>div{flex-wrap:wrap}
+@media(max-width:800px){.lesson-footer{margin-bottom:38px}.side-priority-tools{padding-bottom:12px}}
+
+/* Dark theme — all study views, dialogs, diagrams and quiz states */
+html[data-theme="dark"]{
+ color-scheme:dark;
+ --ink:#e7edf5;--muted:#acbbcc;--soft:#95a7ba;--bg:#0d1520;--panel:#172232;--nav:#111c2b;--nav2:#263951;
+ --line:#2d3b4e;--accent:#88b9fb;--accent-bg:#1b304b;--darkblue:#c0dcff;
+ --card-shadow:0 6px 30px rgba(0,0,0,.15);--amber:#f0be73;--red:#f6a09c;--green:#78cfb5;
+}
+html[data-theme="dark"] body{background:var(--bg);color:var(--ink)}
+html[data-theme="dark"] .side{background:#111e2d;border-color:#26374b}
+html[data-theme="dark"] .chap-button:hover,html[data-theme="dark"] .chap-button.active{background:#2c4058}
+html[data-theme="dark"] .subnav button.selected{background:#355070}
+html[data-theme="dark"] .side-footer{border-color:#304057}
+html[data-theme="dark"] .topbar{background:#172232;border-color:#324256}
+html[data-theme="dark"] .top-small,html[data-theme="dark"] .section-label p,html[data-theme="dark"] .crumb{color:#94a7ba}
+html[data-theme="dark"] .tabs{background:#111c29}
+html[data-theme="dark"] .tab{color:#9eb0c5}
+html[data-theme="dark"] .tab.on{background:#28415f;color:#e6f2ff;box-shadow:0 2px 8px #0003}
+html[data-theme="dark"] .tab:hover{color:#e9f4ff}
+html[data-theme="dark"] .iconbutton,html[data-theme="dark"] .mobile-toggle{background:#243348;border-color:#405570;color:#c6d9ed}
+html[data-theme="dark"] .iconbutton:hover,html[data-theme="dark"] .mobile-toggle:hover{background:#2d4360;border-color:#799fce}
+html[data-theme="dark"] .kicker{color:#9ac7ff}
+html[data-theme="dark"] .lede,html[data-theme="dark"] .muted,html[data-theme="dark"] .tiny{color:#acbed0}
+html[data-theme="dark"] .hero{background:linear-gradient(115deg,#162a43,#24486a);border:1px solid #335573}
+html[data-theme="dark"] .stat,html[data-theme="dark"] .chap-card,html[data-theme="dark"] .card,html[data-theme="dark"] .quick-card,html[data-theme="dark"] .quiz-card,html[data-theme="dark"] .score-card,html[data-theme="dark"] .rail-card,html[data-theme="dark"] .dialog{background:#172435;border-color:#33455b;color:#e7edf5}
+html[data-theme="dark"] .stat b{color:#e6effc}
+html[data-theme="dark"] .stat small,html[data-theme="dark"] .chap-card p,html[data-theme="dark"] .chap-card .foot span{color:#a1b4c8}
+html[data-theme="dark"] .chap-card:hover{border-color:#6c97cb}
+html[data-theme="dark"] .chap-card .num{color:#8fc0ff}
+html[data-theme="dark"] .chap-card .foot button,html[data-theme="dark"] .quick-card button{background:#27476b;color:#c1ddff}
+html[data-theme="dark"] .chap-card .bar{background:#30435a}
+html[data-theme="dark"] .card p,html[data-theme="dark"] .intro-card p{color:#beccdb}
+html[data-theme="dark"] .intro-card{background:#1b2c41;border-left-color:#66a8f1;box-shadow:none}
+html[data-theme="dark"] .intro-card .head{color:#9ac6ff}
+html[data-theme="dark"] .pill{background:#2c3e51;color:#c8d8e8}
+html[data-theme="dark"] .pill.must{background:#552d39;color:#ffd5d4}
+html[data-theme="dark"] .pill.frequent{background:#58412b;color:#ffdfaf}
+html[data-theme="dark"] .pill.understand{background:#213e5e;color:#bcd9fb}
+html[data-theme="dark"] .point{background:#1a293a;border-color:#35465c}
+html[data-theme="dark"] .point .ptext{color:#e0e9f5}
+html[data-theme="dark"] .point .pnote,html[data-theme="dark"] .source{color:#a5b7cb}
+html[data-theme="dark"] .point.must{background:#292936;border-color:#694450}
+html[data-theme="dark"] .point.frequent{background:#302c30;border-color:#65503b}
+html[data-theme="dark"] .small-button,html[data-theme="dark"] .topic-jump button{background:#243850;border-color:#405772;color:#d2e4f6}
+html[data-theme="dark"] .small-button:hover,html[data-theme="dark"] .topic-jump button:hover{background:#2d4b6d;border-color:#77a4d4}
+html[data-theme="dark"] .small-button.primary,html[data-theme="dark"] .topic-jump button.current{background:#3678ca;border-color:#3678ca;color:#fff}
+html[data-theme="dark"] .small-button.done{background:#21483e;border-color:#387c69;color:#bcf3e2}
+html[data-theme="dark"] .small-button.tinted{background:#24476a;border-color:#35658d;color:#c5e2ff}
+html[data-theme="dark"] .small-button.danger{color:#ffc0bd}
+html[data-theme="dark"] .diagram{background:#131f2f;border-color:#34475f}
+html[data-theme="dark"] .diagram-title,html[data-theme="dark"] .d-sub,html[data-theme="dark"] .d-note,html[data-theme="dark"] .d-arrow{color:#afc2d5}
+html[data-theme="dark"] .d-box,html[data-theme="dark"] .d-chip{background:#20344b;border-color:#456181;color:#deedff}
+html[data-theme="dark"] .d-box small{color:#adbed1}
+html[data-theme="dark"] .d-box.accent,html[data-theme="dark"] .d-chip:has(strong){background:#264260;border-color:#628ab6}
+html[data-theme="dark"] .d-chip b{color:#e1edfa}
+html[data-theme="dark"] .d-chip strong{color:#a4cbff}
+html[data-theme="dark"] .formula{background:#203d5e;color:#d5e9ff}
+html[data-theme="dark"] .formula small{color:#afc7de}
+html[data-theme="dark"] .times>div{background:#23364d;color:#bed0e1}
+html[data-theme="dark"] .times .work{background:#315987;color:#e3f1ff}
+html[data-theme="dark"] .times .work.dark{background:#4172ad}
+html[data-theme="dark"] .levelstack .level{background:#284e72;color:#d5eaff}
+html[data-theme="dark"] .mini-table th,html[data-theme="dark"] .mini-table td{border-color:#3b4e64}
+html[data-theme="dark"] .mini-table th{background:#27394d;color:#d2e2f3}
+html[data-theme="dark"] .mini-table td{color:#c6d5e6}
+html[data-theme="dark"] .bit{background:#22374f;border-color:#426486;color:#e2f1ff}
+html[data-theme="dark"] .bit.highlight{background:#2e5480;border-color:#5f97cf;color:#e1f3ff}
+html[data-theme="dark"] .bit.red{background:#55323b;border-color:#a06972;color:#ffe0df}
+html[data-theme="dark"] .chain .unit,html[data-theme="dark"] .parallel .unit{background:#254768;border-color:#5b8aaf;color:#d5ebff}
+html[data-theme="dark"] .chain .link{background:#6484a4}
+html[data-theme="dark"] .example{background:#1b2a3a;border-color:#38506a}
+html[data-theme="dark"] .given{background:#273c53;color:#c8d8e8}
+html[data-theme="dark"] .step{border-color:#34465b}
+html[data-theme="dark"] .step-num{background:#294764;color:#c0e0ff;border-color:#426c91}
+html[data-theme="dark"] .answer{background:#21483c;color:#b5eed8}
+html[data-theme="dark"] .notice{background:#443726;color:#ffdcad}
+html[data-theme="dark"] .map-chap{background:#233f60;border-color:#4b6e96;color:#d6eaff}
+html[data-theme="dark"] .map-chap.on{background:#316da9;border-color:#5598d6;color:#fff}
+html[data-theme="dark"] .map-topic{background:#192b40;border-color:#37506b;color:#d2e4f5}
+html[data-theme="dark"] .map-topic:hover,html[data-theme="dark"] .map-topic.expanded{background:#23415f;border-color:#5c94cb}
+html[data-theme="dark"] .map-topic small,html[data-theme="dark"] .map-details{color:#acbed0}
+html[data-theme="dark"] .map-details{border-color:#42566d}
+html[data-theme="dark"] .map-branch:before{background:#4d789e}
+html[data-theme="dark"] .map-root{background:linear-gradient(125deg,#234368,#315e86)}
+html[data-theme="dark"] .quick-card .qtag{color:#abc0d5}
+html[data-theme="dark"] .quick-card p{color:#c1d1e2}
+html[data-theme="dark"] .quiz-progress,html[data-theme="dark"] .chap-card .bar{background:#2d4056}
+html[data-theme="dark"] .option{background:#1c2e43;border-color:#3b536f;color:#d7e7f8}
+html[data-theme="dark"] .option i{color:#9bc7fb}
+html[data-theme="dark"] .option:not(:disabled):hover{background:#294565;border-color:#679dcc}
+html[data-theme="dark"] .option.selected{background:#244a73;border-color:#6eade6}
+html[data-theme="dark"] .option.correct{background:#1f4a3b;border-color:#4f987b}
+html[data-theme="dark"] .option.incorrect{background:#543237;border-color:#b46f75}
+html[data-theme="dark"] .explain{background:#213c55;border-color:#6bace9;color:#d0e1f0}
+html[data-theme="dark"] .quiz-filter button{background:#22364d;border-color:#415873;color:#c1d4e7}
+html[data-theme="dark"] .quiz-filter button.chosen{background:#2d5177;border-color:#6c9ed1;color:#e3f0ff}
+html[data-theme="dark"] .score-card .huge{color:#9acaef}
+html[data-theme="dark"] .score-card p{color:#bacbdd}
+html[data-theme="dark"] .rail-card h3{color:#a4b9cc}
+html[data-theme="dark"] .rail-card .rail-topic{color:#a9bbcb}
+html[data-theme="dark"] .rail-card .rail-topic.current{color:#b9d9ff;background:#274461;border-color:#79b4f6}
+html[data-theme="dark"] .rail-card .rail-topic:hover{color:#e3f2ff}
+html[data-theme="dark"] .rail-memory{border-color:#38506a;color:#c5d8e9}
+html[data-theme="dark"] .overlay{background:#030812c7}
+html[data-theme="dark"] .dialog{box-shadow:0 25px 90px #0008}
+html[data-theme="dark"] .searchinput{background:#101d2d;border-color:#506780;color:#e7eff7}
+html[data-theme="dark"] .searchinput::placeholder{color:#8199b3}
+html[data-theme="dark"] .sr{background:#1b2e43;border-color:#344b64;color:#e2edfc}
+html[data-theme="dark"] .sr:hover{background:#2a4561;border-color:#648db7}
+html[data-theme="dark"] .sr small{color:#a2b8cc}
+@media print{html[data-theme="dark"] body{background:white;color:#1e2733}}
+
+/* Keep the few instructor-emphasis inline colors legible at night. */
+html[data-theme="dark"] .card [style*="color:#275b94"]{color:#b8daff!important}
+html[data-theme="dark"] [style*="color:#b65e49"]{color:#ffb5a7!important}
+html[data-theme="dark"] [style*="color:#2369c4"]{color:#a9cdff!important}
+html[data-theme="dark"] .mini-table td[style*="background:"]{background:#294665!important}
+html[data-theme="dark"] .mini-table td[style*="color:#"]{color:#d4e5f7!important}
+
+/* OS chapter diagrams — reusable with light and dark themes */
+.os-process,.os-process-lower{display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap;margin:15px 0}
+.os-pnode{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:18px 22px;text-align:center;min-width:156px;box-shadow:var(--card-shadow)}
+.os-pnode.main{background:var(--accent-bg);border-color:var(--accent)}
+.os-pnode b{display:block;color:var(--ink);font-size:15px}.os-pnode small{display:block;color:var(--muted);font-size:11px;margin-top:7px;line-height:1.5}
+.os-pair{display:grid;gap:6px;text-align:center;color:var(--accent);font-weight:750;font-size:12px;line-height:1.8}
+.os-stack{max-width:570px;display:flex;flex-direction:column;align-items:stretch;gap:0;margin:12px auto}.os-stack-item{padding:13px;background:var(--panel);border:1px solid var(--line);border-radius:9px;text-align:center;font-size:14px;font-weight:700;color:var(--ink)}.os-stack-item.mid{background:var(--accent-bg);color:var(--accent)}.os-stack-arrow{color:var(--accent);font-size:15px;text-align:center;line-height:1.1;padding:2px}
+.os-operator{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;color:var(--ink)}.os-operator>b{font-size:15px}.os-operator p{font-size:13px;color:var(--ink);margin:8px 0}.os-operator small{font-size:12px;color:var(--muted)}.os-equation{font-size:21px;color:var(--accent);font-weight:800;letter-spacing:1px;margin:15px 0}.os-code{font:14px/2.05 ui-monospace,'SFMono-Regular',Consolas,monospace;white-space:nowrap;margin:12px 0;color:var(--accent)}.os-table-wrap{overflow-x:auto;max-width:100%}
+.os-tree{display:inline-block;border:1px solid var(--line);background:var(--panel);border-radius:11px;padding:16px 20px;font-size:14px;line-height:2.25;color:var(--ink)}.os-tree-inner{border-left:1px dashed var(--muted);padding-left:23px;margin-left:9px}
+.os-bitrow{display:flex;flex-wrap:wrap;gap:3px;margin:17px auto;max-width:720px}.os-bitrow span{display:grid;place-items:center;background:var(--panel);color:var(--muted);border:1px solid var(--line);border-radius:5px;min-width:21px;height:26px;font-size:11px;flex:1 0 21px}.os-bitrow span.on{background:var(--accent-bg);color:var(--accent);border-color:var(--accent);font-weight:800}
+.d-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.d-box b{display:block;font-size:13px}
+.d-row{flex-wrap:wrap;justify-content:center}
+.lesson-footer{padding-bottom:30px;margin-bottom:70px}
+@media(max-width:650px){.d-grid.three{grid-template-columns:1fr!important}.os-process{gap:8px}.os-pnode{min-width:130px;padding:13px}.os-process-lower{gap:10px}.os-pair{font-size:11px}.os-code{font-size:12px}.os-table-wrap th,.os-table-wrap td{white-space:normal;min-width:100px}}
+
+
+/* SOFTWARE DESIGNER KNOWLEDGE BASE · Unified Reading-first Palette v2
+   Visual reference: 《考试介绍与复习方法》统一配色版
+   Scope: visual-only adjustments; original content / behavior / localStorage keys intact. */
+:root {
+  --bg:#f7f8fa;
+  --nav:#1d2937;
+  --nav2:#2b3b4f;
+  --panel:#ffffff;
+  --line:#e4e8ed;
+  --ink:#222c38;
+  --muted:#5f6d7d;
+  --soft:#8391a0;
+  --accent:#246bb4;
+  --accent-bg:#eff6fd;
+  --teal:#16867f;
+  --red:#c65555;
+  --amber:#ab7225;
+  --card-shadow:0 3px 16px rgba(25,38,55,.035);
+}
+body {background:var(--bg);color:var(--ink)}
+/* Deep-slate navigation remains stable across all courses. */
+.side {background:var(--nav);color:#cbd5e1;border-color:#142334}
+.brand {border-bottom-color:#ffffff17}
+.brand .mono {color:#a9c7e4}
+.brand p {color:#a9bbce}
+.side-head {color:#9caec1}
+.chap-button {color:#c6d3e1}
+.chap-button:hover,.chap-button.active {background:#2a3c50}
+.chap-num {color:#8cbff3}
+.chap-focus-count {background:#344c65;color:#cbdded}
+.chap-button.active .chap-focus-count {background:#3c536d;color:#e3f1fb}
+.subnav button {color:#acbfd0}
+.subnav button:hover {background:#2b3f54}
+.subnav button.selected {background:#334a64;border-left-color:#8ab9ee}
+.subnav button.nav-pr-must {border-left-color:#ec8584}
+.subnav button.nav-pr-frequent {border-left-color:#e5b46b}
+.subnav button.selected.nav-pr-must {border-left-color:#ff9996}
+.subnav button.selected.nav-pr-frequent {border-left-color:#f2c27f}
+.legend-dot.must {background:#f49d98}
+.legend-dot.frequent {background:#ebc38a}
+.focus-toggle {background:#283b4f;border-color:#465e76;color:#d4e1ed}
+.focus-toggle:hover {background:#30475f;border-color:#6c8ba8}
+.focus-toggle[aria-pressed="true"] {background:#344554;border-color:#b6a082;color:#fbe3bc}
+.focus-toggle[aria-pressed="true"] .focus-indicator {background:#ba9b67;border-color:#dec18f}
+.nav-level.must {background:#59373b;border-color:#765154;color:#ffd1cc}
+.nav-level.frequent {background:#514638;border-color:#75624c;color:#ffe0ae}
+.nav-done {color:#91d8c7}
+.side-footer {border-color:#ffffff17}
+.side-footer .progressbar {background:#3c4f64}
+.side-footer .progressbar>span {background:var(--teal)}
+/* Navigation and operational blue; no second dominant brand gradient. */
+.topbar {background:var(--panel);border-color:var(--line);height:69px;box-shadow:0 1px 0 rgba(20,40,60,.015)}
+.tabs {background:#f1f3f6}
+.tab {color:#617184}
+.tab.on {color:#1f5f9d;background:var(--panel);box-shadow:0 1px 4px #1a2d4612}
+.tab:hover {color:#1f5f9d}
+.iconbutton {background:var(--panel);border-color:#dce3eb;color:#4f6478}
+.iconbutton:hover {background:var(--accent-bg);border-color:#9cb9d8}
+.kicker {color:var(--accent)}
+.lede {color:var(--muted)}
+/* White hero with a thin teal rail, exactly as in the approved intro page. */
+.hero {
+  background:var(--panel);
+  color:var(--ink);
+  border:1px solid var(--line);
+  border-left:4px solid var(--teal);
+  border-radius:15px;
+  box-shadow:var(--card-shadow);
+  padding:34px 38px 35px;
+}
+.hero:after {display:none}
+.hero .kicker {color:var(--teal);letter-spacing:1.3px}
+.hero h1 {color:var(--ink);font-size:31px;line-height:1.43;letter-spacing:-.65px;margin:14px 0}
+.hero p {color:var(--muted);line-height:1.95;max-width:760px}
+.hero-actions {margin-top:23px}
+.hero-actions .small-button {padding:11px 16px}
+.small-button.primary,.topic-jump button.current {background:var(--accent);border-color:var(--accent);color:white}
+.small-button.primary:hover {background:#195a99;border-color:#195a99}
+.small-button {background:var(--panel);border-color:#d1dae4;color:var(--ink)}
+.small-button:hover {background:var(--accent-bg);border-color:#a7c6e4}
+.small-button.tinted {background:var(--accent-bg);border-color:#d5e5f5;color:var(--accent)}
+.small-button.done {background:#eef8f4;border-color:#cbe7db;color:#187c66}
+/* Reading-first card surfaces and useful colors. */
+.stat,.chap-card,.card,.quick-card,.quiz-card,.score-card,.dialog,.rail-card {background:var(--panel);border-color:var(--line);box-shadow:var(--card-shadow)}
+.stat b {color:var(--ink);font-size:23px}
+.stat small,.chap-card p,.chap-card .foot span {color:var(--muted)}
+.chap-card:hover {border-color:#b5cde3}
+.chap-card .num {color:var(--accent)}
+.chap-card .foot button,.quick-card button {background:var(--accent-bg);color:var(--accent)}
+.chap-card .foot button:hover,.quick-card button:hover {background:#e4f0fc}
+.chap-card .bar,.quiz-progress {background:#eef1f4}
+.chap-card .bar i,.quiz-progress i {background:var(--teal)}
+.card p,.intro-card p {color:#526173}
+.intro-card {background:#f1f6fc;border-left-color:var(--accent);box-shadow:none}
+.intro-card .head {color:var(--accent)}
+.pill {color:#607184;background:#f1f4f6}
+.pill.must {background:#fdf1f0;color:#ad4749;border:1px solid #f1d4d2}
+.pill.frequent {background:#fdf6ea;color:#956522;border:1px solid #ebdcc4}
+.pill.understand {background:#edf5fc;color:#4576a3}
+.point {background:#fafbfc;border-color:#e8edf2}
+.point .ptext {color:var(--ink)}
+.point .pnote {color:var(--muted)}
+.point.must {border-left:3px solid #d87573}
+.point.frequent {border-left:3px solid #c4934e}
+.source,.quick-card .qtag {color:var(--soft)}
+.topic-jump button {background:var(--panel);border-color:#dfe6ed;color:#536c84}
+.topic-jump button:hover {background:var(--accent-bg);border-color:#a2c4e0}
+.topic-jump button.current {background:var(--accent);border-color:var(--accent);color:#fff}
+/* Figures, formulas and answer states align to a single blue/teal language. */
+.diagram {background:#fafbfd;border-color:var(--line)}
+.diagram-title,.d-sub,.d-note {color:var(--muted)}
+.d-box,.d-chip,.bit {background:var(--panel);border-color:#d4dde6;color:#31526e}
+.d-box.accent,.bit.highlight {background:var(--accent-bg);border-color:#bad4eb;color:var(--accent)}
+.d-chip b {color:#2b516e}
+.d-chip strong {color:var(--accent)}
+.formula {background:var(--accent-bg);color:#245b91}
+.formula small {color:#657d94}
+.mini-table th {background:#f1f5f9;color:#475d74}
+.mini-table td {color:#485b70}
+.step-num {background:var(--accent-bg);color:var(--accent);border-color:#d4e5f5}
+.example {background:#fafbfd;border-color:var(--line)}
+.given {background:#edf4fa;color:#536f87}
+.answer {background:#edf7f3;color:#24745e}
+.notice {background:#fcf8f0;color:#865b28}
+.levelstack .level {background:#eaf3fa;color:#245b82}
+.times .work {background:#dfebf8;color:#2c6398}
+.times .work.dark {background:#bfdaf2}
+.map-root {background:#eaf3f9;color:#245a80;border:1px solid #cfe0ee;border-left:4px solid var(--teal);border-radius:11px;box-shadow:none}
+.map-chap {background:#edf5fc;border-color:#d5e5f2;color:#28659d}
+.map-chap.on {background:#dcecf8;border-color:#8ab7d6;color:#215e93}
+.map-topic {background:var(--panel);border-color:#e1e8ef;color:#4c6075}
+.map-topic:hover,.map-topic.expanded {background:#f6faff;border-color:#b5d3ed}
+.quick-card p {color:#526577}
+.option {border-color:#dce5ed;color:#3e5267}
+.option:not(:disabled):hover {background:#f1f6fc;border-color:#a1c3e1}
+.option.selected {background:#edf5fe;border-color:#80add5}
+.option.correct {background:#eaf7f1;border-color:#72bea2}
+.option.incorrect {background:#fff1f1;border-color:#daa09b}
+.explain {background:#f1f6fb;border-color:#5a92c7;color:#4a6179}
+.quiz-filter button {background:var(--panel);border-color:#dfe6ed;color:#617386}
+.quiz-filter button.chosen {background:var(--accent-bg);border-color:#a4c6e5;color:var(--accent)}
+.score-card .huge {color:var(--accent)}
+.rail-card .rail-topic.current {color:var(--accent);background:var(--accent-bg);border-color:var(--accent)}
+.rail-card .rail-topic:hover {color:var(--accent)}
+.searchinput {background:var(--panel);border-color:#c9d6e3;color:var(--ink)}
+.sr {background:var(--panel);border-color:var(--line);color:var(--ink)}
+.sr:hover {background:var(--accent-bg);border-color:#aac7e5}
+/* Dark palette is a restrained inversion of the same layout—not the old banner. */
+html[data-theme="dark"] {
+  color-scheme:dark;
+  --bg:#111822;
+  --nav:#121e2b;
+  --nav2:#26394d;
+  --panel:#1b2735;
+  --line:#344456;
+  --ink:#e7eef6;
+  --muted:#b3c2d1;
+  --soft:#96aabf;
+  --accent:#96c4fc;
+  --accent-bg:#223c59;
+  --teal:#6fd0bb;
+  --red:#f7a0a0;
+  --amber:#ecc58d;
+  --card-shadow:0 4px 18px #00000018;
+}
+html[data-theme="dark"] body {background:var(--bg);color:var(--ink)}
+html[data-theme="dark"] .side {background:var(--nav);border-color:#253748}
+html[data-theme="dark"] .brand {border-bottom-color:#ffffff17}
+html[data-theme="dark"] .chap-button:hover,html[data-theme="dark"] .chap-button.active {background:#2a3c50}
+html[data-theme="dark"] .chap-focus-count {background:#344c65;color:#cbdded}
+html[data-theme="dark"] .subnav button.selected {background:#334a64;border-left-color:#8ab9ee}
+html[data-theme="dark"] .subnav button.selected.nav-pr-must {border-left-color:#ff9996}
+html[data-theme="dark"] .subnav button.selected.nav-pr-frequent {border-left-color:#f2c27f}
+html[data-theme="dark"] .focus-toggle {background:#283b4f;border-color:#465e76;color:#d4e1ed}
+html[data-theme="dark"] .focus-toggle[aria-pressed="true"] {background:#344554;border-color:#b6a082;color:#fbe3bc}
+html[data-theme="dark"] .nav-level.must {background:#59373b;border-color:#765154;color:#ffd1cc}
+html[data-theme="dark"] .nav-level.frequent {background:#514638;border-color:#75624c;color:#ffe0ae}
+html[data-theme="dark"] .side-footer {border-color:#ffffff17}
+html[data-theme="dark"] .progressbar>span {background:var(--teal)}
+html[data-theme="dark"] .topbar {background:var(--panel);border-color:var(--line)}
+html[data-theme="dark"] .tabs {background:#14212d}
+html[data-theme="dark"] .tab {color:#a7b9cb}
+html[data-theme="dark"] .tab.on {background:#30485f;color:#d7ebff;box-shadow:none}
+html[data-theme="dark"] .iconbutton,html[data-theme="dark"] .mobile-toggle {background:#233447;border-color:#4b6177;color:#d9e8f6}
+html[data-theme="dark"] .iconbutton:hover,html[data-theme="dark"] .mobile-toggle:hover {background:#2d4860;border-color:#789fc0}
+html[data-theme="dark"] .kicker {color:var(--accent)}
+html[data-theme="dark"] .hero {background:var(--panel);color:var(--ink);border-color:var(--line);border-left-color:var(--teal);box-shadow:var(--card-shadow)}
+html[data-theme="dark"] .hero:after {display:none}
+html[data-theme="dark"] .hero .kicker {color:var(--teal)}
+html[data-theme="dark"] .hero h1 {color:var(--ink)}
+html[data-theme="dark"] .hero p {color:var(--muted)}
+html[data-theme="dark"] .hero-actions .small-button:not(.primary) {background:#233447;border-color:#4b6177;color:#e7eff7}
+html[data-theme="dark"] .hero-actions .small-button:not(.primary):hover {background:#2d4860;border-color:#789fc0}
+html[data-theme="dark"] .small-button.primary,html[data-theme="dark"] .topic-jump button.current {background:#397cb8;border-color:#397cb8;color:#fff}
+html[data-theme="dark"] .small-button.primary:hover {background:#4a8fce;border-color:#4a8fce}
+html[data-theme="dark"] .stat,html[data-theme="dark"] .chap-card,html[data-theme="dark"] .card,html[data-theme="dark"] .quick-card,html[data-theme="dark"] .quiz-card,html[data-theme="dark"] .score-card,html[data-theme="dark"] .rail-card,html[data-theme="dark"] .dialog {background:var(--panel);border-color:var(--line);color:var(--ink);box-shadow:var(--card-shadow)}
+html[data-theme="dark"] .stat b {color:var(--ink)}
+html[data-theme="dark"] .stat small,html[data-theme="dark"] .chap-card p,html[data-theme="dark"] .chap-card .foot span {color:var(--muted)}
+html[data-theme="dark"] .chap-card .num {color:var(--accent)}
+html[data-theme="dark"] .chap-card .foot button,html[data-theme="dark"] .quick-card button {background:#283f57;color:#b6dcff}
+html[data-theme="dark"] .chap-card .foot button:hover,html[data-theme="dark"] .quick-card button:hover {background:#33516c}
+html[data-theme="dark"] .chap-card .bar,html[data-theme="dark"] .quiz-progress {background:#324354}
+html[data-theme="dark"] .chap-card .bar i,html[data-theme="dark"] .quiz-progress i {background:var(--teal)}
+html[data-theme="dark"] .card p,html[data-theme="dark"] .intro-card p {color:var(--muted)}
+html[data-theme="dark"] .intro-card {background:#233c54;border-left-color:#6ca0d4}
+html[data-theme="dark"] .intro-card .head {color:#b4d9ff}
+html[data-theme="dark"] .pill {background:#2c3e51;color:#c8d8e8}
+html[data-theme="dark"] .pill.must {background:#563338;border-color:#7d4c50;color:#ffd1cb}
+html[data-theme="dark"] .pill.frequent {background:#51412d;border-color:#806647;color:#ffe1b6}
+html[data-theme="dark"] .pill.understand {background:#213e5e;color:#bcd9fb}
+html[data-theme="dark"] .point {background:var(--panel);border-color:var(--line)}
+html[data-theme="dark"] .point .ptext {color:var(--ink)}
+html[data-theme="dark"] .point .pnote,html[data-theme="dark"] .source {color:var(--muted)}
+html[data-theme="dark"] .point.must {border-left:3px solid #d68481;background:#2a2935}
+html[data-theme="dark"] .point.frequent {border-left:3px solid #bb9563;background:#2e2b30}
+html[data-theme="dark"] .small-button {background:#233447;border-color:#4b6177;color:#e7eff7}
+html[data-theme="dark"] .small-button:hover {background:#2d4860;border-color:#789fc0}
+html[data-theme="dark"] .small-button.tinted {background:#244364;border-color:#486b8d;color:#b9dbff}
+html[data-theme="dark"] .small-button.done {background:#234537;border-color:#3d806a;color:#bdf0db}
+html[data-theme="dark"] .topic-jump button {background:#233447;border-color:#4b6177;color:#d4e5f7}
+html[data-theme="dark"] .topic-jump button:hover {background:#2d4860;border-color:#789fc0}
+html[data-theme="dark"] .diagram,html[data-theme="dark"] .example {background:var(--panel);border-color:var(--line)}
+html[data-theme="dark"] .diagram-title,html[data-theme="dark"] .d-sub,html[data-theme="dark"] .d-note {color:var(--muted)}
+html[data-theme="dark"] .d-box,html[data-theme="dark"] .d-chip,html[data-theme="dark"] .bit {background:var(--panel2,#202e3d);border-color:#4e6175;color:#d7e8f8}
+html[data-theme="dark"] .d-box.accent,html[data-theme="dark"] .bit.highlight {background:#24455f;border-color:#688ead;color:#c5e5ff}
+html[data-theme="dark"] .d-chip b {color:#dceafa}
+html[data-theme="dark"] .d-chip strong {color:#a5cdf7}
+html[data-theme="dark"] .formula {background:#223c59;color:#c9e5ff}
+html[data-theme="dark"] .formula small {color:#a8bfd6}
+html[data-theme="dark"] .mini-table th {background:#273b50;color:#d6e5f4}
+html[data-theme="dark"] .mini-table td {color:#c6d7e8}
+html[data-theme="dark"] .step-num {background:#264767;color:#bcdcff;border-color:#496a88}
+html[data-theme="dark"] .given {background:#253d53;color:#c6daed}
+html[data-theme="dark"] .answer {background:#25463b;color:#b3ecd5}
+html[data-theme="dark"] .notice {background:#3a3229;color:#f0d8b6}
+html[data-theme="dark"] .map-root {background:#233d50;color:#c9e7f6;border-color:#426075;border-left-color:var(--teal);box-shadow:none}
+html[data-theme="dark"] .map-chap {background:#273d54;border-color:#46637d;color:#d4e9f9}
+html[data-theme="dark"] .map-chap.on {background:#315473;border-color:#6396b7;color:#e6f4ff}
+html[data-theme="dark"] .map-topic {background:var(--panel);border-color:var(--line);color:#d5e4f2}
+html[data-theme="dark"] .map-topic:hover,html[data-theme="dark"] .map-topic.expanded {background:#263a4e;border-color:#5e89ad}
+html[data-theme="dark"] .map-details {border-color:#42566d}
+html[data-theme="dark"] .quick-card p {color:var(--muted)}
+html[data-theme="dark"] .option {background:#223346;border-color:#42566e;color:#d8e8f8}
+html[data-theme="dark"] .option.correct {background:#23483b;border-color:#61a487}
+html[data-theme="dark"] .option.incorrect {background:#523236;border-color:#ac7778}
+html[data-theme="dark"] .explain {background:#243d55;border-color:#6ca0d4;color:#d6e7f6}
+html[data-theme="dark"] .quiz-filter button {background:#233447;border-color:#4b6177;color:#c8d9e8}
+html[data-theme="dark"] .quiz-filter button.chosen {background:#30516e;border-color:#6c98bb;color:#e0f0ff}
+html[data-theme="dark"] .score-card .huge {color:var(--accent)}
+html[data-theme="dark"] .rail-card .rail-topic.current {background:#2b465e;color:#c8e5ff;border-color:#82b6e0}
+html[data-theme="dark"] .searchinput {background:#142333;border-color:#50657c;color:#e7eef6}
+html[data-theme="dark"] .sr {background:#223346;border-color:#42566e;color:#e5eff9}
+html[data-theme="dark"] .sr:hover {background:#2d4860;border-color:#769cbc}
+/* OS chapter diagrams use the same palette tokens. */
+html[data-theme="dark"] .os-pnode,html[data-theme="dark"] .os-operator,html[data-theme="dark"] .os-stack-item,html[data-theme="dark"] .os-tree,html[data-theme="dark"] .os-bitrow span {background:var(--panel);border-color:var(--line);color:var(--ink)}
+html[data-theme="dark"] .os-pnode.main,html[data-theme="dark"] .os-stack-item.mid,html[data-theme="dark"] .os-bitrow span.on {background:var(--accent-bg);color:var(--accent);border-color:#496c90}
+html[data-theme="dark"] .os-equation,html[data-theme="dark"] .os-code,html[data-theme="dark"] .os-stack-arrow {color:var(--accent)}
+html[data-theme="dark"] .os-operator p {color:var(--ink)}
+html[data-theme="dark"] .os-operator small {color:var(--muted)}
+@media(max-width:800px) {
+  .hero {padding:27px 24px 29px}
+  .hero h1 {font-size:26px}
+  .topbar {height:auto}
+  .statbar {gap:9px}
+}
+@media print {
+  .hero {background:#fff!important;color:#222!important;border-color:#ddd!important}
+  .hero h1 {color:#222!important}
+}
+
+</style></head>
+<body>
+<div class="app">
+  <aside class="side" id="sidebar"><div class="brand"><div class="mono">SOFTWARE DESIGNER · STUDY NOTES</div><h2>操作系统知识</h2><p>软件设计师 · 精讲知识库<br>基于 PDF 课件和课程转写整理</p></div><div class="side-head"><span>章节目录</span><span id="sideCount"></span></div><div class="side-priority-tools"><div class="priority-legend"><span class="legend-entry"><i class="legend-dot must"></i>必须掌握 <b id="mustCount">0</b></span><span class="legend-entry"><i class="legend-dot frequent"></i>重点 / 常考 <b id="frequentCount">0</b></span></div><button type="button" class="focus-toggle" id="focusToggle" aria-pressed="false"><span class="focus-icon">★</span><span class="focus-label">只看重点主题</span><span class="focus-indicator" aria-hidden="true"></span></button></div><nav class="nav-list" id="navList"></nav><div class="side-footer"><div class="frow"><span>已掌握知识主题</span><strong id="sideProgress">0 / 0</strong></div><div class="progressbar"><span id="sideProgressBar"></span></div><small>学习进度保存在当前浏览器中。<br>离线文件，不需要登录账号。</small></div></aside>
+  <div class="scrim" id="scrim"></div>
+  <div class="workspace">
+   <header class="topbar"><div class="top-left"><button class="mobile-toggle" id="menuBtn" aria-label="打开章节目录">☰</button><div><div class="toptitle" id="topTitle">软件设计师 · 操作系统知识</div><div class="top-small">图文精讲 / 脑图总览 / 考前速记 / 随堂练习</div></div></div><div class="tabs" id="viewTabs"><button class="tab on" data-tab="home">学习首页</button><button class="tab" data-tab="read">图文精讲</button><button class="tab" data-tab="map">知识脑图</button><button class="tab" data-tab="quick">考前速记</button><button class="tab" data-tab="quiz">随堂练习</button></div><div class="top-actions"><button class="iconbutton" title="搜索知识点（Ctrl / ⌘ + K）" id="searchBtn" aria-label="搜索知识点"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button><button class="iconbutton theme-switch" type="button" title="切换夜间模式" id="themeBtn" aria-label="切换为夜间模式" aria-pressed="false"><svg class="moon-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.5 14.2A8.6 8.6 0 0 1 9.8 3.5 8.6 8.6 0 1 0 20.5 14.2Z"/></svg><svg class="sun-icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg></button></div></header>
+   <div class="content-shell" id="contentShell"><main class="content" id="mainContent"></main><aside class="rail" id="rightRail"></aside></div>
+  </div>
+</div>
+<div class="overlay hidden" id="searchOverlay"><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="searchTitle"><div class="dialoghead"><h2 id="searchTitle">查找知识点</h2><button class="iconbutton" id="searchClose" aria-label="关闭搜索">×</button></div><input class="searchinput" id="searchInput" placeholder="试试：PC、CRC、流水线、DMA、可靠性…" autocomplete="off"/><div class="search-results" id="searchResults"></div></div></div>
+<script>
+const DATA = {"chapters":[{"id":0,"number":"00","name":"本章考试定位","subtitle":"PDF 第2页；转写 3.1","topicIds":["0:0","0:1","0:2"]},{"id":1,"number":"01","name":"操作系统概述","subtitle":"PDF 第2–4页；转写 3.1","topicIds":["1:0","1:1","1:2","1:3","1:4"]},{"id":2,"number":"02","name":"进程组成、状态与前驱图","subtitle":"PDF 第4–6页；转写 3.1","topicIds":["2:0","2:1","2:2","2:3","2:4"]},{"id":3,"number":"03","name":"进程同步与互斥 · PV","subtitle":"PDF 第7–9页；转写 3.1","topicIds":["3:0","3:1","3:2","3:3","3:4","3:5","3:6"]},{"id":4,"number":"04","name":"进程调度、死锁与线程","subtitle":"PDF 第9–12页；转写 3.2","topicIds":["4:0","4:1","4:2","4:3","4:4","4:5","4:6"]},{"id":5,"number":"05","name":"存储管理 · 分区、分页、分段","subtitle":"PDF 第12–17页；转写 3.2","topicIds":["5:0","5:1","5:2","5:3","5:4","5:5","5:6","5:7"]},{"id":6,"number":"06","name":"设备管理 · I/O 与 SPOOLING","subtitle":"PDF 第17–19页；转写 3.3","topicIds":["6:0","6:1","6:2","6:3"]},{"id":7,"number":"07","name":"文件管理 · 索引、路径与位示图","subtitle":"PDF 第19–23页；转写 3.3","topicIds":["7:0","7:1","7:2","7:3","7:4","7:5","7:6","7:7"]}],"lessons":[{"id":"0:0","chapter":0,"index":0,"title":"考试定位与复习重点","fullTitle":"考试定位与复习重点","intro":"这章属于软件设计师计算机基础中的操作系统模块。课程老师给出主要考选择题、约 5～6 分的经验估计，重点集中在进程同步互斥、存储管理与文件系统相关计算。","points":[{"text":"选择题约 5～6 分","note":"老师在 3.1 开场所述经验估计，不代表历次考试固定分值。","priority":""},{"text":"本章按四大管理学习：进程、存储、设备、文件","note":"操作系统完整功能还包括作业管理；老师表示本课不重点讲作业管理。","priority":""},{"text":"进程管理尤其要看同步互斥与 PV 操作","note":"老师在开场明确强调为重要考点。","priority":"must"},{"text":"存储管理重点是分页地址转换","note":"老师表示通常约 1～2 分，重点是逻辑地址与物理地址转换。","priority":"frequent"},{"text":"文件管理的索引结构和位示图计算要会做","note":"老师明确指出这两个计算考点比较重要。","priority":"frequent"}],"source":"PDF 第2页；转写 3.1","priority":"","memory":"先抓 PV、死锁、分页地址换算、索引文件和位示图。"},{"id":"0:1","chapter":0,"index":1,"title":"学习路径与先后依赖","fullTitle":"学习路径与先后依赖","intro":"建议沿教师讲义的顺序复习：先了解操作系统基本工作，再学习进程关系与 PV，随后理解死锁、存储映射和文件索引。","points":[{"text":"先建立概念：操作系统特征 → 进程状态 → 前驱图","note":"","priority":""},{"text":"再做核心题：临界资源与同步 → P/V 信号量 → 死锁","note":"","priority":""},{"text":"计算专项：页号和页内偏移 → 段页式 → 多级索引 → 位示图","note":"","priority":""},{"text":"最后串联：I/O 软件层次 → SPOOLING → 文件目录与存储空间","note":"","priority":""}],"source":"PDF 第2页；转写 3.1","priority":"","visual":"studyroute","memory":"理解原理、会做典型题，再用速记与错题检验。"},{"id":"0:2","chapter":0,"index":2,"title":"资料范围与整理口径","fullTitle":"资料范围与整理口径","intro":"以 24 页 PDF 的课程主体、三份 3.1～3.3 课堂转写为来源。课堂有口误、术语同音字与个别算式印刷错误，正文以可确定的课件条件进行说明，疑点另加提示。","points":[{"text":"课程转写：3.1 操作系统与 PV；3.2 调度、死锁与存储；3.3 设备及文件管理","note":"","priority":""},{"text":"课程反复强调的“掌握 / 常考 / 了解即可”随知识点标记","note":"","priority":""},{"text":"所有自测题均是依据课程知识点编写，不能冒充原题","note":"","priority":""},{"text":"容易误读的术语会统一规范：阻塞、就绪、SPOOLING、位示图","note":"保留资料来源与原题的实际条件。","priority":""}],"source":"PDF 第2页；转写 3.1","priority":"","memory":"用课程资料建立可学习的章节，而不是逐字转录。"},{"id":"1:0","chapter":1,"index":0,"title":"操作系统的定义与作用","fullTitle":"操作系统的定义与作用","intro":"操作系统是一种系统软件，组织和管理软硬件资源，控制程序执行，并为用户提供接口。考试不必死背长定义，重点理解它“管资源、给接口”的作用。","points":[{"text":"操作系统属于系统软件，而不是应用软件。","note":"","priority":""},{"text":"作用①：通过资源管理提高计算机系统效率。","note":"","priority":""},{"text":"作用②：改善人机界面，提供友好工作环境和接口。","note":"","priority":""},{"text":"资源管理既包含硬件，也包含软件。","note":"","priority":""},{"text":"课程举例：Windows、Android、iOS、Linux","note":"只用于帮助理解，不作为版本和产品分类的严格清单。","priority":""}],"source":"PDF 第2–4页；转写 3.1","priority":"","visual":"osmanager","memory":"操作系统 = 资源管理者 + 用户接口。"},{"id":"1:1","chapter":1,"index":1,"title":"操作系统四个特征","fullTitle":"操作系统四个特征","intro":"老师要求理解并发性、共享性、虚拟性和不确定性（异步性），尤其注意“并发”和“并行”的区别。","points":[{"text":"并发性：宏观上多个任务同时推进","note":"单处理器上微观可能交替执行；不等同于同一时刻真的并行。","priority":""},{"text":"共享性：多进程可按规则使用共同资源","note":"资源可能互斥共享或同时共享。","priority":""},{"text":"虚拟性：把一个物理实体抽象成多个逻辑实体","note":"如 SPOOLING 为打印机提供可排队的虚拟设备使用体验。","priority":""},{"text":"不确定性／异步性：进程以不可预知的速度推进","note":"受调度与事件到达影响，结果不意味着一定错误。","priority":""},{"text":"并行：真正同一时刻多个任务在执行","note":"与并发概念辨析，老师只要求初步理解。","priority":""}],"source":"PDF 第2–4页；转写 3.1","priority":"","visual":"osfeatures","memory":"并发、共享、虚拟、不确定（异步）。"},{"id":"1:2","chapter":1,"index":2,"title":"操作系统五大管理功能","fullTitle":"操作系统五大管理功能","intro":"课程列出进程、文件、存储、设备、作业五类功能；本章重点学习前四类，作业管理了解即可。","points":[{"text":"进程管理：处理器时间、同步、通信、调度","note":"负责 CPU 的合理分配。","priority":""},{"text":"存储管理：主存分配、回收、保护、地址映射","note":"本课程“存储管理”主要面向主存。","priority":""},{"text":"设备管理：I/O 设备分配、启动、回收","note":"如打印机、磁盘等外设。","priority":""},{"text":"文件管理：外存文件、目录、读写和存取控制","note":"与辅存组织有关。","priority":""},{"text":"作业管理：任务组织和交互等","note":"本课老师明确说不在本章重点考查。","priority":""}],"source":"PDF 第2–4页；转写 3.1","priority":"","visual":"osmanager","memory":"进程管 CPU、存储管主存、设备管外设、文件管外存。"},{"id":"1:3","chapter":1,"index":3,"title":"常见操作系统分类","fullTitle":"常见操作系统分类","intro":"老师表示分类可能在选择题中出现，掌握各种类型的典型特征即可，不必全文背诵。","points":[{"text":"批处理操作系统：成批提交、自动连续执行","note":"单道批处理与多道批处理，侧重提高吞吐和自动处理。","priority":""},{"text":"分时操作系统：划分时间片轮流服务终端","note":"强调交互性，给用户宏观“同时使用”的体验。","priority":""},{"text":"实时操作系统：在规定时间约束内响应","note":"规定期限来自受控对象的要求；强调及时性和可靠性。","priority":""},{"text":"网络操作系统：资源共享、网络服务","note":"课程提及集中、客户机/服务器和对等模式。","priority":""},{"text":"分布式操作系统：协调多个网络计算节点","note":"让多个计算资源协同工作。","priority":""},{"text":"微型计算机操作系统：面向个人微机","note":"课程举 Windows、macOS、Linux。","priority":""}],"source":"PDF 第2–4页；转写 3.1","priority":"","visual":"osclass","memory":"批处理重批量，分时重交互，实时重时限。"},{"id":"1:4","chapter":1,"index":4,"title":"嵌入式操作系统与初始化顺序","fullTitle":"嵌入式操作系统与初始化顺序","intro":"嵌入式操作系统运行在特定设备中，受资源和硬件条件约束。老师特别提醒曾考过“自底向上的初始化顺序”。","points":[{"text":"典型特征：微型化、可定制、实时性、可靠性、易移植性","note":"课件明确列出五点。","priority":"frequent"},{"text":"微型化：功能和资源根据应用精简","note":"如嵌入式设备不必包含完整的桌面软件功能。","priority":""},{"text":"可定制：面向具体硬件平台配置结构和功能","note":"更关注硬件适配。","priority":""},{"text":"初始化顺序：片级 → 板级 → 系统级","note":"老师表示有过相关选择题。","priority":"frequent"},{"text":"片级：芯片；板级：电路板和相关外设；系统级：系统软件","note":"以自底向上理解三层。","priority":""}],"source":"PDF 第2–4页；转写 3.1","priority":"","visual":"init","memory":"嵌入式初始化：片 → 板 → 系统。"},{"id":"2:0","chapter":2,"index":0,"title":"进程组成与 PCB","fullTitle":"进程组成与 PCB","intro":"进程不仅是程序代码，还要包含运行时需要的数据以及管理该进程的控制信息。PCB 是识别和管理进程的关键。","points":[{"text":"进程 = PCB + 程序 + 数据","note":"课程的三大组成。","priority":"frequent"},{"text":"PCB（进程控制块）是进程存在的唯一标识","note":"保存进程状态、标识、调度等控制信息。","priority":"frequent"},{"text":"程序：描述进程需要执行什么","note":"由指令构成。","priority":""},{"text":"数据：运行过程中使用和产生的数据","note":"可区分代码与运行数据。","priority":""},{"text":"控制块缩写：PCB、TCB、FCB","note":"分别对应进程、线程、文件。","priority":""}],"source":"PDF 第4–6页；转写 3.1","priority":"","visual":"processparts","memory":"进程 = PCB + 程序 + 数据；PCB 唯一标识进程。"},{"id":"2:1","chapter":2,"index":1,"title":"进程三态图与状态含义","fullTitle":"进程三态图与状态含义","intro":"课程最强调的是就绪、运行、阻塞这三种状态及其**允许的状态转换**。重点是能自己画出三态图并解释每条箭头。","points":[{"text":"运行态：正在占用 CPU 执行","note":"拥有 CPU 及当前运行所需条件。","priority":"must"},{"text":"就绪态：除 CPU 外执行条件已具备","note":"在就绪队列中等待调度。","priority":"must"},{"text":"阻塞态（等待态）：等待外部事件或所需资源","note":"即使分到 CPU 也暂时不能继续执行。","priority":"must"},{"text":"就绪 → 运行：调度获得 CPU；运行 → 就绪：时间片到、被抢占","note":"这两种转换可以往返。","priority":"must"},{"text":"运行 → 阻塞：等待 I/O 或事件；阻塞 → 就绪：等待事件已发生","note":"阻塞不直接跳到运行，需经就绪再调度。","priority":"must"},{"text":"不能直接：就绪 → 阻塞、阻塞 → 运行","note":"三态图经典辨析，老师反复提醒。","priority":"frequent"}],"source":"PDF 第4–6页；转写 3.1","priority":"must","visual":"process3","memory":"就绪只缺 CPU；阻塞缺事件；阻塞恢复先到就绪。"},{"id":"2:2","chapter":2,"index":2,"title":"进程五态与状态转换题","fullTitle":"进程五态与状态转换题","intro":"五态模型在三态基础上增加新建与终止。老师说本课主要考三态，但题目可能以不同事件描述转换。","points":[{"text":"新建态：创建后尚未正式进入就绪队列","note":"了解即可。","priority":""},{"text":"终止态：程序执行结束、等待资源回收","note":"了解即可。","priority":""},{"text":"例：进程 P1 正在运行，时间片到 → P1 就绪","note":"下一个就绪进程被调度后转为运行。","priority":""},{"text":"等待打印机 / 扫描仪 → 阻塞态","note":"设备事件满足后变成就绪态。","priority":""},{"text":"做题技巧：先确定原状态，再找触发事件，再沿三态图找合法箭头","note":"不要看到 I/O 就以为直接进入运行。","priority":"frequent"}],"source":"PDF 第4–6页；转写 3.1","priority":"","visual":"process3","memory":"题目把“等待态”写成“阻塞态”，通常指同一状态。"},{"id":"2:3","chapter":2,"index":3,"title":"前驱图：并发与先后依赖","fullTitle":"前驱图：并发与先后依赖","intro":"前驱图用箭头表示作业或任务的先后制约。多个前驱都完成后，后续任务才能开始。它与进程资源图的“资源请求/分配”是两回事。","points":[{"text":"A → D：A 完成之后，D 才能执行","note":"箭头代表前后约束。","priority":""},{"text":"A、B、C 同时指向 D：D 必须等待三者全部完成","note":"A/B/C 可以并行。","priority":"frequent"},{"text":"前驱图既表现并发关系，也表现先后顺序","note":"不能仅按箭头数量判断实际执行时长。","priority":""},{"text":"同步关系：一个任务必须等另一个任务完成","note":"为后续 PV 信号量设置提供依据。","priority":""}],"source":"PDF 第4–6页；转写 3.1","priority":"","visual":"precedence","memory":"前驱箭头 X→Y：Y 必须等待 X 完成。"},{"id":"2:4","chapter":2,"index":4,"title":"进程资源图与化简","fullTitle":"进程资源图与化简","intro":"进程资源图反映进程、资源的请求与已分配关系，可用“能否释放并化简”判断系统能否顺利推进。","points":[{"text":"P 表示进程，R 表示资源，资源框中圆点数是资源实例数","note":"看清多实例资源。","priority":""},{"text":"R → P：该资源实例已分配给进程","note":"箭头方向是“资源给进程”。","priority":"frequent"},{"text":"P → R：进程请求该资源","note":"箭头方向是“进程要资源”。","priority":"frequent"},{"text":"化简：找到当前需求能满足的进程，让它完成并释放持有资源","note":"释放后再检查其他进程需求。","priority":""},{"text":"存在完整的化简顺序，说明可以让这些进程全部完成","note":"注意不能只看某一时刻是否有阻塞节点。","priority":""},{"text":"老师指出该类型图题近年较少，但原理仍建议理解","note":"考试频率为老师课程经验判断。","priority":""}],"source":"PDF 第4–6页；转写 3.1","priority":"","visual":"resourcegraph","memory":"P→R 请求；R→P 分配；找能运行的进程，完成后释放资源。"},{"id":"3:0","chapter":3,"index":0,"title":"同步、互斥与临界资源","fullTitle":"同步、互斥与临界资源","intro":"同步处理先后依赖，互斥处理不能同时使用同一临界资源。考试经常要求从流程图识别要设置的信号量。","points":[{"text":"临界资源：同一时刻仅允许一个进程使用的资源","note":"例如互斥访问的缓冲区等。","priority":"must"},{"text":"临界区：程序中访问临界资源的代码段","note":"“临界资源”和“临界区”不是同一个概念。","priority":""},{"text":"互斥：同一时刻只能有一个进程访问临界资源","note":"关注资源独占。","priority":"must"},{"text":"同步：多个进程因顺序依赖而协调执行","note":"关注“谁先完成，谁才能继续”。","priority":"must"},{"text":"互斥信号量初值常为 1；同步信号量初值常为 0","note":"具体应按可用资源数或事件初始状态确定。","priority":"must"}],"source":"PDF 第7–9页；转写 3.1","priority":"must","visual":"syncmutex","memory":"互斥管同一资源不能同时用；同步管先完成谁再执行。"},{"id":"3:1","chapter":3,"index":1,"title":"信号量 S：数值含义和初值","fullTitle":"信号量 S：数值含义和初值","intro":"PV 题的第一步通常是确定信号量的作用和初值。正负值的含义不同，不能简单把所有信号量都设成 1。","points":[{"text":"资源型信号量：S 初值＝当前可用资源实例数","note":"例如 3 台打印机可设置 S=3。","priority":"must"},{"text":"S > 0：还有可用资源；S = 0：没有空闲资源","note":"0 是边界值。","priority":"must"},{"text":"S < 0：绝对值表示等待该资源的进程数量","note":"在课程讲解的经典信号量模型下。","priority":"must"},{"text":"互斥信号量：一般初值为 1","note":"保护单个临界资源。","priority":""},{"text":"同步信号量：前置事件未发生时通常初值为 0","note":"执行 V 才会通知后置步骤。","priority":""}],"source":"PDF 第7–9页；转写 3.1","priority":"must","visual":"semaphore","memory":"初值看资源数；正数是空闲，负数的绝对值是等待数。"},{"id":"3:2","chapter":3,"index":2,"title":"P 操作：申请资源、可能阻塞","fullTitle":"P 操作：申请资源、可能阻塞","intro":"P(S) 先将信号量减 1；若减少后 S 小于 0，则当前进程无法继续，应进入等待队列。","points":[{"text":"P(S)：S ← S − 1","note":"表示申请一个资源或等待前置事件。","priority":"must"},{"text":"若 S ≥ 0：继续运行","note":"说明申请成功。","priority":"must"},{"text":"若 S < 0：进程阻塞，加入等待队列","note":"老师特别说明 P 与阻塞的关系。","priority":"must"},{"text":"P 操作应作为不可分割的原子操作","note":"防止并发竞态，课程图示为顺序执行。","priority":""}],"source":"PDF 第7–9页；转写 3.1","priority":"must","visual":"pv","memory":"P = 申请 = 减 1；结果为负则等待。"},{"id":"3:3","chapter":3,"index":3,"title":"V 操作：释放资源、唤醒等待者","fullTitle":"V 操作：释放资源、唤醒等待者","intro":"V(S) 先将信号量加 1；若增加后 S 不大于 0，说明仍有进程在等待，按规则唤醒其中一个。","points":[{"text":"V(S)：S ← S + 1","note":"表示释放资源或发出完成信号。","priority":"must"},{"text":"若 S > 0：没有等待进程需要唤醒","note":"资源计数增加。","priority":""},{"text":"若 S ≤ 0：唤醒一个在此信号量上等待的进程","note":"与 P 的阻塞条件成对理解。","priority":"must"},{"text":"P 和 V 应成对匹配其资源或同步含义","note":"前置条件通过 V 通知、后继通过 P 等待。","priority":""}],"source":"PDF 第7–9页；转写 3.1","priority":"must","visual":"pv","memory":"V = 释放 = 加 1；结果不大于 0，唤醒一个等待者。"},{"id":"3:4","chapter":3,"index":4,"title":"经典生产者—消费者问题","fullTitle":"经典生产者—消费者问题","intro":"有一个容量有限的共享缓冲区时，生产者与消费者既需要互斥地访问缓冲区，也需要按“有空位/有产品”同步。","points":[{"text":"互斥信号量 mutex 初值 1","note":"保护共享缓冲区临界访问。","priority":"must"},{"text":"空位信号量 empty 初值为缓冲区容量 N","note":"没有空位不能生产。","priority":"must"},{"text":"产品信号量 full 初值 0","note":"没有产品不能消费。","priority":"must"},{"text":"生产者：P(empty) → P(mutex) → 放入 → V(mutex) → V(full)","note":"先等空位，放入后通知产品增加。","priority":"must"},{"text":"消费者：P(full) → P(mutex) → 取出 → V(mutex) → V(empty)","note":"先等产品，取出后释放一个空位。","priority":"must"},{"text":"老师课堂示例先说明“仓库空与否”的同步思想","note":"这里用上述经典记法整理，有助于辨析缓冲区容量与互斥操作。","priority":""}],"source":"PDF 第7–9页；转写 3.1","priority":"must","visual":"producer","memory":"生产者先等空位，消费者先等产品；两边访问缓冲区都要互斥。","notice":"课程原例用 S0、S1、S2 表示不同信号量；这里用 mutex / empty / full 命名，是便于学习的等价表达。"},{"id":"3:5","chapter":3,"index":5,"title":"前驱图转换为 P/V 操作","fullTitle":"前驱图转换为 P/V 操作","intro":"在多进程前驱图中，每条“前驱 → 后继”依赖通常对应一个同步通知：前驱完成时执行 V，后继开始前执行 P。","points":[{"text":"先为每条需要同步的前驱边准备信号量，初值通常设为 0","note":"若多个边独立约束，需分别关注。","priority":"must"},{"text":"边 A → D：A 结束后 V(S_AD)，D 开始前 P(S_AD)","note":"确保 D 在 A 后。","priority":"must"},{"text":"若 A、B、C 均指向 D，D 前需要等待三个条件","note":"即分别执行 P 对应三条边。","priority":"must"},{"text":"分叉：一个前驱结束后可能要通知多个后继","note":"不能把只增加一次的单个信号误当成广播。","priority":"must"},{"text":"做题顺序：画清箭头 → 定初值 → 放前驱的 V → 放后继的 P","note":"老师用多进程真题反复演示。","priority":"frequent"}],"source":"PDF 第7–9页；转写 3.1","priority":"must","visual":"precedencepv","memory":"前驱结尾 V；后继开头 P；每条约束都要对应。"},{"id":"3:6","chapter":3,"index":6,"title":"信号量范围与等待数量计算","fullTitle":"信号量范围与等待数量计算","intro":"除了补 P/V 空格，老师还讲了直接根据信号量初值与进程数计算最大/最小范围的题型。","points":[{"text":"m 个相同资源，n 个进程各最多申请 1 个：S 初值 m","note":"资源初始可用数。","priority":"frequent"},{"text":"n 个进程都执行一次 P 且尚未 V：S 最小可到 m−n","note":"经典模型下，S 的范围为 [m−n, m]。","priority":"frequent"},{"text":"当 S = −k，表示 k 个进程等待资源","note":"前提是采用教材的计数信号量规则。","priority":"must"},{"text":"例：3 台打印机、n 个进程 ⇒ 3−n ≤ S ≤ 3","note":"课件真题条件。","priority":"frequent"}],"source":"PDF 第7–9页；转写 3.1","priority":"frequent","visual":"semaphore","memory":"S最大值=初值；最小值=初值−最大同时申请次数。","examples":[{"title":"三台打印机的信号量取值","given":"3 台打印机，n 个进程，每个进程最多同时使用 1 台","steps":["信号量初值设为可用打印机数：S = 3","最极端时 n 个进程各执行一次 P(S)，S 降为 3−n","尚未申请时 S 最大仍是 3","若出现 S = −3，则说明有 3 个进程等待该类资源"],"answer":"3−n ≤ S ≤ 3；S = −3 时等待进程数为 3","warning":""}]},{"id":"4:0","chapter":4,"index":0,"title":"调度层次与剥夺方式","fullTitle":"调度层次与剥夺方式","intro":"调度的核心是决定哪个进程占有 CPU。老师指出本部分考得不多，主要了解三级调度及抢占和非抢占的含义。","points":[{"text":"高级调度（作业调度）：决定哪批作业进入系统","note":"从后备作业中选择。","priority":""},{"text":"中级调度：交换区与主存之间调入/调出进程","note":"决定哪些进程具备竞争 CPU 的条件。","priority":""},{"text":"低级调度（进程调度）：在就绪队列选择 CPU 使用者","note":"课程强调最频繁也最重要。","priority":""},{"text":"可剥夺：高优先级进程可抢占正在执行的低优先级进程","note":"抢占式调度。","priority":""},{"text":"不可剥夺：即使高优先级进程到达也要等待当前进程释放 CPU","note":"非抢占式调度。","priority":""}],"source":"PDF 第9–12页；转写 3.2","priority":"","visual":"schedule","memory":"高调作业、中调交换、低调 CPU；剥夺看能否抢占。"},{"id":"4:1","chapter":4,"index":1,"title":"常见进程调度算法","fullTitle":"常见进程调度算法","intro":"通过四种调度策略比较“谁先拿 CPU、运行多久”。不要把时间片轮转与优先级调度混在一起。","points":[{"text":"FCFS 先来先服务：按到达先后顺序执行","note":"先来的先用 CPU。","priority":""},{"text":"时间片轮转：每个就绪进程轮流获得固定时间片","note":"时间片用完，即使未完成也可回就绪队列。","priority":""},{"text":"优先级调度：优先级高者优先获得 CPU","note":"是否能打断当前进程，还看剥夺策略。","priority":""},{"text":"多级反馈队列：多个不同优先级、时间片的队列","note":"新进程进较高优先级队列；未完成时可逐级转入较低优先级队列。","priority":""},{"text":"老师定位：调度算法了解概念即可","note":"不要求大量深入数值推导。","priority":""}],"source":"PDF 第9–12页；转写 3.2","priority":"","visual":"schedule","memory":"FCFS 看先后；RR 看时间片；优先级看级别；多级反馈看队列。"},{"id":"4:2","chapter":4,"index":2,"title":"死锁定义与四个必要条件","fullTitle":"死锁定义与四个必要条件","intro":"死锁是多个进程因竞争有限资源形成无法推进的循环等待。老师明确要求记住死锁发生的四个必要条件。","points":[{"text":"互斥条件：相关资源一次只能由一个进程使用","note":"资源具有独占性。","priority":"must"},{"text":"请求并保持：占有资源的同时请求其他资源","note":"请求不到仍持有已占资源。","priority":"must"},{"text":"不可剥夺：已分配资源不能被强制收回","note":"只能主动释放。","priority":"must"},{"text":"循环等待：存在等待链环路","note":"例如 P1 等 P2 持有资源，P2 又等 P1。","priority":"must"},{"text":"破坏四条件中任一必要条件可以从机理上防止死锁","note":"课程以“打破其中一个条件”概括死锁预防。","priority":"frequent"}],"source":"PDF 第9–12页；转写 3.2","priority":"must","visual":"deadlock","memory":"互斥、请求保持、不可剥夺、循环等待。"},{"id":"4:3","chapter":4,"index":3,"title":"死锁预防、避免、检测与解除","fullTitle":"死锁预防、避免、检测与解除","intro":"四种处理思路的关键区别是“什么时候采取措施”。避免类典型算法是银行家算法。","points":[{"text":"死锁预防：事先破坏四个必要条件之一","note":"从制度上阻断死锁条件。","priority":""},{"text":"死锁避免：资源分配前判断是否还能保持安全状态","note":"课程典型为银行家算法。","priority":"frequent"},{"text":"死锁检测：允许死锁出现，周期性或必要时识别","note":"属于事后发现。","priority":""},{"text":"死锁解除：检测后通过撤销进程或回收资源恢复系统","note":"属于事后处理。","priority":""},{"text":"易混：预防 ≠ 避免；检测 ≠ 解除","note":"预防破坏条件；避免做安全性判断；检测识别；解除恢复。","priority":""}],"source":"PDF 第9–12页；转写 3.2","priority":"","visual":"deadlockcontrol","memory":"预防破坏条件、避免选安全分配、检测找死锁、解除回收。"},{"id":"4:4","chapter":4,"index":4,"title":"死锁资源数的计算","fullTitle":"死锁资源数的计算","intro":"若有 n 个进程，每个进程都需要 r 个同类可复用资源，课程给出“最多仍可能死锁”与“最少保证不死锁”的公式。","points":[{"text":"最多仍可能死锁的资源数 = n×(r−1)","note":"每个进程各占 r−1 个，都还缺 1 个时全部等待。","priority":"must"},{"text":"最少保证不发生死锁的资源数 = n×(r−1)+1","note":"多出 1 个可让某进程完成并释放资源。","priority":"must"},{"text":"公式成立条件：每个进程最多需要 r 个同类资源，资源可释放重复使用","note":"这是该类教材题的模型条件。","priority":""},{"text":"老师例：3 个进程每个需要 5 个资源 ⇒ 3×4+1=13","note":"课件原题答案。","priority":"frequent"}],"source":"PDF 第9–12页；转写 3.2","priority":"must","visual":"deadlockcalc","memory":"n 个进程各需 r 个：保不死锁最少 n(r−1)+1。","examples":[{"title":"三进程竞争资源","given":"3 个并发进程，每个进程最多需要 5 个同类资源；求保证不会发生死锁的最少资源数","steps":["若有 12 个资源，可分给每个进程 4 个，三者都还缺 1 个，存在死锁可能","此时极端占有数是 3×(5−1)=12","增加 1 个资源后，至少有一个进程能获得第 5 个资源并完成","该进程释放持有的 5 个资源，其他进程便可继续"],"answer":"13 个同类资源","warning":""}]},{"id":"4:5","chapter":4,"index":5,"title":"银行家算法：安全序列判断","fullTitle":"银行家算法：安全序列判断","intro":"银行家算法在试分配之前检查是否存在能让所有进程依次完成的安全序列。老师说近年考得较少，但要理解基本比较方法。","points":[{"text":"可用资源 Available = 总资源 − 所有进程已分配资源之和","note":"按资源种类分别做减法。","priority":"frequent"},{"text":"尚需资源 Need = Max − Allocation","note":"每个进程每类资源分别相减。","priority":"frequent"},{"text":"若某进程 Need ≤ Available（逐分量比较），就可以假定其完成","note":"完成后释放已分配资源，更新 Available。","priority":"frequent"},{"text":"重复选择可完成的进程，直到全部完成；存在此序列则状态安全","note":"不能只看需求总和。","priority":"frequent"},{"text":"课件例：总资源 (10,5,3)，当前可用资源 (2,0,1)","note":"课件给出一条安全序列：P5→P2→P4→P3→P1。","priority":""}],"source":"PDF 第9–12页；转写 3.2","priority":"frequent","visual":"banker","memory":"先求 Available，再求 Need；找可满足者，完成后回收，循环验证。","examples":[{"title":"课件：银行家算法安全状态","given":"总资源 (10,5,3)，各进程已分配资源见 PPT 第11页，剩余可用为 (2,0,1)","steps":["先按列计算所有已分配资源之和，从总量逐项减去，得到 Available=(2,0,1)","对每个进程做 Need=最大需求−已分配","在当前可用下可先选择满足需求的 P5；P5 完成释放其已分配资源","之后按 P2、P4、P3、P1 的顺序逐个进行可满足性比较"],"answer":"安全序列示例：P5→P2→P4→P3→P1","warning":"题目具体矩阵以 PDF 第11页为准。"}]},{"id":"4:6","chapter":4,"index":6,"title":"进程与线程的区别","fullTitle":"进程与线程的区别","intro":"引入线程是为了减轻进程创建、切换等开销。线程属于进程，进程拥有资源，线程主要承担独立调度。","points":[{"text":"进程：资源分配的基本单位","note":"传统进程具有独立资源和可调度两方面属性。","priority":"frequent"},{"text":"线程：CPU 独立调度和执行的基本单位","note":"一个进程可有多个线程。","priority":"frequent"},{"text":"同一进程的线程共享代码、全局数据、打开文件等","note":"数据共享会带来同步互斥问题。","priority":""},{"text":"每个线程独有程序计数器、寄存器上下文和栈等","note":"并非“线程完全没有任何资源”。","priority":"frequent"},{"text":"TCB 是线程控制块；PCB 是进程控制块","note":"不要混淆缩写。","priority":""}],"source":"PDF 第9–12页；转写 3.2","priority":"","visual":"thread","memory":"进程管资源，线程管调度；同进程线程共享资源、各有栈。"},{"id":"5:0","chapter":5,"index":0,"title":"分区存储管理与碎片","fullTitle":"分区存储管理与碎片","intro":"分区管理把作业作为整体分配主存，区分固定、可变和可重定位分区，考试重点是判断产生哪类碎片。","points":[{"text":"固定分区：事先划分固定大小的分区","note":"分区可能比作业所需大，产生内部碎片。","priority":"frequent"},{"text":"可变分区：装入时按需求划出空间","note":"会造成离散空闲小块，即外部碎片。","priority":"frequent"},{"text":"可重定位分区：通过移动已分配分区合并碎片","note":"需要调整实际驻留位置。","priority":""},{"text":"内部碎片：已经分配给进程、但其内部没用到的空间","note":"常见于固定大小分配。","priority":""},{"text":"外部碎片：未分配、但分散成不易利用的小块","note":"常见于按需连续分配。","priority":""}],"source":"PDF 第12–17页；转写 3.2","priority":"","visual":"fragments","memory":"固定易内部碎片；可变易外部碎片；重定位用于合并外部空闲区。"},{"id":"5:1","chapter":5,"index":1,"title":"可变分区的四种分配算法","fullTitle":"可变分区的四种分配算法","intro":"老师用“需要 9KB 空间”的示例比较首次、最佳、最差、循环首次四种算法，理解选取空闲块的标准。","points":[{"text":"首次适应 FF：按内存地址从头找第一个足够大的空闲块","note":"每次从头开始搜索。","priority":""},{"text":"最佳适应 BF：从能容纳请求的空闲块中挑最小的","note":"可能留下很小的外部碎片。","priority":""},{"text":"最差适应 WF：挑最大的空闲块切割","note":"尽量保留较大的剩余空闲块。","priority":""},{"text":"循环首次适应 NF：从上次查找结束位置继续往后找","note":"到末尾再回到开头，与首次适应不同。","priority":""},{"text":"课件空闲块：25K、10K、28K；请求 9K","note":"FF 选遇到的 25K；BF 选 10K；WF 选 28K；NF 依游标位置。","priority":""}],"source":"PDF 第12–17页；转写 3.2","priority":"","visual":"allocation","memory":"首次按地址；最佳选最小适配；最差选最大；循环首次记游标。"},{"id":"5:2","chapter":5,"index":2,"title":"分页存储管理基础","fullTitle":"分页存储管理基础","intro":"分页是将逻辑空间按固定大小划为“页”，主存按同样大小划为“页框”。逻辑页面可映射到不连续的物理页框。","points":[{"text":"页（Page）：进程逻辑地址空间的固定大小单元","note":"从逻辑地址看页面编号。","priority":"must"},{"text":"页框（Frame）：物理主存内与页等大的块","note":"存储页框号用物理块号。","priority":"must"},{"text":"页面与页框大小相同；映射关系由页表记录","note":"页号未必等于页框号。","priority":"must"},{"text":"分页不要求为一个进程连续分配整块主存","note":"程序可在页框中分散放置。","priority":""},{"text":"分页可能有内部碎片，典型是最后一页没有填满","note":"固定长度分配，老师特别提醒。","priority":"frequent"}],"source":"PDF 第12–17页；转写 3.2","priority":"must","visual":"paging","memory":"逻辑页号查页表找到物理页框号，页内偏移原样保留。","notice":"课程转写对“物理地址在外存、逻辑地址在主存”等位置描述存在口误；以 PDF 页表映射示意和“逻辑页 → 物理主存页框”的关系为准。"},{"id":"5:3","chapter":5,"index":3,"title":"分页：逻辑地址到物理地址转换","fullTitle":"分页：逻辑地址到物理地址转换","intro":"这是老师明确强调的存储管理计算重点。页大小为 2^k 时，低 k 位表示页内偏移，高位表示逻辑页号。","points":[{"text":"逻辑地址 A：页号 p=⌊A/页大小⌋，页内偏移 d=A mod 页大小","note":"两部分拆分。","priority":"must"},{"text":"查页表：逻辑页号 p → 物理页框号 f","note":"注意要以题目给出的页表为准。","priority":"must"},{"text":"物理地址 = f×页大小+d","note":"页内偏移不发生变化。","priority":"must"},{"text":"页大小 4KB=2¹²B ⇒ 低 12 位为页内偏移","note":"课件真题条件。","priority":"frequent"},{"text":"示例：逻辑地址 1D16H，页号 1，偏移 D16H","note":"若页表中第 1 页映射页框 3，则物理地址 3D16H。","priority":"frequent"}],"source":"PDF 第12–17页；转写 3.2","priority":"must","visual":"pageroute","memory":"先拆页号/偏移 → 查页表换页框 → 拼接页框号和原偏移。","examples":[{"title":"课件：分页地址转换","given":"页大小 4KB；逻辑地址 1D16H；页表给出：第 1 页对应物理块 3","steps":["4KB = 1000H；低 3 位十六进制数字代表页内偏移","1D16H ÷ 1000H：逻辑页号 1，页内地址 D16H","查页表得：逻辑页 1 → 物理页框 3","物理地址 = 3×1000H + D16H = 3D16H"],"answer":"3D16H","warning":"页号与物理块号不是同一概念；页内偏移原样保留。"}]},{"id":"5:4","chapter":5,"index":4,"title":"页表、快表与地址映射","fullTitle":"页表、快表与地址映射","intro":"页表保存页号到物理块号的映射。快表（TLB）缓存近期常用的页表项，用于加速地址转换。","points":[{"text":"页表：逻辑页号 → 物理页框号的映射表","note":"地址转换的关键数据结构。","priority":""},{"text":"快表（TLB）：相联存储器实现的高速页表项缓存","note":"保存部分常用页表映射。","priority":"frequent"},{"text":"快表命中：可以快速得到物理页框号","note":"减少慢速查页表的成本。","priority":""},{"text":"快表未命中：需要查询常规页表，必要时填入 TLB","note":"不能把“快表不命中”直接等同于“缺页”。","priority":"frequent"},{"text":"页表项可以涉及访问位、修改位等辅助状态","note":"在页面置换题中常见。","priority":""}],"source":"PDF 第12–17页；转写 3.2","priority":"","visual":"tlb","memory":"快表是页表项的缓存；TLB miss 不一定 page fault。"},{"id":"5:5","chapter":5,"index":5,"title":"页面置换算法和抖动","fullTitle":"页面置换算法和抖动","intro":"当需要载入新页却没有可用页框时，采用页面置换算法。老师重点介绍 OPT、FIFO、LRU 及淘汰原则。","points":[{"text":"OPT 最优置换：淘汰未来最长时间不再访问的页","note":"理论基准，实际无法提前准确知道未来访问。","priority":""},{"text":"FIFO 先进先出：淘汰最早装入的页","note":"可能出现 Belady 异常：页框数增加反而缺页更多。","priority":"frequent"},{"text":"LRU 最近最少使用：淘汰过去最长时间未访问的页","note":"利用访问的时间局部性。","priority":"frequent"},{"text":"淘汰原则：优先淘汰近期未访问、未被修改等代价较低的页面","note":"老师介绍的辅助判断思路。","priority":""},{"text":"快表缓存与内存页面置换关注对象不同","note":"一个替换页表项缓存，一个替换内存页。","priority":""}],"source":"PDF 第12–17页；转写 3.2","priority":"","visual":"pagereplace","memory":"OPT 看未来、FIFO 看装入顺序、LRU 看过去访问时间。"},{"id":"5:6","chapter":5,"index":6,"title":"分段存储管理与段地址","fullTitle":"分段存储管理与段地址","intro":"分段按逻辑意义组织程序，每段长度可以不同。段地址由段号和段内偏移组成，必须先判断偏移是否越界。","points":[{"text":"逻辑分段：按程序功能划分，段长可变","note":"与分页固定大小不同。","priority":"frequent"},{"text":"逻辑地址 = 段号 + 段内偏移","note":"段号到段表查询。","priority":"must"},{"text":"段表包含段基址和段长","note":"用于地址变换和越界检查。","priority":"must"},{"text":"若段内偏移 ≥ 段长，则该逻辑地址越界","note":"比较偏移与段长时注意等号。","priority":"must"},{"text":"合法时物理地址 = 段基址 + 段内偏移","note":"不需要按页大小乘。","priority":"must"},{"text":"分段支持按逻辑共享/保护，但容易出现外部碎片","note":"与分页比较。","priority":""}],"source":"PDF 第12–17页；转写 3.2","priority":"must","visual":"segment","memory":"分段先验“偏移 < 段长”，再“基址 + 偏移”。","examples":[{"title":"课件：分段存储地址题","given":"段表：段 0 基址 1597，段长 600；段 1 基址 486、段长 50；段 3 基址 1327、段长 2988；段 4 基址 1952、段长 960","steps":["逻辑地址 (0,1597)：偏移 1597 ≥ 段长 600 ⇒ 越界","逻辑地址 (1,30)：30 < 50 ⇒ 物理地址 486+30=516","逻辑地址 (3,1390)：1390 < 2988 ⇒ 物理地址 1327+1390=2717","逻辑地址 (4,1066)：1066 ≥ 960 ⇒ 越界"],"answer":"(1,30)、(3,1390) 合法；(0,1597)、(4,1066) 越界","warning":"课程课件表格见 PDF 第16页；注意不同题项的段长和基址。"}]},{"id":"5:7","chapter":5,"index":7,"title":"段页式存储管理与对比","fullTitle":"段页式存储管理与对比","intro":"段页式先分逻辑段，再将每段划分固定大小页。融合按逻辑分段的管理方式和分页的小块映射方式。","points":[{"text":"地址三部分：段号 + 段内页号 + 页内偏移","note":"区别于单纯分页、分段。","priority":"frequent"},{"text":"先用段号定位该段页表，再用页号查页框","note":"最后保留页内偏移。","priority":""},{"text":"优点：便于逻辑共享和保护，且页式配置减少连续存储限制","note":"课件强调集成分页与分段的特点。","priority":""},{"text":"缺点：地址转换和管理结构更复杂","note":"需要段表和页表配合。","priority":""},{"text":"老师对详细的段页式转换图评价为“了解即可”","note":"本章优先掌握分页和分段的典型计算。","priority":""}],"source":"PDF 第12–17页；转写 3.2","priority":"","visual":"segpage","memory":"分页两段地址；分段两段地址；段页式三段地址。"},{"id":"6:0","chapter":6,"index":0,"title":"设备管理任务、设备分类","fullTitle":"设备管理任务、设备分类","intro":"I/O 系统既包括硬件，也包括 I/O 软件。考试对定义考查较少，更值得关注分层软件与 SPOOLING 原理。","points":[{"text":"I/O 系统组成：设备、控制器、通道、总线和 I/O 软件","note":"不要把 I/O 系统等同于“设备”。","priority":""},{"text":"按数据单位：块设备 / 字符设备","note":"分别以块或字符流为基本传输单位。","priority":""},{"text":"按分配：独占设备 / 共享设备 / 虚拟设备","note":"需要区分共享性质。","priority":"frequent"},{"text":"设备管理任务：设备分配释放、状态维护、缓冲区管理、数据交换","note":"主要面向外设和主存间的交互。","priority":""},{"text":"与上一章呼应：查询、中断和 DMA 都是 I/O 控制方式","note":"这里重点转向操作系统提供的软件层次。","priority":""}],"source":"PDF 第17–19页；转写 3.3","priority":"","visual":"devices","memory":"I/O 系统 = 硬件设备 + 控制部件 + 软件。"},{"id":"6:1","chapter":6,"index":1,"title":"I/O 软件层次结构","fullTitle":"I/O 软件层次结构","intro":"老师强调这类题常把五层中的中间三层挖空，让考生填写。关键是从用户到硬件方向逐渐接近具体设备。","points":[{"text":"① 用户进程：发出 I/O 请求","note":"最上层。","priority":"must"},{"text":"② 设备无关软件：命名、保护、缓冲、设备无关处理","note":"屏蔽设备差异。","priority":"must"},{"text":"③ 设备驱动程序：向具体设备控制器发出操作命令","note":"与具体硬件相关。","priority":"must"},{"text":"④ 中断处理程序：处理设备完成等中断事件","note":"设备事件触发软件响应。","priority":"must"},{"text":"⑤ 硬件：实际设备与控制器","note":"最底层。","priority":"must"},{"text":"顺序从上到下：用户 → 无关软件 → 驱动 → 中断 → 硬件","note":"老师明确说过多次选择题会考中间三层。","priority":"frequent"}],"source":"PDF 第17–19页；转写 3.3","priority":"must","visual":"iolayers","memory":"用户进程 → 设备无关软件 → 驱动程序 → 中断处理程序 → 硬件。"},{"id":"6:2","chapter":6,"index":2,"title":"磁盘读取时的 I/O 分层流程","fullTitle":"磁盘读取时的 I/O 分层流程","intro":"老师用“读取磁盘文件”讲述各软件层如何配合。这个流程适合先看图，再沿请求与完成事件复述。","points":[{"text":"用户进程提出读取请求","note":"上层不必知道硬件细节。","priority":""},{"text":"设备无关软件处理抽象请求并检查缓存等","note":"部分请求可能不需要实际读磁盘。","priority":""},{"text":"设备驱动与控制器交互，发起具体读操作","note":"由设备完成低层传输。","priority":""},{"text":"设备完成后产生中断，中断处理程序处理完成事件","note":"随后可唤醒等待的进程。","priority":""},{"text":"分层的目的：隐藏设备的具体操作细节，方便使用设备","note":"课程真题强调“隐藏”而不是“开放”实现细节。","priority":"frequent"}],"source":"PDF 第17–19页；转写 3.3","priority":"","visual":"ioflow","memory":"请求自上而下，完成事件由硬件中断向上通知。"},{"id":"6:3","chapter":6,"index":3,"title":"SPOOLING（假脱机）与虚设备","fullTitle":"SPOOLING（假脱机）与虚设备","intro":"SPOOLING 把对独占设备的请求先存入磁盘缓冲队列，由系统顺序处理，形成类似共享设备的使用体验。","points":[{"text":"独占打印机：同一时刻只能真正打印一份","note":"物理硬件并未变成多台。","priority":""},{"text":"SPOOLING：使用输入井、输出井及相应管理程序","note":"软件与外存配合实现假脱机。","priority":"frequent"},{"text":"用户可并发提交打印任务，打印机仍依队列串行处理","note":"“提交成功”不等于“同时物理打印”。","priority":"must"},{"text":"把独占设备在逻辑上转变为可共享使用的虚拟设备","note":"老师用打印机例子反复解释。","priority":"frequent"},{"text":"主要收益：提高设备利用率，减少用户程序长期占用独占设备","note":"通过缓冲与排队平滑请求。","priority":""}],"source":"PDF 第17–19页；转写 3.3","priority":"frequent","visual":"spooling","memory":"多人可同时提交，机器实际仍依次执行；SPOOLING 虚拟共享。"},{"id":"7:0","chapter":7,"index":0,"title":"文件系统概念与文件结构","fullTitle":"文件系统概念与文件结构","intro":"文件是逻辑上有完整意义的一组相关信息。文件系统负责统一管理文件信息及其存储、目录和访问控制。","points":[{"text":"文件 = 文件体 + 文件说明","note":"文件体是内容，说明是管理用元信息。","priority":""},{"text":"文件系统：实现按名存取、统一接口、访问控制和差错恢复","note":"目录与存储空间管理属其功能。","priority":""},{"text":"逻辑结构：有结构的记录式文件 / 无结构的流式文件","note":"从用户如何组织内容看文件。","priority":""},{"text":"物理结构：连续、链接、索引等","note":"从数据实际怎样分布在物理盘块看文件。","priority":"frequent"},{"text":"连续：物理块连续；链接：块不连续靠指针；索引：集中索引表映射块","note":"考试需要辨析。","priority":""}],"source":"PDF 第19–23页；转写 3.3","priority":"","visual":"filestruct","memory":"逻辑结构看数据如何组织；物理结构看盘块如何存放。"},{"id":"7:1","chapter":7,"index":1,"title":"索引文件：直接、一级与二级间接索引","fullTitle":"索引文件：直接、一级与二级间接索引","intro":"索引节点通过多个地址项直接或间接定位文件数据块。多级索引的目的是使用有限地址项表示更大的文件。","points":[{"text":"直接索引：一个地址项直接指向一个数据盘块","note":"可表示 1 个数据块的容量。","priority":"must"},{"text":"一级间接：指向“存有数据块地址”的索引块","note":"一个索引块能保存多个块地址。","priority":"must"},{"text":"二级间接：先指向一级间接索引块，再指向数据块","note":"容量以每层索引数逐级相乘。","priority":"must"},{"text":"单个索引块可存地址项数 k = 索引块大小 / 地址项大小","note":"两者单位都换成字节。","priority":"must"},{"text":"最大可索引文件数据量 = (直接项数 + 一级项数×k + 二级项数×k² + …)×数据块大小","note":"假设每级索引块规格符合题设。","priority":"must"},{"text":"转写中曾把 “4KB×10” 说成 “10KB”，PDF 第20页也有明显算式笔误","note":"这里按算式核对为 40KB，并在公式讲解中说明。","priority":""}],"source":"PDF 第19–23页；转写 3.3","priority":"must","visual":"index","memory":"直接 1 块、一级 k 块、二级 k² 块；k=索引块字节数÷地址项字节数。","notice":"原 PDF 第20页“4KB×10=10KB”应为 40KB，属于算式明显不一致；本章例题统一以可核对的乘法值为准。"},{"id":"7:2","chapter":7,"index":2,"title":"索引文件计算：块号与最大文件长度","fullTitle":"索引文件计算：块号与最大文件长度","intro":"老师反复强调审题：索引项编号通常从零开始、直接/间接数量分别计算、索引块与数据块不可混用。","points":[{"text":"课件条件：5 个直接项、2 个一级间接项、1 个二级间接项","note":"地址项共 8 个，每项 4B；索引块和数据块均 1KB。","priority":"must"},{"text":"k=1KB / 4B = 256","note":"一个索引块能存 256 个地址项。","priority":"must"},{"text":"直接逻辑块号 0～4；一级逻辑块号 5～516；二级从 517 开始","note":"5 个直接、2×256 个一级覆盖的块。","priority":"must"},{"text":"逻辑块号 5 属一级间接，518 属二级间接","note":"课件选择题答案。","priority":"frequent"},{"text":"最大数据块数 = 5 + 2×256 + 256² = 66053","note":"每数据块 1KB ⇒ 66053KB。","priority":"must"},{"text":"索引块用于算可容纳地址数量，数据块用于算最大文件容量","note":"不同块大小的题目尤其重要。","priority":"must"}],"source":"PDF 第19–23页；转写 3.3","priority":"must","visual":"indexcalc","memory":"先求每索引块有多少地址，再按层级算覆盖块号与容量。","examples":[{"title":"PPT 真题：多级索引文件","given":"8 个地址项：5 个直接、2 个一级间接、1 个二级间接；每地址项 4B，索引块与数据块均为 1KB；逻辑块号 5 和 518","steps":["每索引块容纳地址数：1024B÷4B=256","直接范围：0～4，共 5 个块","一级共 2×256=512 个块，覆盖 5～516","二级从 517 开始，因此逻辑块 518 落在二级间接","最大数据块数＝5＋2×256＋256²＝66053"],"answer":"5 为一级、518 为二级；最大文件长度 66053KB","warning":""}]},{"id":"7:3","chapter":7,"index":3,"title":"文件控制块 FCB 与树形目录","fullTitle":"文件控制块 FCB 与树形目录","intro":"文件控制块记录文件的管理信息，一组 FCB 形成文件目录。目录常组织成树形结构。","points":[{"text":"FCB：文件控制块，保存文件名、物理地址、长度等基本信息","note":"不是文件的实际内容。","priority":""},{"text":"FCB 还保存访问权限等控制信息","note":"例如读、写、执行权限。","priority":""},{"text":"FCB 可记录创建、修改和访问等使用信息","note":"目录是管理信息的组织方式。","priority":""},{"text":"文件控制块的有序集合可构成文件目录","note":"课程强调这句话。","priority":""},{"text":"树形目录从根目录逐级进入子目录与文件","note":"为绝对和相对路径打基础。","priority":""}],"source":"PDF 第19–23页；转写 3.3","priority":"","visual":"filetree","memory":"FCB 是管理信息，不是文件内容；目录组织一组 FCB。"},{"id":"7:4","chapter":7,"index":4,"title":"绝对路径、相对路径与全文件名","fullTitle":"绝对路径、相对路径与全文件名","intro":"这三类题通常很简单，但容易把“路径”和“文件名”混在一起。老师特别提醒从哪里开始、是否包含文件名。","points":[{"text":"绝对路径：从根目录开始","note":"Unix 风格路径以 / 起始；Windows 可包含盘符或反斜杠。","priority":"frequent"},{"text":"相对路径：从当前工作目录开始","note":"可以直接从子目录名开始，也可以使用 ./ 和 ../。","priority":"frequent"},{"text":"路径不一定包含最后的文件名","note":"课程中“绝对路径/相对路径”题只求所在目录。","priority":""},{"text":"全文件名 = 绝对路径 + 文件名","note":"必须包含最终文件名。","priority":"frequent"},{"text":"课件示例：当前目录 /swshare，文件 /swshare/flash/fault.swf","note":"相对目录 flash/，全文件名 /swshare/flash/fault.swf。","priority":""}],"source":"PDF 第19–23页；转写 3.3","priority":"","visual":"paths","memory":"绝对从根走；相对从当前位置走；全文件名 = 路径 + 文件名。"},{"id":"7:5","chapter":7,"index":5,"title":"文件空间管理的四种方法","fullTitle":"文件空间管理的四种方法","intro":"从外存“哪些物理块空闲”这一问题出发，老师介绍空闲区表、空闲链表、成组链接和位示图。","points":[{"text":"空闲区表：对连续空闲区域记录起始块号和块数","note":"适合连续空闲区管理。","priority":""},{"text":"空闲链表：空闲块以指针串联","note":"非连续空闲块也可连接。","priority":""},{"text":"成组链接：把空闲块分组，组间记录下组地址","note":"减少逐块指针追踪。","priority":""},{"text":"位示图（Bitmap）：用一个二进制位表示一个盘块的空闲/占用状态","note":"老师特别强调有计算题。","priority":"frequent"},{"text":"位 0 / 1 的状态含义必须按题目约定读取","note":"本课图示采用 0 空闲、1 占用。","priority":""}],"source":"PDF 第19–23页；转写 3.3","priority":"","visual":"freeblocks","memory":"空闲区表看连续区，链表串空闲块，成组链接按组，位示图一位一块。"},{"id":"7:6","chapter":7,"index":6,"title":"位示图：块号到字位置的计算","fullTitle":"位示图：块号到字位置的计算","intro":"位示图把每个盘块的状态压缩成一个位，常考“第几号块位于第几个字”和整个位示图大小。","points":[{"text":"一位对应一个物理块，不是一个字节对应一个物理块","note":"易错点：比特与字节。","priority":"must"},{"text":"若从 0 编号，块号 b 所在字序号（0 起）= ⌊b/w⌋；位序号 = b mod w","note":"w 为每个字的位数。","priority":"must"},{"text":"若盘块从 1 编号而字序号从 0 编号，先将块号转换为 0 基序号","note":"先确认编号约定。","priority":""},{"text":"位示图容量（bit）= 磁盘总块数","note":"要换算为字节或字，按 8 或字长除。","priority":"must"},{"text":"课件例：1000GB 磁盘、4MB/块、32 位/字 ⇒ 位示图 8000 个字","note":"1000GB/4MB=256000 块（按 1GB=1024MB）；256000/32=8000。","priority":"frequent"}],"source":"PDF 第19–23页；转写 3.3","priority":"must","visual":"bitmap","memory":"总盘块数=容量÷块大小；每盘块 1bit；每字位数决定字数。","examples":[{"title":"PPT：位示图总字数","given":"磁盘容量 1000GB，盘块 4MB，位示图采用 32 位字","steps":["总盘块数＝1000×1024MB÷4MB＝256000","一个物理盘块对应 1bit ⇒ 位示图共 256000bit","32bit/字 ⇒ 256000÷32＝8000 字"],"answer":"8000 个字","warning":"注意 GB 与 MB 换算采用题目指定的 1024 制。"}]},{"id":"7:7","chapter":7,"index":7,"title":"位示图：编号起点与临界值","fullTitle":"位示图：编号起点与临界值","intro":"课程位示图真题要求判断“某个盘块对应第几个字”，最容易把物理块号和第几个空闲物理块混淆。","points":[{"text":"先判断：题目问的是物理块号、位示图下标还是“第 N 个空闲块”","note":"不同问法先定位实际盘块号。","priority":"must"},{"text":"一个字 32 位 ⇒ 字 0 覆盖盘块序号 0～31","note":"以双方均从 0 编号为例。","priority":"must"},{"text":"序号 16385 落在第 512 号字（从 0 开始）","note":"16385 // 32 = 512，位序号 1。","priority":"frequent"},{"text":"若问“第 16385 个块”并从 1 数，先换成下标 16384","note":"再计算落在第 512 号字、位 0。","priority":""},{"text":"题目若预留了盘块 0 或先指出一个特殊位，应先按课件条件调整","note":"别把题目的额外偏移当成通用公式。","priority":""}],"source":"PDF 第19–23页；转写 3.3","priority":"frequent","visual":"bitmap","memory":"先确定 0 起还是 1 起，再做除法取整、取余。"}],"quizzes":[{"chapter":1,"topic":"1:0","question":"操作系统在计算机软件分类中属于哪一类？","options":["应用软件","系统软件","固件设备","数据库文件"],"answer":1,"explain":"课程明确说操作系统是最基本的系统软件，负责管理系统资源并提供用户接口。"},{"chapter":1,"topic":"1:1","question":"宏观上多个任务同时推进，但单核 CPU 实际交替执行，体现的是？","options":["并发性","并行计算","独占性","静态链接"],"answer":0,"explain":"并发强调一段时间内同时推进；并行则强调真正同一时刻执行。"},{"chapter":1,"topic":"1:3","question":"要求在受控对象允许的时间范围内响应的系统称为？","options":["批处理系统","分时系统","实时操作系统","离线文件系统"],"answer":2,"explain":"实时操作系统强调满足外部时限约束。"},{"chapter":1,"topic":"1:4","question":"嵌入式系统初始化自底向上的顺序是？","options":["系统→板级→片级","片级→板级→系统级","板级→系统级→片级","片级→系统级→板级"],"answer":1,"explain":"课件给出的顺序是片级初始化、板级初始化、系统级初始化。"},{"chapter":2,"topic":"2:0","question":"课件中的进程组成是？","options":["程序+数据+PCB","进程号+文件夹+磁盘","CPU+内存+外设","线程+总线+寄存器"],"answer":0,"explain":"程序、数据和进程控制块 PCB 构成进程基本结构。"},{"chapter":2,"topic":"2:1","question":"进程只缺 CPU、其他运行条件都具备时，处于什么状态？","options":["运行","阻塞","就绪","终止"],"answer":2,"explain":"就绪态只缺 CPU，等待处理器调度。"},{"chapter":2,"topic":"2:1","question":"在基本三态图中，下列哪种直接转换不合法？","options":["运行→阻塞","就绪→运行","阻塞→运行","阻塞→就绪"],"answer":2,"explain":"阻塞事件满足时先转就绪，再被调度进入运行。"},{"chapter":2,"topic":"2:2","question":"等待打印机 I/O 的进程通常处于？","options":["阻塞态","运行态","就绪态","终止态"],"answer":0,"explain":"等待设备事件未完成时属于阻塞。"},{"chapter":2,"topic":"2:3","question":"A、B、C 均有箭头指向 D 的前驱图表示什么？","options":["D 可以立即执行","D 只等 A","A B C 完成后 D 才能执行","A B C 必须串行"],"answer":2,"explain":"D 的全部前驱节点都完成后才能执行。"},{"chapter":2,"topic":"2:4","question":"进程资源图中从进程 P 指向资源 R 的箭头表示？","options":["R 已分配给 P","P 请求 R","P 释放 R","R 销毁 P"],"answer":1,"explain":"P→R 为请求边，R→P 为分配边。"},{"chapter":3,"topic":"3:0","question":"多个进程对同一临界资源不能同时访问，体现的是？","options":["同步","互斥","并行","死锁解除"],"answer":1,"explain":"互斥控制的是独占资源不能同时访问。"},{"chapter":3,"topic":"3:1","question":"一个信号量 S 当前为 −2，课件的经典信号量模型下表示？","options":["2 个资源可用","2 个进程等待","信号量失效","资源数为 2"],"answer":1,"explain":"负数绝对值表示在该信号量上等待的进程数。"},{"chapter":3,"topic":"3:2","question":"执行 P(S) 后 S=−1，当前进程应？","options":["直接继续","立刻执行 V","阻塞等待","销毁信号量"],"answer":2,"explain":"P 先减一，S<0 时当前进程进入等待队列。"},{"chapter":3,"topic":"3:3","question":"执行 V(S) 后 S=0，按课件的 V 操作规则应？","options":["唤醒一个等待进程","阻塞当前进程","继续减一","立刻产生死锁"],"answer":0,"explain":"V 加一后若 S≤0，表示存在等待进程应被唤醒。"},{"chapter":3,"topic":"3:4","question":"容量 N 的经典生产者消费者模型中，空缓冲区时 full 的初值是？","options":["N","1","0","−N"],"answer":2,"explain":"空缓冲区没有产品，full 初值为 0；empty 初值 N，mutex 初值 1。"},{"chapter":3,"topic":"3:5","question":"若前驱关系为 A→B，为保证 B 只有在 A 完成后运行，应？","options":["A 在开始前 P，B 在结束后 V","A 在结束后 V，B 在开始前 P","A 和 B 都在开始前 V","A 和 B 都无需信号量"],"answer":1,"explain":"前驱结束时 V 通知，后继开始前 P 等待。"},{"chapter":3,"topic":"3:6","question":"3 台打印机，n 个进程最多各申请 1 台，信号量 S 最小可为？","options":["3+n","n−3","3−n","−3n"],"answer":2,"explain":"初值 3，每次 P 减一，n 个进程都 P 后最小为 3−n。"},{"chapter":4,"topic":"4:0","question":"三级调度中直接决定哪个就绪进程使用 CPU 的是？","options":["高级调度","中级调度","低级调度","目录调度"],"answer":2,"explain":"低级调度又称进程调度，直接分配 CPU。"},{"chapter":4,"topic":"4:1","question":"按照到达顺序依次使用 CPU 的算法是？","options":["FCFS","LRU","OPT","SSTF"],"answer":0,"explain":"FCFS 是先来先服务；其余是置换或磁盘调度的术语。"},{"chapter":4,"topic":"4:2","question":"死锁的四个必要条件不包括哪一项？","options":["资源互斥","请求保持","循环等待","必须有两个 CPU"],"answer":3,"explain":"必要条件是互斥、请求保持、不可剥夺、循环等待。"},{"chapter":4,"topic":"4:3","question":"在资源分配之前检查安全性属于哪种死锁处理策略？","options":["死锁解除","死锁避免","死锁检测","死锁恢复"],"answer":1,"explain":"银行家算法属于死锁避免，在分配前判断是否安全。"},{"chapter":4,"topic":"4:4","question":"3 个进程各最多需要 5 个同类资源，至少多少资源可保证不死锁？","options":["12","13","14","15"],"answer":1,"explain":"按课程模型：3×(5−1)+1=13。"},{"chapter":4,"topic":"4:5","question":"银行家算法中 Need 的计算是？","options":["已分配+可用","最大需求−已分配","总资源−最大需求","可用×已分配"],"answer":1,"explain":"Need=Max−Allocation，逐资源类型计算。"},{"chapter":4,"topic":"4:6","question":"引入线程后，通常将什么作为独立资源分配基本单位？","options":["线程","页表","进程","文件名"],"answer":2,"explain":"进程是资源分配基本单位，线程是 CPU 调度基本单位。"},{"chapter":5,"topic":"5:0","question":"固定分区最典型的内存浪费是？","options":["内部碎片","外部碎片","必然缺页","索引损坏"],"answer":0,"explain":"固定分区大于需求时，分给进程但没有使用的部分是内部碎片。"},{"chapter":5,"topic":"5:1","question":"最佳适应算法选择哪个空闲区？","options":["地址最低","第一个够用","能满足需求的最小空闲区","最大的空闲区"],"answer":2,"explain":"BF 在可以满足请求的空闲块中选择最小的一块。"},{"chapter":5,"topic":"5:2","question":"分页中页号和页框号的对应关系记录在哪里？","options":["PCB","页表","文件目录","打印队列"],"answer":1,"explain":"页表保存逻辑页到物理页框的映射。"},{"chapter":5,"topic":"5:3","question":"页大小 4KB，逻辑地址 1D16H，页表第 1 页→页框 3，物理地址是？","options":["1024H","3D16H","4D16H","6D16H"],"answer":1,"explain":"页内偏移 D16H 保留，页框从 1 换成 3，所以 3D16H。"},{"chapter":5,"topic":"5:4","question":"快表 TLB 未命中是否必然表示页面不在内存中？","options":["必然","不必然","只发生在文件系统","只发生在外存"],"answer":1,"explain":"TLB 未命中可能页表仍有有效映射，不能直接当成缺页。"},{"chapter":5,"topic":"5:5","question":"可能出现页框增多、缺页反而更多（Belady 异常）的算法是？","options":["OPT","LRU","FIFO","二级索引"],"answer":2,"explain":"FIFO 在某些访问序列下可能产生 Belady 异常。"},{"chapter":5,"topic":"5:6","question":"段表中段长为 600，段内偏移 600，则该段访问？","options":["合法","地址越界","物理地址为 0","应先补 1"],"answer":1,"explain":"段内偏移必须小于段长，等于段长也越界。"},{"chapter":5,"topic":"5:7","question":"段页式逻辑地址通常由哪三个部分组成？","options":["段号、页号、页内偏移","页号、段长、文件名","段基址、页框、硬盘号","PCB、页表、文件控制块"],"answer":0,"explain":"段页式把段与页结合，逻辑地址包含段号、段内页号和页内偏移。"},{"chapter":6,"topic":"6:0","question":"按资源分配角度，打印机常用于说明哪类设备？","options":["只能是共享设备","典型独占设备，可用 SPOOLING 虚拟共享","纯字符流设备无资源互斥","与 I/O 软件无关"],"answer":1,"explain":"物理打印机一次只能打印一个任务，SPOOLING 可使多个进程并发提交。"},{"chapter":6,"topic":"6:1","question":"I/O 软件层次中紧邻设备无关软件下方的是？","options":["用户进程","设备驱动程序","磁盘文件系统","网页浏览器"],"answer":1,"explain":"从上到下为用户进程→设备无关软件→设备驱动→中断处理→硬件。"},{"chapter":6,"topic":"6:2","question":"I/O 软件分层的主要目标之一是？","options":["向用户暴露硬件指令","隐藏硬件细节并统一使用接口","消除所有 I/O 中断","让 CPU 等待所有设备"],"answer":1,"explain":"课程真题强调 I/O 软件隐藏硬件实现细节，便利用户使用。"},{"chapter":6,"topic":"6:3","question":"关于 SPOOLING 打印的说法，哪项正确？","options":["多个任务在物理上同时打印","用户可以并发提交，物理打印仍排队","打印机不再需要硬件","提交打印会立即完成"],"answer":1,"explain":"共享的是请求与排队体验，不是同一台打印机同时印多份文档。"},{"chapter":7,"topic":"7:0","question":"文件的物理结构中使用集中索引表定位不连续数据块的是？","options":["连续结构","链接结构","索引结构","批处理结构"],"answer":2,"explain":"索引结构保存块位置的索引信息，和每块内的下一块指针不同。"},{"chapter":7,"topic":"7:1","question":"1KB 索引块，地址项 4B，一个一级间接块最多记录几个数据块地址？","options":["64","128","256","1024"],"answer":2,"explain":"1024B÷4B=256 个地址项。"},{"chapter":7,"topic":"7:2","question":"5 个直接、2 个一级间接、1 个二级间接，k=256，逻辑块号 518 属于？","options":["直接","一级间接","二级间接","不在索引范围"],"answer":2,"explain":"直接覆盖 0~4，一级覆盖 5~516，二级从 517 开始。"},{"chapter":7,"topic":"7:2","question":"同上一题，数据块为 1KB，最大文件数据长度为？","options":["517KB","1029KB","16513KB","66053KB"],"answer":3,"explain":"5+2×256+256²=66053 个数据块，共 66053KB。"},{"chapter":7,"topic":"7:3","question":"文件控制块 FCB 主要存放什么？","options":["文件的二进制内容","文件管理信息","全部内存数据","CPU 的机器指令"],"answer":1,"explain":"FCB 存文件名、地址、权限等管理信息，不是文件体内容。"},{"chapter":7,"topic":"7:4","question":"若当前工作目录是 /swshare，要访问 /swshare/flash/fault.swf，该文件的相对所在目录可写为？","options":["/swshare/flash/","flash/","/flash/","/swshare/flash/fault.swf"],"answer":1,"explain":"相对目录从当前工作目录出发，后续的 flash/ 即可。"},{"chapter":7,"topic":"7:5","question":"文件空间管理中用一位标记一个盘块空闲/占用的方法是？","options":["空闲区表","成组链接","位示图","时间片轮转"],"answer":2,"explain":"位示图用一个 bit 表示一个物理盘块状态。"},{"chapter":7,"topic":"7:6","question":"磁盘 1000GB、4MB/块、32 位/字，位示图需多少个字？","options":["1200","3200","6400","8000"],"answer":3,"explain":"1000×1024÷4=256000 个盘块，每块 1 位，除以 32 得 8000 字。"},{"chapter":7,"topic":"7:7","question":"从 0 开始编号，每个字 32 位，块号 16385 对应第几个字（0 起）？","options":["511","512","513","1024"],"answer":1,"explain":"16385//32=512，位序号 1。"}]};
+const {chapters,lessons,quizzes}=DATA;
+const lessonMap=new Map(lessons.map(t=>[t.id,t]));
+const totalStudy=lessons.filter(t=>t.chapter>0).length;
+function load(key,def){try{const v=localStorage.getItem(key);return v?JSON.parse(v):def}catch(e){return def}}
+function save(key,value){try{localStorage.setItem(key,JSON.stringify(value))}catch(e){}}
+let mastery=load('sd_os_v1_mastery',{});
+let savedLast=load('sd_os_v1_last','1:0');
+let current=lessonMap.has(savedLast)?savedLast:'1:0';
+let view='home';let openedChap=1;let mapOpen=1;let focusOnly=load('sd_os_v1_focus_only',false)===true;
+let quizState={scope:'all',items:[],index:0,picks:{},completed:false};
+const el=id=>document.getElementById(id);
+const esc=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
+function topicLabel(s){return esc(String(s).replace(/^[🔴🟠🔵]\s*/u,''))}
+function priority(t){if(t.priority)return t.priority;if(t.points.some(p=>p.priority==='must'))return 'must';if(t.points.some(p=>p.priority==='frequent'))return 'frequent';if(t.points.some(p=>p.priority==='understand'))return 'understand';return ''}
+function navPriorityLabel(pr){return pr==='must'?'<span class="nav-level must" title="必须掌握">必掌握</span>':pr==='frequent'?'<span class="nav-level frequent" title="重点 / 常考">常考</span>':''}
+function levelTag(pr){return pr==='must'?'<span class="pill must">必须掌握</span>':pr==='frequent'?'<span class="pill frequent">重点 / 常考</span>':pr==='understand'?'<span class="pill understand">了解即可</span>':''}
+function chapterDone(ci){let ids=chapters[ci].topicIds.filter(id=>ci!==0);return ids.filter(id=>mastery[id]===2).length}
+function masteredCount(){return lessons.filter(t=>t.chapter!==0 && mastery[t.id]===2).length}
+function setStatus(id,s){mastery[id]=s;save('sd_os_v1_mastery',mastery);render();}
+function markNext(id){let s=mastery[id]||0;setStatus(id,(s+1)%3)}
+function openLesson(id){if(!lessonMap.has(id))return;current=id;openedChap=lessonMap.get(id).chapter;save('sd_os_v1_last',id);setView('read')}
+function setView(v){view=v;render();el('contentShell').scrollTop=0;hideMobile()}
+function hideMobile(){el('sidebar').classList.remove('open');el('scrim').classList.remove('open')}
+function chapNav(ci){openedChap=ci;openLesson(chapters[ci].topicIds[0])}
+function renderSidebar(){
+ const mustN=lessons.filter(t=>t.chapter>0&&priority(t)==='must').length;
+ const freqN=lessons.filter(t=>t.chapter>0&&priority(t)==='frequent').length;
+ el('sideCount').textContent=`${chapters.length} 个分支`;
+ el('mustCount').textContent=mustN;el('frequentCount').textContent=freqN;
+ el('focusToggle').setAttribute('aria-pressed',String(focusOnly));
+ el('focusToggle').title=focusOnly?'显示全部知识主题':'只显示必须掌握和重点 / 常考的主题';
+ el('navList').innerHTML=chapters.map(c=>{
+  const hotIds=c.topicIds.filter(id=>{const p=priority(lessonMap.get(id));return p==='must'||p==='frequent'});
+  const visibleIds=focusOnly&&c.id!==0?hotIds:c.topicIds;
+  const sub=visibleIds.map(id=>{
+   const t=lessonMap.get(id),pr=priority(t),done=mastery[id]===2;
+   return `<button data-lesson="${id}" class="${current===id&&view==='read'?'selected':''} ${done?'complete':''} ${pr==='must'||pr==='frequent'?'nav-pr-'+pr:''}" title="${esc(t.title)}${pr==='must'?' · 必须掌握':pr==='frequent'?' · 重点 / 常考':''}"><span class="nav-topic-title">${esc(t.title)}</span>${navPriorityLabel(pr)}${done?'<span class="nav-done" title="已掌握">✓</span>':''}</button>`;
+  }).join('');
+  return `<div class="nav-group"><button class="chap-button ${(view==='read'&&openedChap===c.id)?'active':''}" data-chapter="${c.id}" aria-expanded="${openedChap===c.id}"><span class="chap-num">${c.number}</span><span>${esc(c.name)}</span>${hotIds.length?`<span class="chap-focus-count" title="本章 ${hotIds.length} 个重点主题">★${hotIds.length}</span>`:''}<span class="chap-chevron">${openedChap===c.id?'⌄':'›'}</span></button>${openedChap===c.id?`<div class="subnav">${sub||'<div class="nav-empty">本章暂无重点主题</div>'}</div>`:''}</div>`;
+ }).join('');
+ const n=masteredCount();el('sideProgress').textContent=`${n} / ${totalStudy}`;el('sideProgressBar').style.width=(n/totalStudy*100).toFixed(1)+'%';
+}
+
+function renderHome(){el('topTitle').textContent='操作系统知识 · 学习首页';let n=masteredCount();
+ let priorityTopics=lessons.filter(t=>t.chapter>0&&priority(t)==='must').length;
+ return `<section class="hero"><div class="kicker">2026 · SOFTWARE DESIGNER</div><h1>把精讲课件，变成真正能复习的知识体系。</h1><p>这是软件设计师第 3 章的完整离线复习知识库。第一次学习用图文精讲，第二次回顾用脑图，考前用速记和练习检验掌握程度。</p><div class="hero-actions"><button class="small-button primary" data-lesson="${current}">▶ ${n?'继续学习':'开始学习'}</button><button class="small-button" data-view="map">查看知识脑图</button><button class="small-button" data-view="quiz">开始随堂练习</button></div></section><div class="statbar"><div class="stat"><b>7 <small>+ 考试定位</small></b><small>内容章节</small></div><div class="stat"><b>${totalStudy}</b><small>精讲知识主题</small></div><div class="stat"><b>${n} <small>/ ${totalStudy}</small></b><small>已掌握主题</small></div></div><div class="section-label"><h2>章节学习路线</h2><p>按老师课程顺序组织，知识点均来自上传资料</p></div><div class="chap-grid">${chapters.map(c=>{let cnt=c.topicIds.length,done=chapterDone(c.id);let lead=lessonMap.get(c.topicIds[0]);return `<article class="chap-card"><div class="num">CHAPTER ${c.number}</div><h3>${esc(c.name)}</h3><p>${esc(lead.intro)}</p><div class="bar"><i style="width:${done/Math.max(1,cnt)*100}%"></i></div><div class="foot"><span>${cnt} 个主题 ${c.id>0?`· 已掌握 ${done}`:''}</span><button data-lesson="${c.topicIds[0]}">进入章节 ↗</button></div></article>`}).join('')}</div><div class="card"><h2>这份资料怎么用？</h2><div class="d-grid three"><div class="d-chip"><b>01 · 首次学习</b>打开「图文精讲」，先看解释、图解，再看关键知识和计算例题。</div><div class="d-chip"><b>02 · 复习回顾</b>打开「知识脑图」，沿分支回忆概念；不熟悉的知识点点击返回精讲。</div><div class="d-chip"><b>03 · 考前冲刺</b>使用「考前速记」和「随堂练习」快速巩固，标记已掌握主题。</div></div><p class="tiny" style="margin-top:15px">说明：教师的“常考/了解/必须掌握”来自课程讲解，属于授课侧重点；并非官方考试大纲中的固定权重。练习题为依据资料编写的自测题，不冒充原题。</p></div>`;
+}
+function renderPoints(t){return `<div class="point-list">${t.points.map(p=>{let pr=p.priority||'';return `<div class="point ${pr}"><span class="point-marker"></span><div><div class="ptext">${topicLabel(p.text)}</div>${p.note?`<div class="pnote">${esc(p.note)}</div>`:''}</div></div>`}).join('')}</div>`}
+function renderExample(t){if(!t.examples?.length)return '';return `<section class="card"><h2>🧮 计算与例题</h2>${t.examples.map(ex=>`<div class="example"><h3>${esc(ex.title)}</h3><div class="given"><b>已知：</b>${esc(ex.given)}</div>${ex.steps.map((step,i)=>`<div class="step"><span class="step-num">${i+1}</span><div>${esc(step)}</div></div>`).join('')}<div class="answer">结果：${esc(ex.answer)}</div>${ex.warning?`<div class="notice">⚠ ${esc(ex.warning)}</div>`:''}</div>`).join('')}</section>`}
+function renderRead(){const t=lessonMap.get(current);const c=chapters[t.chapter];let same=c.topicIds;let ci=same.indexOf(current),ix=lessons.findIndex(q=>q.id===current),prev=lessons[ix-1],next=lessons[ix+1];let s=mastery[current]||0;el('topTitle').textContent=`${c.name} · 图文精讲`;
+ return `<div class="crumb"><button data-view="home" style="border:0;background:none;color:#73879a;cursor:pointer;padding:0">学习首页</button> / ${esc(c.name)} / 第 ${ci+1} 节</div><div class="title-row"><div><div class="kicker">CHAPTER ${c.number} / SECTION ${String(ci+1).padStart(2,'0')}</div><h1 class="big-title">${esc(t.title)}</h1><div class="smalltags">${levelTag(priority(t))}<span class="pill">${esc(c.name)}</span><span class="pill">${s===2?'✓ 已掌握':s===1?'复习中':'未标记'}</span></div></div><button class="small-button ${s===2?'done':''}" data-master="${current}">${s===2?'✓ 已掌握 · 重置':s===1?'◐ 复习中 · 标记掌握':'○ 未学习 · 标记复习中'}</button></div><div class="topic-jump">${same.map((id,j)=>`<button class="${id===current?'current':''}" data-lesson="${id}">${j+1}. ${esc(lessonMap.get(id).title)}</button>`).join('')}</div><section class="intro-card"><div class="head">📘 先理解这一点</div><p>${esc(t.intro)}</p></section>${renderDiagram(t)}<section class="card"><h2>关键知识与老师强调的考点</h2>${renderPoints(t)}<div class="source">📎 资料来源：${esc(t.source)}。条目主要依据课件与授课转写整理，少量呈现语句为便于阅读所做的归纳。</div></section>${renderExample(t)}${renderExtra(t)}<section class="card"><h2>一分钟回忆</h2><p style="font-size:15px;font-weight:700;color:#275b94;margin:0 0 12px">${esc(t.memory||t.points.slice(0,2).map(p=>p.text).join('；'))}</p><p class="tiny" style="margin:0">先遮住答案，试着用自己的话复述本节知识。能独立说清楚，再标记为「已掌握」。</p></section><div class="lesson-footer"><button class="small-button" ${!prev?'disabled':''} ${prev?`data-lesson="${prev.id}"`:''}>← 上一个主题</button><div class="lesson-footer-actions" style="display:flex;gap:8px;flex-wrap:wrap"><button class="small-button" data-quiztopic="${current}">练习本章节题目</button><button class="small-button primary" ${!next?'disabled':''} ${next?`data-lesson="${next.id}"`:''}>下一个主题 →</button></div></div>`
+}
+function renderExtra(t){return t.notice?`<div class="notice"><strong>📌 资料核对提醒：</strong>${esc(t.notice)}</div>`:''}
+function renderDiagram(t){
+ const type=t.visual||'';
+ const head=`<section class="card"><h2>可视化理解</h2><div class="diagram"><div class="diagram-title">ILLUSTRATION / ${esc(t.title)}</div>`;
+ const end='</div></section>';
+ const box=(label,desc='',accent=false)=>`<div class="d-box ${accent?'accent':''}"><b>${label}</b>${desc?`<small>${desc}</small>`:''}</div>`;
+ const chip=(title,content)=>`<div class="d-chip"><b>${title}</b>${content}</div>`;
+ const arrow='<span class="d-arrow">→</span>';
+ const line=(xs)=>`<div class="d-row">${xs.join(arrow)}</div>`;
+ const grid=(xs,klass='two')=>`<div class="d-grid ${klass}">${xs.join('')}</div>`;
+ const table=(columns,rows)=>`<div class="os-table-wrap"><table class="mini-table"><tr>${columns.map(a=>`<th>${a}</th>`).join('')}</tr>${rows.map(r=>`<tr>${r.map(a=>`<td>${a}</td>`).join('')}</tr>`).join('')}</table></div>`;
+ let body='';
+ if(type==='studyroute')body=line([box('概述','特征·分类'),box('进程','状态·前驱'),box('PV','同步·互斥',true),box('死锁','调度·算法'),box('存储/文件','地址·索引')]);
+ else if(type==='osmanager')body=grid([chip('进程管理','管理 CPU 分配与同步'),chip('存储管理','管理主存与地址映射'),chip('设备管理','管理外设与 I/O'),chip('文件管理','管理文件与目录'),chip('作业管理','本课仅了解')]);
+ else if(type==='osfeatures')body=grid([chip('并发性','宏观同时推进，单核可能交替'),chip('共享性','多个进程按规则使用资源'),chip('虚拟性','抽象实体，虚拟设备'),chip('异步性','推进时间与顺序可能不同')]);
+ else if(type==='osclass')body=table(['类别','关注点','典型理解'],[['批处理','批量自动处理','顺序执行一批任务'],['分时','时间片与交互','多个终端轮流使用 CPU'],['实时','规定时间内响应','必须满足时限约束'],['网络 / 分布式','网络共享 / 协同','多计算节点资源组织']]);
+ else if(type==='init')body=line([box('片级','芯片初始化'),box('板级','板上设备与接口'),box('系统级','系统软件初始化',true)]);
+ else if(type==='processparts')body=grid([chip('PCB','进程的控制信息与唯一标识'),chip('程序','要执行的指令'),chip('数据','程序运行时需要的信息')],'three');
+ else if(type==='process3')body=`<div class="os-process"><div class="os-pnode"><b>就绪态</b><small>除 CPU 外已具备条件</small></div><div class="os-pair"><span>被调度 →</span><span>← 时间片到 / 抢占</span></div><div class="os-pnode main"><b>运行态</b><small>正在占用 CPU</small></div></div><div class="os-process-lower"><div class="os-pair"><span>等待事件 →</span><span>← 事件完成后，先回就绪</span></div><div class="os-pnode"><b>阻塞态</b><small>等待 I/O / 资源 / 事件</small></div></div><div class="d-note">合法路径：运行→阻塞；阻塞→就绪。不允许阻塞直接跳至运行，也不允许就绪直接跳至阻塞。</div>`;
+ else if(type==='precedence')body=`${line([box('A','可与 B/C 并发'),box('D','必须等 A/B/C',true),box('E','必须等 D')])}<div class="d-sub">同时还要满足：B → D，C → D。多个前驱要全部完成。</div>`;
+ else if(type==='resourcegraph')body=grid([chip('P → R','请求边：进程 P 想获得资源 R'),chip('R → P','分配边：资源 R 已分配给进程 P'),chip('可化简','找能满足需求的进程 → 运行 → 释放持有资源'),chip('不可化简','没有可执行的安全完成顺序')]);
+ else if(type==='syncmutex')body=grid([chip('互斥 Mutual Exclusion','同一临界资源一次只有一个进程可进入；mutex 通常初值 1'),chip('同步 Synchronization','前一个事件完成后，后一个才能继续；初值经常是 0')]);
+ else if(type==='semaphore')body=grid([chip('S > 0','当前有 S 个可用资源'),chip('S = 0','当前没有可用空闲资源'),chip('S < 0','有 |S| 个等待进程')],'three');
+ else if(type==='pv')body=grid([`<div class="os-operator"><b>P(S) · 申请</b><div class="os-equation">S ← S − 1</div><p>若 S < 0：阻塞并等待</p><small>若 S ≥ 0：继续执行</small></div>`,`<div class="os-operator"><b>V(S) · 释放</b><div class="os-equation">S ← S + 1</div><p>若 S ≤ 0：唤醒一个等待者</p><small>若 S > 0：无需唤醒</small></div>`]);
+ else if(type==='producer')body=grid([`<div class="os-operator"><b>生产者</b><div class="os-code">P(empty)<br>P(mutex)<br>放入产品<br>V(mutex)<br>V(full)</div><small>先等空位，再互斥进入</small></div>`,`<div class="os-operator"><b>消费者</b><div class="os-code">P(full)<br>P(mutex)<br>取出产品<br>V(mutex)<br>V(empty)</div><small>先等产品，再互斥进入</small></div>`])+`<div class="d-note">信号量初值：mutex=1，empty=N（容量），full=0。</div>`;
+ else if(type==='precedencepv')body=line([box('进程 A','结束后 V(S_AB)'),box('信号量 S_AB','初值 0',true),box('进程 B','开始前 P(S_AB)')]);
+ else if(type==='schedule')body=table(['方式','何时获取 CPU','区分点'],[['FCFS','先到者','按先后排队'],['时间片轮转','轮流获取','时间片结束归还 CPU'],['优先级','高优先级先运行','是否抢占视策略'],['多级反馈队列','按队列优先级','不同队列不同时间片']]);
+ else if(type==='deadlock')body=grid([chip('① 互斥','资源独占'),chip('② 请求并保持','占有还要申请'),chip('③ 不可剥夺','不能强行回收'),chip('④ 循环等待','P1→P2→…→P1')]);
+ else if(type==='deadlockcontrol')body=grid([chip('预防','事先打破必要条件'),chip('避免','分配前确认安全状态'),chip('检测','允许发生，事后识别'),chip('解除','撤销或回收，恢复运行')]);
+ else if(type==='deadlockcalc')body=`<div class="formula">最多可能死锁 = n × (r−1)</div><div class="formula">保证不死锁的最少数 = n × (r−1) + 1</div><div class="d-note">例：3 个进程每个最多需 5 个 → 3×4+1 = 13 个。</div>`;
+ else if(type==='banker')body=line([box('总资源 - 已分配','Available'),box('最大 - 已分配','Need'),box('Need ≤ Available?','逐类比较',true),box('完成并释放','寻找安全序列')]);
+ else if(type==='thread')body=grid([chip('进程 Process','独立资源分配单位：拥有代码、数据、文件等'),chip('线程 Thread','独立调度单位：有 PC / 寄存器 / 栈，和同进程线程共享资源')]);
+ else if(type==='fragments')body=grid([chip('固定分区','100MB 分区分给 50MB 作业 → <strong>内部碎片 50MB</strong>'),chip('可变分区','按需切分后产生零散闲置区域 → <strong>外部碎片</strong>')]);
+ else if(type==='allocation')body=table(['算法','选择规则','给 9KB，空闲 25 / 10 / 28 KB'],[['首次适应 FF','地址从头找第一个够用','25KB（按题示地址序）'],['最佳适应 BF','最小且够用','10KB'],['最差适应 WF','最大','28KB'],['循环首次 NF','从上次扫描点向后继续','取决于当前游标']]);
+ else if(type==='paging')body=line([box('逻辑空间','页 0、页 1、页 2'),box('页表','逻辑页号 → 物理页框'),box('物理主存','页框 3、页框 6 等',true)]);
+ else if(type==='pageroute')body=`${line([box('1D16H','页号 1 / 偏移 D16H'),box('查页表','逻辑页 1 → 页框 3',true),box('3D16H','页框 3 + 原偏移')])}<div class="formula">物理地址 = 页框号 × 页大小 + 页内偏移</div>`;
+ else if(type==='tlb')body=line([box('CPU 逻辑地址','提取页号'),box('查快表 TLB','命中则得页框',true),box('未命中查页表','不一定缺页'),box('组合页框与偏移','物理地址')]);
+ else if(type==='pagereplace')body=table(['算法','淘汰哪一页','特点'],[['OPT','未来最久不访问','理论最优'],['FIFO','最早装入','可能出现 Belady 异常'],['LRU','过去最长时间未访问','利用时间局部性']]);
+ else if(type==='segment')body=`${line([box('逻辑地址','段号 S + 偏移 d'),box('查段表','基址 B、段长 L',true),box('先检查','d < L 才合法'),box('计算地址','B + d')])}<div class="d-note">切记先判断越界：偏移与段长相等，也不合法。</div>`;
+ else if(type==='segpage')body=line([box('段号','查段表'),box('段内页号','查该段页表'),box('物理页框','替换页号'),box('页内偏移','原样保留')]);
+ else if(type==='devices')body=grid([chip('块设备','按数据块交互，如磁盘'),chip('字符设备','按字符/字节流交互'),chip('独占设备','一次只能一个用户真正使用'),chip('虚设备','SPOOLING 等技术让请求可并发提交')]);
+ else if(type==='iolayers')body=`<div class="os-stack">${['① 用户进程','② 设备无关软件','③ 设备驱动程序','④ 中断处理程序','⑤ I/O 硬件'].map((t,i)=>`<div class="os-stack-item ${i===1||i===2||i===3?'mid':''}">${t}</div>${i<4?'<div class="os-stack-arrow">↓</div>':''}`).join('')}</div><div class="d-note">课堂常挖空中间三层：设备无关软件 → 设备驱动程序 → 中断处理程序。</div>`;
+ else if(type==='ioflow')body=line([box('发起 I/O','用户进程'),box('处理抽象请求','设备无关软件'),box('下达设备命令','驱动程序',true),box('设备完成','中断处理'),box('唤醒进程','返回结果')]);
+ else if(type==='spooling')body=`${line([box('用户 A / B / C','并发提交任务'),box('输入井 / 队列','缓冲、排队',true),box('物理打印机','逐项打印'),box('输出井 / 结果','完成通知')])}<div class="d-note">逻辑上支持多个请求排队，物理设备同一时刻仍只能处理一个打印任务。</div>`;
+ else if(type==='filestruct')body=table(['物理组织','如何保存','如何定位'],[['连续结构','连续编号物理块','起始块号+长度'],['链接结构','非连续块串起来','每块指向下一块'],['索引结构','非连续盘块','集中索引项记录每块地址']]);
+ else if(type==='index')body=`${grid([chip('直接索引','1 个地址项 → 1 个数据块'),chip('一级间接','1 个地址项 → k 个数据块'),chip('二级间接','1 个地址项 → k² 个数据块')],'three')}<div class="formula">k = 索引块大小 ÷ 单个地址项大小</div>`;
+ else if(type==='indexcalc')body=`<div class="d-grid three">${chip('直接项','5 × 1 = 5 块')}${chip('一级间接项','2 × 256 = 512 块')}${chip('二级间接项','1 × 256² = 65536 块')}</div><div class="formula">最大文件长度 = (5 + 512 + 65536) × 1KB = 66053KB</div><div class="d-note">块号：直接 0～4；一级 5～516；二级从 517 开始。</div>`;
+ else if(type==='filetree')body=`<div class="os-tree"><div>📁 /（根目录）</div><div class="os-tree-inner"><div>📁 swshare</div><div class="os-tree-inner"><div>📁 flash</div><div class="os-tree-inner">📄 fault.swf</div></div></div></div></div>`;
+ else if(type==='paths')body=table(['名称','示例（当前目录 /swshare）'],[['绝对所在目录','/swshare/flash/'],['相对所在目录','flash/'],['全文件名','/swshare/flash/fault.swf']]);
+ else if(type==='freeblocks')body=grid([chip('空闲区表','记录连续空闲区起点和长度'),chip('空闲链表','空闲块一个接一个指向后继'),chip('成组链接','若干块成组，记录组间信息'),chip('位示图','每一盘块占 1 位')]);
+ else if(type==='bitmap')body=`<div class="d-grid two">${chip('盘块数','1000GB ÷ 4MB = 256000')}${chip('位示图字数','256000bit ÷ 32bit/字 = 8000字')}</div><div class="os-bitrow">${Array.from({length:32},(_,i)=>`<span class="${i===1?'on':''}" title="第 ${i} 位">${i===1?'1':'0'}</span>`).join('')}</div><div class="d-note">一个 32 位字覆盖 32 个盘块标记。这里只用位 1 高亮示意目标位置，不代表真实磁盘占用状态。</div>`;
+ else return '';
+ return head+body+end;
+}
+function renderMap(){el('topTitle').textContent='操作系统知识 · 知识脑图';return `<div class="kicker">KNOWLEDGE MAP</div><h1 class="big-title">一张图，看懂整章知识结构</h1><p class="lede">按章节展开知识分支。点击右侧主题可以直接跳转到图文精讲；再次点击已展开的章节可以收起。</p><div class="map-root">操作系统知识 <span style="font-size:12px;margin-left:13px;opacity:.7;align-self:center">7 组知识主题 · 1 份考试定位</span></div><div class="map-rail">${chapters.map(c=>`<div class="map-branch"><button class="map-chap ${mapOpen===c.id?'on':''}" data-mapchap="${c.id}"><span>${c.number} · ${esc(c.name)}</span><b>${mapOpen===c.id?'−':'+'}</b></button><div class="map-topics">${mapOpen===c.id?c.topicIds.map(id=>{let t=lessonMap.get(id);return `<button class="map-topic" data-lesson="${id}"><b>${esc(t.title)}</b><small>${t.points.length} 个知识条目 · 查看精讲 ↗</small><div class="map-details">${t.points.slice(0,3).map(p=>`<span>• ${topicLabel(p.text)}</span>`).join('')}${t.points.length>3?`<span>… 及其他 ${t.points.length-3} 项</span>`:''}</div></button>`}).join(''):`<div style="color:#92a1b0;font-size:12px;padding:13px">${c.topicIds.length} 个子主题 · 点击左侧展开</div>`}</div></div>`).join('')}</div>`}
+function renderQuick(){el('topTitle').textContent='操作系统知识 · 考前速记';
+ const formulas=[['P / V 信号量','P(S)：S←S−1；V(S)：S←S+1','3:2'],['不死锁资源数','n × (r−1) + 1','4:4'],['分页物理地址','页框号 × 页大小 + 页内偏移','5:3'],['分段物理地址','先验 d < 段长；物理地址 = 基址 + d','5:6'],['索引文件最大长度','(直接项数 + 一级项数×k + 二级项数×k²)×数据块大小','7:2'],['位示图字数','磁盘总块数 ÷ 每字位数','7:6']];
+ return `<div class="kicker">QUICK RECALL</div><h1 class="big-title">考前速记 · 先回忆，再核对</h1><p class="lede">按老师强调的核心公式和讲义顺序浓缩整章。点击主题可回到图文精讲。</p><div class="section-label"><h2>本章关键公式与做题套路</h2><p>整理自课件与课程转写</p></div><div class="qgrid">${formulas.map(f=>`<article class="card" style="margin:0"><h3 style="margin:0 0 8px">${f[0]}</h3><div class="formula">${f[1]}</div><button class="small-button tinted" style="margin-top:13px" data-lesson="${f[2]}">查看解析 ↗</button></article>`).join('')}</div>${chapters.slice(1).map(c=>`<div class="section-label"><h2>${c.number} · ${esc(c.name)}</h2><p>${c.topicIds.length} 条速记</p></div><div class="qgrid">${c.topicIds.map(id=>{let t=lessonMap.get(id);return `<article class="quick-card"><div class="qtag">${esc(c.name)} ${levelTag(priority(t))}</div><h3>${esc(t.title)}</h3><p>${esc(t.memory||t.points.slice(0,2).map(p=>p.text).join('；'))}</p><button data-lesson="${id}">完整精讲 ↗</button></article>`}).join('')}</div>`).join('')}`;
+}
+function getQuizItems(scope){return quizzes.map((q,i)=>({...q,key:i})).filter(q=>scope==='all'||q.chapter===Number(scope)||scope==='wrong'&&load('sd_os_v1_wrong',[]).includes(q.key));}
+function startQuiz(scope){quizState={scope,items:getQuizItems(scope),index:0,picks:{},completed:false};setView('quiz')}
+function chooseQuiz(idx){const item=quizState.items[quizState.index];if(quizState.picks[item.key]!==undefined)return;quizState.picks[item.key]=idx;render()}
+function nextQuiz(){quizState.index++;if(quizState.index>=quizState.items.length){quizState.completed=true;const errors=quizState.items.filter(q=>quizState.picks[q.key]!==q.answer).map(q=>q.key);let old=new Set(load('sd_os_v1_wrong',[]));for(let q of quizState.items)old.delete(q.key);for(let k of errors)old.add(k);save('sd_os_v1_wrong',[...old]);}render();el('contentShell').scrollTop=0}
+function renderQuiz(){el('topTitle').textContent='操作系统知识 · 随堂练习';if(!quizState.items.length&&!quizState.completed){quizState.items=getQuizItems(quizState.scope)}let qs=quizState.items,idx=quizState.index;
+ let filters=`<div class="quiz-filter"><button data-quizscope="all" class="${quizState.scope==='all'?'chosen':''}">全章 · ${quizzes.length} 题</button>${chapters.slice(1).map(c=>`<button data-quizscope="${c.id}" class="${quizState.scope===String(c.id)?'chosen':''}">${c.number} ${esc(c.name)} · ${getQuizItems(String(c.id)).length} 题</button>`).join('')}<button data-quizscope="wrong" class="${quizState.scope==='wrong'?'chosen':''}">错题重练 · ${getQuizItems('wrong').length} 题</button></div>`;
+ if(!qs.length)return `<div class="kicker">PRACTICE</div><h1 class="big-title">随堂练习</h1><p class="lede">本组暂无试题或尚未产生错题。选择其他章节继续练习。</p>${filters}`;
+ if(quizState.completed){let score=qs.filter(q=>quizState.picks[q.key]===q.answer).length;return `<div class="kicker">PRACTICE RESULT</div><h1 class="big-title">练习完成</h1><div class="score-card"><div class="huge">${Math.round(score/qs.length*100)}<small style="font-size:20px">分</small></div><h2>${score} / ${qs.length} 题正确</h2><p>${qs.length-score===0?'这组知识点都答对了，可以去精讲中继续学习其他内容。':`有 ${qs.length-score} 道题答错，错题会保存在当前浏览器中，可以单独重练。`}</p><button class="small-button primary" data-quizscope="${quizState.scope}">再做一遍</button><button class="small-button" data-quizscope="wrong">重练错题</button><button class="small-button" data-view="quick">查看考前速记</button></div>${filters}`;}
+ let q=qs[idx],pick=quizState.picks[q.key],answered=pick!==undefined,chapter=chapters[q.chapter];return `<div class="kicker">PRACTICE / SELF TEST</div><h1 class="big-title">随堂练习</h1><p class="lede" style="margin-bottom:11px">按课程内容编写的自测题（非历年真题原文），答题后立即展示正确答案和解析。</p>${filters}<div class="quiz-wrap"><div class="quiz-top"><span class="tiny">${esc(chapter.name)} · 第 ${idx+1} / ${qs.length} 题</span><div class="quiz-progress"><i style="width:${idx/qs.length*100}%"></i></div><b style="font-size:12px;color:#6e8192">${Math.round(idx/qs.length*100)}%</b></div><div class="quiz-card"><span class="pill">单选题</span><h2>${esc(q.question)}</h2><div class="options">${q.options.map((o,j)=>`<button class="option ${answered&&j===q.answer?'correct':''} ${answered&&pick===j&&j!==q.answer?'incorrect':''} ${answered&&pick===j?'selected':''}" data-option="${j}" ${answered?'disabled':''}><i>${'ABCD'[j]}.</i><span>${esc(o)}</span></button>`).join('')}</div>${answered?`<div class="explain"><strong>${pick===q.answer?'✓ 回答正确':'✕ 回答错误'} · 正确答案 ${'ABCD'[q.answer]}</strong><div style="margin-top:5px">${esc(q.explain)}</div><div style="margin-top:10px"><button class="small-button tinted" data-lesson="${q.topic}">返回对应知识点 ↗</button></div></div>`:''}<div class="quiz-bottom"><span class="tiny">请先选择一个答案</span><button class="small-button primary" data-nextquestion ${!answered?'disabled':''}>${idx===qs.length-1?'查看成绩':'下一题 →'}</button></div></div></div>`;}
+function renderRail(){if(view!=='read')return '';let t=lessonMap.get(current),c=chapters[t.chapter];return `<div class="rail-card"><h3>本章目录 · ${c.number}</h3>${c.topicIds.map((id,i)=>`<button class="rail-topic ${id===current?'current':''}" data-lesson="${id}">${String(i+1).padStart(2,'0')} · ${esc(lessonMap.get(id).title)} ${mastery[id]===2?'✓':''}</button>`).join('')}<div class="rail-memory"><strong>本节一句话</strong><p>${esc(t.memory||t.points[0]?.text||'')}</p><div class="tiny">${esc(t.source)}</div></div></div>`}
+function render(){renderSidebar();document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===view));const main=el('mainContent');main.className='content '+(view==='read'?'reading':'');main.innerHTML=({home:renderHome,read:renderRead,map:renderMap,quick:renderQuick,quiz:renderQuiz}[view]||renderHome)();const shell=el('contentShell');shell.classList.toggle('withrail',view==='read');el('rightRail').innerHTML=renderRail()}
+function openSearch(){el('searchOverlay').classList.remove('hidden');el('searchInput').focus();searchResults('')}
+function closeSearch(){el('searchOverlay').classList.add('hidden')}
+function searchResults(term){
+ term=term.trim().toLowerCase();
+ let hits=term?lessons.filter(t=>(t.title+' '+t.intro+' '+t.points.map(p=>p.text+' '+p.note).join(' ')).toLowerCase().includes(term)):lessons.filter(t=>t.chapter>0&&priority(t)==='must').slice(0,8);
+ if(term)hits.sort((a,b)=>{const score=t=>{let name=t.title.toLowerCase();return name===term?0:name.startsWith(term)?1:name.includes(term)?2:3};return score(a)-score(b) || a.chapter-b.chapter || a.index-b.index});
+ let n=hits.length;hits=hits.slice(0,25);
+ el('searchResults').innerHTML=`<div class="tiny">${term?`匹配 ${n} 个知识主题`:'建议重点内容'}</div>`+hits.map(t=>`<button class="sr" data-searchlesson="${t.id}"><strong>${esc(t.title)}</strong><small>${esc(chapters[t.chapter].name)} · ${esc(t.intro.slice(0,66))}…</small></button>`).join('')+(hits.length?'':'<div class="tiny">没有匹配结果，试试其他关键词。</div>');
+}
+document.body.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ if(b.id==='focusToggle'){focusOnly=!focusOnly;save('sd_os_v1_focus_only',focusOnly);renderSidebar();return}
+ if(b.dataset.view){setView(b.dataset.view);return}
+ if(b.dataset.tab){setView(b.dataset.tab);return}
+ if(b.dataset.chapter!==undefined){let ci=+b.dataset.chapter;if(openedChap===ci){openedChap=-1;renderSidebar()}else{openedChap=ci;renderSidebar()}return}
+ if(b.dataset.lesson){openLesson(b.dataset.lesson);return}
+ if(b.dataset.master){markNext(b.dataset.master);return}
+ if(b.dataset.mapchap!==undefined){let ci=+b.dataset.mapchap;mapOpen=mapOpen===ci?-1:ci;render();return}
+ if(b.dataset.quizscope){startQuiz(b.dataset.quizscope);return}
+ if(b.dataset.quiztopic){const t=lessonMap.get(b.dataset.quiztopic);quizState={scope:String(t.chapter),items:getQuizItems(String(t.chapter)),index:0,picks:{},completed:false};setView('quiz');return}
+ if(b.dataset.option!==undefined){chooseQuiz(+b.dataset.option);return}
+ if(b.hasAttribute('data-nextquestion')){nextQuiz();return}
+ if(b.dataset.searchlesson){closeSearch();openLesson(b.dataset.searchlesson);return}
+});
+el('menuBtn').onclick=()=>{el('sidebar').classList.add('open');el('scrim').classList.add('open')};el('scrim').onclick=hideMobile;
+function refreshThemeButton(){const dark=document.documentElement.dataset.theme==='dark',b=el('themeBtn');b.setAttribute('aria-pressed',String(dark));b.setAttribute('aria-label',dark?'切换为日间模式':'切换为夜间模式');b.title=dark?'切换为日间模式':'切换为夜间模式'}
+el('themeBtn').onclick=()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;save('sd_os_v1_theme',next);refreshThemeButton()};refreshThemeButton();
+el('searchBtn').onclick=openSearch;el('searchClose').onclick=closeSearch;el('searchInput').oninput=e=>searchResults(e.target.value);
+el('searchOverlay').addEventListener('click',e=>{if(e.target===el('searchOverlay'))closeSearch()});
+window.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSearch();hideMobile()}if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openSearch()}});
+render();
+</script></body></html>

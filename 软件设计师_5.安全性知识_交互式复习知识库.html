@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><script>(function(){try{document.documentElement.dataset.theme=JSON.parse(localStorage.getItem('sd_sec_v1_theme'))==='dark'?'dark':'light'}catch(e){document.documentElement.dataset.theme='light'}})();</script><title>安全性知识 · 软件设计师备考知识库</title>
+<style>
+:root{--ink:#1e2733;--muted:#657385;--soft:#8b95a1;--bg:#f5f6f8;--panel:#fff;--nav:#1d2633;--nav2:#293646;--line:#e5e9ee;--accent:#2773d4;--accent-bg:#eef5fe;--darkblue:#203b61;--card-shadow:0 6px 30px rgba(28,40,59,.045);--amber:#aa6c1c;--red:#b84b4b;--green:#167966;--radius:14px}*{box-sizing:border-box}html,body{margin:0;height:100%;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:var(--bg);font-size:15px;-webkit-font-smoothing:antialiased}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #8abaff;outline-offset:2px}button:disabled{cursor:not-allowed;opacity:.45}a{color:inherit}p{line-height:1.88}h1,h2,h3{letter-spacing:-.025em}h1{font-size:32px}h2{font-size:22px}h3{font-size:17px}.hidden{display:none!important}
+.app{height:100dvh;min-height:530px;display:grid;grid-template-columns:264px minmax(0,1fr)}.side{background:var(--nav);color:#cbd5e2;display:flex;flex-direction:column;overflow-y:auto;min-height:0;border-right:1px solid #0f1b29}.brand{padding:27px 20px 24px;border-bottom:1px solid #ffffff12}.brand .mono{color:#95bbf4;font-weight:800;letter-spacing:1.4px;font-size:10px}.brand h2{color:white;margin:12px 0 8px;font-size:19px;line-height:1.45}.brand p{font-size:12px;color:#9baebf;line-height:1.65;margin:0}.side-head{display:flex;justify-content:space-between;align-items:center;margin:27px 20px 10px;color:#8b9aad;font-size:11px;font-weight:800;letter-spacing:1px}.nav-list{padding:0 11px 18px}.nav-group{margin:3px 0}.chap-button{width:100%;background:none;border:0;color:#bbc8d7;display:flex;gap:10px;align-items:flex-start;border-radius:9px;padding:12px 11px;text-align:left;font-size:13px;font-weight:650;line-height:1.55}.chap-button:hover,.chap-button.active{background:#2b3a4d;color:white}.chap-num{font-size:11px;font-weight:800;color:#86b9fd;min-width:23px;margin-top:2px}.chap-chevron{margin-left:auto;color:#8293a4;font-size:13px}.subnav{padding:3px 5px 9px 42px;display:grid;gap:2px}.subnav button{background:none;border:0;text-align:left;color:#9daebe;padding:8px 9px;border-radius:7px;font-size:12px;line-height:1.52}.subnav button:hover{background:#2b3949;color:#e4ebf4}.subnav button.selected{background:#354962;color:white;box-shadow:inset 2px 0 #87b5ff}.subnav button.complete:after{content:'✓';color:#81d1ba;margin-left:5px}.side-footer{margin-top:auto;padding:18px 18px 26px;border-top:1px solid #ffffff12}.side-footer .frow{display:flex;align-items:center;justify-content:space-between;font-size:12px;margin-bottom:11px}.side-footer strong{color:white}.progressbar{height:7px;border-radius:10px;background:#425065;overflow:hidden}.progressbar>span{display:block;height:100%;width:0;background:#76aefa;transition:width .2s}.side-footer small{display:block;color:#8da0b2;line-height:1.8;margin-top:10px;font-size:11px}
+.workspace{min-width:0;display:flex;flex-direction:column;overflow:hidden}.topbar{background:white;border-bottom:1px solid var(--line);height:70px;padding:0 32px;flex:none;display:flex;align-items:center;justify-content:space-between;gap:18px}.top-left{display:flex;align-items:center;gap:13px;min-width:0}.toptitle{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:780;font-size:15px}.top-small{color:#8a95a0;font-size:11px;margin-top:3px}.mobile-toggle{display:none}.tabs{display:flex;align-items:center;gap:4px;background:#f3f5f8;padding:5px;border-radius:11px}.tab{background:none;border:0;padding:10px 14px;color:#657387;border-radius:8px;font-size:13px;white-space:nowrap;font-weight:690}.tab.on{color:#183a67;background:white;box-shadow:0 2px 8px #16233815}.tab:hover{color:#153b71}.top-actions{display:flex;gap:10px;align-items:center}.iconbutton{display:inline-flex;align-items:center;justify-content:center;width:39px;height:39px;background:white;border:1px solid #dce3ea;border-radius:10px;color:#5c6b7b;font-size:19px}.iconbutton:hover{background:#f4f8fd;border-color:#bfd3eb}.content-shell{flex:1;display:flex;min-height:0;overflow:auto;scroll-behavior:smooth}.content{width:100%;max-width:1130px;padding:38px 42px 90px;margin:0 auto;min-width:0}.content.reading{max-width:1000px}.kicker{font-size:11px;font-weight:820;color:#2972c2;letter-spacing:1.5px;text-transform:uppercase}.muted{color:var(--muted)}.tiny{font-size:12px;color:var(--soft)}.crumb{font-size:12px;color:#8b97a2;margin-bottom:15px}.title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.big-title{font-size:31px;line-height:1.35;letter-spacing:-.4px;margin:10px 0 10px}.lede{font-size:15px;line-height:1.95;color:#536477;max-width:860px;margin:0 0 25px}.pill{display:inline-flex;align-items:center;font-size:11px;border-radius:6px;padding:4px 8px;font-weight:720;background:#eef2f6;color:#607285;margin-right:6px;white-space:nowrap}.pill.must{background:#fff0ed;color:#bf594e}.pill.frequent{background:#fff4e7;color:#a46e24}.pill.understand{background:#edf5ff;color:#527baa}.small-button{border:1px solid #dbe4ed;border-radius:9px;padding:10px 14px;background:white;color:#485b71;font-size:12px;font-weight:740;white-space:nowrap}.small-button:hover{background:#f0f6fe;border-color:#8fb6df}.small-button.primary{background:#2266c3;color:white;border-color:#2266c3}.small-button.primary:hover{background:#1753a6}.small-button.tinted{background:#edf5ff;border-color:#d7e9fc;color:#2367aa}.small-button.done{background:#ecf8f3;color:#08755e;border-color:#b8ddcf}.small-button.danger{color:#b55b5b}
+.hero{background:linear-gradient(115deg,#182b46,#284b70);border-radius:18px;color:white;padding:39px 42px;position:relative;overflow:hidden;box-shadow:0 12px 28px #1b34551e}.hero:after{content:'';position:absolute;border-radius:100%;width:320px;height:320px;border:1px solid #ffffff17;right:-110px;top:-130px;box-shadow:0 0 0 65px #ffffff07,0 0 0 138px #ffffff04;pointer-events:none}.hero .kicker{color:#b2d2ff}.hero h1{font-size:35px;margin:13px 0 15px;max-width:720px}.hero p{line-height:1.95;font-size:15px;color:#d5e0ee;max-width:680px;margin:0 0 23px}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:1}.hero-actions .small-button{padding:11px 16px}.statbar{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0 36px}.stat{background:white;border:1px solid var(--line);border-radius:13px;padding:18px 20px}.stat b{font-size:23px;display:block;color:#233349;margin-bottom:5px}.stat small{color:#7b8898;font-size:12px}.section-label{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:26px 0 14px}.section-label h2{font-size:20px;margin:0}.section-label p{margin:0;color:#8490a0;font-size:12px}.chap-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.chap-card{border:1px solid #e0e6ec;background:#fff;border-radius:14px;padding:20px;box-shadow:var(--card-shadow);transition:transform .15s,border-color .15s}.chap-card:hover{transform:translateY(-2px);border-color:#bed4eb}.chap-card .num{font-size:12px;font-weight:800;color:#296ab8}.chap-card h3{font-size:17px;margin:10px 0 10px}.chap-card p{font-size:12px;line-height:1.8;color:#728091;margin:0 0 16px;min-height:42px}.chap-card .foot{display:flex;align-items:center;justify-content:space-between;gap:8px}.chap-card .foot span{font-size:11px;color:#8996a5}.chap-card .foot button{border:0;background:#edf4fd;color:#2869b6;font-size:12px;font-weight:760;padding:9px 11px;border-radius:8px}.chap-card .bar{height:5px;border-radius:8px;background:#edf1f5;margin:15px 0 12px;overflow:hidden}.chap-card .bar i{display:block;height:100%;background:#75abf2}
+.card{background:white;border:1px solid var(--line);border-radius:14px;padding:25px 29px;margin:19px 0;box-shadow:var(--card-shadow)}.card h2{font-size:20px;margin:0 0 17px}.card h3{font-size:15px;margin:20px 0 10px}.card p{margin:8px 0 0;color:#546477;line-height:1.95}.intro-card{background:#fff;border-left:4px solid #3376c6;padding:22px 26px;border-radius:0 12px 12px 0;box-shadow:0 3px 16px #1d3c6509;margin:23px 0}.intro-card .head{font-size:12px;color:#2674c7;font-weight:850;margin-bottom:11px}.intro-card p{margin:0;color:#43556a;font-size:15px;line-height:1.95}.point-list{display:grid;grid-template-columns:1fr;gap:9px}.point{padding:14px 16px 13px;border:1px solid #ebeff4;border-radius:10px;background:#fcfdfe;display:flex;gap:12px;align-items:flex-start}.point-marker{flex:none;width:7px;height:7px;border-radius:50%;background:#8db6e7;margin-top:9px}.point.must .point-marker{background:#e17d65}.point.frequent .point-marker{background:#dbad5c}.point .ptext{font-weight:650;font-size:14px;line-height:1.7}.point .pnote{font-size:12px;line-height:1.8;color:#6a7d8e;margin-top:5px}.source{font-size:11px;color:#8a97a5;margin:16px 0 0;line-height:1.9}.lesson-footer{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-top:24px}.step{display:flex;gap:13px;align-items:flex-start;padding:13px 0;border-bottom:1px solid #edf0f3}.step:last-child{border:0}.step-num{background:#edf4fc;color:#2670c1;border:1px solid #dae8f8;min-width:27px;height:27px;border-radius:8px;font-size:12px;font-weight:800;display:grid;place-items:center}.step>div:last-child{font-size:14px;line-height:1.8;padding-top:3px}.example{background:#f8fafc;border:1px solid #e3eaf1;border-radius:12px;padding:18px 21px;margin-top:14px}.example h3{margin:0 0 6px;font-size:15px}.given{color:#567089;font-size:13px;background:#edf3f9;padding:10px 12px;border-radius:7px;margin:10px 0}.answer{margin-top:13px;padding:12px 13px;background:#eaf5f0;color:#116a57;border-radius:8px;font-size:14px;font-weight:750;line-height:1.75}.notice{background:#fff8ed;color:#94672f;border-radius:9px;padding:13px 14px;margin-top:13px;font-size:13px;line-height:1.9}.smalltags{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0}.topic-jump{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.topic-jump button{border:1px solid #e0e7ee;border-radius:9px;padding:9px 12px;font-size:12px;background:white;color:#56718e}.topic-jump button:hover{border-color:#88bae9;background:#f0f7fd}.topic-jump button.current{background:#266cc4;color:white;border-color:#266cc4}
+.diagram{background:#fbfcfe;border:1px solid #e7eef4;border-radius:12px;padding:22px;overflow-x:auto}.diagram-title{font-size:11px;color:#748b9e;font-weight:800;letter-spacing:.8px;margin-bottom:16px}.d-row{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}.d-box{border:1px solid #cfdced;background:white;border-radius:10px;text-align:center;padding:14px 19px;min-width:103px;font-size:13px;font-weight:740;color:#244766;box-shadow:0 2px 8px #1e324609}.d-box small{display:block;font-weight:500;font-size:11px;color:#8392a2;margin-top:5px}.d-box.accent{background:#ecf4ff;border-color:#9fc0ea;color:#2359a2}.d-arrow{font-size:22px;color:#a3b5c7}.d-sub{font-size:12px;color:#667b8e;text-align:center;line-height:1.8;margin-top:13px}.d-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.d-grid.two{grid-template-columns:repeat(2,1fr)}.d-grid.three{grid-template-columns:repeat(3,1fr)}.d-grid .d-box{min-width:0;padding:13px 9px}.d-chip{border:1px solid #d8e3ed;border-radius:10px;padding:13px 14px;background:white;color:#31506d;font-size:12px;line-height:1.8}.d-chip b{display:block;color:#234566;font-size:14px}.d-chip strong{color:#1e65af}.formula{font-size:16px;font-weight:780;color:#214d89;line-height:1.9;padding:17px 20px;background:#eef5fe;border-radius:10px;overflow-wrap:anywhere}.formula small{display:block;font-size:12px;color:#6e859f;font-weight:500;margin-top:3px}.times{display:grid;grid-template-columns:58px repeat(7,36px);gap:4px;justify-content:center;min-width:340px}.times>div{height:33px;display:grid;place-items:center;font-size:11px;border-radius:5px;background:#eff2f6;color:#637b91}.times .work{background:#dceafc;color:#265b95;font-weight:800}.times .work.dark{background:#a9d0f9}.levelstack{display:flex;flex-direction:column;align-items:center;gap:6px}.levelstack .level{border-radius:6px;text-align:center;padding:10px 12px;color:#18426b;background:#dfeeff;font-size:12px;font-weight:780}.levelstack .level:nth-child(1){width:32%}.levelstack .level:nth-child(2){width:50%}.levelstack .level:nth-child(3){width:71%}.levelstack .level:nth-child(4){width:95%}.mini-table{border-collapse:collapse;width:100%;font-size:13px;line-height:1.75}.mini-table th,.mini-table td{border-bottom:1px solid #e3e9ef;padding:12px 10px;text-align:left;vertical-align:top}.mini-table th{background:#f1f5fa;color:#46617c;font-weight:760}.mini-table td{color:#40566b}.mini-table tbody tr:last-child td{border-bottom:none}.bits{display:flex;justify-content:center;gap:5px;flex-wrap:wrap}.bit{width:40px;height:44px;display:grid;place-items:center;border:1px solid #cbd9e7;background:white;border-radius:7px;font-weight:830;font-family:ui-monospace,monospace;font-size:18px;color:#345b83}.bit.highlight{background:#ddebfc;border-color:#8fb3e2;color:#1e62b2}.bit.red{background:#fff0e9;border-color:#f1bdac;color:#aa594c}.brow{display:flex;align-items:center;gap:7px;justify-content:center;flex-wrap:wrap}.chain{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}.chain .link{height:2px;background:#9fb8d0;width:25px}.chain .unit{padding:13px 19px;border:1px solid #9fc2e7;border-radius:9px;background:#eaf4ff;color:#255d9c;font-weight:790;font-size:13px}.parallel{display:flex;flex-direction:column;align-items:center;gap:12px}.parallel .unit{padding:13px 54px;background:#edf5fd;border:1px solid #acc9e6;border-radius:9px;color:#2c639b;font-weight:800}.d-note{font-size:12px;color:#6d7f92;text-align:center;margin-top:14px;line-height:1.9}
+.map-root{padding:18px 23px;border-radius:14px;background:linear-gradient(125deg,#203953,#305778);color:#fff;font-size:19px;font-weight:800;display:inline-flex;box-shadow:0 8px 22px #12314e19}.map-rail{display:flex;gap:16px;flex-direction:column;margin:22px 0}.map-branch{display:grid;grid-template-columns:250px minmax(0,1fr);gap:17px;align-items:start;position:relative}.map-branch:before{content:'';height:1px;width:17px;position:absolute;left:235px;top:23px;background:#bad0e4}.map-chap{padding:15px 18px;text-align:left;background:#e8f1fb;color:#285a95;border:1px solid #bfd7f1;border-radius:10px;font-size:13px;font-weight:780;display:flex;justify-content:space-between;gap:9px}.map-chap.on{background:#2d6baf;color:white;border-color:#2d6baf}.map-topics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.map-topic{border:1px solid #e1e8ef;background:white;border-radius:9px;text-align:left;padding:12px 13px;font-size:12px;color:#486079;line-height:1.55}.map-topic:hover{border-color:#8db9e5;background:#f6faff}.map-topic small{display:block;color:#94a2b0;margin-top:6px}.map-topic.expanded{border-color:#aac8e6;background:#f9fcff}.map-details{grid-column:1/-1;margin-top:10px;padding-top:10px;border-top:1px dashed #d8e5ee;color:#6e7f8c;font-size:11px;line-height:1.85}.map-details span{display:block;padding:3px 0}.qgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.quick-card{border:1px solid #e2e9ef;border-radius:12px;background:white;padding:18px;display:flex;flex-direction:column;gap:11px}.quick-card .qtag{font-size:11px;color:#7c8da0}.quick-card h3{margin:0;font-size:15px}.quick-card p{font-size:13px;line-height:1.85;color:#476079;margin:0;flex:1}.quick-card button{align-self:flex-start;color:#2068b6;font-size:12px;border:0;background:#edf5ff;border-radius:8px;padding:9px 11px;font-weight:770}.quiz-wrap{max-width:760px}.quiz-top{display:flex;align-items:center;justify-content:space-between;gap:15px;margin:22px 0}.quiz-progress{height:8px;border-radius:10px;background:#e7edf4;overflow:hidden;flex:1}.quiz-progress i{display:block;background:#5b9ee8;height:100%;transition:width .2s}.quiz-card{background:white;border:1px solid #e0e8f0;border-radius:15px;padding:32px;box-shadow:var(--card-shadow)}.quiz-card h2{font-size:22px;margin:9px 0 22px;line-height:1.6}.options{display:grid;gap:10px}.option{display:flex;gap:13px;align-items:flex-start;text-align:left;border:1px solid #dce5ef;background:white;border-radius:10px;padding:15px 17px;color:#41556a;font-size:14px;line-height:1.7}.option i{font-style:normal;font-weight:800;color:#4973a6}.option:not(:disabled):hover{border-color:#76aae6;background:#f5f9ff}.option.selected{border-color:#5997d8;background:#ebf5ff}.option.correct{border-color:#65bda2;background:#e8f6f0}.option.incorrect{border-color:#e4a2a0;background:#fff1f0}.explain{background:#f4f8fc;border-left:3px solid #4b96dd;padding:15px 17px;border-radius:0 9px 9px 0;color:#476179;line-height:1.9;margin-top:16px;font-size:13px}.quiz-bottom{display:flex;justify-content:space-between;gap:12px;margin-top:22px}.quiz-filter{display:flex;gap:9px;flex-wrap:wrap;margin:16px 0 24px}.quiz-filter button{background:#fff;border:1px solid #dee6ed;color:#697f92;border-radius:8px;padding:9px 12px;font-size:12px;font-weight:670}.quiz-filter button.chosen{background:#e8f2ff;border-color:#a6c8ef;color:#2262a7}.score-card{background:#fff;border:1px solid #e4ebf1;border-radius:14px;padding:34px;text-align:center}.score-card .huge{font-size:58px;color:#236cb5;font-weight:850}.score-card p{font-size:14px;color:#5d7286}.score-card .small-button{margin:8px}
+.rail{display:none}.overlay{position:fixed;inset:0;background:#142336a6;z-index:25;display:flex;justify-content:center;align-items:flex-start;padding:11vh 17px}.dialog{background:white;border-radius:16px;box-shadow:0 25px 100px #101c2f35;width:min(650px,100%);padding:23px;max-height:80vh;overflow:auto}.dialoghead{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.dialoghead h2{font-size:19px;margin:0}.searchinput{width:100%;border:1px solid #cad8e5;padding:14px 16px;border-radius:10px;outline:none;font-size:15px}.search-results{margin-top:16px;display:grid;gap:7px}.sr{display:block;width:100%;border:1px solid #e6ebf1;background:white;border-radius:9px;padding:12px 15px;text-align:left;color:#3b526a;font-size:13px}.sr:hover{background:#f2f7fe;border-color:#afcfed}.sr small{display:block;color:#8496a7;margin-top:5px}.scrim{display:none}
+@media(min-width:1320px){.workspace .content-shell.withrail .content{max-width:1000px;padding-right:35px}.content-shell.withrail .rail{display:block;width:235px;min-width:235px;padding:40px 22px 40px 0}.rail-card{position:sticky;top:0;background:white;border:1px solid #e4e9ef;border-radius:12px;padding:17px 15px}.rail-card h3{font-size:12px;color:#7a8ca1;margin:0 0 12px;letter-spacing:.4px}.rail-card .rail-topic{display:block;text-align:left;width:100%;border:0;background:none;color:#76879b;font-size:12px;line-height:1.55;padding:10px 6px;border-left:2px solid transparent}.rail-card .rail-topic.current{border-color:#347ecb;color:#2466ae;background:#f4f8fe;font-weight:720}.rail-card .rail-topic:hover{color:#234f83}.rail-memory{border-top:1px solid #edf0f3;margin-top:14px;padding-top:14px;color:#49637d;font-size:12px;line-height:1.8}}
+@media(max-width:1100px){.topbar{padding:0 20px}.content{padding:32px 28px 70px}.tabs .tab{padding:9px 10px;font-size:12px}.app{grid-template-columns:230px minmax(0,1fr)}.map-branch{grid-template-columns:180px 1fr}.map-branch:before{left:165px}}
+@media(max-width:800px){.app{display:block}.side{position:fixed;top:0;bottom:0;left:0;width:275px;transform:translateX(-110%);z-index:21;transition:transform .2s;box-shadow:10px 0 50px #15243c22}.side.open{transform:translateX(0)}.scrim.open{display:block;position:fixed;inset:0;background:#121d2a88;z-index:20}.workspace{height:100dvh}.topbar{height:auto;min-height:67px;padding:11px 14px;gap:10px;flex-wrap:wrap}.top-left{flex:1}.mobile-toggle{display:flex;align-items:center;justify-content:center;width:35px;height:35px;border:1px solid #e1e6ed;border-radius:8px;background:#fff;font-size:19px}.toptitle{font-size:13px}.top-small{display:none}.tabs{order:3;width:100%;justify-content:space-between}.tabs .tab{flex:1}.top-actions{gap:5px}.content{padding:25px 18px 65px}.big-title{font-size:25px}.hero{padding:30px 23px}.hero h1{font-size:26px}.statbar{gap:8px}.stat{padding:15px 12px}.stat b{font-size:19px}.chap-grid,.qgrid,.map-topics{grid-template-columns:1fr}.card{padding:19px 17px}.map-branch{grid-template-columns:1fr;gap:8px}.map-branch:before{display:none}.d-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.quiz-card{padding:21px 17px}.title-row{flex-wrap:wrap}.lesson-footer{justify-content:flex-start}}
+@media print{.side,.topbar,.rail,.overlay,.scrim,.small-button,.topic-jump{display:none!important}.app{display:block;height:auto}.workspace,.content-shell{overflow:visible;height:auto}.content{padding:0!important;max-width:none}.card{box-shadow:none;break-inside:avoid}.content-shell{display:block}body{background:white}}
+
+/* v1.1 — controls, priority navigation & theme */
+.nav-empty{font-size:11px;color:#8da4bb;padding:8px 10px;line-height:1.65}
+.iconbutton{flex:none;display:inline-flex;align-items:center;justify-content:center;padding:0;line-height:1}
+.iconbutton svg{display:block;width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.theme-switch .sun-icon{display:none}
+html[data-theme="dark"] .theme-switch .moon-icon{display:none}
+html[data-theme="dark"] .theme-switch .sun-icon{display:block}
+.side-priority-tools{padding:1px 16px 12px}
+.priority-legend{display:flex;align-items:center;justify-content:space-between;gap:7px;margin:0 1px 11px}
+.legend-entry{display:inline-flex;gap:5px;align-items:center;color:#bdcad7;font-size:11px;white-space:nowrap;font-weight:650}
+.legend-entry b{color:#edf5ff;font-size:11px;font-variant-numeric:tabular-nums}
+.legend-dot{display:inline-block;flex:none;width:7px;height:7px;border-radius:3px}
+.legend-dot.must{background:#fc8989;box-shadow:0 0 0 2px #fc898927}
+.legend-dot.frequent{background:#f9ba65;box-shadow:0 0 0 2px #f9ba6527}
+.focus-toggle{width:100%;border:1px solid #40556d;color:#bed0e2;background:#243449;border-radius:9px;display:flex;align-items:center;gap:8px;padding:9px 11px;text-align:left;font-size:12px;font-weight:720;transition:background .15s,border-color .15s}
+.focus-toggle:hover{background:#304760;border-color:#6285ae}
+.focus-toggle .focus-icon{font-size:13px;color:#f4c37e}
+.focus-toggle .focus-label{flex:1}
+.focus-indicator{width:26px;height:15px;border:1px solid #6a8199;background:#566779;border-radius:12px;position:relative;flex:none}
+.focus-indicator:before{content:'';position:absolute;width:9px;height:9px;border-radius:50%;top:2px;left:2px;background:#d7e1ec;transition:transform .18s}
+.focus-toggle[aria-pressed="true"]{background:#344761;border-color:#efbb76;color:#fff}
+.focus-toggle[aria-pressed="true"] .focus-indicator{background:#d49347;border-color:#e6b06b}
+.focus-toggle[aria-pressed="true"] .focus-indicator:before{transform:translateX(11px);background:white}
+.chap-button{align-items:center;gap:8px}
+.chap-button>span:nth-child(2){flex:1;min-width:0}
+.chap-focus-count{color:#b8cadf;font-size:10px;white-space:nowrap;background:#34465b;border-radius:5px;padding:2px 5px;line-height:1.4;font-variant-numeric:tabular-nums}
+.chap-button.active .chap-focus-count{background:#445c7b;color:#e6f2ff}
+.chap-chevron{margin-left:0}
+.subnav{padding-left:25px;padding-right:3px;gap:4px}
+.subnav button{width:100%;display:flex;gap:7px;align-items:center;border-left:3px solid transparent;padding:9px 8px 9px 9px;min-height:37px;font-size:12px}
+.subnav button.nav-pr-must{border-left-color:#f58e93;color:#e7d1d6}
+.subnav button.nav-pr-frequent{border-left-color:#e3ac67;color:#e3d9cc}
+.subnav button.selected{background:#3a4c64;border-left-color:#91c0ff;color:#fff;box-shadow:none}
+.subnav button.selected.nav-pr-must{border-left-color:#ff8f96}
+.subnav button.selected.nav-pr-frequent{border-left-color:#f3bb71}
+.subnav button.complete:after{content:none}
+.nav-topic-title{flex:1;min-width:0;line-height:1.55}
+.nav-level{flex:none;font-size:10px;font-weight:750;padding:2px 4px;border-radius:4px;white-space:nowrap;letter-spacing:0}
+.nav-level.must{color:#ffd3d4;background:#642f3b;border:1px solid #86505b}
+.nav-level.frequent{color:#ffdcac;background:#584630;border:1px solid #7b6242}
+.nav-done{font-size:11px;color:#94e5c9;flex:none}
+.lesson-footer{margin:28px 0 50px;padding:17px 0 22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.lesson-footer>div{flex-wrap:wrap}
+@media(max-width:800px){.lesson-footer{margin-bottom:38px}.side-priority-tools{padding-bottom:12px}}
+
+/* Dark theme — all study views, dialogs, diagrams and quiz states */
+html[data-theme="dark"]{
+ color-scheme:dark;
+ --ink:#e7edf5;--muted:#acbbcc;--soft:#95a7ba;--bg:#0d1520;--panel:#172232;--nav:#111c2b;--nav2:#263951;
+ --line:#2d3b4e;--accent:#88b9fb;--accent-bg:#1b304b;--darkblue:#c0dcff;
+ --card-shadow:0 6px 30px rgba(0,0,0,.15);--amber:#f0be73;--red:#f6a09c;--green:#78cfb5;
+}
+html[data-theme="dark"] body{background:var(--bg);color:var(--ink)}
+html[data-theme="dark"] .side{background:#111e2d;border-color:#26374b}
+html[data-theme="dark"] .chap-button:hover,html[data-theme="dark"] .chap-button.active{background:#2c4058}
+html[data-theme="dark"] .subnav button.selected{background:#355070}
+html[data-theme="dark"] .side-footer{border-color:#304057}
+html[data-theme="dark"] .topbar{background:#172232;border-color:#324256}
+html[data-theme="dark"] .top-small,html[data-theme="dark"] .section-label p,html[data-theme="dark"] .crumb{color:#94a7ba}
+html[data-theme="dark"] .tabs{background:#111c29}
+html[data-theme="dark"] .tab{color:#9eb0c5}
+html[data-theme="dark"] .tab.on{background:#28415f;color:#e6f2ff;box-shadow:0 2px 8px #0003}
+html[data-theme="dark"] .tab:hover{color:#e9f4ff}
+html[data-theme="dark"] .iconbutton,html[data-theme="dark"] .mobile-toggle{background:#243348;border-color:#405570;color:#c6d9ed}
+html[data-theme="dark"] .iconbutton:hover,html[data-theme="dark"] .mobile-toggle:hover{background:#2d4360;border-color:#799fce}
+html[data-theme="dark"] .kicker{color:#9ac7ff}
+html[data-theme="dark"] .lede,html[data-theme="dark"] .muted,html[data-theme="dark"] .tiny{color:#acbed0}
+html[data-theme="dark"] .hero{background:linear-gradient(115deg,#162a43,#24486a);border:1px solid #335573}
+html[data-theme="dark"] .stat,html[data-theme="dark"] .chap-card,html[data-theme="dark"] .card,html[data-theme="dark"] .quick-card,html[data-theme="dark"] .quiz-card,html[data-theme="dark"] .score-card,html[data-theme="dark"] .rail-card,html[data-theme="dark"] .dialog{background:#172435;border-color:#33455b;color:#e7edf5}
+html[data-theme="dark"] .stat b{color:#e6effc}
+html[data-theme="dark"] .stat small,html[data-theme="dark"] .chap-card p,html[data-theme="dark"] .chap-card .foot span{color:#a1b4c8}
+html[data-theme="dark"] .chap-card:hover{border-color:#6c97cb}
+html[data-theme="dark"] .chap-card .num{color:#8fc0ff}
+html[data-theme="dark"] .chap-card .foot button,html[data-theme="dark"] .quick-card button{background:#27476b;color:#c1ddff}
+html[data-theme="dark"] .chap-card .bar{background:#30435a}
+html[data-theme="dark"] .card p,html[data-theme="dark"] .intro-card p{color:#beccdb}
+html[data-theme="dark"] .intro-card{background:#1b2c41;border-left-color:#66a8f1;box-shadow:none}
+html[data-theme="dark"] .intro-card .head{color:#9ac6ff}
+html[data-theme="dark"] .pill{background:#2c3e51;color:#c8d8e8}
+html[data-theme="dark"] .pill.must{background:#552d39;color:#ffd5d4}
+html[data-theme="dark"] .pill.frequent{background:#58412b;color:#ffdfaf}
+html[data-theme="dark"] .pill.understand{background:#213e5e;color:#bcd9fb}
+html[data-theme="dark"] .point{background:#1a293a;border-color:#35465c}
+html[data-theme="dark"] .point .ptext{color:#e0e9f5}
+html[data-theme="dark"] .point .pnote,html[data-theme="dark"] .source{color:#a5b7cb}
+html[data-theme="dark"] .point.must{background:#292936;border-color:#694450}
+html[data-theme="dark"] .point.frequent{background:#302c30;border-color:#65503b}
+html[data-theme="dark"] .small-button,html[data-theme="dark"] .topic-jump button{background:#243850;border-color:#405772;color:#d2e4f6}
+html[data-theme="dark"] .small-button:hover,html[data-theme="dark"] .topic-jump button:hover{background:#2d4b6d;border-color:#77a4d4}
+html[data-theme="dark"] .small-button.primary,html[data-theme="dark"] .topic-jump button.current{background:#3678ca;border-color:#3678ca;color:#fff}
+html[data-theme="dark"] .small-button.done{background:#21483e;border-color:#387c69;color:#bcf3e2}
+html[data-theme="dark"] .small-button.tinted{background:#24476a;border-color:#35658d;color:#c5e2ff}
+html[data-theme="dark"] .small-button.danger{color:#ffc0bd}
+html[data-theme="dark"] .diagram{background:#131f2f;border-color:#34475f}
+html[data-theme="dark"] .diagram-title,html[data-theme="dark"] .d-sub,html[data-theme="dark"] .d-note,html[data-theme="dark"] .d-arrow{color:#afc2d5}
+html[data-theme="dark"] .d-box,html[data-theme="dark"] .d-chip{background:#20344b;border-color:#456181;color:#deedff}
+html[data-theme="dark"] .d-box small{color:#adbed1}
+html[data-theme="dark"] .d-box.accent,html[data-theme="dark"] .d-chip:has(strong){background:#264260;border-color:#628ab6}
+html[data-theme="dark"] .d-chip b{color:#e1edfa}
+html[data-theme="dark"] .d-chip strong{color:#a4cbff}
+html[data-theme="dark"] .formula{background:#203d5e;color:#d5e9ff}
+html[data-theme="dark"] .formula small{color:#afc7de}
+html[data-theme="dark"] .times>div{background:#23364d;color:#bed0e1}
+html[data-theme="dark"] .times .work{background:#315987;color:#e3f1ff}
+html[data-theme="dark"] .times .work.dark{background:#4172ad}
+html[data-theme="dark"] .levelstack .level{background:#284e72;color:#d5eaff}
+html[data-theme="dark"] .mini-table th,html[data-theme="dark"] .mini-table td{border-color:#3b4e64}
+html[data-theme="dark"] .mini-table th{background:#27394d;color:#d2e2f3}
+html[data-theme="dark"] .mini-table td{color:#c6d5e6}
+html[data-theme="dark"] .bit{background:#22374f;border-color:#426486;color:#e2f1ff}
+html[data-theme="dark"] .bit.highlight{background:#2e5480;border-color:#5f97cf;color:#e1f3ff}
+html[data-theme="dark"] .bit.red{background:#55323b;border-color:#a06972;color:#ffe0df}
+html[data-theme="dark"] .chain .unit,html[data-theme="dark"] .parallel .unit{background:#254768;border-color:#5b8aaf;color:#d5ebff}
+html[data-theme="dark"] .chain .link{background:#6484a4}
+html[data-theme="dark"] .example{background:#1b2a3a;border-color:#38506a}
+html[data-theme="dark"] .given{background:#273c53;color:#c8d8e8}
+html[data-theme="dark"] .step{border-color:#34465b}
+html[data-theme="dark"] .step-num{background:#294764;color:#c0e0ff;border-color:#426c91}
+html[data-theme="dark"] .answer{background:#21483c;color:#b5eed8}
+html[data-theme="dark"] .notice{background:#443726;color:#ffdcad}
+html[data-theme="dark"] .map-chap{background:#233f60;border-color:#4b6e96;color:#d6eaff}
+html[data-theme="dark"] .map-chap.on{background:#316da9;border-color:#5598d6;color:#fff}
+html[data-theme="dark"] .map-topic{background:#192b40;border-color:#37506b;color:#d2e4f5}
+html[data-theme="dark"] .map-topic:hover,html[data-theme="dark"] .map-topic.expanded{background:#23415f;border-color:#5c94cb}
+html[data-theme="dark"] .map-topic small,html[data-theme="dark"] .map-details{color:#acbed0}
+html[data-theme="dark"] .map-details{border-color:#42566d}
+html[data-theme="dark"] .map-branch:before{background:#4d789e}
+html[data-theme="dark"] .map-root{background:linear-gradient(125deg,#234368,#315e86)}
+html[data-theme="dark"] .quick-card .qtag{color:#abc0d5}
+html[data-theme="dark"] .quick-card p{color:#c1d1e2}
+html[data-theme="dark"] .quiz-progress,html[data-theme="dark"] .chap-card .bar{background:#2d4056}
+html[data-theme="dark"] .option{background:#1c2e43;border-color:#3b536f;color:#d7e7f8}
+html[data-theme="dark"] .option i{color:#9bc7fb}
+html[data-theme="dark"] .option:not(:disabled):hover{background:#294565;border-color:#679dcc}
+html[data-theme="dark"] .option.selected{background:#244a73;border-color:#6eade6}
+html[data-theme="dark"] .option.correct{background:#1f4a3b;border-color:#4f987b}
+html[data-theme="dark"] .option.incorrect{background:#543237;border-color:#b46f75}
+html[data-theme="dark"] .explain{background:#213c55;border-color:#6bace9;color:#d0e1f0}
+html[data-theme="dark"] .quiz-filter button{background:#22364d;border-color:#415873;color:#c1d4e7}
+html[data-theme="dark"] .quiz-filter button.chosen{background:#2d5177;border-color:#6c9ed1;color:#e3f0ff}
+html[data-theme="dark"] .score-card .huge{color:#9acaef}
+html[data-theme="dark"] .score-card p{color:#bacbdd}
+html[data-theme="dark"] .rail-card h3{color:#a4b9cc}
+html[data-theme="dark"] .rail-card .rail-topic{color:#a9bbcb}
+html[data-theme="dark"] .rail-card .rail-topic.current{color:#b9d9ff;background:#274461;border-color:#79b4f6}
+html[data-theme="dark"] .rail-card .rail-topic:hover{color:#e3f2ff}
+html[data-theme="dark"] .rail-memory{border-color:#38506a;color:#c5d8e9}
+html[data-theme="dark"] .overlay{background:#030812c7}
+html[data-theme="dark"] .dialog{box-shadow:0 25px 90px #0008}
+html[data-theme="dark"] .searchinput{background:#101d2d;border-color:#506780;color:#e7eff7}
+html[data-theme="dark"] .searchinput::placeholder{color:#8199b3}
+html[data-theme="dark"] .sr{background:#1b2e43;border-color:#344b64;color:#e2edfc}
+html[data-theme="dark"] .sr:hover{background:#2a4561;border-color:#648db7}
+html[data-theme="dark"] .sr small{color:#a2b8cc}
+@media print{html[data-theme="dark"] body{background:white;color:#1e2733}}
+
+/* Keep the few instructor-emphasis inline colors legible at night. */
+html[data-theme="dark"] .card [style*="color:#275b94"]{color:#b8daff!important}
+html[data-theme="dark"] [style*="color:#b65e49"]{color:#ffb5a7!important}
+html[data-theme="dark"] [style*="color:#2369c4"]{color:#a9cdff!important}
+html[data-theme="dark"] .mini-table td[style*="background:"]{background:#294665!important}
+html[data-theme="dark"] .mini-table td[style*="color:#"]{color:#d4e5f7!important}
+
+/* OS chapter diagrams — reusable with light and dark themes */
+.os-process,.os-process-lower{display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap;margin:15px 0}
+.os-pnode{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:18px 22px;text-align:center;min-width:156px;box-shadow:var(--card-shadow)}
+.os-pnode.main{background:var(--accent-bg);border-color:var(--accent)}
+.os-pnode b{display:block;color:var(--ink);font-size:15px}.os-pnode small{display:block;color:var(--muted);font-size:11px;margin-top:7px;line-height:1.5}
+.os-pair{display:grid;gap:6px;text-align:center;color:var(--accent);font-weight:750;font-size:12px;line-height:1.8}
+.os-stack{max-width:570px;display:flex;flex-direction:column;align-items:stretch;gap:0;margin:12px auto}.os-stack-item{padding:13px;background:var(--panel);border:1px solid var(--line);border-radius:9px;text-align:center;font-size:14px;font-weight:700;color:var(--ink)}.os-stack-item.mid{background:var(--accent-bg);color:var(--accent)}.os-stack-arrow{color:var(--accent);font-size:15px;text-align:center;line-height:1.1;padding:2px}
+.os-operator{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;color:var(--ink)}.os-operator>b{font-size:15px}.os-operator p{font-size:13px;color:var(--ink);margin:8px 0}.os-operator small{font-size:12px;color:var(--muted)}.os-equation{font-size:21px;color:var(--accent);font-weight:800;letter-spacing:1px;margin:15px 0}.os-code{font:14px/2.05 ui-monospace,'SFMono-Regular',Consolas,monospace;white-space:nowrap;margin:12px 0;color:var(--accent)}.os-table-wrap{overflow-x:auto;max-width:100%}
+.os-tree{display:inline-block;border:1px solid var(--line);background:var(--panel);border-radius:11px;padding:16px 20px;font-size:14px;line-height:2.25;color:var(--ink)}.os-tree-inner{border-left:1px dashed var(--muted);padding-left:23px;margin-left:9px}
+.os-bitrow{display:flex;flex-wrap:wrap;gap:3px;margin:17px auto;max-width:720px}.os-bitrow span{display:grid;place-items:center;background:var(--panel);color:var(--muted);border:1px solid var(--line);border-radius:5px;min-width:21px;height:26px;font-size:11px;flex:1 0 21px}.os-bitrow span.on{background:var(--accent-bg);color:var(--accent);border-color:var(--accent);font-weight:800}
+.d-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.d-box b{display:block;font-size:13px}
+.d-row{flex-wrap:wrap;justify-content:center}
+.lesson-footer{padding-bottom:30px;margin-bottom:70px}
+@media(max-width:650px){.d-grid.three{grid-template-columns:1fr!important}.os-process{gap:8px}.os-pnode{min-width:130px;padding:13px}.os-process-lower{gap:10px}.os-pair{font-size:11px}.os-code{font-size:12px}.os-table-wrap th,.os-table-wrap td{white-space:normal;min-width:100px}}
+
+
+/* SOFTWARE DESIGNER KNOWLEDGE BASE · Unified Reading-first Palette v2
+   Visual reference: 《考试介绍与复习方法》统一配色版
+   Scope: visual-only adjustments; original content / behavior / localStorage keys intact. */
+:root {
+  --bg:#f7f8fa;
+  --nav:#1d2937;
+  --nav2:#2b3b4f;
+  --panel:#ffffff;
+  --line:#e4e8ed;
+  --ink:#222c38;
+  --muted:#5f6d7d;
+  --soft:#8391a0;
+  --accent:#246bb4;
+  --accent-bg:#eff6fd;
+  --teal:#16867f;
+  --red:#c65555;
+  --amber:#ab7225;
+  --card-shadow:0 3px 16px rgba(25,38,55,.035);
+}
+body {background:var(--bg);color:var(--ink)}
+/* Deep-slate navigation remains stable across all courses. */
+.side {background:var(--nav);color:#cbd5e1;border-color:#142334}
+.brand {border-bottom-color:#ffffff17}
+.brand .mono {color:#a9c7e4}
+.brand p {color:#a9bbce}
+.side-head {color:#9caec1}
+.chap-button {color:#c6d3e1}
+.chap-button:hover,.chap-button.active {background:#2a3c50}
+.chap-num {color:#8cbff3}
+.chap-focus-count {background:#344c65;color:#cbdded}
+.chap-button.active .chap-focus-count {background:#3c536d;color:#e3f1fb}
+.subnav button {color:#acbfd0}
+.subnav button:hover {background:#2b3f54}
+.subnav button.selected {background:#334a64;border-left-color:#8ab9ee}
+.subnav button.nav-pr-must {border-left-color:#ec8584}
+.subnav button.nav-pr-frequent {border-left-color:#e5b46b}
+.subnav button.selected.nav-pr-must {border-left-color:#ff9996}
+.subnav button.selected.nav-pr-frequent {border-left-color:#f2c27f}
+.legend-dot.must {background:#f49d98}
+.legend-dot.frequent {background:#ebc38a}
+.focus-toggle {background:#283b4f;border-color:#465e76;color:#d4e1ed}
+.focus-toggle:hover {background:#30475f;border-color:#6c8ba8}
+.focus-toggle[aria-pressed="true"] {background:#344554;border-color:#b6a082;color:#fbe3bc}
+.focus-toggle[aria-pressed="true"] .focus-indicator {background:#ba9b67;border-color:#dec18f}
+.nav-level.must {background:#59373b;border-color:#765154;color:#ffd1cc}
+.nav-level.frequent {background:#514638;border-color:#75624c;color:#ffe0ae}
+.nav-done {color:#91d8c7}
+.side-footer {border-color:#ffffff17}
+.side-footer .progressbar {background:#3c4f64}
+.side-footer .progressbar>span {background:var(--teal)}
+/* Navigation and operational blue; no second dominant brand gradient. */
+.topbar {background:var(--panel);border-color:var(--line);height:69px;box-shadow:0 1px 0 rgba(20,40,60,.015)}
+.tabs {background:#f1f3f6}
+.tab {color:#617184}
+.tab.on {color:#1f5f9d;background:var(--panel);box-shadow:0 1px 4px #1a2d4612}
+.tab:hover {color:#1f5f9d}
+.iconbutton {background:var(--panel);border-color:#dce3eb;color:#4f6478}
+.iconbutton:hover {background:var(--accent-bg);border-color:#9cb9d8}
+.kicker {color:var(--accent)}
+.lede {color:var(--muted)}
+/* White hero with a thin teal rail, exactly as in the approved intro page. */
+.hero {
+  background:var(--panel);
+  color:var(--ink);
+  border:1px solid var(--line);
+  border-left:4px solid var(--teal);
+  border-radius:15px;
+  box-shadow:var(--card-shadow);
+  padding:34px 38px 35px;
+}
+.hero:after {display:none}
+.hero .kicker {color:var(--teal);letter-spacing:1.3px}
+.hero h1 {color:var(--ink);font-size:31px;line-height:1.43;letter-spacing:-.65px;margin:14px 0}
+.hero p {color:var(--muted);line-height:1.95;max-width:760px}
+.hero-actions {margin-top:23px}
+.hero-actions .small-button {padding:11px 16px}
+.small-button.primary,.topic-jump button.current {background:var(--accent);border-color:var(--accent);color:white}
+.small-button.primary:hover {background:#195a99;border-color:#195a99}
+.small-button {background:var(--panel);border-color:#d1dae4;color:var(--ink)}
+.small-button:hover {background:var(--accent-bg);border-color:#a7c6e4}
+.small-button.tinted {background:var(--accent-bg);border-color:#d5e5f5;color:var(--accent)}
+.small-button.done {background:#eef8f4;border-color:#cbe7db;color:#187c66}
+/* Reading-first card surfaces and useful colors. */
+.stat,.chap-card,.card,.quick-card,.quiz-card,.score-card,.dialog,.rail-card {background:var(--panel);border-color:var(--line);box-shadow:var(--card-shadow)}
+.stat b {color:var(--ink);font-size:23px}
+.stat small,.chap-card p,.chap-card .foot span {color:var(--muted)}
+.chap-card:hover {border-color:#b5cde3}
+.chap-card .num {color:var(--accent)}
+.chap-card .foot button,.quick-card button {background:var(--accent-bg);color:var(--accent)}
+.chap-card .foot button:hover,.quick-card button:hover {background:#e4f0fc}
+.chap-card .bar,.quiz-progress {background:#eef1f4}
+.chap-card .bar i,.quiz-progress i {background:var(--teal)}
+.card p,.intro-card p {color:#526173}
+.intro-card {background:#f1f6fc;border-left-color:var(--accent);box-shadow:none}
+.intro-card .head {color:var(--accent)}
+.pill {color:#607184;background:#f1f4f6}
+.pill.must {background:#fdf1f0;color:#ad4749;border:1px solid #f1d4d2}
+.pill.frequent {background:#fdf6ea;color:#956522;border:1px solid #ebdcc4}
+.pill.understand {background:#edf5fc;color:#4576a3}
+.point {background:#fafbfc;border-color:#e8edf2}
+.point .ptext {color:var(--ink)}
+.point .pnote {color:var(--muted)}
+.point.must {border-left:3px solid #d87573}
+.point.frequent {border-left:3px solid #c4934e}
+.source,.quick-card .qtag {color:var(--soft)}
+.topic-jump button {background:var(--panel);border-color:#dfe6ed;color:#536c84}
+.topic-jump button:hover {background:var(--accent-bg);border-color:#a2c4e0}
+.topic-jump button.current {background:var(--accent);border-color:var(--accent);color:#fff}
+/* Figures, formulas and answer states align to a single blue/teal language. */
+.diagram {background:#fafbfd;border-color:var(--line)}
+.diagram-title,.d-sub,.d-note {color:var(--muted)}
+.d-box,.d-chip,.bit {background:var(--panel);border-color:#d4dde6;color:#31526e}
+.d-box.accent,.bit.highlight {background:var(--accent-bg);border-color:#bad4eb;color:var(--accent)}
+.d-chip b {color:#2b516e}
+.d-chip strong {color:var(--accent)}
+.formula {background:var(--accent-bg);color:#245b91}
+.formula small {color:#657d94}
+.mini-table th {background:#f1f5f9;color:#475d74}
+.mini-table td {color:#485b70}
+.step-num {background:var(--accent-bg);color:var(--accent);border-color:#d4e5f5}
+.example {background:#fafbfd;border-color:var(--line)}
+.given {background:#edf4fa;color:#536f87}
+.answer {background:#edf7f3;color:#24745e}
+.notice {background:#fcf8f0;color:#865b28}
+.levelstack .level {background:#eaf3fa;color:#245b82}
+.times .work {background:#dfebf8;color:#2c6398}
+.times .work.dark {background:#bfdaf2}
+.map-root {background:#eaf3f9;color:#245a80;border:1px solid #cfe0ee;border-left:4px solid var(--teal);border-radius:11px;box-shadow:none}
+.map-chap {background:#edf5fc;border-color:#d5e5f2;color:#28659d}
+.map-chap.on {background:#dcecf8;border-color:#8ab7d6;color:#215e93}
+.map-topic {background:var(--panel);border-color:#e1e8ef;color:#4c6075}
+.map-topic:hover,.map-topic.expanded {background:#f6faff;border-color:#b5d3ed}
+.quick-card p {color:#526577}
+.option {border-color:#dce5ed;color:#3e5267}
+.option:not(:disabled):hover {background:#f1f6fc;border-color:#a1c3e1}
+.option.selected {background:#edf5fe;border-color:#80add5}
+.option.correct {background:#eaf7f1;border-color:#72bea2}
+.option.incorrect {background:#fff1f1;border-color:#daa09b}
+.explain {background:#f1f6fb;border-color:#5a92c7;color:#4a6179}
+.quiz-filter button {background:var(--panel);border-color:#dfe6ed;color:#617386}
+.quiz-filter button.chosen {background:var(--accent-bg);border-color:#a4c6e5;color:var(--accent)}
+.score-card .huge {color:var(--accent)}
+.rail-card .rail-topic.current {color:var(--accent);background:var(--accent-bg);border-color:var(--accent)}
+.rail-card .rail-topic:hover {color:var(--accent)}
+.searchinput {background:var(--panel);border-color:#c9d6e3;color:var(--ink)}
+.sr {background:var(--panel);border-color:var(--line);color:var(--ink)}
+.sr:hover {background:var(--accent-bg);border-color:#aac7e5}
+/* Dark palette is a restrained inversion of the same layout—not the old banner. */
+html[data-theme="dark"] {
+  color-scheme:dark;
+  --bg:#111822;
+  --nav:#121e2b;
+  --nav2:#26394d;
+  --panel:#1b2735;
+  --line:#344456;
+  --ink:#e7eef6;
+  --muted:#b3c2d1;
+  --soft:#96aabf;
+  --accent:#96c4fc;
+  --accent-bg:#223c59;
+  --teal:#6fd0bb;
+  --red:#f7a0a0;
+  --amber:#ecc58d;
+  --card-shadow:0 4px 18px #00000018;
+}
+html[data-theme="dark"] body {background:var(--bg);color:var(--ink)}
+html[data-theme="dark"] .side {background:var(--nav);border-color:#253748}
+html[data-theme="dark"] .brand {border-bottom-color:#ffffff17}
+html[data-theme="dark"] .chap-button:hover,html[data-theme="dark"] .chap-button.active {background:#2a3c50}
+html[data-theme="dark"] .chap-focus-count {background:#344c65;color:#cbdded}
+html[data-theme="dark"] .subnav button.selected {background:#334a64;border-left-color:#8ab9ee}
+html[data-theme="dark"] .subnav button.selected.nav-pr-must {border-left-color:#ff9996}
+html[data-theme="dark"] .subnav button.selected.nav-pr-frequent {border-left-color:#f2c27f}
+html[data-theme="dark"] .focus-toggle {background:#283b4f;border-color:#465e76;color:#d4e1ed}
+html[data-theme="dark"] .focus-toggle[aria-pressed="true"] {background:#344554;border-color:#b6a082;color:#fbe3bc}
+html[data-theme="dark"] .nav-level.must {background:#59373b;border-color:#765154;color:#ffd1cc}
+html[data-theme="dark"] .nav-level.frequent {background:#514638;border-color:#75624c;color:#ffe0ae}
+html[data-theme="dark"] .side-footer {border-color:#ffffff17}
+html[data-theme="dark"] .progressbar>span {background:var(--teal)}
+html[data-theme="dark"] .topbar {background:var(--panel);border-color:var(--line)}
+html[data-theme="dark"] .tabs {background:#14212d}
+html[data-theme="dark"] .tab {color:#a7b9cb}
+html[data-theme="dark"] .tab.on {background:#30485f;color:#d7ebff;box-shadow:none}
+html[data-theme="dark"] .iconbutton,html[data-theme="dark"] .mobile-toggle {background:#233447;border-color:#4b6177;color:#d9e8f6}
+html[data-theme="dark"] .iconbutton:hover,html[data-theme="dark"] .mobile-toggle:hover {background:#2d4860;border-color:#789fc0}
+html[data-theme="dark"] .kicker {color:var(--accent)}
+html[data-theme="dark"] .hero {background:var(--panel);color:var(--ink);border-color:var(--line);border-left-color:var(--teal);box-shadow:var(--card-shadow)}
+html[data-theme="dark"] .hero:after {display:none}
+html[data-theme="dark"] .hero .kicker {color:var(--teal)}
+html[data-theme="dark"] .hero h1 {color:var(--ink)}
+html[data-theme="dark"] .hero p {color:var(--muted)}
+html[data-theme="dark"] .hero-actions .small-button:not(.primary) {background:#233447;border-color:#4b6177;color:#e7eff7}
+html[data-theme="dark"] .hero-actions .small-button:not(.primary):hover {background:#2d4860;border-color:#789fc0}
+html[data-theme="dark"] .small-button.primary,html[data-theme="dark"] .topic-jump button.current {background:#397cb8;border-color:#397cb8;color:#fff}
+html[data-theme="dark"] .small-button.primary:hover {background:#4a8fce;border-color:#4a8fce}
+html[data-theme="dark"] .stat,html[data-theme="dark"] .chap-card,html[data-theme="dark"] .card,html[data-theme="dark"] .quick-card,html[data-theme="dark"] .quiz-card,html[data-theme="dark"] .score-card,html[data-theme="dark"] .rail-card,html[data-theme="dark"] .dialog {background:var(--panel);border-color:var(--line);color:var(--ink);box-shadow:var(--card-shadow)}
+html[data-theme="dark"] .stat b {color:var(--ink)}
+html[data-theme="dark"] .stat small,html[data-theme="dark"] .chap-card p,html[data-theme="dark"] .chap-card .foot span {color:var(--muted)}
+html[data-theme="dark"] .chap-card .num {color:var(--accent)}
+html[data-theme="dark"] .chap-card .foot button,html[data-theme="dark"] .quick-card button {background:#283f57;color:#b6dcff}
+html[data-theme="dark"] .chap-card .foot button:hover,html[data-theme="dark"] .quick-card button:hover {background:#33516c}
+html[data-theme="dark"] .chap-card .bar,html[data-theme="dark"] .quiz-progress {background:#324354}
+html[data-theme="dark"] .chap-card .bar i,html[data-theme="dark"] .quiz-progress i {background:var(--teal)}
+html[data-theme="dark"] .card p,html[data-theme="dark"] .intro-card p {color:var(--muted)}
+html[data-theme="dark"] .intro-card {background:#233c54;border-left-color:#6ca0d4}
+html[data-theme="dark"] .intro-card .head {color:#b4d9ff}
+html[data-theme="dark"] .pill {background:#2c3e51;color:#c8d8e8}
+html[data-theme="dark"] .pill.must {background:#563338;border-color:#7d4c50;color:#ffd1cb}
+html[data-theme="dark"] .pill.frequent {background:#51412d;border-color:#806647;color:#ffe1b6}
+html[data-theme="dark"] .pill.understand {background:#213e5e;color:#bcd9fb}
+html[data-theme="dark"] .point {background:var(--panel);border-color:var(--line)}
+html[data-theme="dark"] .point .ptext {color:var(--ink)}
+html[data-theme="dark"] .point .pnote,html[data-theme="dark"] .source {color:var(--muted)}
+html[data-theme="dark"] .point.must {border-left:3px solid #d68481;background:#2a2935}
+html[data-theme="dark"] .point.frequent {border-left:3px solid #bb9563;background:#2e2b30}
+html[data-theme="dark"] .small-button {background:#233447;border-color:#4b6177;color:#e7eff7}
+html[data-theme="dark"] .small-button:hover {background:#2d4860;border-color:#789fc0}
+html[data-theme="dark"] .small-button.tinted {background:#244364;border-color:#486b8d;color:#b9dbff}
+html[data-theme="dark"] .small-button.done {background:#234537;border-color:#3d806a;color:#bdf0db}
+html[data-theme="dark"] .topic-jump button {background:#233447;border-color:#4b6177;color:#d4e5f7}
+html[data-theme="dark"] .topic-jump button:hover {background:#2d4860;border-color:#789fc0}
+html[data-theme="dark"] .diagram,html[data-theme="dark"] .example {background:var(--panel);border-color:var(--line)}
+html[data-theme="dark"] .diagram-title,html[data-theme="dark"] .d-sub,html[data-theme="dark"] .d-note {color:var(--muted)}
+html[data-theme="dark"] .d-box,html[data-theme="dark"] .d-chip,html[data-theme="dark"] .bit {background:var(--panel2,#202e3d);border-color:#4e6175;color:#d7e8f8}
+html[data-theme="dark"] .d-box.accent,html[data-theme="dark"] .bit.highlight {background:#24455f;border-color:#688ead;color:#c5e5ff}
+html[data-theme="dark"] .d-chip b {color:#dceafa}
+html[data-theme="dark"] .d-chip strong {color:#a5cdf7}
+html[data-theme="dark"] .formula {background:#223c59;color:#c9e5ff}
+html[data-theme="dark"] .formula small {color:#a8bfd6}
+html[data-theme="dark"] .mini-table th {background:#273b50;color:#d6e5f4}
+html[data-theme="dark"] .mini-table td {color:#c6d7e8}
+html[data-theme="dark"] .step-num {background:#264767;color:#bcdcff;border-color:#496a88}
+html[data-theme="dark"] .given {background:#253d53;color:#c6daed}
+html[data-theme="dark"] .answer {background:#25463b;color:#b3ecd5}
+html[data-theme="dark"] .notice {background:#3a3229;color:#f0d8b6}
+html[data-theme="dark"] .map-root {background:#233d50;color:#c9e7f6;border-color:#426075;border-left-color:var(--teal);box-shadow:none}
+html[data-theme="dark"] .map-chap {background:#273d54;border-color:#46637d;color:#d4e9f9}
+html[data-theme="dark"] .map-chap.on {background:#315473;border-color:#6396b7;color:#e6f4ff}
+html[data-theme="dark"] .map-topic {background:var(--panel);border-color:var(--line);color:#d5e4f2}
+html[data-theme="dark"] .map-topic:hover,html[data-theme="dark"] .map-topic.expanded {background:#263a4e;border-color:#5e89ad}
+html[data-theme="dark"] .map-details {border-color:#42566d}
+html[data-theme="dark"] .quick-card p {color:var(--muted)}
+html[data-theme="dark"] .option {background:#223346;border-color:#42566e;color:#d8e8f8}
+html[data-theme="dark"] .option.correct {background:#23483b;border-color:#61a487}
+html[data-theme="dark"] .option.incorrect {background:#523236;border-color:#ac7778}
+html[data-theme="dark"] .explain {background:#243d55;border-color:#6ca0d4;color:#d6e7f6}
+html[data-theme="dark"] .quiz-filter button {background:#233447;border-color:#4b6177;color:#c8d9e8}
+html[data-theme="dark"] .quiz-filter button.chosen {background:#30516e;border-color:#6c98bb;color:#e0f0ff}
+html[data-theme="dark"] .score-card .huge {color:var(--accent)}
+html[data-theme="dark"] .rail-card .rail-topic.current {background:#2b465e;color:#c8e5ff;border-color:#82b6e0}
+html[data-theme="dark"] .searchinput {background:#142333;border-color:#50657c;color:#e7eef6}
+html[data-theme="dark"] .sr {background:#223346;border-color:#42566e;color:#e5eff9}
+html[data-theme="dark"] .sr:hover {background:#2d4860;border-color:#769cbc}
+/* OS chapter diagrams use the same palette tokens. */
+html[data-theme="dark"] .os-pnode,html[data-theme="dark"] .os-operator,html[data-theme="dark"] .os-stack-item,html[data-theme="dark"] .os-tree,html[data-theme="dark"] .os-bitrow span {background:var(--panel);border-color:var(--line);color:var(--ink)}
+html[data-theme="dark"] .os-pnode.main,html[data-theme="dark"] .os-stack-item.mid,html[data-theme="dark"] .os-bitrow span.on {background:var(--accent-bg);color:var(--accent);border-color:#496c90}
+html[data-theme="dark"] .os-equation,html[data-theme="dark"] .os-code,html[data-theme="dark"] .os-stack-arrow {color:var(--accent)}
+html[data-theme="dark"] .os-operator p {color:var(--ink)}
+html[data-theme="dark"] .os-operator small {color:var(--muted)}
+@media(max-width:800px) {
+  .hero {padding:27px 24px 29px}
+  .hero h1 {font-size:26px}
+  .topbar {height:auto}
+  .statbar {gap:9px}
+}
+@media print {
+  .hero {background:#fff!important;color:#222!important;border-color:#ddd!important}
+  .hero h1 {color:#222!important}
+}
+
+
+/* 第 3 章数据库知识：同一视觉设计规范下的专属教学图解 */
+.db-flow{display:flex;align-items:center;justify-content:center;gap:9px;flex-wrap:wrap;margin:8px 0}
+.db-arrow{color:var(--accent);font-size:21px;flex:none;font-weight:800}
+.db-node{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;color:var(--ink);min-width:112px;text-align:center;max-width:255px;flex:1 1 120px}
+.db-node.accent{border-color:var(--accent);background:var(--accent-bg)}
+.db-node strong{display:block;font-size:14px;line-height:1.5}.db-node small{display:block;font-size:12px;color:var(--muted);margin-top:6px;line-height:1.6}
+.db-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:10px}.db-grid .db-node{min-width:0;max-width:none}
+.db-layer{text-align:center}.db-layer>.db-grid{margin-top:12px}
+.db-stair{max-width:640px;margin:5px auto;display:flex;flex-direction:column;align-items:center;gap:5px}.db-stair .db-node{width:100%;max-width:510px;flex:none}.db-stair>span{font-size:12px;color:var(--accent);font-weight:750;padding:6px}
+.db-er-shapes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:center;justify-items:center;gap:15px;padding:12px 3px}
+.db-er-shapes>div{height:130px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:17px;min-width:0}
+.db-er-shapes small{font-size:12px;color:var(--muted)}.db-rectangle,.db-oval,.db-rhombus{display:grid;place-items:center;background:var(--accent-bg);color:var(--ink);font-size:14px;font-weight:800;border:2px solid var(--accent)}
+.db-rectangle{width:95px;height:60px;border-radius:5px}.db-oval{width:100px;height:60px;border-radius:50%}.db-rhombus{width:65px;height:65px;transform:rotate(45deg);border-radius:4px}.db-rhombus b{transform:rotate(-45deg);display:block;font-size:13px}
+.db-math{background:var(--accent-bg);border:1px solid var(--line);border-radius:9px;padding:17px;color:var(--accent);font-weight:800;text-align:center;overflow-wrap:anywhere;font-size:17px;margin-bottom:16px}
+.db-code{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:18px 22px;color:var(--ink);font:14px/2.1 ui-monospace,Consolas,monospace;white-space:normal;margin:0 auto 14px;max-width:660px;overflow-x:auto}.db-code span{font-weight:900;color:var(--accent)}
+.db-note{color:var(--muted);font-size:12px;line-height:1.9;margin-top:13px;text-align:center}
+html[data-theme="dark"] .db-node{background:#1c3046;border-color:#3d5670}
+html[data-theme="dark"] .db-node.accent,html[data-theme="dark"] .db-rectangle,html[data-theme="dark"] .db-oval,html[data-theme="dark"] .db-rhombus{background:#264765;border-color:#75b2e8;color:#e8f3ff}
+html[data-theme="dark"] .db-code{background:#112031;border-color:#3a536c}
+@media(max-width:650px){.db-flow{gap:6px}.db-node{padding:12px 9px;min-width:98px;flex-basis:110px}.db-arrow{font-size:17px}.db-er-shapes{gap:3px}.db-er-shapes small{font-size:10px}.db-rectangle,.db-oval{width:85px;height:55px}.db-rhombus{width:57px;height:57px}.db-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.db-math{font-size:14px}}
+
+
+/* security knowledge diagrams follow the unified palette */
+.sec-cia{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.sec-cia>div{background:var(--panel);border:1px solid var(--line);border-radius:12px;min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:17px 10px}.sec-cia strong{font:800 45px/1 ui-sans-serif,system-ui,sans-serif;color:var(--accent)}.sec-cia b{font-size:15px;color:var(--ink);margin:14px 0 6px}.sec-cia small{font-size:12px;color:var(--muted);text-align:center}
+.sec-two-col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-bottom:14px}.sec-two-col .db-node{max-width:none;height:100%;width:100%}.sec-table-scroll{max-width:100%;overflow-x:auto}.sec-table-scroll th,.sec-table-scroll td{min-width:100px}
+.sec-two-col .db-node strong{overflow-wrap:anywhere}.db-flow .db-node strong{overflow-wrap:anywhere}
+html[data-theme="dark"] .sec-cia>div{background:#1c3046;border-color:#3d5670}
+@media(max-width:680px){.sec-cia{grid-template-columns:1fr;gap:8px}.sec-cia>div{min-height:105px}.sec-cia strong{font-size:33px}.sec-cia b{margin:6px 0 2px}.sec-two-col{grid-template-columns:1fr}.sec-table-scroll th,.sec-table-scroll td{min-width:90px}}
+
+</style></head>
+<body>
+<div class="app">
+  <aside class="side" id="sidebar"><div class="brand"><div class="mono">SOFTWARE DESIGNER · STUDY NOTES</div><h2>安全性知识</h2><p>软件设计师 · 精讲知识库<br>基于 PDF 课件和课程转写整理</p></div><div class="side-head"><span>章节目录</span><span id="sideCount"></span></div><div class="side-priority-tools"><div class="priority-legend"><span class="legend-entry"><i class="legend-dot must"></i>必须掌握 <b id="mustCount">0</b></span><span class="legend-entry"><i class="legend-dot frequent"></i>重点 / 常考 <b id="frequentCount">0</b></span></div><button type="button" class="focus-toggle" id="focusToggle" aria-pressed="false"><span class="focus-icon">★</span><span class="focus-label">只看重点主题</span><span class="focus-indicator" aria-hidden="true"></span></button></div><nav class="nav-list" id="navList"></nav><div class="side-footer"><div class="frow"><span>已掌握知识主题</span><strong id="sideProgress">0 / 0</strong></div><div class="progressbar"><span id="sideProgressBar"></span></div><small>学习进度保存在当前浏览器中。<br>离线文件，不需要登录账号。</small></div></aside>
+  <div class="scrim" id="scrim"></div>
+  <div class="workspace">
+   <header class="topbar"><div class="top-left"><button class="mobile-toggle" id="menuBtn" aria-label="打开章节目录">☰</button><div><div class="toptitle" id="topTitle">软件设计师 · 安全性知识</div><div class="top-small">图文精讲 / 脑图总览 / 考前速记 / 随堂练习</div></div></div><div class="tabs" id="viewTabs"><button class="tab on" data-tab="home">学习首页</button><button class="tab" data-tab="read">图文精讲</button><button class="tab" data-tab="map">知识脑图</button><button class="tab" data-tab="quick">考前速记</button><button class="tab" data-tab="quiz">随堂练习</button></div><div class="top-actions"><button class="iconbutton" title="搜索知识点（Ctrl / ⌘ + K）" id="searchBtn" aria-label="搜索知识点"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button><button class="iconbutton theme-switch" type="button" title="切换夜间模式" id="themeBtn" aria-label="切换为夜间模式" aria-pressed="false"><svg class="moon-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.5 14.2A8.6 8.6 0 0 1 9.8 3.5 8.6 8.6 0 1 0 20.5 14.2Z"/></svg><svg class="sun-icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg></button></div></header>
+   <div class="content-shell" id="contentShell"><main class="content" id="mainContent"></main><aside class="rail" id="rightRail"></aside></div>
+  </div>
+</div>
+<div class="overlay hidden" id="searchOverlay"><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="searchTitle"><div class="dialoghead"><h2 id="searchTitle">查找知识点</h2><button class="iconbutton" id="searchClose" aria-label="关闭搜索">×</button></div><input class="searchinput" id="searchInput" placeholder="试试：E-R、自然连接、3NF、无损分解、SQL…" autocomplete="off"/><div class="search-results" id="searchResults"></div></div></div>
+<script>
+const DATA = {"chapters":[{"id":0,"number":"00","name":"本章学习定位","subtitle":"课件 PDF 第2页；转写 6.1 开篇","topicIds":["0:0","0:1","0:2"]},{"id":1,"number":"01","name":"信息安全基础与安全需求","subtitle":"课件 PDF 第2—4页；转写 6.1","topicIds":["1:0","1:1","1:2","1:3","1:4","1:5","1:6","1:7"]},{"id":2,"number":"02","name":"加密技术与密钥体制","subtitle":"课件 PDF 第5—6页；转写 6.1","topicIds":["2:0","2:1","2:2","2:3","2:4","2:5","2:6"]},{"id":3,"number":"03","name":"摘要、数字签名与 PKI","subtitle":"课件 PDF 第7—9页；转写 6.1","topicIds":["3:0","3:1","3:2","3:3","3:4","3:5","3:6"]},{"id":4,"number":"04","name":"防火墙与入侵检测防御","subtitle":"课件 PDF 第9—10页；转写 6.2","topicIds":["4:0","4:1","4:2","4:3","4:4"]},{"id":5,"number":"05","name":"攻击威胁与恶意程序","subtitle":"课件 PDF 第11—12页；转写 6.2","topicIds":["5:0","5:1","5:2","5:3","5:4","5:5","5:6"]},{"id":6,"number":"06","name":"网络安全协议与应用","subtitle":"课件 PDF 第12—14页；转写 6.2","topicIds":["6:0","6:1","6:2","6:3","6:4","6:5","6:6","6:7","6:8"]}],"lessons":[{"id":"0:0","chapter":0,"index":0,"title":"本章定位：信息安全与网络安全","fullTitle":"本章定位：信息安全与网络安全","intro":"老师把安全性知识分成信息安全、网络安全两块，认为这部分主要是概念理解与判断，旧课程经验约每年 2 分。","points":[{"text":"主要内容：信息安全及信息系统安全；安全技术；防火墙、入侵检测和网络攻击；安全协议。","note":"对应课件第2页总览。","priority":""},{"text":"老师的分值经验约 2 分，且与计算机网络内容有交叉。","note":"不是最新考务固定配分，也不是必然出现的题数。","priority":"understand"},{"text":"最值得掌握：信息安全 CIA 三要素、安全空间五属性、加密流程、防火墙、重放与拒绝服务。","note":"老师明确在对应课程中强调。","priority":"frequent"},{"text":"对 SSL、SET、PGP 等扩展协议：以概念和使用场景为主，不深入内部细节。","note":"老师在 6.2 多次说明“了解基本定义即可”。","priority":"understand"},{"text":"本章自测题根据课件和课堂讲解编写，不冒充历年真题。","note":"跨时代变化的协议应以题干和课程语境辨析。","priority":""}],"source":"课件 PDF 第2页；转写 6.1 开篇","priority":"","visual":"study","memory":"考试重点先抓 CIA、五属性、公私钥、签名、防火墙、重放和 DoS。"},{"id":"0:1","chapter":0,"index":1,"title":"学习路线：先辨析，再串联","fullTitle":"学习路线：先辨析，再串联","intro":"这章不需要把安全技术完全当成密码学课程来学。先明确每种技术在解决什么安全问题，再看它如何组合。","points":[{"text":"第一遍：掌握 CIA 与五属性 → 安全需求分层 → 安全技术分类。","note":"","priority":""},{"text":"第二遍：区分对称加密与非对称加密 → 信息摘要 → 数字签名 → 数字证书。","note":"","priority":""},{"text":"第三遍：防火墙、IDS、IPS → 主动与被动攻击 → 重放、DoS、病毒与木马。","note":"","priority":""},{"text":"第四遍：把 HTTPS、SSH、SET、Kerberos、PGP、S/MIME 按场景归类。","note":"","priority":""},{"text":"第五遍：先在速记页复述关键词，再做题检验易混淆项。","note":"","priority":""}],"source":"课件 PDF 第2页；转写 6.1 开篇","priority":"","visual":"study","memory":"判断题先看“保护什么”：保密、完整、认证、不可抵赖，还是服务可用。"},{"id":"0:2","chapter":0,"index":2,"title":"资料来源与阅读提醒","fullTitle":"资料来源与阅读提醒","intro":"本知识库以《6.安全性知识》PDF 和 6.1、6.2 两份课程转写为主要依据。课堂中的“经常考/了解即可”按老师原话的意思标记。","points":[{"text":"课件内容以本次上传的 PDF 第 2～14 页为范围，广告与销售提醒不纳入学习正文。","note":"","priority":""},{"text":"语音转写中的错别字进行了必要统一，如“铭文”统一为“明文”、“中间截获”统一成正常表述。","note":"","priority":""},{"text":"部分课堂解释使用了简化比喻，精讲保留备考逻辑，另以“资料核对提醒”提示其适用边界。","note":"","priority":""},{"text":"MD5、SHA-1、DES、SSL、SET 等协议/算法的介绍属于课程知识点，不应据此视为今天的安全部署建议。","note":"","priority":""},{"text":"老师对知识难度及考试频率的评价属于当时的授课经验，不能替代实际考试大纲。","note":"","priority":""}],"source":"课件 PDF 第2页；转写 6.1 开篇","priority":"","visual":"sourcenote","memory":"课程考点与现行安全实务要区分；先理解考题语境，再看适用边界。"},{"id":"1:0","chapter":1,"index":0,"title":"信息安全与信息系统安全","fullTitle":"信息安全与信息系统安全","intro":"信息安全强调信息和数据的保护；信息系统安全还涉及支撑信息运行的设备、环境、操作系统、应用与网络等整体系统。","points":[{"text":"信息安全：围绕信息本身的保密、完整、可用等要求。","note":"课程将“数据”作为信息安全最直观的对象。","priority":""},{"text":"信息系统安全：除了数据，还要考虑设备被盗、链路被破坏、运行时被攻击等。","note":"老师用设备、线路、黑客攻击举例。","priority":""},{"text":"本章讲解整体分为信息安全与网络安全两大方向。","note":"网络安全是与信息安全交叉的关注领域。","priority":""},{"text":"概念区分主要是理解性的，老师指出一般不直接考定义。","note":"不要在这一点投入过多背诵时间。","priority":"understand"},{"text":"判断实际题目时，优先看它保护的对象和引发问题的途径。","note":"这有助于把“物理/网络/系统/应用安全”分开。","priority":""}],"source":"课件 PDF 第2—4页；转写 6.1","priority":"","visual":"security-scope","memory":"信息安全重数据；信息系统安全还覆盖承载数据和软件运行的整个系统。"},{"id":"1:1","chapter":1,"index":1,"title":"安全空间三维模型：X、Y、Z","fullTitle":"安全空间三维模型：X、Y、Z","intro":"课件第 2 页的立体图把安全体系组织为三个维度。老师要求能够识别 X、Y、Z 各指什么，无需背下每个格子的全部细目。","points":[{"text":"X 轴：安全机制（安全防范、授权、审计、平台与数据保护等）。","note":"按系统采取的安全技术机制进行描述。","priority":"frequent"},{"text":"Y 轴：网络层次，对应 OSI 七层模型。","note":"物理、数据链路、网络、传输、会话、表示、应用。","priority":"frequent"},{"text":"Z 轴：安全服务，面向各网络层次提供认证、访问控制、保密、完整性等支持。","note":"注意它是“服务”，不是安全机制列表。","priority":"frequent"},{"text":"安全机制是用技术和控制手段实现安全服务的途径。","note":"X 与 Z 的概念不要倒置。","priority":""},{"text":"课堂定位：记住三个维度的含义即可。","note":"PDF 第2页示意图为对应依据。","priority":"understand"}],"source":"课件 PDF 第2—4页；转写 6.1","priority":"","visual":"axes","memory":"X 机制、Y OSI 层次、Z 服务。"},{"id":"1:2","chapter":1,"index":2,"title":"安全空间五大属性","fullTitle":"安全空间五大属性","intro":"老师在 6.1 中特别要求记住安全空间的五个属性：认证、权限、完整、加密、不可否认。","points":[{"text":"认证：确认实体“是谁”。","note":"如账号身份验证。","priority":"must"},{"text":"权限：确认通过认证后“能做什么”。","note":"访问控制与最小授权。","priority":"must"},{"text":"完整：防止信息未经授权被篡改。","note":"增删改造成非预期改变都影响完整性。","priority":"must"},{"text":"加密：对信息加密以支持保密。","note":"该处以课堂“五属性”表述为准。","priority":"must"},{"text":"不可否认：防止发送者或参与者否认已执行的行为。","note":"又称不可抵赖；数字签名是典型应用。","priority":"must"}],"source":"课件 PDF 第2—4页；转写 6.1","priority":"must","visual":"five","memory":"安全空间五属性：认证、权限、完整、加密、不可否认。"},{"id":"1:3","chapter":1,"index":3,"title":"信息安全 CIA 三要素","fullTitle":"信息安全 CIA 三要素","intro":"这是本课最明确的核心记忆点：保密性、完整性、可用性，常写作 CIA。与前一节“安全空间五属性”不是同一组概念。","points":[{"text":"C — Confidentiality：保密性/机密性。","note":"信息不被未授权实体获取、泄露或使用。","priority":"must"},{"text":"I — Integrity：完整性。","note":"信息不被未经授权修改或破坏。","priority":"must"},{"text":"A — Availability：可用性。","note":"授权用户需要时，信息或系统可被访问和使用。","priority":"must"},{"text":"CIA 三要素以外，还有真实性、可核查性、不可抵赖性、可靠性。","note":"课堂认为这些是补充属性。","priority":"understand"},{"text":"易混辨析：安全空间“五属性”与信息安全“三要素”不同。","note":"题干若指三元组，填 CIA；若指安全空间，则填五属性。","priority":"frequent"}],"source":"课件 PDF 第2—4页；转写 6.1","priority":"must","visual":"cia","memory":"CIA：保密“不泄露”，完整“不乱改”，可用“用得上”。"},{"id":"1:4","chapter":1,"index":4,"title":"保密性与最小授权原则","fullTitle":"保密性与最小授权原则","intro":"保密性不只是加密，也包含访问权限与物理层面的防泄露。老师用课程系统和数据库权限说明“最小授权”。","points":[{"text":"保密性：未授权者不能获得或利用受保护信息。","note":"强调信息不泄露。","priority":"must"},{"text":"最小授权：只授予完成工作所必需的权限。","note":"如只允许查看数据，不默认开放删除权。","priority":"frequent"},{"text":"防暴露：尽量降低信息被他人看到、复制或截获的机会。","note":"这是保密策略的一部分。","priority":""},{"text":"信息加密：将明文转换为密文，减少截获后的信息暴露。","note":"本章后续讨论具体密钥体制。","priority":""},{"text":"物理保密：保护设备及环境，考虑电磁泄露等物理途径。","note":"老师举机房设备被盗、电磁泄露等例子。","priority":"understand"}],"source":"课件 PDF 第2—4页；转写 6.1","priority":"","visual":"confidential","memory":"最小授权：需要多少权限就给多少，不把“能登录”视为“能操作全部”。"},{"id":"1:5","chapter":1,"index":5,"title":"完整性：影响因素与常见保障","fullTitle":"完整性：影响因素与常见保障","intro":"完整性的关键词是“未经授权不能修改”，既要防人为篡改，也要防传输错误或故障造成的数据变化。","points":[{"text":"完整性强调信息保持正确、完整且没有未经授权的修改。","note":"题目中出现“被改动/被插入/被删除”先联想完整性。","priority":"must"},{"text":"影响因素：设备故障、传输误码、人为攻击、病毒感染。","note":"课堂列举的四种典型因素。","priority":"frequent"},{"text":"保障方式：可靠通信、纠错编码、校验和、密码学摘要或数字签名。","note":"不同机制的保障范围并不完全相同。","priority":""},{"text":"哈希摘要可辅助检测数据是否发生变化。","note":"但仅靠未认证的摘要不能阻止攻击者同时替换数据与摘要。","priority":""},{"text":"数字签名进一步为消息完整性与签名者身份提供验证依据。","note":"数字签名的完整性作用将在后续讲解。","priority":""}],"source":"课件 PDF 第2—4页；转写 6.1","priority":"frequent","visual":"integrity","memory":"完整性关注“内容有没有被非法改”；摘要用于核对内容变化。"},{"id":"1:6","chapter":1,"index":6,"title":"可用性、可靠性与其他属性","fullTitle":"可用性、可靠性与其他属性","intro":"可用性和可靠性不要混同；真实性、可核查性、不可抵赖性在课件中也是补充安全属性。","points":[{"text":"可用性：授权用户需要时，系统或信息能正常访问。","note":"故障停机、拒绝服务会影响可用性。","priority":"must"},{"text":"可靠性：在规定时间和条件下，无故障完成指定功能的能力。","note":"强调能否稳定、正确完成工作。","priority":"frequent"},{"text":"真实性：确认信息来源是否与声称的实体一致。","note":"不是判断“对方说的每句话是否属实”。","priority":"understand"},{"text":"可核查性：活动可追溯到有关实体。","note":"通常依赖日志、审计等机制。","priority":"understand"},{"text":"不可抵赖性：建立有效责任机制，减少对行为的否认。","note":"与数字签名联系最紧密。","priority":"frequent"},{"text":"教学区分：可用性关心“能不能用”，可靠性关心“能否无故障完成规定功能”。","note":"不同指标有关联，但概念不完全相同。","priority":"frequent"}],"source":"课件 PDF 第2—4页；转写 6.1","priority":"","visual":"availability","memory":"可用：想用时能用；可靠：规定条件下能无故障完成。"},{"id":"1:7","chapter":1,"index":7,"title":"安全需求四层分类","fullTitle":"安全需求四层分类","intro":"课件把安全需求分为物理线路、网络、系统、应用四类；老师用“保护对象”法帮助判断归属。","points":[{"text":"物理线路安全：设备、线缆、机房环境、供电、温湿度、防火防雷。","note":"安全的物理基础。","priority":"frequent"},{"text":"网络安全：针对网络通信、攻击与入侵的防护。","note":"如防火墙、入侵检测与通信保护。","priority":"frequent"},{"text":"系统安全：操作系统、系统软件的配置、漏洞修复等。","note":"如操作系统补丁。","priority":"frequent"},{"text":"应用安全：应用软件及数据库应用的漏洞、授权、输入校验等。","note":"课程中特别把数据库应用归在应用层理解。","priority":"frequent"},{"text":"做题法：看“防护目标”而不是措施是否都用了网络。","note":"雷击→物理，系统补丁→系统，应用漏洞→应用。","priority":"frequent"}],"source":"课件 PDF 第2—4页；转写 6.1","priority":"frequent","visual":"layers","memory":"物理看设备环境；网络看通信入侵；系统看操作系统；应用看业务程序。"},{"id":"2:0","chapter":2,"index":0,"title":"密码体制模型：明文、密文、密钥","fullTitle":"密码体制模型：明文、密文、密钥","intro":"课件第 5 页展示了发送端加密、信道传输、接收端解密的基础模型。课程强调理解参与要素，不必深入推导公式。","points":[{"text":"明文 M：发送前可直接理解的原始数据。","note":"也是加密的输入。","priority":""},{"text":"密文 C：明文经加密运算后的结果。","note":"通过通信信道传送。","priority":""},{"text":"密钥 K：控制加解密过程的重要秘密参数。","note":"加密密钥 Ke 与解密密钥 Kd 不一定相同。","priority":""},{"text":"加密：C = E(M,Ke)；解密：M = D(C,Kd)。","note":"课件以 E、D 表示算法。","priority":""},{"text":"攻击者截获密文不应轻易得到明文。","note":"依赖合适算法、密钥保密和协议配置。","priority":""},{"text":"老师认为公式了解即可，不作为本章深入计算重点。","note":"理解箭头和各名称更重要。","priority":"understand"}],"source":"课件 PDF 第5—6页；转写 6.1","priority":"","visual":"cipher-model","memory":"明文 M → 加密 E + 密钥 → 密文 C → 解密 D + 密钥 → 明文 M。"},{"id":"2:1","chapter":2,"index":1,"title":"对称加密：使用同一密钥","fullTitle":"对称加密：使用同一密钥","intro":"对称密钥体制的主要识别特征是双方共享同一秘密密钥。老师要求记住它适合加密大量数据，以及密钥分发困难。","points":[{"text":"数据加密与解密使用同一把共享密钥。","note":"又称共享密钥加密。","priority":"frequent"},{"text":"优点：加解密速度快，适合大量数据。","note":"这是课堂真题中反复出现的判断点。","priority":"must"},{"text":"难点：通信双方需要安全地获得共享密钥。","note":"称为密钥分发或密钥协商问题。","priority":"frequent"},{"text":"密钥不能直接公开给任意人。","note":"与公开的公钥区别。","priority":""},{"text":"课堂用“安全性比非对称低”作简化比较。","note":"实际安全性不能单纯按对称/非对称分类比较，取决于算法、密钥长度和使用方式。","priority":""}],"source":"课件 PDF 第5—6页；转写 6.1","priority":"frequent","visual":"symmetric","memory":"对称：同钥加解密；速度快、适合大数据；密钥共享是难点。","notice":"课堂以旧算法的位数解释“对称加密安全性较低”。这不是通用结论：现代 AES 等对称密码同样可提供很强的安全性，密钥位数不能直接与 RSA 位数比较。"},{"id":"2:2","chapter":2,"index":2,"title":"常见对称算法：DES、3DES、AES、RC5、IDEA","fullTitle":"常见对称算法：DES、3DES、AES、RC5、IDEA","intro":"课件第 5 页列举了五种常见对称加密算法，主要用于识别选择题选项，并非要求实现这些算法。","points":[{"text":"DES：经典分组密码，历史有效密钥长度为 56 位。","note":"现在不宜作为新系统加密方案。","priority":"frequent"},{"text":"3DES：把 DES 以多次处理方式组合，属于对称密码。","note":"课件示意为 EDE 的三次处理。","priority":"frequent"},{"text":"AES：现代常见分组密码算法，也是对称密码。","note":"考试最容易与 RSA 混淆。","priority":"frequent"},{"text":"RC5：对称分组密码算法。","note":"课程只要求记住分类。","priority":"understand"},{"text":"IDEA：对称密码算法，课件举出 128 位密钥。","note":"课程借 PGP 案例提到 IDEA。","priority":"understand"},{"text":"避免把“3DES 三重运算”误解为“必须是三把完全不同的密钥”。","note":"不同 3DES 方案可能有不同密钥配置。","priority":""}],"source":"课件 PDF 第5—6页；转写 6.1","priority":"","visual":"algos","memory":"对称：DES、3DES、AES、RC5、IDEA；非对称：RSA、ECC 等。"},{"id":"2:3","chapter":2,"index":3,"title":"非对称加密：公钥与私钥配对","fullTitle":"非对称加密：公钥与私钥配对","intro":"非对称密码体制为通信主体提供一对密钥：可公开的公钥和必须保护的私钥。老师明确强调其保密通信流程经常考。","points":[{"text":"每个通信主体各自拥有公钥与私钥。","note":"例如 A 有 A 公钥/A 私钥，B 有 B 公钥/B 私钥。","priority":"must"},{"text":"公钥可以公开，私钥必须安全保存。","note":"私钥泄露将损害相关安全属性。","priority":"must"},{"text":"用于保密时：发送者使用接收者公钥加密，接收者使用自己的私钥解密。","note":"不要误写成“发送方用自己的公钥加密”。","priority":"must"},{"text":"典型算法：RSA、ECC 等；课件还提 ElGamal。","note":"课程以辨析分类为主要目的。","priority":"frequent"},{"text":"非对称运算通常开销较大，不直接用来加密全部大文件。","note":"常与对称密钥搭配使用。","priority":"frequent"}],"source":"课件 PDF 第5—6页；转写 6.1","priority":"must","visual":"asymmetric","memory":"保密通信：用接收者公钥加密 → 接收者私钥解密。"},{"id":"2:4","chapter":2,"index":4,"title":"公钥加密流程：A 向 B 保密发送","fullTitle":"公钥加密流程：A 向 B 保密发送","intro":"这类流程题核心是回答：“谁持有唯一能解密的私钥？”若希望只有 B 能解密，就应围绕 B 的密钥对设计。","points":[{"text":"① A 和 B 各自生成或持有公钥/私钥对。","note":"公钥公开、私钥自持。","priority":"must"},{"text":"② A 获取并验证 B 的公钥。","note":"实际应用中需保证公钥真实属于 B。","priority":"must"},{"text":"③ A 使用 B 公钥加密要发送的内容（或会话密钥）。","note":"课堂考试流程的关键步骤。","priority":"must"},{"text":"④ B 收到后使用 B 私钥解密。","note":"只有 B 的私钥可完成对应解密。","priority":"must"},{"text":"⑤ 不使用 A 私钥来实现“只有 B 能阅读”的保密目标。","note":"A 私钥用于 A 自身的签名操作。","priority":"frequent"}],"source":"课件 PDF 第5—6页；转写 6.1","priority":"must","visual":"asym-flow","memory":"想让 B 看懂：A 用 B 公钥加密，B 用 B 私钥解密。","examples":[{"title":"谁的公钥与私钥？","given":"甲给乙发一份应保密的信息，问甲用谁的密钥加密、乙用谁的密钥解密。","steps":["甲的目标是只有乙能解密。","乙的私钥不能公开，只有乙自己掌握。","所以甲使用乙的公钥进行加密。","乙用自己的私钥进行解密。"],"answer":"乙的公钥加密；乙的私钥解密。","warning":"题目若改为“验证甲的签名”，则密钥使用方向会变。"}]},{"id":"2:5","chapter":2,"index":5,"title":"对称与非对称：区别与使用选择","fullTitle":"对称与非对称：区别与使用选择","intro":"这两类密码不应仅背“快/慢”，还要把使用目的与密钥关系绑定起来。","points":[{"text":"密钥数量：对称双方共享同一秘密；非对称每个主体保管密钥对。","note":"最根本的结构区别。","priority":"frequent"},{"text":"数据量大：通常用对称算法处理数据本体。","note":"效率高。","priority":"must"},{"text":"密钥分发与身份相关任务：适当使用公钥密码和证书。","note":"典型为混合加密和 PKI。","priority":"frequent"},{"text":"实现机密性不意味着自动实现身份认证、完整性或不可抵赖性。","note":"要按需求补充完整性认证或签名。","priority":""},{"text":"实际系统通常采用结合方式，避免把两者理解为二选一。","note":"例如后续“数字信封”。","priority":""}],"source":"课件 PDF 第5—6页；转写 6.1","priority":"","visual":"crypto-compare","memory":"对称负责大量数据；公钥密码解决密钥保护/交换和签名等配套问题。"},{"id":"2:6","chapter":2,"index":6,"title":"数字信封：加密数据与保护密钥","fullTitle":"数字信封：加密数据与保护密钥","intro":"数字信封利用对称密码加密数据，再使用接收方公钥加密对称密钥。这是老师用来串联两类加密方法的扩展。","points":[{"text":"第 1 步：生成一次性或会话对称密钥 K。","note":"会话密钥主要用于当前消息。","priority":"understand"},{"text":"第 2 步：用 K 对消息正文做对称加密。","note":"适合大数据量。","priority":"understand"},{"text":"第 3 步：用 B 的公钥加密 K，构成给 B 的“密钥信封”。","note":"避免裸传对称密钥。","priority":"understand"},{"text":"第 4 步：B 用自己的私钥解开 K，再用 K 解开密文。","note":"密钥解包与数据解密分两步。","priority":"understand"},{"text":"数字信封主要关注保密和密钥传递，不可直接等同于数字签名。","note":"还需要校验消息来源与完整性。","priority":"frequent"}],"source":"课件 PDF 第5—6页；转写 6.1","priority":"","visual":"envelope","memory":"数据用对称密钥加密；对称密钥用接收方公钥加密。"},{"id":"3:0","chapter":3,"index":0,"title":"信息摘要与哈希函数","fullTitle":"信息摘要与哈希函数","intro":"信息摘要通过哈希算法把任意长度数据映射为固定长度结果。老师主要从“检测内容是否改变”解释其作用。","points":[{"text":"哈希函数 H：消息 M → 摘要 h=H(M)。","note":"摘要通常比消息短且长度固定。","priority":"frequent"},{"text":"同一内容、同一算法会得到相同摘要。","note":"利于重复计算比对。","priority":""},{"text":"内容发生改变时，摘要通常随之改变。","note":"密码学设计追求强抗碰撞能力，但理论上不同输入也可能同摘要。","priority":"frequent"},{"text":"典型应用：文件完整性核对、数字签名所需的消息摘要。","note":"后者通常在摘要上签名。","priority":"frequent"},{"text":"摘要不是加密：通常不需要“解密摘要”还原原文。","note":"不可逆压缩性质与保密不同。","priority":"frequent"},{"text":"简单附带一个无认证摘要并不能证明来源可信。","note":"攻击者可同时篡改消息和摘要。","priority":""}],"source":"课件 PDF 第7—9页；转写 6.1","priority":"frequent","visual":"hash","memory":"摘要：固定长度、便于验改；不等于加密，也不天然保证来源身份。"},{"id":"3:1","chapter":3,"index":1,"title":"MD5、SHA-1 与摘要算法分类","fullTitle":"MD5、SHA-1 与摘要算法分类","intro":"课件第 7 页以 MD5 和 SHA-1 为典型摘要算法，讲解它们的摘要位数。考试识别时注意它们与加密算法的区别。","points":[{"text":"MD5：输出 128 位摘要。","note":"课件历史知识点；现代密码安全需求中不宜再选作抗碰撞摘要。","priority":"frequent"},{"text":"SHA-1：输出 160 位摘要。","note":"同样存在碰撞安全问题，不宜用于新的数字签名方案。","priority":"frequent"},{"text":"SHA-256 等是现代常见摘要算法示例。","note":"这是现行技术补充，不是老师该段课程的强调对象。","priority":"understand"},{"text":"摘要位数和数据明文长度不是一一对应关系。","note":"大文件也能得到固定长度摘要。","priority":""},{"text":"“输入改变一位，摘要绝对不可能相同”是课堂便于理解的简化说法。","note":"数学上有限摘要空间必然可能发生碰撞。","priority":""}],"source":"课件 PDF 第7—9页；转写 6.1","priority":"","visual":"hash-algos","memory":"MD5=128 bit；SHA-1=160 bit；都是摘要算法，不是对称加密。","notice":"本课列举 MD5、SHA-1 供考试概念识别。它们已不适合新的抗碰撞安全场景；不能把课程示例当作安全工程选型建议。"},{"id":"3:2","chapter":3,"index":2,"title":"数字签名：作用与基本步骤","fullTitle":"数字签名：作用与基本步骤","intro":"数字签名与加密的使用方向不同。签名使用发送者自己的私钥；验证使用发送者的公钥。","points":[{"text":"签名目标：验证签名者来源、检测内容改动，并支持不可抵赖性。","note":"前提是私钥安全、身份和公钥得到正确绑定。","priority":"must"},{"text":"发送方 A：先对消息算摘要，再用 A 私钥对摘要进行签名。","note":"老师在 6.2 的 PGP 串讲中补充“主要对摘要签名”。","priority":"must"},{"text":"接收方 B：用 A 公钥验证签名，并对收到的消息重新算摘要。","note":"重点是验证签名与消息是否匹配。","priority":"must"},{"text":"数字签名本身不负责把原始消息内容保密。","note":"需要保密时另外使用加密。","priority":"must"},{"text":"不要误写成“B 的私钥用于验证 A 的签名”。","note":"私钥的所有者要和发送者一致。","priority":"frequent"}],"source":"课件 PDF 第7—9页；转写 6.1","priority":"must","visual":"signature","memory":"签名：发送方私钥签；验签：发送方公钥验；不等于内容加密。","examples":[{"title":"甲的签名，乙如何验证？","given":"甲向乙发送消息和数字签名；问乙使用谁的公钥。","steps":["谁做签名？甲。","签名基于甲自己的私钥。","对应验签使用甲的公钥。","乙重新对消息计算摘要并完成签名验证。"],"answer":"使用甲的公钥验签。","warning":"如果问题要求“保证乙才能读”，则应改为用乙公钥加密。"}]},{"id":"3:3","chapter":3,"index":3,"title":"加密、摘要、签名三者对比","fullTitle":"加密、摘要、签名三者对比","intro":"最常见的混淆是把“保护机密性”和“验证来源或内容完整性”当成一回事。这一节把目的、方法、结果放在一张表里。","points":[{"text":"对称/公钥加密：主要用于保密性。","note":"未经授权者不应读懂明文。","priority":"must"},{"text":"哈希摘要：主要用于辅助完整性检验。","note":"反映内容的特征，不单独提供身份认证。","priority":"frequent"},{"text":"数字签名：用于来源认证、完整性验证、不可抵赖。","note":"不直接实现密文保密。","priority":"must"},{"text":"数字证书：绑定主体身份与公钥。","note":"保证验签或加密使用的公钥归属可验证。","priority":"frequent"},{"text":"实际安全通信经常把多种技术组合。","note":"单一技术通常只覆盖部分安全目标。","priority":""}],"source":"课件 PDF 第7—9页；转写 6.1","priority":"must","visual":"securitytools","memory":"加密保密；摘要验改；签名验人+验改+不可抵赖；证书绑定人和公钥。"},{"id":"3:4","chapter":3,"index":4,"title":"PKI：公钥基础设施","fullTitle":"PKI：公钥基础设施","intro":"PKI（Public Key Infrastructure）是围绕公钥、数字证书、信任链和认证管理建立的安全支撑体系。老师要求理解基本概念。","points":[{"text":"PKI 基于公钥密码体制提供身份认证等安全基础服务。","note":"属于安全基础设施，不是单个加密算法。","priority":"frequent"},{"text":"数字证书用于把一个实体（网站、组织、用户）和相应公钥联系起来。","note":"课件将“绑定公钥与身份”列为核心。","priority":"must"},{"text":"CA（证书颁发机构）：对证书签名并承担证书签发职责。","note":"老师用“驾照发证机构”类比。","priority":"frequent"},{"text":"证书可包含公钥、主体标识、签发者、有效期、序列号、签名算法等。","note":"通常不会公开持有者私钥。","priority":"frequent"},{"text":"证书有效性还涉及信任链、有效期、用途、撤销状态等。","note":"这是现代验证时需要注意的边界；课件主要说明 CA 签名。","priority":"understand"}],"source":"课件 PDF 第7—9页；转写 6.1","priority":"frequent","visual":"pki","memory":"数字证书绑定“谁”与“哪把公钥”；CA 负责签发与可信验证。"},{"id":"3:5","chapter":3,"index":5,"title":"数字证书：驾照类比与验证","fullTitle":"数字证书：驾照类比与验证","intro":"老师使用“驾驶人—驾驶证—签发机关”的三方类比，帮助理解证书证明公钥归属。考试主要识别证书/CA/公钥作用。","points":[{"text":"现实类比：人 ↔ 驾照 ↔ 发证机关。","note":"驾照由权威机构签发并对应特定人。","priority":""},{"text":"PKI 对应：主体 ↔ 数字证书 ↔ CA。","note":"证书包含主体信息与公钥。","priority":"frequent"},{"text":"CA 数字签名用于证明证书来源及其内容未被非法改变。","note":"验证时使用可信 CA 相关公钥。","priority":"frequent"},{"text":"验证通过不代表“任何连接到该主体的应用都绝对安全”。","note":"证书解决的是部分身份与密钥真实性问题。","priority":""},{"text":"私钥不放进公开证书，不向他人分享。","note":"题目若出现“证书公开包含私钥”，一般是错误选项。","priority":"must"}],"source":"课件 PDF 第7—9页；转写 6.1","priority":"","visual":"certificate","memory":"主体—证书—CA ≈ 人—驾照—发证机关；证书可公开，私钥不公开。"},{"id":"3:6","chapter":3,"index":6,"title":"综合示例：安全邮件的混合保护","fullTitle":"综合示例：安全邮件的混合保护","intro":"课堂用 PGP 示意图把摘要、签名、对称加密和数字信封串联起来；老师明确定位为扩展，用于建立整体理解。","points":[{"text":"① 发送方计算消息摘要，并用自己的私钥生成签名。","note":"来源认证与完整性机制。","priority":"understand"},{"text":"② 把消息和签名打包，再用临时对称密钥加密。","note":"消息本体通过高效对称加密处理。","priority":"understand"},{"text":"③ 用接收者公钥保护临时对称密钥。","note":"构成数字信封。","priority":"understand"},{"text":"④ 接收者用私钥取出会话密钥，再解密消息和签名。","note":"恢复原始消息内容。","priority":"understand"},{"text":"⑤ 用发送者公钥验签，并核对收到的消息。","note":"验证签名与消息匹配。","priority":"understand"},{"text":"这只是课程示意，不表示全部 PGP 版本都固定使用 MD5 或 IDEA。","note":"算法具体组合与版本有关。","priority":""}],"source":"课件 PDF 第7—9页；转写 6.1","priority":"","visual":"mailflow","memory":"先签名、再对称加密正文、再用接收方公钥保护密钥；接收方反向处理。","notice":"老师在综合串讲中把数字签名附加值称作“MAC”，并用“私钥加密”解释签名。标准密码学里消息认证码 MAC 与数字签名不同；本知识库按“签名”表述，避免混淆。"},{"id":"4:0","chapter":4,"index":0,"title":"防火墙：内外网边界控制","fullTitle":"防火墙：内外网边界控制","intro":"课件第 9 页把防火墙比作隔离内外网的“大门”。老师指出这是网络安全技术中最重要的概念之一。","points":[{"text":"防火墙：按安全规则控制可信网络与不可信网络之间的通信。","note":"题干出现“进出内网的数据包是否允许”优先想到防火墙。","priority":"must"},{"text":"它可以按地址、端口、连接状态、应用特征等匹配规则。","note":"具体能力取决于设备与方案。","priority":""},{"text":"作用：阻止不允许的连接或流量穿越安全边界。","note":"不是保证系统内部绝对安全。","priority":"frequent"},{"text":"老师以“门卫/大门”比喻其边界控制作用。","note":"这个比喻适合记忆与做题。","priority":"frequent"},{"text":"防火墙不能替代身份权限管理、终端防护、补丁与日志审计。","note":"安全通常要多层防护。","priority":""}],"source":"课件 PDF 第9—10页；转写 6.2","priority":"must","visual":"firewall","memory":"防火墙像门卫：重点是按规则控制内外网络的进出。"},{"id":"4:1","chapter":4,"index":1,"title":"网络级与应用级防火墙","fullTitle":"网络级与应用级防火墙","intro":"老师把防火墙简要分为网络级和应用级两类，主要要求理解层级和检测粒度，而不是深入实现。","points":[{"text":"网络级防火墙：侧重网络层/传输层地址、协议、端口等信息。","note":"通常规则简单、处理开销相对较小。","priority":"understand"},{"text":"应用级防火墙：深入应用协议、请求和内容信息。","note":"可以针对具体应用行为处理。","priority":"understand"},{"text":"课堂用“低层快、高层检查细”概括差异。","note":"实际性能和安全效果还取决于产品与部署。","priority":"understand"},{"text":"题目若强调“过滤进出网络的数据包”，通常首先对应防火墙。","note":"老师真题解析的主要判断法。","priority":"frequent"},{"text":"应用级检查不是无条件“绝对更安全”。","note":"需要配合规则、更新、部署。","priority":""}],"source":"课件 PDF 第9—10页；转写 6.2","priority":"","visual":"firewall-levels","memory":"网络级看通信元信息；应用级能理解更多应用请求内容。"},{"id":"4:2","chapter":4,"index":2,"title":"入侵检测系统 IDS：监控与告警","fullTitle":"入侵检测系统 IDS：监控与告警","intro":"老师把 IDS 比作“摄像头”：采集并分析可疑流量或行为，检测到异常后报警，而不是默认自己执行封堵。","points":[{"text":"IDS = Intrusion Detection System，入侵检测系统。","note":"D 是 Detection（检测）。","priority":"frequent"},{"text":"典型职责：监控、分析、发现异常、报告或报警。","note":"课堂强调的四步。","priority":"frequent"},{"text":"传统被动 IDS 一般不在网络数据转发的必经路径上主动阻断。","note":"可以通过镜像端口/探针获得流量。","priority":"frequent"},{"text":"部署点通常靠近重要资源或网络入口，以保证观察到相关流量。","note":"部署方式随保护目标变化。","priority":"understand"},{"text":"检测手段可以包含特征规则和异常检测。","note":"课程将其形容为带知识库的监控。","priority":""},{"text":"老师特别要求记住缩写 IDS 和“摄像头”比喻。","note":"与 IPS 对照。","priority":"frequent"}],"source":"课件 PDF 第9—10页；转写 6.2","priority":"frequent","visual":"ids","memory":"IDS 像摄像头：看见异常 → 分析 → 报警。"},{"id":"4:3","chapter":4,"index":3,"title":"入侵防御系统 IPS：检测并阻断","fullTitle":"入侵防御系统 IPS：检测并阻断","intro":"老师以“机关”比喻 IPS：发现某种攻击后还能主动阻断。此部分他明确评价为补充知识，了解即可。","points":[{"text":"IPS = Intrusion Prevention System，入侵防御系统。","note":"P 是 Prevention（预防、防御）。","priority":"understand"},{"text":"IPS 不只检测，还可以按策略阻断可疑通信。","note":"区别于传统被动 IDS。","priority":"frequent"},{"text":"典型 IPS 可能以内联模式部署在流量路径上。","note":"必须综合考虑误报及业务中断风险。","priority":"understand"},{"text":"IDS = 摄像头；IPS = 可以触发拦截的机关。","note":"保留老师的类比帮助记忆。","priority":"understand"},{"text":"并非所有 IDS/IPS 产品只有一种部署方式或功能。","note":"这里遵循课件原理层的简化。","priority":""}],"source":"课件 PDF 第9—10页；转写 6.2","priority":"","visual":"ips","memory":"IDS 重发现告警，IPS 重主动阻断；老师认为 IPS 属扩展。"},{"id":"4:4","chapter":4,"index":4,"title":"蜜罐、杀毒与多层防护","fullTitle":"蜜罐、杀毒与多层防护","intro":"蜜罐模拟可被攻击的目标，用来观察入侵行为；杀毒软件面向恶意代码。老师在 6.2 作为补充知识简述。","points":[{"text":"蜜罐 Honeypot：构造诱饵服务或系统吸引攻击者。","note":"借此采集、分析攻击行为。","priority":"understand"},{"text":"蜜罐通常不应放任攻击者借它进一步攻击真实业务网络。","note":"隔离和监控仍必不可少。","priority":""},{"text":"杀毒/终端安全软件：发现并处理可疑恶意程序。","note":"与网络边界的防火墙职责不同。","priority":""},{"text":"防火墙关注通信边界，IDS/IPS 关注异常行为，终端防护关注主机内威胁。","note":"不同层面组合才能形成多层防护。","priority":""},{"text":"老师把蜜罐概括为“设置陷阱”，此处只需理解基本作用。","note":"非本课重点考查内容。","priority":"understand"}],"source":"课件 PDF 第9—10页；转写 6.2","priority":"","visual":"defense-stack","memory":"边界门卫=防火墙；摄像头=IDS；拦截机关=IPS；诱饵=蜜罐。"},{"id":"5:0","chapter":5,"index":0,"title":"被动攻击：窃听与流量分析","fullTitle":"被动攻击：窃听与流量分析","intro":"被动攻击倾向于观察或收集信息而不直接改变通信内容。课件把窃听、业务流分析作为典型例子。","points":[{"text":"窃听：监听通信内容，损害机密性。","note":"被动攻击的典型形式。","priority":"frequent"},{"text":"业务流/流量分析：观察谁与谁通信、时间、频率等模式。","note":"即使不理解正文，也可能分析通信特征。","priority":"frequent"},{"text":"被动攻击的核心在于秘密观察，而不是必须让对方察觉。","note":"老师用“听但不改”作记忆。","priority":""},{"text":"反例：篡改报文、假冒身份、拒绝服务通常属于主动攻击。","note":"它们会改变系统行为或通信。","priority":""},{"text":"资料把“非法登录”也列在被动侧，但其主动性依实际行为而定。","note":"严格分类时，不宜把所有非法登录无条件视为被动攻击。","priority":""}],"source":"课件 PDF 第11—12页；转写 6.2","priority":"frequent","visual":"passive","memory":"被动：听、看、分析，不改变原通信内容。","notice":"课件将某些“非法登录”情形列入被动攻击；实际安全分析更常按有无修改、伪造、干扰及目标行为来判断，不能仅凭是否被发现分类。"},{"id":"5:1","chapter":5,"index":1,"title":"主动攻击：伪装、篡改与抵赖","fullTitle":"主动攻击：伪装、篡改与抵赖","intro":"主动攻击通过修改、伪造、重放或阻断等手段影响通信与系统行为。课堂强调重放攻击和拒绝服务必须掌握。","points":[{"text":"假冒身份：攻击者冒充合法通信方。","note":"影响实体认证。","priority":"frequent"},{"text":"篡改/插入：修改、伪造或添加数据。","note":"影响完整性及业务正确性。","priority":""},{"text":"抵赖：参与者否认自己的行为。","note":"对应不可抵赖技术。","priority":""},{"text":"旁路控制：利用系统安全缺陷绕过原有访问控制。","note":"课堂例举，理解即可。","priority":"understand"},{"text":"重放攻击：截获旧报文再重新发送。","note":"老师明确说重要。","priority":"must"},{"text":"DoS 拒绝服务：占用或破坏服务资源，使合法用户难以访问。","note":"老师明确说重要。","priority":"must"}],"source":"课件 PDF 第11—12页；转写 6.2","priority":"frequent","visual":"active","memory":"主动攻击会“动手”：假冒、改包、重放、阻断。"},{"id":"5:2","chapter":5,"index":2,"title":"重放攻击：旧报文再次发送","fullTitle":"重放攻击：旧报文再次发送","intro":"重放不是一定要解出密码内容；攻击者可以把曾经有效的认证或交易报文再次发送，诱使服务端重复处理。","points":[{"text":"攻击步骤：捕获合法报文 → 保存 → 在其他时间重复发送。","note":"最典型的重放时序。","priority":"must"},{"text":"攻击效果：使旧授权/旧交易在不应该的时间再次生效。","note":"具体结果取决于协议设计。","priority":"must"},{"text":"防护：随机挑战值 nonce、序列号、一次性令牌或时间戳等机制。","note":"课程特别指出时间戳。","priority":"frequent"},{"text":"单有时间戳但没有可信校验、有效期和重复检查，未必能阻断重放。","note":"这是对老师简化说法的实践补充。","priority":""},{"text":"考试关键词：“先截获已发送报文，再重复发送”＝重放。","note":"课件第12页示例。","priority":"must"}],"source":"课件 PDF 第11—12页；转写 6.2","priority":"must","visual":"replay","memory":"重放＝抓旧包，再发一遍；识别靠时效/唯一性/状态校验。","notice":"课堂把“加一个时间戳”说成能够解决重放问题，并称重放已基本消失。这只是概念化说明：时间戳需认证且配合重放窗口等校验，现实中重放攻击仍可能出现。","examples":[{"title":"判断攻击类型","given":"攻击者发送一个目的主机已经接收过的报文，以获得不应有的效果。","steps":["题干强调“已经接收过的报文”。","攻击者不是单纯观察，也不是修改后发送。","关键行为是重复提交旧报文。"],"answer":"重放攻击。","warning":"反重放应设计报文唯一性或有效期验证，不能只依赖内容加密。"}]},{"id":"5:3","chapter":5,"index":3,"title":"拒绝服务 DoS 与可用性","fullTitle":"拒绝服务 DoS 与可用性","intro":"DoS 的主要目标是让合法用户无法获得服务。老师以服务端请求过多而崩溃作形象解释，但应注意“访问量大”不必然就是攻击。","points":[{"text":"DoS = Denial of Service，拒绝服务攻击。","note":"目的在于损害服务可用性。","priority":"must"},{"text":"常见方式：耗尽计算、连接、带宽等资源，使合法请求无法正常完成。","note":"资源耗尽只是常见路径之一。","priority":"must"},{"text":"DDoS：来自多个来源的分布式拒绝服务攻击。","note":"属于拓展的经典术语。","priority":"understand"},{"text":"检测关键词：“合法用户无法访问”“服务资源被恶意占用”。","note":"课件将其列为必须掌握。","priority":"must"},{"text":"正常高并发（如抢票）造成拥塞是故障，不应自动等同于恶意 DoS。","note":"攻击需要具有恶意或违规流量等判据。","priority":""}],"source":"课件 PDF 第11—12页；转写 6.2","priority":"must","visual":"dos","memory":"DoS 主要破坏 A（Availability，可用性）；正常流量高峰不自动算攻击。"},{"id":"5:4","chapter":5,"index":4,"title":"计算机病毒：自我复制与危害","fullTitle":"计算机病毒：自我复制与危害","intro":"课程定义病毒为能自我复制、传播并可能损害计算机功能和数据的一类程序指令或代码。","points":[{"text":"病毒本质是恶意程序代码，不是物理生物病毒。","note":"考试常识题。","priority":"frequent"},{"text":"传播/自我复制能力是课件强调的重要特征。","note":"包括感染其他程序或载体等。","priority":"frequent"},{"text":"典型特征：传染性、隐蔽性、潜伏性、触发性和破坏性。","note":"不同病毒并不总同时表现全部特征。","priority":"frequent"},{"text":"课件真题辨析：“自毁性”不是常用的基本必备特征。","note":"按题干原选项理解。","priority":"frequent"},{"text":"课程举“熊猫烧香”等历史案例帮助理解。","note":"不必背诵大量病毒名称。","priority":"understand"}],"source":"课件 PDF 第11—12页；转写 6.2","priority":"","visual":"virus","memory":"病毒是程序代码；抓关键词“自我复制、感染传播”。"},{"id":"5:5","chapter":5,"index":5,"title":"木马、后门与病毒的区别","fullTitle":"木马、后门与病毒的区别","intro":"课堂用“病毒主动破坏、木马暗中监控”概括差别，主要帮助识别木马的伪装和后门作用。","points":[{"text":"木马 Trojan：伪装成正常程序或利用诱导执行，在受害机器上实施未授权行为。","note":"常见与窃取信息、后门控制相关。","priority":"frequent"},{"text":"病毒通常强调感染传播或自我复制。","note":"与木马的典型传播机制不同。","priority":"frequent"},{"text":"木马并非只能监听，也可能删除文件、加密数据或下载其他恶意程序。","note":"不能把“不会破坏系统”当通用规则。","priority":""},{"text":"后门：绕过正常授权机制的隐蔽访问入口。","note":"木马可能安装后门，但两者不是同义词。","priority":""},{"text":"防护：不运行不明来源程序，保持更新，配合终端检测与最小权限。","note":"依据原理延伸的实践提示。","priority":""}],"source":"课件 PDF 第11—12页；转写 6.2","priority":"","visual":"trojan","memory":"病毒典型特征是感染复制；木马典型特征是伪装诱导与未授权控制。","notice":"老师把木马描述为“不主动破坏，只监控”。这是备考类比而非严格定义：木马同样可能执行破坏行为。"},{"id":"5:6","chapter":5,"index":6,"title":"网络威胁速辨：考题关键词","fullTitle":"网络威胁速辨：考题关键词","intro":"把课件里容易混淆的威胁放到同一张对照表，从“行为”和“损害的安全属性”两步判断。","points":[{"text":"窃听：未授权获取通信内容 → 保密性。","note":"通常是被动攻击。","priority":"frequent"},{"text":"流量分析：分析通信模式 → 泄露通信关系/行为信息。","note":"通常是被动攻击。","priority":"frequent"},{"text":"身份假冒：冒用他人身份 → 认证真实性。","note":"通常是主动攻击。","priority":"frequent"},{"text":"篡改消息：修改数据 → 完整性。","note":"主动攻击。","priority":"frequent"},{"text":"重放旧报文：重复发送合法旧消息 → 重放攻击。","note":"主动攻击。","priority":"must"},{"text":"使服务不可用：DoS/DDoS → 可用性。","note":"主动攻击。","priority":"must"}],"source":"课件 PDF 第11—12页；转写 6.2","priority":"frequent","visual":"threattable","memory":"先识别动作，再看受损属性；重放看“旧报文”，DoS 看“用不了”。"},{"id":"6:0","chapter":6,"index":0,"title":"协议总览：按网络层次与业务目标辨析","fullTitle":"协议总览：按网络层次与业务目标辨析","intro":"课件第 12 页把常见安全协议放在 OSI 模型上。老师说以“属于哪类、用于哪里”为主，不需要深入内部协议流程。","points":[{"text":"物理层：物理隔离、屏蔽、设备保护等手段。","note":"并非主要使用应用协议。","priority":"understand"},{"text":"数据链路侧：隧道或链路保护方案示例 PPTP、L2TP。","note":"要注意它们本身不必然表示数据已被强加密。","priority":"understand"},{"text":"网络层：IPsec。","note":"常用于网络层安全通信。","priority":"understand"},{"text":"与传输安全相关：SSL/TLS。","note":"课程用 SSL 与 HTTPS 举例。","priority":"frequent"},{"text":"应用场景：HTTPS 网页访问、SSH 安全远程登录、SET 支付、PGP/S/MIME 安全邮件。","note":"题目常考协议与用途匹配。","priority":"frequent"},{"text":"协议位置图是课堂帮助分类的简化示意，并非严格的一协议只属于单层。","note":"例如 TLS 运行在传输协议之上，为应用流量提供保护。","priority":""}],"source":"课件 PDF 第12—14页；转写 6.2","priority":"","visual":"protocol-map","memory":"IPsec 保护 IP 层；TLS 支撑 HTTPS；SSH 远程登录；PGP/S/MIME 安全邮件。"},{"id":"6:1","chapter":6,"index":1,"title":"SSL / TLS 与 HTTPS","fullTitle":"SSL / TLS 与 HTTPS","intro":"老师重点提到 HTTPS 用于安全网页传输，要求记住 HTTPS 通常使用 443 端口。SSL 是课件旧称，现代实现以 TLS 为主。","points":[{"text":"HTTP：常见明文网页传输协议，默认端口 80。","note":"老师明确要求记住端口。","priority":"must"},{"text":"HTTPS：HTTP 通过 TLS 安全通道传输，默认端口 443。","note":"课程将它表述为 HTTP + SSL。","priority":"must"},{"text":"TLS：现代安全传输协议，用于身份验证与保护传输数据机密性、完整性。","note":"课程用 SSL/TLS 的旧式分层图说明。","priority":"frequent"},{"text":"SSL 是历史协议名称；现代实际部署主要使用 TLS。","note":"考试老题可能继续使用 SSL 表述。","priority":""},{"text":"HTTPS 并不保证站点业务绝对可信，不等于网站没有漏洞。","note":"它主要保护客户端与服务器之间的传输通道。","priority":""}],"source":"课件 PDF 第12—14页；转写 6.2","priority":"frequent","visual":"https","memory":"HTTP=80；HTTPS=443；HTTPS 现在主要靠 TLS 安全传输。","notice":"旧课件说“HTTPS 就是 HTTP+SSL”。这是历史教学说法；今天通常称为 HTTP over TLS，旧版 SSL 已淘汰。"},{"id":"6:2","chapter":6,"index":2,"title":"SSH：安全远程管理","fullTitle":"SSH：安全远程管理","intro":"SSH 用于加密远程登录和命令行会话。老师的典型题是“管理员远程配置路由器，需保护账号密码与操作内容”。","points":[{"text":"SSH = Secure Shell，用于安全远程交互与管理。","note":"与 Telnet 的明文传输形成对照。","priority":"must"},{"text":"使用 SSH 可保护远程登录凭据与会话传输。","note":"老师明确给出相关选择题。","priority":"must"},{"text":"SSH 也可承载安全文件传输，如 SFTP。","note":"具体功能取决于部署。","priority":"understand"},{"text":"SSH 通常默认使用 TCP 22 端口。","note":"这是一般网络常识补充，原课件的主要考点是协议用途。","priority":""},{"text":"题目关键词：命令行管理远端设备/路由器、保护会话内容 → SSH。","note":"课程直接强调。","priority":"must"}],"source":"课件 PDF 第12—14页；转写 6.2","priority":"must","visual":"ssh","memory":"远程命令行管理要保密，选 SSH；网页 HTTPS 不是 SSH。"},{"id":"6:3","chapter":6,"index":3,"title":"IPsec：网络层安全通信","fullTitle":"IPsec：网络层安全通信","intro":"IPsec 是在 IP 层保护通信的协议套件，课件将它放在网络层并要求了解。","points":[{"text":"IPsec 面向网络层的安全传输。","note":"课件在协议层次总览中列出。","priority":"understand"},{"text":"主要可提供数据保密、完整性验证等功能。","note":"取决于配置和工作模式。","priority":"understand"},{"text":"常与 VPN 场景联系。","note":"属于理解用途的补充，而非老师要求深入实现。","priority":""},{"text":"不要把 IPsec 与 HTTPS 的应用场景和层次完全混同。","note":"前者以 IP 层为保护对象，后者保护 HTTP 通信。","priority":""}],"source":"课件 PDF 第12—14页；转写 6.2","priority":"","visual":"ipsec","memory":"IPsec = IP 网络层安全；了解与 VPN 的常见关联即可。"},{"id":"6:4","chapter":6,"index":4,"title":"SET：安全电子交易协议","fullTitle":"SET：安全电子交易协议","intro":"SET 是早期围绕电子商务卡支付安全设计的协议。老师在课件第 13 页介绍它涉及多方认证与支付信息保护，了解场景即可。","points":[{"text":"SET = Secure Electronic Transaction，安全电子交易协议。","note":"课件翻译与应用场景。","priority":"understand"},{"text":"设计目标是保护网上银行卡/信用卡支付交易。","note":"B2C 场景是老师主要举例。","priority":"understand"},{"text":"涉及持卡人、商户、银行、支付机构、认证机构等多方。","note":"协议结构较复杂。","priority":""},{"text":"不要将 SET 误记成一般网页 HTTPS 或邮件协议。","note":"考试更可能考定义匹配。","priority":""},{"text":"SET 属历史技术知识点，不代表当今电子支付普遍仍采用它。","note":"与今天的实际部署应分开看待。","priority":""}],"source":"课件 PDF 第12—14页；转写 6.2","priority":"","visual":"set","memory":"SET 看“电子交易/卡支付”，了解用途即可。"},{"id":"6:5","chapter":6,"index":5,"title":"Kerberos：第三方票据认证","fullTitle":"Kerberos：第三方票据认证","intro":"老师在 6.2 中把 Kerberos 描述为基于可信第三方的身份认证机制，核心是使用票据完成网络服务认证。","points":[{"text":"Kerberos 是网络身份认证协议。","note":"不是公钥证书机构本身。","priority":"understand"},{"text":"以可信认证中心/密钥分发中心 KDC 及票据为核心。","note":"KDC = Key Distribution Center。","priority":"frequent"},{"text":"客户端获取可用于访问服务的票据，再向服务方出示。","note":"有助于理解为什么不是直接每次发送密码。","priority":"understand"},{"text":"PKI 侧重 CA 证书与公钥绑定；Kerberos 侧重 KDC 与票据。","note":"课程第三方认证真题辨析的关键。","priority":"frequent"},{"text":"不能把 KDC 写成 PKI 数字证书的存储服务器。","note":"老师明确指出此类错项。","priority":"frequent"}],"source":"课件 PDF 第12—14页；转写 6.2","priority":"","visual":"kerberos","memory":"Kerberos：KDC 发票据；PKI：CA 签发数字证书。"},{"id":"6:6","chapter":6,"index":6,"title":"PGP：安全电子邮件与混合技术","fullTitle":"PGP：安全电子邮件与混合技术","intro":"PGP 是安全邮件保护方案，老师虽然花了较多时间解释，但明确说它的详细流程不是本课考试重点，主要用于串联已学技术。","points":[{"text":"PGP：Pretty Good Privacy，提供邮件加密与签名等能力。","note":"课件以此作为综合技术示例。","priority":"understand"},{"text":"可以综合对称加密、公钥密码、摘要和数字签名技术。","note":"课件示意采用 IDEA、RSA、MD5 等历史算法组合。","priority":"understand"},{"text":"邮件内容加密适合用对称密钥，密钥再由收件人公钥保护。","note":"数字信封思路。","priority":"understand"},{"text":"发送方以自身私钥签名，收件方以发送者公钥验签。","note":"综合流程中的签名部分。","priority":"frequent"},{"text":"老师明确表示详细邮件流程属于扩展，不必深究。","note":"但懂这个例子能串起前面概念。","priority":"understand"}],"source":"课件 PDF 第12—14页；转写 6.2","priority":"","visual":"pgp","memory":"PGP：邮件安全；混合加密 + 摘要 + 签名。"},{"id":"6:7","chapter":6,"index":7,"title":"S/MIME 与安全邮件协议辨析","fullTitle":"S/MIME 与安全邮件协议辨析","intro":"课件最后一页将 S/MIME 作为安全电子邮件服务选项，同时强调 MIME 本身不是加密与签名安全方案。","points":[{"text":"MIME：多用途互联网邮件扩展，用于扩展邮件内容类型。","note":"本身不等于提供邮件的安全加密。","priority":"understand"},{"text":"S/MIME：安全多用途互联网邮件扩展，提供邮件加密/签名支持。","note":"课件真题选择答案。","priority":"frequent"},{"text":"PGP 也是安全邮件相关技术。","note":"与 S/MIME 的具体实现和信任模型可以不同。","priority":""},{"text":"HTTPS 用于 Web，SET 用于历史电子交易，S/MIME 和 PGP 用于邮件。","note":"凭服务场景识别即可。","priority":"frequent"},{"text":"老师建议协议部分主要“看得懂名词、能与用途对应”。","note":"无需按信息安全工程师深度学习。","priority":"understand"}],"source":"课件 PDF 第12—14页；转写 6.2","priority":"","visual":"securemail","memory":"安全电子邮件选 PGP 或 S/MIME；MIME 只扩展内容格式。"},{"id":"6:8","chapter":6,"index":8,"title":"安全协议选择：一张总对照","fullTitle":"安全协议选择：一张总对照","intro":"最后把常见协议按网络层次和应用业务汇总，便于考前快速定位选择题关键词。","points":[{"text":"HTTPS/TLS：Web 安全传输；HTTPS 默认 443。","note":"HTTP 默认 80。","priority":"must"},{"text":"SSH：安全远程登录和管理。","note":"题干出现命令行管理设备优先联想。","priority":"must"},{"text":"IPsec：网络层通信安全。","note":"课件要求了解。","priority":"understand"},{"text":"Kerberos：KDC 与票据身份认证。","note":"与 CA 证书体制区分。","priority":"frequent"},{"text":"SET：历史电子交易/信用卡支付协议。","note":"场景辨析为主。","priority":"understand"},{"text":"PGP / S/MIME：安全电子邮件。","note":"用于加密和签名等能力。","priority":"frequent"}],"source":"课件 PDF 第12—14页；转写 6.2","priority":"frequent","visual":"protocol-table","memory":"Web HTTPS；远程管理 SSH；网络层 IPsec；认证票据 Kerberos；邮件 PGP/S/MIME。"}],"quizzes":[{"chapter":1,"topic":"1:0","question":"课件中“信息系统安全”与“信息安全”的关系，哪项更准确？","options":["前者只看加密","前者还涉及设备和运行环境等整体系统","后者仅指机房设备","两者都不涉及网络"],"answer":1,"explain":"信息安全关注信息属性；信息系统安全还要考虑承载信息的系统与环境。"},{"chapter":1,"topic":"1:1","question":"安全空间三维模型中，课件 X、Y、Z 三轴依次是？","options":["安全机制、网络层次、安全服务","用户、数据、设备","物理层、网络层、应用层","身份、内容、时钟"],"answer":0,"explain":"X=安全机制；Y=OSI 网络层次；Z=安全服务。"},{"chapter":1,"topic":"1:2","question":"下列哪项不属于课堂强调的“安全空间五属性”？","options":["认证","权限","完整","吞吐量"],"answer":3,"explain":"课件的五属性是认证、权限、完整、加密、不可否认。"},{"chapter":1,"topic":"1:3","question":"信息安全 CIA 三要素的 A 指的是？","options":["匿名性","可用性","授权性","算法性"],"answer":1,"explain":"CIA = Confidentiality 保密性、Integrity 完整性、Availability 可用性。"},{"chapter":1,"topic":"1:3","question":"未经授权者读取了员工隐私资料，首先破坏了？","options":["保密性","完整性","可用性","可靠性"],"answer":0,"explain":"信息被未授权主体读取，属于保密性问题。"},{"chapter":1,"topic":"1:3","question":"攻击者修改了传输中的电子合同金额，首先破坏了？","options":["可用性","保密性","完整性","吞吐量"],"answer":2,"explain":"信息未经授权被修改，属于完整性问题。"},{"chapter":1,"topic":"1:4","question":"数据库账号只需查看报表，却被授予删除所有表的权限，违背了？","options":["非对称加密","最小授权","哈希算法","分时调度"],"answer":1,"explain":"最小授权要求只授予完成工作所需权限。"},{"chapter":1,"topic":"1:5","question":"为了检测文件内容是否被意外改变，可使用哪类技术生成内容特征值？","options":["地址转换","哈希摘要","路由聚合","磁盘分区"],"answer":1,"explain":"哈希摘要便于对文件内容进行一致性比较。"},{"chapter":1,"topic":"1:6","question":"授权用户需要访问业务系统时一直无法打开，该现象直接影响？","options":["可用性","密码复杂度","数据结构","数字证书格式"],"answer":0,"explain":"可用性关注需要时能否正常获得服务。"},{"chapter":1,"topic":"1:7","question":"给服务器机房增加防雷与备用电源，主要针对哪一类安全需求？","options":["应用安全","网络安全","物理线路安全","SQL 安全"],"answer":2,"explain":"设备及其物理环境保护归于物理线路安全。"},{"chapter":1,"topic":"1:7","question":"给操作系统安装漏洞补丁，主要针对？","options":["系统安全","物理线路安全","应用安全","用户密码加盐"],"answer":0,"explain":"系统安全主要涉及操作系统和系统软件等。"},{"chapter":2,"topic":"2:0","question":"密码体制中，经加密后在信道中传输的数据称为？","options":["明文","密文","私钥","数字证书"],"answer":1,"explain":"明文 M 经过 E(M,Ke) 加密得到密文 C。"},{"chapter":2,"topic":"2:1","question":"对称密码的加密与解密密钥通常？","options":["每次都公开","使用同一共享秘密","总是从 CA 下载","必须分别由两个人拥有"],"answer":1,"explain":"对称加密使用共享的秘密密钥。"},{"chapter":2,"topic":"2:1","question":"处理大量数据的高效加密，课堂更推荐哪类算法？","options":["对称加密","手工数字签名","数字证书查询","哈希编码"],"answer":0,"explain":"对称加密计算效率高，适合加密大量数据。"},{"chapter":2,"topic":"2:2","question":"哪一组都属于课件列出的对称密码算法？","options":["AES、DES、3DES","RSA、ECC、DES","SHA-1、MD5、AES","Kerberos、SET、AES"],"answer":0,"explain":"DES、3DES、AES 属于对称密码；RSA/ECC 属公钥算法；MD5/SHA-1 属哈希摘要。"},{"chapter":2,"topic":"2:3","question":"非对称密码体系中，以下哪项需要保密保存？","options":["公钥","私钥","公开算法名称","数字证书中的主体名称"],"answer":1,"explain":"私钥必须安全保护，公钥可以发布。"},{"chapter":2,"topic":"2:4","question":"A 希望只有 B 能读懂消息，A 应优先使用哪把钥加密？","options":["A 的公钥","A 的私钥","B 的公钥","B 的私钥"],"answer":2,"explain":"保密通信使用接收者 B 的公钥加密，B 用自己的私钥解密。"},{"chapter":2,"topic":"2:4","question":"B 收到 A 发来的 B 公钥加密的密文，应由谁使用哪把钥解密？","options":["A 用 A 私钥","B 用 B 私钥","A 用 B 公钥","任何人用 B 公钥"],"answer":1,"explain":"只有与 B 公钥配对的 B 私钥可解密。"},{"chapter":2,"topic":"2:5","question":"以下说法哪项正确？","options":["公钥加密一定比 AES 运算快","数据保密性与签名不可抵赖性完全等价","对称密码适合大量数据，公钥密码可辅助保护会话密钥","哈希摘要可用原密钥解密"],"answer":2,"explain":"混合加密结合对称处理数据和公钥密码保护密钥的特点。"},{"chapter":2,"topic":"2:6","question":"数字信封里用于加密大段数据本体的通常是？","options":["对称会话密钥","CA 私钥","签发机构序列号","存储设备口令"],"answer":0,"explain":"数字信封用对称密钥加密数据，接收方公钥加密这个密钥。"},{"chapter":2,"topic":"2:6","question":"数字信封如何把会话密钥安全交给接收方 B？","options":["明文公开会话密钥","用 B 的公钥加密会话密钥","用 A 的公钥加密整个数据库","用 B 的私钥签名后广播"],"answer":1,"explain":"对称密钥经 B 公钥加密，只有 B 私钥能解开。"},{"chapter":3,"topic":"3:0","question":"信息摘要与加密的主要区别是？","options":["摘要一定能还原原文","摘要输出通常固定长度且不可逆还原原文","摘要必须使用 CA","摘要结果只能是原文的一半"],"answer":1,"explain":"摘要为任意长度消息生成固定长度特征，不能像密文那样通过解密还原明文。"},{"chapter":3,"topic":"3:0","question":"直接发送“数据+未认证的哈希值”，为什么不能单独证明来源真实？","options":["哈希长度过长","攻击者可能同时修改数据和哈希值","哈希输出无法比较","哈希不能对文件计算"],"answer":1,"explain":"哈希能辅助发现意外修改，但无密钥或签名验证的摘要不能可靠认证来源。"},{"chapter":3,"topic":"3:1","question":"MD5 输出摘要长度为？","options":["64 位","128 位","160 位","256 位"],"answer":1,"explain":"课件列举 MD5 产生 128 位摘要。"},{"chapter":3,"topic":"3:1","question":"SHA-1 输出摘要长度为？","options":["80 位","128 位","160 位","512 位"],"answer":2,"explain":"课件列举 SHA-1 产生 160 位摘要。"},{"chapter":3,"topic":"3:1","question":"从现行安全实践看，哪项说法正确？","options":["MD5 和 SHA-1 应优先用于新签名系统","SHA-1 是非对称加密","MD5 和 SHA-1 属历史摘要算法，现代抗碰撞场景不宜继续选用","MD5 必须与 RSA 同密钥"],"answer":2,"explain":"课程考分类和位数；安全工程选型不应继续依赖 MD5/SHA-1 的抗碰撞能力。"},{"chapter":3,"topic":"3:2","question":"甲给消息做数字签名，应使用谁的哪把钥？","options":["乙的公钥","甲的公钥","甲的私钥","乙的私钥"],"answer":2,"explain":"数字签名使用签名者自己的私钥。"},{"chapter":3,"topic":"3:2","question":"乙收到甲的数字签名，乙需要什么验证签名？","options":["乙的公钥","甲的公钥","甲的私钥","乙的私钥"],"answer":1,"explain":"验签使用签名者甲的公钥。"},{"chapter":3,"topic":"3:2","question":"单独的数字签名一般不提供以下哪种能力？","options":["签名者来源验证","完整性验证","不可抵赖支持","对明文正文的机密性保护"],"answer":3,"explain":"数字签名本身不加密消息正文，机密性需额外加密措施。"},{"chapter":3,"topic":"3:3","question":"想保证内容只有指定用户可读，最直接关联哪种技术？","options":["加密","单独摘要","目录索引","数据透视"],"answer":0,"explain":"机密性主要由适当加密及权限控制提供。"},{"chapter":3,"topic":"3:3","question":"“把实体身份与公钥绑定”最典型依赖什么？","options":["数字证书","磁盘校验和","网络地址翻译","打印队列"],"answer":0,"explain":"数字证书绑定主体身份与公钥，是 PKI 中的关键对象。"},{"chapter":3,"topic":"3:4","question":"数字证书通常不会包含哪类信息？","options":["主体标识","公钥","签发者","主体私钥"],"answer":3,"explain":"私钥只应由主体安全持有，不能放入公开证书。"},{"chapter":3,"topic":"3:4","question":"PKI 中为数字证书进行签发和签名的机构是？","options":["CA","IDS","IPS","SET"],"answer":0,"explain":"CA 是证书颁发机构。"},{"chapter":3,"topic":"3:5","question":"课程用驾驶证举例，CA 对应的是？","options":["被证明的驾驶员","驾驶证签发机关","驾驶证上的照片","驾驶证使用者的密码"],"answer":1,"explain":"CA 相当于可信发证机构，为证书签发并提供可信验证基础。"},{"chapter":3,"topic":"3:6","question":"综合安全邮件示意中，用谁的私钥对消息摘要进行签名？","options":["收件方","发件方","CA 的所有私钥","邮件服务器的任意私钥"],"answer":1,"explain":"签名属于消息发送者，使用发送者私钥签。"},{"chapter":4,"topic":"4:0","question":"保护组织内外网边界，按规则允许或拒绝数据包通过的是？","options":["防火墙","文件索引","进程调度","位示图"],"answer":0,"explain":"防火墙是网络边界访问控制的典型技术。"},{"chapter":4,"topic":"4:1","question":"在网络边界进行源/目的地址和端口规则检查，最贴近？","options":["网络级防火墙","数字签名","哈希摘要","数据仓库"],"answer":0,"explain":"网络级防火墙侧重网络与传输层通信元信息。"},{"chapter":4,"topic":"4:2","question":"IDS 的主要职责是？","options":["让全部请求自动通过","监控并分析异常、告警","只管理密钥对","把邮件转换成图像"],"answer":1,"explain":"IDS 重点是检测与告警。"},{"chapter":4,"topic":"4:3","question":"与传统 IDS 相比，IPS 典型增加的能力是？","options":["自动发证书","按策略主动阻断可疑通信","把路由表转换为 SQL","实时压缩磁盘"],"answer":1,"explain":"IPS 不仅检测，还可以主动阻断。"},{"chapter":4,"topic":"4:4","question":"布设诱饵主机吸引攻击者并观察攻击行为的技术称为？","options":["蜜罐","数字信封","投影","分时调度"],"answer":0,"explain":"蜜罐是模拟受攻击目标以观察攻击行为的诱饵系统。"},{"chapter":5,"topic":"5:0","question":"不修改通信内容、只监听数据和分析流量特征，典型属于？","options":["被动攻击","拒绝服务攻击","报文重放攻击","数字签名"],"answer":0,"explain":"窃听和流量分析是典型被动攻击。"},{"chapter":5,"topic":"5:1","question":"冒充合法身份发送欺骗性通信，通常属于？","options":["被动业务流分析","主动攻击","数字摘要","冷备份"],"answer":1,"explain":"身份伪装改变交互过程，属于主动攻击。"},{"chapter":5,"topic":"5:2","question":"攻击者截获之前已经被接收的报文，再次发送给目标，属于？","options":["拒绝服务","重放攻击","流量分析","拥塞控制"],"answer":1,"explain":"重放的核心是把旧报文重新发送。"},{"chapter":5,"topic":"5:2","question":"下列何者可帮助发现或拒绝旧报文被重放？","options":["无校验的明文时间戳","随机挑战 nonce 与重放检查","仅调高显示分辨率","只改变文件名"],"answer":1,"explain":"nonce、序列号和带认证的时间戳等可帮助识别过期或重复消息。"},{"chapter":5,"topic":"5:3","question":"大量恶意请求耗尽网站资源，合法用户因此无法访问，主要损害？","options":["完整性","可用性","数据原子性","传输位序"],"answer":1,"explain":"DoS 主要破坏可用性。"},{"chapter":5,"topic":"5:3","question":"正常春运抢票高并发导致网页变慢，是否必定是 DoS 攻击？","options":["必定是","不能仅凭访问量高就认定恶意攻击","只要没有日志就是攻击","只要端口是 443 就是攻击"],"answer":1,"explain":"高负载是现象，是否为 DoS 攻击还应判断请求是否具有恶意或违规性质。"},{"chapter":5,"topic":"5:4","question":"传统计算机病毒的典型特征之一是？","options":["自我复制或感染传播","固定输出 128 位摘要","只由 CA 发放","必须使用 HTTPS 传输"],"answer":0,"explain":"病毒的典型特征是自我复制和感染传播。"},{"chapter":5,"topic":"5:5","question":"木马与传统病毒的经典区分侧重点是？","options":["木马一定不会造成破坏","木马常靠伪装与诱导执行，病毒强调感染/复制","病毒都用于远程认证","木马必须自我复制"],"answer":1,"explain":"木马典型是伪装和未授权控制，并不必然自我复制，也可能造成破坏。"},{"chapter":5,"topic":"5:6","question":"攻击者分析用户通信的频次与时间，却未修改报文，这属于？","options":["流量分析","重放攻击","硬盘故障","交易签名"],"answer":0,"explain":"通过观察通信模式获取信息是流量分析。"},{"chapter":6,"topic":"6:0","question":"下列哪种协议主要在网络层为 IP 通信提供安全保护？","options":["IPsec","SET","S/MIME","SSH"],"answer":0,"explain":"IPsec 属于 IP 网络层安全协议套件。"},{"chapter":6,"topic":"6:1","question":"HTTPS 的默认端口是？","options":["21","22","80","443"],"answer":3,"explain":"课件明确要求记住 HTTPS 默认 443；HTTP 默认 80。"},{"chapter":6,"topic":"6:1","question":"现代 HTTPS 通常基于哪种协议保护传输？","options":["TLS","明文 Telnet","FTP","SQL"],"answer":0,"explain":"课件历史称 SSL；现代 HTTPS 使用 TLS。"},{"chapter":6,"topic":"6:2","question":"管理员远程通过命令行配置路由器，同时保护口令和会话内容，宜选？","options":["Telnet","SSH","HTTP","MIME"],"answer":1,"explain":"SSH 提供安全远程登录和命令行会话。"},{"chapter":6,"topic":"6:3","question":"IPsec 最适合与下列哪个层次联系？","options":["数据定义层","网络层","应用界面层","物理机房温控"],"answer":1,"explain":"IPsec 保护 IP 层通信。"},{"chapter":6,"topic":"6:4","question":"SET 协议课程背景下主要用于？","options":["电子邮件 MIME","安全电子交易、银行卡支付","系统进程调度","物理防雷"],"answer":1,"explain":"SET 属早期安全电子交易协议，课件强调卡支付。"},{"chapter":6,"topic":"6:5","question":"Kerberos 主要依赖哪个可信第三方机制？","options":["KDC 与票据","CA 私钥公开","防火墙转发日志","固定哈希长度"],"answer":0,"explain":"Kerberos 核心是 KDC 的认证/票据机制。"},{"chapter":6,"topic":"6:5","question":"下面哪对术语搭配准确？","options":["PKI—KDC 发票据，Kerberos—CA 发证书","PKI—CA 证书，Kerberos—KDC 票据","两者都只用于网页端口","两者都是哈希函数"],"answer":1,"explain":"PKI 围绕 CA 与证书，Kerberos 围绕 KDC 与票据。"},{"chapter":6,"topic":"6:6","question":"PGP 课程中主要用于保护哪类业务？","options":["安全电子邮件","打印机假脱机","编译链接","磁盘分页"],"answer":0,"explain":"PGP 是安全邮件相关技术。"},{"chapter":6,"topic":"6:7","question":"下列哪项可提供电子邮件的加密与签名支持？","options":["普通 MIME","S/MIME","裸 HTTP","Telnet"],"answer":1,"explain":"S/MIME 为安全多用途互联网邮件扩展，提供邮件安全能力。"},{"chapter":6,"topic":"6:8","question":"下列“协议—典型用途”对应哪项正确？","options":["SSH—安全远程管理","IPsec—关系代数","SET—操作系统分页","HTTPS—病毒自我复制"],"answer":0,"explain":"SSH 主要用于安全远程管理。"}]};
+const {chapters,lessons,quizzes}=DATA;
+const lessonMap=new Map(lessons.map(t=>[t.id,t]));
+const totalStudy=lessons.filter(t=>t.chapter>0).length;
+function load(key,def){try{const v=localStorage.getItem(key);return v?JSON.parse(v):def}catch(e){return def}}
+function save(key,value){try{localStorage.setItem(key,JSON.stringify(value))}catch(e){}}
+let mastery=load('sd_sec_v1_mastery',{});
+let savedLast=load('sd_sec_v1_last','1:0');
+let current=lessonMap.has(savedLast)?savedLast:'1:0';
+let view='home';let openedChap=1;let mapOpen=1;let focusOnly=load('sd_sec_v1_focus_only',false)===true;
+let quizState={scope:'all',items:[],index:0,picks:{},completed:false};
+const el=id=>document.getElementById(id);
+const esc=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
+function topicLabel(s){return esc(String(s).replace(/^[🔴🟠🔵]\s*/u,''))}
+function priority(t){if(t.priority)return t.priority;if(t.points.some(p=>p.priority==='must'))return 'must';if(t.points.some(p=>p.priority==='frequent'))return 'frequent';if(t.points.some(p=>p.priority==='understand'))return 'understand';return ''}
+function navPriorityLabel(pr){return pr==='must'?'<span class="nav-level must" title="必须掌握">必掌握</span>':pr==='frequent'?'<span class="nav-level frequent" title="重点 / 常考">常考</span>':''}
+function levelTag(pr){return pr==='must'?'<span class="pill must">必须掌握</span>':pr==='frequent'?'<span class="pill frequent">重点 / 常考</span>':pr==='understand'?'<span class="pill understand">了解即可</span>':''}
+function chapterDone(ci){let ids=chapters[ci].topicIds.filter(id=>ci!==0);return ids.filter(id=>mastery[id]===2).length}
+function masteredCount(){return lessons.filter(t=>t.chapter!==0 && mastery[t.id]===2).length}
+function setStatus(id,s){mastery[id]=s;save('sd_sec_v1_mastery',mastery);render();}
+function markNext(id){let s=mastery[id]||0;setStatus(id,(s+1)%3)}
+function openLesson(id){if(!lessonMap.has(id))return;current=id;openedChap=lessonMap.get(id).chapter;save('sd_sec_v1_last',id);setView('read')}
+function setView(v){view=v;render();el('contentShell').scrollTop=0;hideMobile()}
+function hideMobile(){el('sidebar').classList.remove('open');el('scrim').classList.remove('open')}
+function chapNav(ci){openedChap=ci;openLesson(chapters[ci].topicIds[0])}
+function renderSidebar(){
+ const mustN=lessons.filter(t=>t.chapter>0&&priority(t)==='must').length;
+ const freqN=lessons.filter(t=>t.chapter>0&&priority(t)==='frequent').length;
+ el('sideCount').textContent=`${chapters.length} 个分支`;
+ el('mustCount').textContent=mustN;el('frequentCount').textContent=freqN;
+ el('focusToggle').setAttribute('aria-pressed',String(focusOnly));
+ el('focusToggle').title=focusOnly?'显示全部知识主题':'只显示必须掌握和重点 / 常考的主题';
+ el('navList').innerHTML=chapters.map(c=>{
+  const hotIds=c.topicIds.filter(id=>{const p=priority(lessonMap.get(id));return p==='must'||p==='frequent'});
+  const visibleIds=focusOnly&&c.id!==0?hotIds:c.topicIds;
+  const sub=visibleIds.map(id=>{
+   const t=lessonMap.get(id),pr=priority(t),done=mastery[id]===2;
+   return `<button data-lesson="${id}" class="${current===id&&view==='read'?'selected':''} ${done?'complete':''} ${pr==='must'||pr==='frequent'?'nav-pr-'+pr:''}" title="${esc(t.title)}${pr==='must'?' · 必须掌握':pr==='frequent'?' · 重点 / 常考':''}"><span class="nav-topic-title">${esc(t.title)}</span>${navPriorityLabel(pr)}${done?'<span class="nav-done" title="已掌握">✓</span>':''}</button>`;
+  }).join('');
+  return `<div class="nav-group"><button class="chap-button ${(view==='read'&&openedChap===c.id)?'active':''}" data-chapter="${c.id}" aria-expanded="${openedChap===c.id}"><span class="chap-num">${c.number}</span><span>${esc(c.name)}</span>${hotIds.length?`<span class="chap-focus-count" title="本章 ${hotIds.length} 个重点主题">★${hotIds.length}</span>`:''}<span class="chap-chevron">${openedChap===c.id?'⌄':'›'}</span></button>${openedChap===c.id?`<div class="subnav">${sub||'<div class="nav-empty">本章暂无重点主题</div>'}</div>`:''}</div>`;
+ }).join('');
+ const n=masteredCount();el('sideProgress').textContent=`${n} / ${totalStudy}`;el('sideProgressBar').style.width=(n/totalStudy*100).toFixed(1)+'%';
+}
+
+function renderHome(){el('topTitle').textContent='安全性知识 · 学习首页';let n=masteredCount();
+ let priorityTopics=lessons.filter(t=>t.chapter>0&&priority(t)==='must').length;
+ return `<section class="hero"><div class="kicker">2026 · SOFTWARE DESIGNER</div><h1>把精讲课件，变成真正能复习的知识体系。</h1><p>这是软件设计师第五部分「安全性知识」的完整离线复习知识库。先用图解辨析安全属性、密钥、签名和攻击方式，再通过脑图、速记与练习巩固。</p><div class="hero-actions"><button class="small-button primary" data-lesson="${current}">▶ ${n?'继续学习':'开始学习'}</button><button class="small-button" data-view="map">查看知识脑图</button><button class="small-button" data-view="quiz">开始随堂练习</button></div></section><div class="statbar"><div class="stat"><b>6 <small>+ 考试定位</small></b><small>内容章节</small></div><div class="stat"><b>${totalStudy}</b><small>精讲知识主题</small></div><div class="stat"><b>${n} <small>/ ${totalStudy}</small></b><small>已掌握主题</small></div></div><div class="section-label"><h2>章节学习路线</h2><p>按老师课程顺序组织，知识点均来自上传资料</p></div><div class="chap-grid">${chapters.map(c=>{let cnt=c.topicIds.length,done=chapterDone(c.id);let lead=lessonMap.get(c.topicIds[0]);return `<article class="chap-card"><div class="num">CHAPTER ${c.number}</div><h3>${esc(c.name)}</h3><p>${esc(lead.intro)}</p><div class="bar"><i style="width:${done/Math.max(1,cnt)*100}%"></i></div><div class="foot"><span>${cnt} 个主题 ${c.id>0?`· 已掌握 ${done}`:''}</span><button data-lesson="${c.topicIds[0]}">进入章节 ↗</button></div></article>`}).join('')}</div><div class="card"><h2>这份资料怎么用？</h2><div class="d-grid three"><div class="d-chip"><b>01 · 首次学习</b>打开「图文精讲」，先看概念、对比图和典型判断题，再掌握易混结论。</div><div class="d-chip"><b>02 · 复习回顾</b>打开「知识脑图」，沿分支回忆概念；不熟悉的知识点点击返回精讲。</div><div class="d-chip"><b>03 · 考前冲刺</b>使用「考前速记」和「随堂练习」快速巩固，标记已掌握主题。</div></div><p class="tiny" style="margin-top:15px">说明：教师的“常考/了解/必须掌握”来自课程讲解，属于授课侧重点；并非官方考试大纲中的固定权重。练习题为依据资料编写的自测题，不冒充原题。</p></div>`;
+}
+function renderPoints(t){return `<div class="point-list">${t.points.map(p=>{let pr=p.priority||'';return `<div class="point ${pr}"><span class="point-marker"></span><div><div class="ptext">${topicLabel(p.text)}</div>${p.note?`<div class="pnote">${esc(p.note)}</div>`:''}</div></div>`}).join('')}</div>`}
+function renderExample(t){if(!t.examples?.length)return '';return `<section class="card"><h2>🧩 典型题与解题步骤</h2>${t.examples.map(ex=>`<div class="example"><h3>${esc(ex.title)}</h3><div class="given"><b>已知：</b>${esc(ex.given)}</div>${ex.steps.map((step,i)=>`<div class="step"><span class="step-num">${i+1}</span><div>${esc(step)}</div></div>`).join('')}<div class="answer">结果：${esc(ex.answer)}</div>${ex.warning?`<div class="notice">⚠ ${esc(ex.warning)}</div>`:''}</div>`).join('')}</section>`}
+function renderRead(){const t=lessonMap.get(current);const c=chapters[t.chapter];let same=c.topicIds;let ci=same.indexOf(current),ix=lessons.findIndex(q=>q.id===current),prev=lessons[ix-1],next=lessons[ix+1];let s=mastery[current]||0;el('topTitle').textContent=`${c.name} · 图文精讲`;
+ return `<div class="crumb"><button data-view="home" style="border:0;background:none;color:#73879a;cursor:pointer;padding:0">学习首页</button> / ${esc(c.name)} / 第 ${ci+1} 节</div><div class="title-row"><div><div class="kicker">CHAPTER ${c.number} / SECTION ${String(ci+1).padStart(2,'0')}</div><h1 class="big-title">${esc(t.title)}</h1><div class="smalltags">${levelTag(priority(t))}<span class="pill">${esc(c.name)}</span><span class="pill">${s===2?'✓ 已掌握':s===1?'复习中':'未标记'}</span></div></div><button class="small-button ${s===2?'done':''}" data-master="${current}">${s===2?'✓ 已掌握 · 重置':s===1?'◐ 复习中 · 标记掌握':'○ 未学习 · 标记复习中'}</button></div><div class="topic-jump">${same.map((id,j)=>`<button class="${id===current?'current':''}" data-lesson="${id}">${j+1}. ${esc(lessonMap.get(id).title)}</button>`).join('')}</div><section class="intro-card"><div class="head">📘 先理解这一点</div><p>${esc(t.intro)}</p></section>${renderDiagram(t)}<section class="card"><h2>关键知识与老师强调的考点</h2>${renderPoints(t)}<div class="source">📎 资料来源：${esc(t.source)}。条目主要依据课件与授课转写整理，少量内容做了便于阅读的归纳，并明确标注课程旧说法的适用边界。</div></section>${renderExample(t)}${renderExtra(t)}<section class="card"><h2>一分钟回忆</h2><p style="font-size:15px;font-weight:700;color:#275b94;margin:0 0 12px">${esc(t.memory||t.points.slice(0,2).map(p=>p.text).join('；'))}</p><p class="tiny" style="margin:0">先遮住答案，试着用自己的话复述本节知识。能独立说清楚，再标记为「已掌握」。</p></section><div class="lesson-footer"><button class="small-button" ${!prev?'disabled':''} ${prev?`data-lesson="${prev.id}"`:''}>← 上一个主题</button><div class="lesson-footer-actions" style="display:flex;gap:8px;flex-wrap:wrap"><button class="small-button" data-quiztopic="${current}">练习本章节题目</button><button class="small-button primary" ${!next?'disabled':''} ${next?`data-lesson="${next.id}"`:''}>下一个主题 →</button></div></div>`
+}
+function renderExtra(t){return t.notice?`<div class="notice"><strong>📌 课程口径 / 适用边界提醒：</strong>${esc(t.notice)}</div>`:''}
+function renderDiagram(t){
+ const v=t.visual;if(!v)return '';
+ const box=(h,b='',a=false)=>`<div class="db-node ${a?'accent':''}"><strong>${h}</strong>${b?`<small>${b}</small>`:''}</div>`;
+ const flow=nodes=>`<div class="db-flow">${nodes.map((n,i)=>`${i?'<span class="db-arrow">→</span>':''}${box(n[0],n[1]||'',i===nodes.length-1)}`).join('')}</div>`;
+ const grid=nodes=>`<div class="db-grid">${nodes.map(n=>box(...n)).join('')}</div>`;
+ const table=(hs,rs)=>`<div class="sec-table-scroll"><table class="mini-table"><thead><tr>${hs.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${rs.map(r=>`<tr>${r.map(x=>`<td>${x}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+ const note=t=>`<div class="db-note">${t}</div>`;
+ const math=t=>`<div class="db-math">${t}</div>`;
+ let body='';
+ if(v==='study')body=flow([['信息属性','CIA / 五属性'],['加密','公钥与私钥'],['鉴别','摘要 · 签名 · 证书'],['防护','防火墙 / IDS'],['攻击与协议','重放 · DoS · HTTPS']]);
+ else if(v==='sourcenote')body=grid([['课堂原话','保留老师强调的学习层级'],['原理梳理','按知识点消除语音转写噪声'],['适用边界','旧协议和简化说法单独标注']]);
+ else if(v==='security-scope')body=grid([['信息安全','信息/数据：机密性 · 完整性 · 可用性'],['信息系统安全','设备 · 平台 · 网络 · 应用 · 数据']]);
+ else if(v==='axes')body=grid([['X · 安全机制','技术与管理控制措施'],['Y · 网络层次','OSI 七层模型'],['Z · 安全服务','认证 · 访问控制 · 保密 · 完整等']]);
+ else if(v==='five')body=grid([['身份认证','你是谁？'],['权限控制','你能做什么？'],['完整性','数据没被乱改？'],['加密保护','内容不被看见？'],['不可否认','不能事后抵赖？']]);
+ else if(v==='cia')body=`<div class="sec-cia"><div><strong>C</strong><b>保密性</b><small>未授权者不能知道</small></div><div><strong>I</strong><b>完整性</b><small>未经授权不能改动</small></div><div><strong>A</strong><b>可用性</b><small>需要时能正常使用</small></div></div>${note('注意：CIA 三要素 ≠ 安全空间五属性。')}`;
+ else if(v==='confidential')body=grid([['谁能看？','身份认证 + 访问控制'],['只给多少？','最小授权'],['通信怎么保护？','适当加密'],['设备怎么保护？','物理安全和防泄露']]);
+ else if(v==='integrity')body=flow([['发送端消息','原数据'],['计算摘要','Hash'],['接收端消息','重新计算'],['核对结果','匹配则未检测到变化']]);
+ else if(v==='availability')body=grid([['可用性 Availability','授权用户需要时系统可访问'],['可靠性 Reliability','规定条件下无故障完成功能'],['真实性 Authenticity','消息来源是否可信'],['不可抵赖 Non-repudiation','行为能否被否认']]);
+ else if(v==='layers')body=table(['需求类型','主要保护对象','典型示例'],[['物理线路安全','设备、机房、供电、线缆','防雷 / 备用电源'],['网络安全','网络通信与入侵','防火墙 / IDS'],['系统安全','操作系统和系统软件','OS 安全补丁'],['应用安全','业务程序和数据库应用','输入校验 / 授权']]);
+ else if(v==='cipher-model')body=`${flow([['明文 M','原始消息'],['加密 E','密钥 Ke'],['密文 C','经信道发送'],['解密 D','密钥 Kd'],['明文 M','接收恢复']])}${math('C = E(M,Ke)　；　M = D(C,Kd)')}`;
+ else if(v==='symmetric')body=flow([['A 的明文','消息'],['共享密钥 K','加密',true],['传输密文','其他人看不懂'],['共享密钥 K','解密'],['B 得明文','恢复消息']]);
+ else if(v==='algos')body=table(['算法','类别','课堂速记'],[['DES','对称加密','56 位有效密钥（历史）'],['3DES','对称加密','三重 DES 运算'],['AES','对称加密','现代常见分组密码'],['RC5 / IDEA','对称加密','记住名称与类别'],['RSA / ECC','非对称密码','公钥 / 私钥体系']]);
+ else if(v==='asymmetric')body=grid([['A 密钥对','A 公钥（公开）／A 私钥（保密）'],['B 密钥对','B 公钥（公开）／B 私钥（保密）'],['保密通信','A 用 B 公钥加密；B 用 B 私钥解密'],['数字签名','A 用 A 私钥签名；B 用 A 公钥验签']]);
+ else if(v==='asym-flow')body=`${flow([['发送者 A','拿到 B 的真实公钥'],['B 的公钥','加密消息'],['密文','通过网络'],['B 的私钥','解密成功'],['接收者 B','读到明文']])}${note('秘诀：要给谁保密，就用谁的公钥加密。')}`;
+ else if(v==='crypto-compare')body=table(['比较','对称密钥密码','非对称（公钥）密码'],[['密钥','双方共享秘密','每个主体有公钥/私钥'],['大量数据加密','高效，通常用于正文','计算开销较大'],['典型用途','数据内容加密','密钥保护 / 身份相关操作'],['代表','AES、DES','RSA、ECC']]);
+ else if(v==='envelope')body=`<div class="sec-two-col"><div>${box('消息正文 M','使用一次性对称密钥 K 加密',true)}</div><div>${box('会话密钥 K','使用 B 的公钥加密')}</div></div>${flow([['发送两个密文','消息密文 + 密钥信封'],['B 私钥','解开 K'],['K','解开正文'],['B 得明文','读取消息']])}`;
+ else if(v==='hash')body=`${flow([['文件/消息','可很长'],['Hash','固定算法'],['摘要 H(M)','固定长度']])}${note('对同一数据重新计算并比对摘要，可帮助发现内容变化；没有身份认证时无法单凭摘要防恶意伪造。')}`;
+ else if(v==='hash-algos')body=table(['算法','摘要长度','学习提示'],[['MD5','128 bit','旧课程经典算法'],['SHA-1','160 bit','旧课程经典算法'],['SHA-256','256 bit','现代常见示例（补充）']]);
+ else if(v==='signature')body=`${flow([['A 的消息','计算 Hash'],['A 私钥','对摘要签名'],['消息＋签名','一起发送'],['A 公钥','B 验证签名'],['结果','来源与完整性验证']])}${note('签名用自己的私钥；验签用签名者的公钥。签名不代表对正文进行了保密加密。')}`;
+ else if(v==='securitytools')body=table(['技术','主要目标','典型过程'],[['加密','保密性','明文 → 密文'],['哈希摘要','内容变化检测','数据 → 摘要'],['数字签名','来源 / 完整 / 不可抵赖','私钥签、公钥验'],['数字证书','身份与公钥可信绑定','主体 + 公钥 + CA 签名']]);
+ else if(v==='pki')body=`${flow([['实体 B','申请证书'],['CA','审核并签发'],['数字证书','B 身份＋B 公钥'],['使用者 A','验证证书、获取 B 公钥']])}${note('公钥可公开；私钥始终应由 B 自己保管，不装进公开数字证书。')}`;
+ else if(v==='certificate')body=grid([['驾照类比 · 主体','驾驶人 ↔ 证书主体 B'],['驾照类比 · 证件','驾驶证 ↔ 数字证书'],['驾照类比 · 发证机关','交通管理部门 ↔ CA'],['核心绑定','证书把实体身份与公钥联系起来']]);
+ else if(v==='mailflow')body=`<div class="sec-two-col">${box('发送方 A','对消息做摘要 → A 私钥签名')}${box('发送方 A','对正文与签名做对称加密')}</div>${flow([['生成密钥信封','用 B 公钥加密 K'],['发送密文','正文密文＋密钥信封'],['接收方 B','B 私钥解开 K'],['B 验签','A 公钥验证签名']])}`;
+ else if(v==='firewall')body=`${flow([['外部网络','互联网流量'],['防火墙','规则检查 / 允许或拒绝'],['内部网络','受保护资源']])}${note('课程类比：“防火墙就是大门”。核心能力是边界上的访问规则控制。')}`;
+ else if(v==='firewall-levels')body=grid([['网络级','看 IP、端口、协议、连接状态等'],['应用级','可分析 HTTP 等应用请求及数据'],['教学记忆','低层检查较轻、高层可更细'],['实际效果','取决于规则、部署与产品']]);
+ else if(v==='ids')body=flow([['流量/行为','观察'],['IDS','分析规则与异常'],['可疑事件','检测匹配'],['告警','通知安全人员']]);
+ else if(v==='ips')body=table(['系统','老师类比','典型动作'],[['防火墙','大门','按规则控制内外网通信'],['IDS','摄像头','检测异常并告警'],['IPS','机关','检测并阻断部分通信']]);
+ else if(v==='defense-stack')body=grid([['防火墙','边界的门卫'],['IDS','观察异常的摄像头'],['IPS','可主动阻断的机关'],['蜜罐','吸引攻击的诱饵'],['终端安全','保护主机免遭恶意代码']]);
+ else if(v==='passive')body=grid([['窃听','偷看通信内容'],['流量分析','统计通信时间与频次'],['共同点','不直接改动正常报文'],['安全影响','泄露机密信息与行为模式']]);
+ else if(v==='active')body=grid([['假冒','伪装通信主体'],['篡改','更改或插入消息'],['重放','旧报文再发送'],['DoS','让服务不可用'],['抵赖','否认自己执行的行为']]);
+ else if(v==='replay')body=`${flow([['A 合法请求','发报文 M'],['攻击者','截获并保存 M'],['稍后重发','再次发送 M'],['B 服务端','误以为新请求']])}${note('防护思想：认证过的时间戳 / nonce / 序列号 + 重复检查。')}`;
+ else if(v==='dos')body=`${flow([['攻击流量','过多或违规请求'],['服务资源','连接/CPU/带宽被耗尽'],['合法用户','访问受阻']])}${math('DoS → 主要损害 Availability（可用性）')}`;
+ else if(v==='virus')body=grid([['恶意代码','可能损害功能与数据'],['感染/复制','病毒典型传播特征'],['隐蔽/触发','潜伏一段时间后执行'],['防范','更新 + 终端检测 + 最小权限']]);
+ else if(v==='trojan')body=table(['区别','传统病毒','木马'],[['典型方式','感染传播和自我复制','伪装、诱导执行'],['常见目的','传播、破坏','窃密、后门、远控等'],['能否造成破坏','可以','也可以'],['是否一定自我复制','常体现','不要求']]);
+ else if(v==='threattable')body=table(['关键词','攻击类型','受损重点'],[['窃听 / 流量分析','被动','保密性'],['冒充 / 篡改','主动','认证 / 完整性'],['旧报文再次发送','主动：重放','身份与交易正确性'],['合法用户无法访问','主动：DoS','可用性']]);
+ else if(v==='protocol-map')body=table(['网络 / 应用位置','代表协议或措施','考试关注'],[['物理层','物理隔离 / 屏蔽','硬件手段'],['数据链路相关','PPTP / L2TP','了解隧道'],['网络层','IPsec','IP 层安全'],['传输安全','TLS（课件称 SSL）','HTTPS 安全通道'],['应用场景','SSH / SET / PGP / S/MIME','用途辨析']]);
+ else if(v==='https')body=`${grid([['HTTP','明文，默认 80 端口'],['HTTPS','HTTP over TLS，默认 443 端口']])}${flow([['浏览器','HTTPS 请求'],['TLS 安全通道','保护传输'],['Web 服务器','返回加密数据']])}`;
+ else if(v==='ssh')body=flow([['管理员','远程命令行'],['SSH 通道','加密认证与会话'],['远程路由器','安全配置设备']]);
+ else if(v==='ipsec')body=flow([['站点 A','IP 网络'],['IPsec','网络层的通信保护'],['站点 B','受保护通信']]);
+ else if(v==='set')body=grid([['持卡人','发起卡支付交易'],['商户','处理交易'],['银行 / 支付环节','完成资金支付'],['认证机构','提供相关身份信任基础']]);
+ else if(v==='kerberos')body=`${flow([['用户 A','发起认证'],['KDC','验证身份并签发票据'],['服务端 B','验证票据后提供服务']])}${note('区别：Kerberos 看 KDC + Ticket；PKI 看 CA + Certificate。')}`;
+ else if(v==='pgp')body=grid([['数字签名','发件方私钥对摘要签名'],['对称加密','邮件正文大量数据加密'],['公钥加密','保护邮件会话密钥'],['验签与摘要','收件方检查消息匹配']]);
+ else if(v==='securemail')body=table(['协议','用途','课堂定位'],[['MIME','扩展邮件内容格式','不是加密安全协议'],['S/MIME','邮件加密与签名','安全电子邮件'],['PGP','邮件加密与签名','安全电子邮件'],['SET','电子交易','不是邮件协议']]);
+ else if(v==='protocol-table')body=table(['题目出现的关键词','优先想到'],[['HTTPS / 443 / 网页安全','TLS/HTTPS'],['远程登录、命令行配置路由器','SSH'],['IP 层 / VPN','IPsec'],['KDC / 票据','Kerberos'],['信用卡 / 电子交易（历史）','SET'],['安全邮件','PGP 或 S/MIME']]);
+ if(!body)return '';
+ return `<section class="card"><h2>🧩 可视化理解</h2><div class="diagram"><div class="diagram-title">VISUAL EXPLAINER · ${esc(t.title)}</div>${body}</div></section>`;
+}
+function renderMap(){el('topTitle').textContent='安全性知识 · 知识脑图';return `<div class="kicker">KNOWLEDGE MAP</div><h1 class="big-title">一张图，看懂整章知识结构</h1><p class="lede">按章节展开知识分支。点击右侧主题可以直接跳转到图文精讲；再次点击已展开的章节可以收起。</p><div class="map-root">安全性知识 <span style="font-size:12px;margin-left:13px;opacity:.7;align-self:center">6 组知识主题 · 1 份考试定位</span></div><div class="map-rail">${chapters.map(c=>`<div class="map-branch"><button class="map-chap ${mapOpen===c.id?'on':''}" data-mapchap="${c.id}"><span>${c.number} · ${esc(c.name)}</span><b>${mapOpen===c.id?'−':'+'}</b></button><div class="map-topics">${mapOpen===c.id?c.topicIds.map(id=>{let t=lessonMap.get(id);return `<button class="map-topic" data-lesson="${id}"><b>${esc(t.title)}</b><small>${t.points.length} 个知识条目 · 查看精讲 ↗</small><div class="map-details">${t.points.slice(0,3).map(p=>`<span>• ${topicLabel(p.text)}</span>`).join('')}${t.points.length>3?`<span>… 及其他 ${t.points.length-3} 项</span>`:''}</div></button>`}).join(''):`<div style="color:#92a1b0;font-size:12px;padding:13px">${c.topicIds.length} 个子主题 · 点击左侧展开</div>`}</div></div>`).join('')}</div>`}
+function renderQuick(){el('topTitle').textContent='安全性知识 · 考前速记';
+ const rules=[
+  ['信息安全 CIA','C 保密、I 完整、A 可用','1:3'],
+  ['安全空间五属性','认证、权限、完整、加密、不可否认','1:2'],
+  ['安全空间三维','X 安全机制、Y OSI 层次、Z 安全服务','1:1'],
+  ['四类安全需求','物理线路、网络、系统、应用','1:7'],
+  ['对称与非对称','同钥高效；公钥可公开，私钥需保密','2:5'],
+  ['公钥保密通信','用接收方公钥加密，用接收方私钥解密','2:4'],
+  ['数字签名','发送者私钥签，发送者公钥验；不保密正文','3:2'],
+  ['摘要与证书','哈希检测内容变化；证书绑定身份与公钥','3:3'],
+  ['网络防御','防火墙=门卫；IDS=摄像头；IPS=主动阻断','4:3'],
+  ['攻击分类','窃听/流量分析=被动；重放/DoS=主动','5:6'],
+  ['重放与 DoS','重放：旧报文再发；DoS：合法用户用不了','5:2'],
+  ['协议用途与端口','HTTPS=443，HTTP=80；SSH=远程管理；PGP/S-MIME=邮件','6:8']];
+ return `<div class="kicker">QUICK RECALL</div><h1 class="big-title">考前速记 · 核心概念与易混对照</h1><p class="lede">这章以判断技术目的和应用场景为主。建议先遮住答案自测，再点击跳回精讲。</p><div class="section-label"><h2>12 条高效判题规则</h2><p>按课件与老师重点整理；现代实践补充另行标明</p></div><div class="qgrid">${rules.map(x=>`<article class="card" style="margin:0"><h3 style="margin:0 0 8px">${x[0]}</h3><div class="formula">${x[1]}</div><button class="small-button tinted" style="margin-top:13px" data-lesson="${x[2]}">查看精讲 ↗</button></article>`).join('')}</div>${chapters.slice(1).map(c=>`<div class="section-label"><h2>${c.number} · ${esc(c.name)}</h2><p>${c.topicIds.length} 个主题</p></div><div class="qgrid">${c.topicIds.map(id=>{let t=lessonMap.get(id);return `<article class="quick-card"><div class="qtag">${esc(c.name)} ${levelTag(priority(t))}</div><h3>${esc(t.title)}</h3><p>${esc(t.memory||t.points.slice(0,2).map(p=>p.text).join('；'))}</p><button data-lesson="${id}">完整精讲 ↗</button></article>`}).join('')}</div>`).join('')}`;
+}
+function getQuizItems(scope){return quizzes.map((q,i)=>({...q,key:i})).filter(q=>scope==='all'||q.chapter===Number(scope)||scope==='wrong'&&load('sd_sec_v1_wrong',[]).includes(q.key));}
+function startQuiz(scope){quizState={scope,items:getQuizItems(scope),index:0,picks:{},completed:false};setView('quiz')}
+function chooseQuiz(idx){const item=quizState.items[quizState.index];if(quizState.picks[item.key]!==undefined)return;quizState.picks[item.key]=idx;render()}
+function nextQuiz(){quizState.index++;if(quizState.index>=quizState.items.length){quizState.completed=true;const errors=quizState.items.filter(q=>quizState.picks[q.key]!==q.answer).map(q=>q.key);let old=new Set(load('sd_sec_v1_wrong',[]));for(let q of quizState.items)old.delete(q.key);for(let k of errors)old.add(k);save('sd_sec_v1_wrong',[...old]);}render();el('contentShell').scrollTop=0}
+function renderQuiz(){el('topTitle').textContent='安全性知识 · 随堂练习';if(!quizState.items.length&&!quizState.completed){quizState.items=getQuizItems(quizState.scope)}let qs=quizState.items,idx=quizState.index;
+ let filters=`<div class="quiz-filter"><button data-quizscope="all" class="${quizState.scope==='all'?'chosen':''}">全章 · ${quizzes.length} 题</button>${chapters.slice(1).map(c=>`<button data-quizscope="${c.id}" class="${quizState.scope===String(c.id)?'chosen':''}">${c.number} ${esc(c.name)} · ${getQuizItems(String(c.id)).length} 题</button>`).join('')}<button data-quizscope="wrong" class="${quizState.scope==='wrong'?'chosen':''}">错题重练 · ${getQuizItems('wrong').length} 题</button></div>`;
+ if(!qs.length)return `<div class="kicker">PRACTICE</div><h1 class="big-title">随堂练习</h1><p class="lede">本组暂无试题或尚未产生错题。选择其他章节继续练习。</p>${filters}`;
+ if(quizState.completed){let score=qs.filter(q=>quizState.picks[q.key]===q.answer).length;return `<div class="kicker">PRACTICE RESULT</div><h1 class="big-title">练习完成</h1><div class="score-card"><div class="huge">${Math.round(score/qs.length*100)}<small style="font-size:20px">分</small></div><h2>${score} / ${qs.length} 题正确</h2><p>${qs.length-score===0?'这组知识点都答对了，可以去精讲中继续学习其他内容。':`有 ${qs.length-score} 道题答错，错题会保存在当前浏览器中，可以单独重练。`}</p><button class="small-button primary" data-quizscope="${quizState.scope}">再做一遍</button><button class="small-button" data-quizscope="wrong">重练错题</button><button class="small-button" data-view="quick">查看考前速记</button></div>${filters}`;}
+ let q=qs[idx],pick=quizState.picks[q.key],answered=pick!==undefined,chapter=chapters[q.chapter];return `<div class="kicker">PRACTICE / SELF TEST</div><h1 class="big-title">随堂练习</h1><p class="lede" style="margin-bottom:11px">按课程内容编写的自测题（非历年真题原文），答题后立即展示正确答案和解析。</p>${filters}<div class="quiz-wrap"><div class="quiz-top"><span class="tiny">${esc(chapter.name)} · 第 ${idx+1} / ${qs.length} 题</span><div class="quiz-progress"><i style="width:${idx/qs.length*100}%"></i></div><b style="font-size:12px;color:#6e8192">${Math.round(idx/qs.length*100)}%</b></div><div class="quiz-card"><span class="pill">单选题</span><h2>${esc(q.question)}</h2><div class="options">${q.options.map((o,j)=>`<button class="option ${answered&&j===q.answer?'correct':''} ${answered&&pick===j&&j!==q.answer?'incorrect':''} ${answered&&pick===j?'selected':''}" data-option="${j}" ${answered?'disabled':''}><i>${'ABCD'[j]}.</i><span>${esc(o)}</span></button>`).join('')}</div>${answered?`<div class="explain"><strong>${pick===q.answer?'✓ 回答正确':'✕ 回答错误'} · 正确答案 ${'ABCD'[q.answer]}</strong><div style="margin-top:5px">${esc(q.explain)}</div><div style="margin-top:10px"><button class="small-button tinted" data-lesson="${q.topic}">返回对应知识点 ↗</button></div></div>`:''}<div class="quiz-bottom"><span class="tiny">请先选择一个答案</span><button class="small-button primary" data-nextquestion ${!answered?'disabled':''}>${idx===qs.length-1?'查看成绩':'下一题 →'}</button></div></div></div>`;}
+function renderRail(){if(view!=='read')return '';let t=lessonMap.get(current),c=chapters[t.chapter];return `<div class="rail-card"><h3>本章目录 · ${c.number}</h3>${c.topicIds.map((id,i)=>`<button class="rail-topic ${id===current?'current':''}" data-lesson="${id}">${String(i+1).padStart(2,'0')} · ${esc(lessonMap.get(id).title)} ${mastery[id]===2?'✓':''}</button>`).join('')}<div class="rail-memory"><strong>本节一句话</strong><p>${esc(t.memory||t.points[0]?.text||'')}</p><div class="tiny">${esc(t.source)}</div></div></div>`}
+function render(){renderSidebar();document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===view));const main=el('mainContent');main.className='content '+(view==='read'?'reading':'');main.innerHTML=({home:renderHome,read:renderRead,map:renderMap,quick:renderQuick,quiz:renderQuiz}[view]||renderHome)();const shell=el('contentShell');shell.classList.toggle('withrail',view==='read');el('rightRail').innerHTML=renderRail()}
+function openSearch(){el('searchOverlay').classList.remove('hidden');el('searchInput').focus();searchResults('')}
+function closeSearch(){el('searchOverlay').classList.add('hidden')}
+function searchResults(term){
+ term=term.trim().toLowerCase();
+ let hits=term?lessons.filter(t=>(t.title+' '+t.intro+' '+t.points.map(p=>p.text+' '+p.note).join(' ')).toLowerCase().includes(term)):lessons.filter(t=>t.chapter>0&&priority(t)==='must').slice(0,8);
+ if(term)hits.sort((a,b)=>{const score=t=>{let name=t.title.toLowerCase();return name===term?0:name.startsWith(term)?1:name.includes(term)?2:3};return score(a)-score(b) || a.chapter-b.chapter || a.index-b.index});
+ let n=hits.length;hits=hits.slice(0,25);
+ el('searchResults').innerHTML=`<div class="tiny">${term?`匹配 ${n} 个知识主题`:'建议重点内容'}</div>`+hits.map(t=>`<button class="sr" data-searchlesson="${t.id}"><strong>${esc(t.title)}</strong><small>${esc(chapters[t.chapter].name)} · ${esc(t.intro.slice(0,66))}…</small></button>`).join('')+(hits.length?'':'<div class="tiny">没有匹配结果，试试其他关键词。</div>');
+}
+document.body.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ if(b.id==='focusToggle'){focusOnly=!focusOnly;save('sd_sec_v1_focus_only',focusOnly);renderSidebar();return}
+ if(b.dataset.view){setView(b.dataset.view);return}
+ if(b.dataset.tab){setView(b.dataset.tab);return}
+ if(b.dataset.chapter!==undefined){let ci=+b.dataset.chapter;if(openedChap===ci){openedChap=-1;renderSidebar()}else{openedChap=ci;renderSidebar()}return}
+ if(b.dataset.lesson){openLesson(b.dataset.lesson);return}
+ if(b.dataset.master){markNext(b.dataset.master);return}
+ if(b.dataset.mapchap!==undefined){let ci=+b.dataset.mapchap;mapOpen=mapOpen===ci?-1:ci;render();return}
+ if(b.dataset.quizscope){startQuiz(b.dataset.quizscope);return}
+ if(b.dataset.quiztopic){const t=lessonMap.get(b.dataset.quiztopic);quizState={scope:String(t.chapter),items:getQuizItems(String(t.chapter)),index:0,picks:{},completed:false};setView('quiz');return}
+ if(b.dataset.option!==undefined){chooseQuiz(+b.dataset.option);return}
+ if(b.hasAttribute('data-nextquestion')){nextQuiz();return}
+ if(b.dataset.searchlesson){closeSearch();openLesson(b.dataset.searchlesson);return}
+});
+el('menuBtn').onclick=()=>{el('sidebar').classList.add('open');el('scrim').classList.add('open')};el('scrim').onclick=hideMobile;
+function refreshThemeButton(){const dark=document.documentElement.dataset.theme==='dark',b=el('themeBtn');b.setAttribute('aria-pressed',String(dark));b.setAttribute('aria-label',dark?'切换为日间模式':'切换为夜间模式');b.title=dark?'切换为日间模式':'切换为夜间模式'}
+el('themeBtn').onclick=()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;save('sd_sec_v1_theme',next);refreshThemeButton()};refreshThemeButton();
+el('searchBtn').onclick=openSearch;el('searchClose').onclick=closeSearch;el('searchInput').oninput=e=>searchResults(e.target.value);
+el('searchOverlay').addEventListener('click',e=>{if(e.target===el('searchOverlay'))closeSearch()});
+window.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSearch();hideMobile()}if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openSearch()}});
+render();
+</script></body></html>

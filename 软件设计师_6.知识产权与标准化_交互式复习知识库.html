@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><script>(function(){try{document.documentElement.dataset.theme=JSON.parse(localStorage.getItem('sd_ip_v1_theme'))==='dark'?'dark':'light'}catch(e){document.documentElement.dataset.theme='light'}})();</script><title>知识产权与标准化 · 软件设计师备考知识库</title>
+<style>
+:root{--ink:#1e2733;--muted:#657385;--soft:#8b95a1;--bg:#f5f6f8;--panel:#fff;--nav:#1d2633;--nav2:#293646;--line:#e5e9ee;--accent:#2773d4;--accent-bg:#eef5fe;--darkblue:#203b61;--card-shadow:0 6px 30px rgba(28,40,59,.045);--amber:#aa6c1c;--red:#b84b4b;--green:#167966;--radius:14px}*{box-sizing:border-box}html,body{margin:0;height:100%;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:var(--bg);font-size:15px;-webkit-font-smoothing:antialiased}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #8abaff;outline-offset:2px}button:disabled{cursor:not-allowed;opacity:.45}a{color:inherit}p{line-height:1.88}h1,h2,h3{letter-spacing:-.025em}h1{font-size:32px}h2{font-size:22px}h3{font-size:17px}.hidden{display:none!important}
+.app{height:100dvh;min-height:530px;display:grid;grid-template-columns:264px minmax(0,1fr)}.side{background:var(--nav);color:#cbd5e2;display:flex;flex-direction:column;overflow-y:auto;min-height:0;border-right:1px solid #0f1b29}.brand{padding:27px 20px 24px;border-bottom:1px solid #ffffff12}.brand .mono{color:#95bbf4;font-weight:800;letter-spacing:1.4px;font-size:10px}.brand h2{color:white;margin:12px 0 8px;font-size:19px;line-height:1.45}.brand p{font-size:12px;color:#9baebf;line-height:1.65;margin:0}.side-head{display:flex;justify-content:space-between;align-items:center;margin:27px 20px 10px;color:#8b9aad;font-size:11px;font-weight:800;letter-spacing:1px}.nav-list{padding:0 11px 18px}.nav-group{margin:3px 0}.chap-button{width:100%;background:none;border:0;color:#bbc8d7;display:flex;gap:10px;align-items:flex-start;border-radius:9px;padding:12px 11px;text-align:left;font-size:13px;font-weight:650;line-height:1.55}.chap-button:hover,.chap-button.active{background:#2b3a4d;color:white}.chap-num{font-size:11px;font-weight:800;color:#86b9fd;min-width:23px;margin-top:2px}.chap-chevron{margin-left:auto;color:#8293a4;font-size:13px}.subnav{padding:3px 5px 9px 42px;display:grid;gap:2px}.subnav button{background:none;border:0;text-align:left;color:#9daebe;padding:8px 9px;border-radius:7px;font-size:12px;line-height:1.52}.subnav button:hover{background:#2b3949;color:#e4ebf4}.subnav button.selected{background:#354962;color:white;box-shadow:inset 2px 0 #87b5ff}.subnav button.complete:after{content:'✓';color:#81d1ba;margin-left:5px}.side-footer{margin-top:auto;padding:18px 18px 26px;border-top:1px solid #ffffff12}.side-footer .frow{display:flex;align-items:center;justify-content:space-between;font-size:12px;margin-bottom:11px}.side-footer strong{color:white}.progressbar{height:7px;border-radius:10px;background:#425065;overflow:hidden}.progressbar>span{display:block;height:100%;width:0;background:#76aefa;transition:width .2s}.side-footer small{display:block;color:#8da0b2;line-height:1.8;margin-top:10px;font-size:11px}
+.workspace{min-width:0;display:flex;flex-direction:column;overflow:hidden}.topbar{background:white;border-bottom:1px solid var(--line);height:70px;padding:0 32px;flex:none;display:flex;align-items:center;justify-content:space-between;gap:18px}.top-left{display:flex;align-items:center;gap:13px;min-width:0}.toptitle{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:780;font-size:15px}.top-small{color:#8a95a0;font-size:11px;margin-top:3px}.mobile-toggle{display:none}.tabs{display:flex;align-items:center;gap:4px;background:#f3f5f8;padding:5px;border-radius:11px}.tab{background:none;border:0;padding:10px 14px;color:#657387;border-radius:8px;font-size:13px;white-space:nowrap;font-weight:690}.tab.on{color:#183a67;background:white;box-shadow:0 2px 8px #16233815}.tab:hover{color:#153b71}.top-actions{display:flex;gap:10px;align-items:center}.iconbutton{display:inline-flex;align-items:center;justify-content:center;width:39px;height:39px;background:white;border:1px solid #dce3ea;border-radius:10px;color:#5c6b7b;font-size:19px}.iconbutton:hover{background:#f4f8fd;border-color:#bfd3eb}.content-shell{flex:1;display:flex;min-height:0;overflow:auto;scroll-behavior:smooth}.content{width:100%;max-width:1130px;padding:38px 42px 90px;margin:0 auto;min-width:0}.content.reading{max-width:1000px}.kicker{font-size:11px;font-weight:820;color:#2972c2;letter-spacing:1.5px;text-transform:uppercase}.muted{color:var(--muted)}.tiny{font-size:12px;color:var(--soft)}.crumb{font-size:12px;color:#8b97a2;margin-bottom:15px}.title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.big-title{font-size:31px;line-height:1.35;letter-spacing:-.4px;margin:10px 0 10px}.lede{font-size:15px;line-height:1.95;color:#536477;max-width:860px;margin:0 0 25px}.pill{display:inline-flex;align-items:center;font-size:11px;border-radius:6px;padding:4px 8px;font-weight:720;background:#eef2f6;color:#607285;margin-right:6px;white-space:nowrap}.pill.must{background:#fff0ed;color:#bf594e}.pill.frequent{background:#fff4e7;color:#a46e24}.pill.understand{background:#edf5ff;color:#527baa}.small-button{border:1px solid #dbe4ed;border-radius:9px;padding:10px 14px;background:white;color:#485b71;font-size:12px;font-weight:740;white-space:nowrap}.small-button:hover{background:#f0f6fe;border-color:#8fb6df}.small-button.primary{background:#2266c3;color:white;border-color:#2266c3}.small-button.primary:hover{background:#1753a6}.small-button.tinted{background:#edf5ff;border-color:#d7e9fc;color:#2367aa}.small-button.done{background:#ecf8f3;color:#08755e;border-color:#b8ddcf}.small-button.danger{color:#b55b5b}
+.hero{background:linear-gradient(115deg,#182b46,#284b70);border-radius:18px;color:white;padding:39px 42px;position:relative;overflow:hidden;box-shadow:0 12px 28px #1b34551e}.hero:after{content:'';position:absolute;border-radius:100%;width:320px;height:320px;border:1px solid #ffffff17;right:-110px;top:-130px;box-shadow:0 0 0 65px #ffffff07,0 0 0 138px #ffffff04;pointer-events:none}.hero .kicker{color:#b2d2ff}.hero h1{font-size:35px;margin:13px 0 15px;max-width:720px}.hero p{line-height:1.95;font-size:15px;color:#d5e0ee;max-width:680px;margin:0 0 23px}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:1}.hero-actions .small-button{padding:11px 16px}.statbar{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0 36px}.stat{background:white;border:1px solid var(--line);border-radius:13px;padding:18px 20px}.stat b{font-size:23px;display:block;color:#233349;margin-bottom:5px}.stat small{color:#7b8898;font-size:12px}.section-label{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:26px 0 14px}.section-label h2{font-size:20px;margin:0}.section-label p{margin:0;color:#8490a0;font-size:12px}.chap-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.chap-card{border:1px solid #e0e6ec;background:#fff;border-radius:14px;padding:20px;box-shadow:var(--card-shadow);transition:transform .15s,border-color .15s}.chap-card:hover{transform:translateY(-2px);border-color:#bed4eb}.chap-card .num{font-size:12px;font-weight:800;color:#296ab8}.chap-card h3{font-size:17px;margin:10px 0 10px}.chap-card p{font-size:12px;line-height:1.8;color:#728091;margin:0 0 16px;min-height:42px}.chap-card .foot{display:flex;align-items:center;justify-content:space-between;gap:8px}.chap-card .foot span{font-size:11px;color:#8996a5}.chap-card .foot button{border:0;background:#edf4fd;color:#2869b6;font-size:12px;font-weight:760;padding:9px 11px;border-radius:8px}.chap-card .bar{height:5px;border-radius:8px;background:#edf1f5;margin:15px 0 12px;overflow:hidden}.chap-card .bar i{display:block;height:100%;background:#75abf2}
+.card{background:white;border:1px solid var(--line);border-radius:14px;padding:25px 29px;margin:19px 0;box-shadow:var(--card-shadow)}.card h2{font-size:20px;margin:0 0 17px}.card h3{font-size:15px;margin:20px 0 10px}.card p{margin:8px 0 0;color:#546477;line-height:1.95}.intro-card{background:#fff;border-left:4px solid #3376c6;padding:22px 26px;border-radius:0 12px 12px 0;box-shadow:0 3px 16px #1d3c6509;margin:23px 0}.intro-card .head{font-size:12px;color:#2674c7;font-weight:850;margin-bottom:11px}.intro-card p{margin:0;color:#43556a;font-size:15px;line-height:1.95}.point-list{display:grid;grid-template-columns:1fr;gap:9px}.point{padding:14px 16px 13px;border:1px solid #ebeff4;border-radius:10px;background:#fcfdfe;display:flex;gap:12px;align-items:flex-start}.point-marker{flex:none;width:7px;height:7px;border-radius:50%;background:#8db6e7;margin-top:9px}.point.must .point-marker{background:#e17d65}.point.frequent .point-marker{background:#dbad5c}.point .ptext{font-weight:650;font-size:14px;line-height:1.7}.point .pnote{font-size:12px;line-height:1.8;color:#6a7d8e;margin-top:5px}.source{font-size:11px;color:#8a97a5;margin:16px 0 0;line-height:1.9}.lesson-footer{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-top:24px}.step{display:flex;gap:13px;align-items:flex-start;padding:13px 0;border-bottom:1px solid #edf0f3}.step:last-child{border:0}.step-num{background:#edf4fc;color:#2670c1;border:1px solid #dae8f8;min-width:27px;height:27px;border-radius:8px;font-size:12px;font-weight:800;display:grid;place-items:center}.step>div:last-child{font-size:14px;line-height:1.8;padding-top:3px}.example{background:#f8fafc;border:1px solid #e3eaf1;border-radius:12px;padding:18px 21px;margin-top:14px}.example h3{margin:0 0 6px;font-size:15px}.given{color:#567089;font-size:13px;background:#edf3f9;padding:10px 12px;border-radius:7px;margin:10px 0}.answer{margin-top:13px;padding:12px 13px;background:#eaf5f0;color:#116a57;border-radius:8px;font-size:14px;font-weight:750;line-height:1.75}.notice{background:#fff8ed;color:#94672f;border-radius:9px;padding:13px 14px;margin-top:13px;font-size:13px;line-height:1.9}.smalltags{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0}.topic-jump{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.topic-jump button{border:1px solid #e0e7ee;border-radius:9px;padding:9px 12px;font-size:12px;background:white;color:#56718e}.topic-jump button:hover{border-color:#88bae9;background:#f0f7fd}.topic-jump button.current{background:#266cc4;color:white;border-color:#266cc4}
+.diagram{background:#fbfcfe;border:1px solid #e7eef4;border-radius:12px;padding:22px;overflow-x:auto}.diagram-title{font-size:11px;color:#748b9e;font-weight:800;letter-spacing:.8px;margin-bottom:16px}.d-row{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}.d-box{border:1px solid #cfdced;background:white;border-radius:10px;text-align:center;padding:14px 19px;min-width:103px;font-size:13px;font-weight:740;color:#244766;box-shadow:0 2px 8px #1e324609}.d-box small{display:block;font-weight:500;font-size:11px;color:#8392a2;margin-top:5px}.d-box.accent{background:#ecf4ff;border-color:#9fc0ea;color:#2359a2}.d-arrow{font-size:22px;color:#a3b5c7}.d-sub{font-size:12px;color:#667b8e;text-align:center;line-height:1.8;margin-top:13px}.d-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.d-grid.two{grid-template-columns:repeat(2,1fr)}.d-grid.three{grid-template-columns:repeat(3,1fr)}.d-grid .d-box{min-width:0;padding:13px 9px}.d-chip{border:1px solid #d8e3ed;border-radius:10px;padding:13px 14px;background:white;color:#31506d;font-size:12px;line-height:1.8}.d-chip b{display:block;color:#234566;font-size:14px}.d-chip strong{color:#1e65af}.formula{font-size:16px;font-weight:780;color:#214d89;line-height:1.9;padding:17px 20px;background:#eef5fe;border-radius:10px;overflow-wrap:anywhere}.formula small{display:block;font-size:12px;color:#6e859f;font-weight:500;margin-top:3px}.times{display:grid;grid-template-columns:58px repeat(7,36px);gap:4px;justify-content:center;min-width:340px}.times>div{height:33px;display:grid;place-items:center;font-size:11px;border-radius:5px;background:#eff2f6;color:#637b91}.times .work{background:#dceafc;color:#265b95;font-weight:800}.times .work.dark{background:#a9d0f9}.levelstack{display:flex;flex-direction:column;align-items:center;gap:6px}.levelstack .level{border-radius:6px;text-align:center;padding:10px 12px;color:#18426b;background:#dfeeff;font-size:12px;font-weight:780}.levelstack .level:nth-child(1){width:32%}.levelstack .level:nth-child(2){width:50%}.levelstack .level:nth-child(3){width:71%}.levelstack .level:nth-child(4){width:95%}.mini-table{border-collapse:collapse;width:100%;font-size:13px;line-height:1.75}.mini-table th,.mini-table td{border-bottom:1px solid #e3e9ef;padding:12px 10px;text-align:left;vertical-align:top}.mini-table th{background:#f1f5fa;color:#46617c;font-weight:760}.mini-table td{color:#40566b}.mini-table tbody tr:last-child td{border-bottom:none}.bits{display:flex;justify-content:center;gap:5px;flex-wrap:wrap}.bit{width:40px;height:44px;display:grid;place-items:center;border:1px solid #cbd9e7;background:white;border-radius:7px;font-weight:830;font-family:ui-monospace,monospace;font-size:18px;color:#345b83}.bit.highlight{background:#ddebfc;border-color:#8fb3e2;color:#1e62b2}.bit.red{background:#fff0e9;border-color:#f1bdac;color:#aa594c}.brow{display:flex;align-items:center;gap:7px;justify-content:center;flex-wrap:wrap}.chain{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}.chain .link{height:2px;background:#9fb8d0;width:25px}.chain .unit{padding:13px 19px;border:1px solid #9fc2e7;border-radius:9px;background:#eaf4ff;color:#255d9c;font-weight:790;font-size:13px}.parallel{display:flex;flex-direction:column;align-items:center;gap:12px}.parallel .unit{padding:13px 54px;background:#edf5fd;border:1px solid #acc9e6;border-radius:9px;color:#2c639b;font-weight:800}.d-note{font-size:12px;color:#6d7f92;text-align:center;margin-top:14px;line-height:1.9}
+.map-root{padding:18px 23px;border-radius:14px;background:linear-gradient(125deg,#203953,#305778);color:#fff;font-size:19px;font-weight:800;display:inline-flex;box-shadow:0 8px 22px #12314e19}.map-rail{display:flex;gap:16px;flex-direction:column;margin:22px 0}.map-branch{display:grid;grid-template-columns:250px minmax(0,1fr);gap:17px;align-items:start;position:relative}.map-branch:before{content:'';height:1px;width:17px;position:absolute;left:235px;top:23px;background:#bad0e4}.map-chap{padding:15px 18px;text-align:left;background:#e8f1fb;color:#285a95;border:1px solid #bfd7f1;border-radius:10px;font-size:13px;font-weight:780;display:flex;justify-content:space-between;gap:9px}.map-chap.on{background:#2d6baf;color:white;border-color:#2d6baf}.map-topics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.map-topic{border:1px solid #e1e8ef;background:white;border-radius:9px;text-align:left;padding:12px 13px;font-size:12px;color:#486079;line-height:1.55}.map-topic:hover{border-color:#8db9e5;background:#f6faff}.map-topic small{display:block;color:#94a2b0;margin-top:6px}.map-topic.expanded{border-color:#aac8e6;background:#f9fcff}.map-details{grid-column:1/-1;margin-top:10px;padding-top:10px;border-top:1px dashed #d8e5ee;color:#6e7f8c;font-size:11px;line-height:1.85}.map-details span{display:block;padding:3px 0}.qgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.quick-card{border:1px solid #e2e9ef;border-radius:12px;background:white;padding:18px;display:flex;flex-direction:column;gap:11px}.quick-card .qtag{font-size:11px;color:#7c8da0}.quick-card h3{margin:0;font-size:15px}.quick-card p{font-size:13px;line-height:1.85;color:#476079;margin:0;flex:1}.quick-card button{align-self:flex-start;color:#2068b6;font-size:12px;border:0;background:#edf5ff;border-radius:8px;padding:9px 11px;font-weight:770}.quiz-wrap{max-width:760px}.quiz-top{display:flex;align-items:center;justify-content:space-between;gap:15px;margin:22px 0}.quiz-progress{height:8px;border-radius:10px;background:#e7edf4;overflow:hidden;flex:1}.quiz-progress i{display:block;background:#5b9ee8;height:100%;transition:width .2s}.quiz-card{background:white;border:1px solid #e0e8f0;border-radius:15px;padding:32px;box-shadow:var(--card-shadow)}.quiz-card h2{font-size:22px;margin:9px 0 22px;line-height:1.6}.options{display:grid;gap:10px}.option{display:flex;gap:13px;align-items:flex-start;text-align:left;border:1px solid #dce5ef;background:white;border-radius:10px;padding:15px 17px;color:#41556a;font-size:14px;line-height:1.7}.option i{font-style:normal;font-weight:800;color:#4973a6}.option:not(:disabled):hover{border-color:#76aae6;background:#f5f9ff}.option.selected{border-color:#5997d8;background:#ebf5ff}.option.correct{border-color:#65bda2;background:#e8f6f0}.option.incorrect{border-color:#e4a2a0;background:#fff1f0}.explain{background:#f4f8fc;border-left:3px solid #4b96dd;padding:15px 17px;border-radius:0 9px 9px 0;color:#476179;line-height:1.9;margin-top:16px;font-size:13px}.quiz-bottom{display:flex;justify-content:space-between;gap:12px;margin-top:22px}.quiz-filter{display:flex;gap:9px;flex-wrap:wrap;margin:16px 0 24px}.quiz-filter button{background:#fff;border:1px solid #dee6ed;color:#697f92;border-radius:8px;padding:9px 12px;font-size:12px;font-weight:670}.quiz-filter button.chosen{background:#e8f2ff;border-color:#a6c8ef;color:#2262a7}.score-card{background:#fff;border:1px solid #e4ebf1;border-radius:14px;padding:34px;text-align:center}.score-card .huge{font-size:58px;color:#236cb5;font-weight:850}.score-card p{font-size:14px;color:#5d7286}.score-card .small-button{margin:8px}
+.rail{display:none}.overlay{position:fixed;inset:0;background:#142336a6;z-index:25;display:flex;justify-content:center;align-items:flex-start;padding:11vh 17px}.dialog{background:white;border-radius:16px;box-shadow:0 25px 100px #101c2f35;width:min(650px,100%);padding:23px;max-height:80vh;overflow:auto}.dialoghead{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.dialoghead h2{font-size:19px;margin:0}.searchinput{width:100%;border:1px solid #cad8e5;padding:14px 16px;border-radius:10px;outline:none;font-size:15px}.search-results{margin-top:16px;display:grid;gap:7px}.sr{display:block;width:100%;border:1px solid #e6ebf1;background:white;border-radius:9px;padding:12px 15px;text-align:left;color:#3b526a;font-size:13px}.sr:hover{background:#f2f7fe;border-color:#afcfed}.sr small{display:block;color:#8496a7;margin-top:5px}.scrim{display:none}
+@media(min-width:1320px){.workspace .content-shell.withrail .content{max-width:1000px;padding-right:35px}.content-shell.withrail .rail{display:block;width:235px;min-width:235px;padding:40px 22px 40px 0}.rail-card{position:sticky;top:0;background:white;border:1px solid #e4e9ef;border-radius:12px;padding:17px 15px}.rail-card h3{font-size:12px;color:#7a8ca1;margin:0 0 12px;letter-spacing:.4px}.rail-card .rail-topic{display:block;text-align:left;width:100%;border:0;background:none;color:#76879b;font-size:12px;line-height:1.55;padding:10px 6px;border-left:2px solid transparent}.rail-card .rail-topic.current{border-color:#347ecb;color:#2466ae;background:#f4f8fe;font-weight:720}.rail-card .rail-topic:hover{color:#234f83}.rail-memory{border-top:1px solid #edf0f3;margin-top:14px;padding-top:14px;color:#49637d;font-size:12px;line-height:1.8}}
+@media(max-width:1100px){.topbar{padding:0 20px}.content{padding:32px 28px 70px}.tabs .tab{padding:9px 10px;font-size:12px}.app{grid-template-columns:230px minmax(0,1fr)}.map-branch{grid-template-columns:180px 1fr}.map-branch:before{left:165px}}
+@media(max-width:800px){.app{display:block}.side{position:fixed;top:0;bottom:0;left:0;width:275px;transform:translateX(-110%);z-index:21;transition:transform .2s;box-shadow:10px 0 50px #15243c22}.side.open{transform:translateX(0)}.scrim.open{display:block;position:fixed;inset:0;background:#121d2a88;z-index:20}.workspace{height:100dvh}.topbar{height:auto;min-height:67px;padding:11px 14px;gap:10px;flex-wrap:wrap}.top-left{flex:1}.mobile-toggle{display:flex;align-items:center;justify-content:center;width:35px;height:35px;border:1px solid #e1e6ed;border-radius:8px;background:#fff;font-size:19px}.toptitle{font-size:13px}.top-small{display:none}.tabs{order:3;width:100%;justify-content:space-between}.tabs .tab{flex:1}.top-actions{gap:5px}.content{padding:25px 18px 65px}.big-title{font-size:25px}.hero{padding:30px 23px}.hero h1{font-size:26px}.statbar{gap:8px}.stat{padding:15px 12px}.stat b{font-size:19px}.chap-grid,.qgrid,.map-topics{grid-template-columns:1fr}.card{padding:19px 17px}.map-branch{grid-template-columns:1fr;gap:8px}.map-branch:before{display:none}.d-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.quiz-card{padding:21px 17px}.title-row{flex-wrap:wrap}.lesson-footer{justify-content:flex-start}}
+@media print{.side,.topbar,.rail,.overlay,.scrim,.small-button,.topic-jump{display:none!important}.app{display:block;height:auto}.workspace,.content-shell{overflow:visible;height:auto}.content{padding:0!important;max-width:none}.card{box-shadow:none;break-inside:avoid}.content-shell{display:block}body{background:white}}
+
+/* v1.1 — controls, priority navigation & theme */
+.nav-empty{font-size:11px;color:#8da4bb;padding:8px 10px;line-height:1.65}
+.iconbutton{flex:none;display:inline-flex;align-items:center;justify-content:center;padding:0;line-height:1}
+.iconbutton svg{display:block;width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.theme-switch .sun-icon{display:none}
+html[data-theme="dark"] .theme-switch .moon-icon{display:none}
+html[data-theme="dark"] .theme-switch .sun-icon{display:block}
+.side-priority-tools{padding:1px 16px 12px}
+.priority-legend{display:flex;align-items:center;justify-content:space-between;gap:7px;margin:0 1px 11px}
+.legend-entry{display:inline-flex;gap:5px;align-items:center;color:#bdcad7;font-size:11px;white-space:nowrap;font-weight:650}
+.legend-entry b{color:#edf5ff;font-size:11px;font-variant-numeric:tabular-nums}
+.legend-dot{display:inline-block;flex:none;width:7px;height:7px;border-radius:3px}
+.legend-dot.must{background:#fc8989;box-shadow:0 0 0 2px #fc898927}
+.legend-dot.frequent{background:#f9ba65;box-shadow:0 0 0 2px #f9ba6527}
+.focus-toggle{width:100%;border:1px solid #40556d;color:#bed0e2;background:#243449;border-radius:9px;display:flex;align-items:center;gap:8px;padding:9px 11px;text-align:left;font-size:12px;font-weight:720;transition:background .15s,border-color .15s}
+.focus-toggle:hover{background:#304760;border-color:#6285ae}
+.focus-toggle .focus-icon{font-size:13px;color:#f4c37e}
+.focus-toggle .focus-label{flex:1}
+.focus-indicator{width:26px;height:15px;border:1px solid #6a8199;background:#566779;border-radius:12px;position:relative;flex:none}
+.focus-indicator:before{content:'';position:absolute;width:9px;height:9px;border-radius:50%;top:2px;left:2px;background:#d7e1ec;transition:transform .18s}
+.focus-toggle[aria-pressed="true"]{background:#344761;border-color:#efbb76;color:#fff}
+.focus-toggle[aria-pressed="true"] .focus-indicator{background:#d49347;border-color:#e6b06b}
+.focus-toggle[aria-pressed="true"] .focus-indicator:before{transform:translateX(11px);background:white}
+.chap-button{align-items:center;gap:8px}
+.chap-button>span:nth-child(2){flex:1;min-width:0}
+.chap-focus-count{color:#b8cadf;font-size:10px;white-space:nowrap;background:#34465b;border-radius:5px;padding:2px 5px;line-height:1.4;font-variant-numeric:tabular-nums}
+.chap-button.active .chap-focus-count{background:#445c7b;color:#e6f2ff}
+.chap-chevron{margin-left:0}
+.subnav{padding-left:25px;padding-right:3px;gap:4px}
+.subnav button{width:100%;display:flex;gap:7px;align-items:center;border-left:3px solid transparent;padding:9px 8px 9px 9px;min-height:37px;font-size:12px}
+.subnav button.nav-pr-must{border-left-color:#f58e93;color:#e7d1d6}
+.subnav button.nav-pr-frequent{border-left-color:#e3ac67;color:#e3d9cc}
+.subnav button.selected{background:#3a4c64;border-left-color:#91c0ff;color:#fff;box-shadow:none}
+.subnav button.selected.nav-pr-must{border-left-color:#ff8f96}
+.subnav button.selected.nav-pr-frequent{border-left-color:#f3bb71}
+.subnav button.complete:after{content:none}
+.nav-topic-title{flex:1;min-width:0;line-height:1.55}
+.nav-level{flex:none;font-size:10px;font-weight:750;padding:2px 4px;border-radius:4px;white-space:nowrap;letter-spacing:0}
+.nav-level.must{color:#ffd3d4;background:#642f3b;border:1px solid #86505b}
+.nav-level.frequent{color:#ffdcac;background:#584630;border:1px solid #7b6242}
+.nav-done{font-size:11px;color:#94e5c9;flex:none}
+.lesson-footer{margin:28px 0 50px;padding:17px 0 22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.lesson-footer>div{flex-wrap:wrap}
+@media(max-width:800px){.lesson-footer{margin-bottom:38px}.side-priority-tools{padding-bottom:12px}}
+
+/* Dark theme — all study views, dialogs, diagrams and quiz states */
+html[data-theme="dark"]{
+ color-scheme:dark;
+ --ink:#e7edf5;--muted:#acbbcc;--soft:#95a7ba;--bg:#0d1520;--panel:#172232;--nav:#111c2b;--nav2:#263951;
+ --line:#2d3b4e;--accent:#88b9fb;--accent-bg:#1b304b;--darkblue:#c0dcff;
+ --card-shadow:0 6px 30px rgba(0,0,0,.15);--amber:#f0be73;--red:#f6a09c;--green:#78cfb5;
+}
+html[data-theme="dark"] body{background:var(--bg);color:var(--ink)}
+html[data-theme="dark"] .side{background:#111e2d;border-color:#26374b}
+html[data-theme="dark"] .chap-button:hover,html[data-theme="dark"] .chap-button.active{background:#2c4058}
+html[data-theme="dark"] .subnav button.selected{background:#355070}
+html[data-theme="dark"] .side-footer{border-color:#304057}
+html[data-theme="dark"] .topbar{background:#172232;border-color:#324256}
+html[data-theme="dark"] .top-small,html[data-theme="dark"] .section-label p,html[data-theme="dark"] .crumb{color:#94a7ba}
+html[data-theme="dark"] .tabs{background:#111c29}
+html[data-theme="dark"] .tab{color:#9eb0c5}
+html[data-theme="dark"] .tab.on{background:#28415f;color:#e6f2ff;box-shadow:0 2px 8px #0003}
+html[data-theme="dark"] .tab:hover{color:#e9f4ff}
+html[data-theme="dark"] .iconbutton,html[data-theme="dark"] .mobile-toggle{background:#243348;border-color:#405570;color:#c6d9ed}
+html[data-theme="dark"] .iconbutton:hover,html[data-theme="dark"] .mobile-toggle:hover{background:#2d4360;border-color:#799fce}
+html[data-theme="dark"] .kicker{color:#9ac7ff}
+html[data-theme="dark"] .lede,html[data-theme="dark"] .muted,html[data-theme="dark"] .tiny{color:#acbed0}
+html[data-theme="dark"] .hero{background:linear-gradient(115deg,#162a43,#24486a);border:1px solid #335573}
+html[data-theme="dark"] .stat,html[data-theme="dark"] .chap-card,html[data-theme="dark"] .card,html[data-theme="dark"] .quick-card,html[data-theme="dark"] .quiz-card,html[data-theme="dark"] .score-card,html[data-theme="dark"] .rail-card,html[data-theme="dark"] .dialog{background:#172435;border-color:#33455b;color:#e7edf5}
+html[data-theme="dark"] .stat b{color:#e6effc}
+html[data-theme="dark"] .stat small,html[data-theme="dark"] .chap-card p,html[data-theme="dark"] .chap-card .foot span{color:#a1b4c8}
+html[data-theme="dark"] .chap-card:hover{border-color:#6c97cb}
+html[data-theme="dark"] .chap-card .num{color:#8fc0ff}
+html[data-theme="dark"] .chap-card .foot button,html[data-theme="dark"] .quick-card button{background:#27476b;color:#c1ddff}
+html[data-theme="dark"] .chap-card .bar{background:#30435a}
+html[data-theme="dark"] .card p,html[data-theme="dark"] .intro-card p{color:#beccdb}
+html[data-theme="dark"] .intro-card{background:#1b2c41;border-left-color:#66a8f1;box-shadow:none}
+html[data-theme="dark"] .intro-card .head{color:#9ac6ff}
+html[data-theme="dark"] .pill{background:#2c3e51;color:#c8d8e8}
+html[data-theme="dark"] .pill.must{background:#552d39;color:#ffd5d4}
+html[data-theme="dark"] .pill.frequent{background:#58412b;color:#ffdfaf}
+html[data-theme="dark"] .pill.understand{background:#213e5e;color:#bcd9fb}
+html[data-theme="dark"] .point{background:#1a293a;border-color:#35465c}
+html[data-theme="dark"] .point .ptext{color:#e0e9f5}
+html[data-theme="dark"] .point .pnote,html[data-theme="dark"] .source{color:#a5b7cb}
+html[data-theme="dark"] .point.must{background:#292936;border-color:#694450}
+html[data-theme="dark"] .point.frequent{background:#302c30;border-color:#65503b}
+html[data-theme="dark"] .small-button,html[data-theme="dark"] .topic-jump button{background:#243850;border-color:#405772;color:#d2e4f6}
+html[data-theme="dark"] .small-button:hover,html[data-theme="dark"] .topic-jump button:hover{background:#2d4b6d;border-color:#77a4d4}
+html[data-theme="dark"] .small-button.primary,html[data-theme="dark"] .topic-jump button.current{background:#3678ca;border-color:#3678ca;color:#fff}
+html[data-theme="dark"] .small-button.done{background:#21483e;border-color:#387c69;color:#bcf3e2}
+html[data-theme="dark"] .small-button.tinted{background:#24476a;border-color:#35658d;color:#c5e2ff}
+html[data-theme="dark"] .small-button.danger{color:#ffc0bd}
+html[data-theme="dark"] .diagram{background:#131f2f;border-color:#34475f}
+html[data-theme="dark"] .diagram-title,html[data-theme="dark"] .d-sub,html[data-theme="dark"] .d-note,html[data-theme="dark"] .d-arrow{color:#afc2d5}
+html[data-theme="dark"] .d-box,html[data-theme="dark"] .d-chip{background:#20344b;border-color:#456181;color:#deedff}
+html[data-theme="dark"] .d-box small{color:#adbed1}
+html[data-theme="dark"] .d-box.accent,html[data-theme="dark"] .d-chip:has(strong){background:#264260;border-color:#628ab6}
+html[data-theme="dark"] .d-chip b{color:#e1edfa}
+html[data-theme="dark"] .d-chip strong{color:#a4cbff}
+html[data-theme="dark"] .formula{background:#203d5e;color:#d5e9ff}
+html[data-theme="dark"] .formula small{color:#afc7de}
+html[data-theme="dark"] .times>div{background:#23364d;color:#bed0e1}
+html[data-theme="dark"] .times .work{background:#315987;color:#e3f1ff}
+html[data-theme="dark"] .times .work.dark{background:#4172ad}
+html[data-theme="dark"] .levelstack .level{background:#284e72;color:#d5eaff}
+html[data-theme="dark"] .mini-table th,html[data-theme="dark"] .mini-table td{border-color:#3b4e64}
+html[data-theme="dark"] .mini-table th{background:#27394d;color:#d2e2f3}
+html[data-theme="dark"] .mini-table td{color:#c6d5e6}
+html[data-theme="dark"] .bit{background:#22374f;border-color:#426486;color:#e2f1ff}
+html[data-theme="dark"] .bit.highlight{background:#2e5480;border-color:#5f97cf;color:#e1f3ff}
+html[data-theme="dark"] .bit.red{background:#55323b;border-color:#a06972;color:#ffe0df}
+html[data-theme="dark"] .chain .unit,html[data-theme="dark"] .parallel .unit{background:#254768;border-color:#5b8aaf;color:#d5ebff}
+html[data-theme="dark"] .chain .link{background:#6484a4}
+html[data-theme="dark"] .example{background:#1b2a3a;border-color:#38506a}
+html[data-theme="dark"] .given{background:#273c53;color:#c8d8e8}
+html[data-theme="dark"] .step{border-color:#34465b}
+html[data-theme="dark"] .step-num{background:#294764;color:#c0e0ff;border-color:#426c91}
+html[data-theme="dark"] .answer{background:#21483c;color:#b5eed8}
+html[data-theme="dark"] .notice{background:#443726;color:#ffdcad}
+html[data-theme="dark"] .map-chap{background:#233f60;border-color:#4b6e96;color:#d6eaff}
+html[data-theme="dark"] .map-chap.on{background:#316da9;border-color:#5598d6;color:#fff}
+html[data-theme="dark"] .map-topic{background:#192b40;border-color:#37506b;color:#d2e4f5}
+html[data-theme="dark"] .map-topic:hover,html[data-theme="dark"] .map-topic.expanded{background:#23415f;border-color:#5c94cb}
+html[data-theme="dark"] .map-topic small,html[data-theme="dark"] .map-details{color:#acbed0}
+html[data-theme="dark"] .map-details{border-color:#42566d}
+html[data-theme="dark"] .map-branch:before{background:#4d789e}
+html[data-theme="dark"] .map-root{background:linear-gradient(125deg,#234368,#315e86)}
+html[data-theme="dark"] .quick-card .qtag{color:#abc0d5}
+html[data-theme="dark"] .quick-card p{color:#c1d1e2}
+html[data-theme="dark"] .quiz-progress,html[data-theme="dark"] .chap-card .bar{background:#2d4056}
+html[data-theme="dark"] .option{background:#1c2e43;border-color:#3b536f;color:#d7e7f8}
+html[data-theme="dark"] .option i{color:#9bc7fb}
+html[data-theme="dark"] .option:not(:disabled):hover{background:#294565;border-color:#679dcc}
+html[data-theme="dark"] .option.selected{background:#244a73;border-color:#6eade6}
+html[data-theme="dark"] .option.correct{background:#1f4a3b;border-color:#4f987b}
+html[data-theme="dark"] .option.incorrect{background:#543237;border-color:#b46f75}
+html[data-theme="dark"] .explain{background:#213c55;border-color:#6bace9;color:#d0e1f0}
+html[data-theme="dark"] .quiz-filter button{background:#22364d;border-color:#415873;color:#c1d4e7}
+html[data-theme="dark"] .quiz-filter button.chosen{background:#2d5177;border-color:#6c9ed1;color:#e3f0ff}
+html[data-theme="dark"] .score-card .huge{color:#9acaef}
+html[data-theme="dark"] .score-card p{color:#bacbdd}
+html[data-theme="dark"] .rail-card h3{color:#a4b9cc}
+html[data-theme="dark"] .rail-card .rail-topic{color:#a9bbcb}
+html[data-theme="dark"] .rail-card .rail-topic.current{color:#b9d9ff;background:#274461;border-color:#79b4f6}
+html[data-theme="dark"] .rail-card .rail-topic:hover{color:#e3f2ff}
+html[data-theme="dark"] .rail-memory{border-color:#38506a;color:#c5d8e9}
+html[data-theme="dark"] .overlay{background:#030812c7}
+html[data-theme="dark"] .dialog{box-shadow:0 25px 90px #0008}
+html[data-theme="dark"] .searchinput{background:#101d2d;border-color:#506780;color:#e7eff7}
+html[data-theme="dark"] .searchinput::placeholder{color:#8199b3}
+html[data-theme="dark"] .sr{background:#1b2e43;border-color:#344b64;color:#e2edfc}
+html[data-theme="dark"] .sr:hover{background:#2a4561;border-color:#648db7}
+html[data-theme="dark"] .sr small{color:#a2b8cc}
+@media print{html[data-theme="dark"] body{background:white;color:#1e2733}}
+
+/* Keep the few instructor-emphasis inline colors legible at night. */
+html[data-theme="dark"] .card [style*="color:#275b94"]{color:#b8daff!important}
+html[data-theme="dark"] [style*="color:#b65e49"]{color:#ffb5a7!important}
+html[data-theme="dark"] [style*="color:#2369c4"]{color:#a9cdff!important}
+html[data-theme="dark"] .mini-table td[style*="background:"]{background:#294665!important}
+html[data-theme="dark"] .mini-table td[style*="color:#"]{color:#d4e5f7!important}
+
+/* OS chapter diagrams — reusable with light and dark themes */
+.os-process,.os-process-lower{display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap;margin:15px 0}
+.os-pnode{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:18px 22px;text-align:center;min-width:156px;box-shadow:var(--card-shadow)}
+.os-pnode.main{background:var(--accent-bg);border-color:var(--accent)}
+.os-pnode b{display:block;color:var(--ink);font-size:15px}.os-pnode small{display:block;color:var(--muted);font-size:11px;margin-top:7px;line-height:1.5}
+.os-pair{display:grid;gap:6px;text-align:center;color:var(--accent);font-weight:750;font-size:12px;line-height:1.8}
+.os-stack{max-width:570px;display:flex;flex-direction:column;align-items:stretch;gap:0;margin:12px auto}.os-stack-item{padding:13px;background:var(--panel);border:1px solid var(--line);border-radius:9px;text-align:center;font-size:14px;font-weight:700;color:var(--ink)}.os-stack-item.mid{background:var(--accent-bg);color:var(--accent)}.os-stack-arrow{color:var(--accent);font-size:15px;text-align:center;line-height:1.1;padding:2px}
+.os-operator{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;color:var(--ink)}.os-operator>b{font-size:15px}.os-operator p{font-size:13px;color:var(--ink);margin:8px 0}.os-operator small{font-size:12px;color:var(--muted)}.os-equation{font-size:21px;color:var(--accent);font-weight:800;letter-spacing:1px;margin:15px 0}.os-code{font:14px/2.05 ui-monospace,'SFMono-Regular',Consolas,monospace;white-space:nowrap;margin:12px 0;color:var(--accent)}.os-table-wrap{overflow-x:auto;max-width:100%}
+.os-tree{display:inline-block;border:1px solid var(--line);background:var(--panel);border-radius:11px;padding:16px 20px;font-size:14px;line-height:2.25;color:var(--ink)}.os-tree-inner{border-left:1px dashed var(--muted);padding-left:23px;margin-left:9px}
+.os-bitrow{display:flex;flex-wrap:wrap;gap:3px;margin:17px auto;max-width:720px}.os-bitrow span{display:grid;place-items:center;background:var(--panel);color:var(--muted);border:1px solid var(--line);border-radius:5px;min-width:21px;height:26px;font-size:11px;flex:1 0 21px}.os-bitrow span.on{background:var(--accent-bg);color:var(--accent);border-color:var(--accent);font-weight:800}
+.d-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.d-box b{display:block;font-size:13px}
+.d-row{flex-wrap:wrap;justify-content:center}
+.lesson-footer{padding-bottom:30px;margin-bottom:70px}
+@media(max-width:650px){.d-grid.three{grid-template-columns:1fr!important}.os-process{gap:8px}.os-pnode{min-width:130px;padding:13px}.os-process-lower{gap:10px}.os-pair{font-size:11px}.os-code{font-size:12px}.os-table-wrap th,.os-table-wrap td{white-space:normal;min-width:100px}}
+
+
+/* SOFTWARE DESIGNER KNOWLEDGE BASE · Unified Reading-first Palette v2
+   Visual reference: 《考试介绍与复习方法》统一配色版
+   Scope: visual-only adjustments; original content / behavior / localStorage keys intact. */
+:root {
+  --bg:#f7f8fa;
+  --nav:#1d2937;
+  --nav2:#2b3b4f;
+  --panel:#ffffff;
+  --line:#e4e8ed;
+  --ink:#222c38;
+  --muted:#5f6d7d;
+  --soft:#8391a0;
+  --accent:#246bb4;
+  --accent-bg:#eff6fd;
+  --teal:#16867f;
+  --red:#c65555;
+  --amber:#ab7225;
+  --card-shadow:0 3px 16px rgba(25,38,55,.035);
+}
+body {background:var(--bg);color:var(--ink)}
+/* Deep-slate navigation remains stable across all courses. */
+.side {background:var(--nav);color:#cbd5e1;border-color:#142334}
+.brand {border-bottom-color:#ffffff17}
+.brand .mono {color:#a9c7e4}
+.brand p {color:#a9bbce}
+.side-head {color:#9caec1}
+.chap-button {color:#c6d3e1}
+.chap-button:hover,.chap-button.active {background:#2a3c50}
+.chap-num {color:#8cbff3}
+.chap-focus-count {background:#344c65;color:#cbdded}
+.chap-button.active .chap-focus-count {background:#3c536d;color:#e3f1fb}
+.subnav button {color:#acbfd0}
+.subnav button:hover {background:#2b3f54}
+.subnav button.selected {background:#334a64;border-left-color:#8ab9ee}
+.subnav button.nav-pr-must {border-left-color:#ec8584}
+.subnav button.nav-pr-frequent {border-left-color:#e5b46b}
+.subnav button.selected.nav-pr-must {border-left-color:#ff9996}
+.subnav button.selected.nav-pr-frequent {border-left-color:#f2c27f}
+.legend-dot.must {background:#f49d98}
+.legend-dot.frequent {background:#ebc38a}
+.focus-toggle {background:#283b4f;border-color:#465e76;color:#d4e1ed}
+.focus-toggle:hover {background:#30475f;border-color:#6c8ba8}
+.focus-toggle[aria-pressed="true"] {background:#344554;border-color:#b6a082;color:#fbe3bc}
+.focus-toggle[aria-pressed="true"] .focus-indicator {background:#ba9b67;border-color:#dec18f}
+.nav-level.must {background:#59373b;border-color:#765154;color:#ffd1cc}
+.nav-level.frequent {background:#514638;border-color:#75624c;color:#ffe0ae}
+.nav-done {color:#91d8c7}
+.side-footer {border-color:#ffffff17}
+.side-footer .progressbar {background:#3c4f64}
+.side-footer .progressbar>span {background:var(--teal)}
+/* Navigation and operational blue; no second dominant brand gradient. */
+.topbar {background:var(--panel);border-color:var(--line);height:69px;box-shadow:0 1px 0 rgba(20,40,60,.015)}
+.tabs {background:#f1f3f6}
+.tab {color:#617184}
+.tab.on {color:#1f5f9d;background:var(--panel);box-shadow:0 1px 4px #1a2d4612}
+.tab:hover {color:#1f5f9d}
+.iconbutton {background:var(--panel);border-color:#dce3eb;color:#4f6478}
+.iconbutton:hover {background:var(--accent-bg);border-color:#9cb9d8}
+.kicker {color:var(--accent)}
+.lede {color:var(--muted)}
+/* White hero with a thin teal rail, exactly as in the approved intro page. */
+.hero {
+  background:var(--panel);
+  color:var(--ink);
+  border:1px solid var(--line);
+  border-left:4px solid var(--teal);
+  border-radius:15px;
+  box-shadow:var(--card-shadow);
+  padding:34px 38px 35px;
+}
+.hero:after {display:none}
+.hero .kicker {color:var(--teal);letter-spacing:1.3px}
+.hero h1 {color:var(--ink);font-size:31px;line-height:1.43;letter-spacing:-.65px;margin:14px 0}
+.hero p {color:var(--muted);line-height:1.95;max-width:760px}
+.hero-actions {margin-top:23px}
+.hero-actions .small-button {padding:11px 16px}
+.small-button.primary,.topic-jump button.current {background:var(--accent);border-color:var(--accent);color:white}
+.small-button.primary:hover {background:#195a99;border-color:#195a99}
+.small-button {background:var(--panel);border-color:#d1dae4;color:var(--ink)}
+.small-button:hover {background:var(--accent-bg);border-color:#a7c6e4}
+.small-button.tinted {background:var(--accent-bg);border-color:#d5e5f5;color:var(--accent)}
+.small-button.done {background:#eef8f4;border-color:#cbe7db;color:#187c66}
+/* Reading-first card surfaces and useful colors. */
+.stat,.chap-card,.card,.quick-card,.quiz-card,.score-card,.dialog,.rail-card {background:var(--panel);border-color:var(--line);box-shadow:var(--card-shadow)}
+.stat b {color:var(--ink);font-size:23px}
+.stat small,.chap-card p,.chap-card .foot span {color:var(--muted)}
+.chap-card:hover {border-color:#b5cde3}
+.chap-card .num {color:var(--accent)}
+.chap-card .foot button,.quick-card button {background:var(--accent-bg);color:var(--accent)}
+.chap-card .foot button:hover,.quick-card button:hover {background:#e4f0fc}
+.chap-card .bar,.quiz-progress {background:#eef1f4}
+.chap-card .bar i,.quiz-progress i {background:var(--teal)}
+.card p,.intro-card p {color:#526173}
+.intro-card {background:#f1f6fc;border-left-color:var(--accent);box-shadow:none}
+.intro-card .head {color:var(--accent)}
+.pill {color:#607184;background:#f1f4f6}
+.pill.must {background:#fdf1f0;color:#ad4749;border:1px solid #f1d4d2}
+.pill.frequent {background:#fdf6ea;color:#956522;border:1px solid #ebdcc4}
+.pill.understand {background:#edf5fc;color:#4576a3}
+.point {background:#fafbfc;border-color:#e8edf2}
+.point .ptext {color:var(--ink)}
+.point .pnote {color:var(--muted)}
+.point.must {border-left:3px solid #d87573}
+.point.frequent {border-left:3px solid #c4934e}
+.source,.quick-card .qtag {color:var(--soft)}
+.topic-jump button {background:var(--panel);border-color:#dfe6ed;color:#536c84}
+.topic-jump button:hover {background:var(--accent-bg);border-color:#a2c4e0}
+.topic-jump button.current {background:var(--accent);border-color:var(--accent);color:#fff}
+/* Figures, formulas and answer states align to a single blue/teal language. */
+.diagram {background:#fafbfd;border-color:var(--line)}
+.diagram-title,.d-sub,.d-note {color:var(--muted)}
+.d-box,.d-chip,.bit {background:var(--panel);border-color:#d4dde6;color:#31526e}
+.d-box.accent,.bit.highlight {background:var(--accent-bg);border-color:#bad4eb;color:var(--accent)}
+.d-chip b {color:#2b516e}
+.d-chip strong {color:var(--accent)}
+.formula {background:var(--accent-bg);color:#245b91}
+.formula small {color:#657d94}
+.mini-table th {background:#f1f5f9;color:#475d74}
+.mini-table td {color:#485b70}
+.step-num {background:var(--accent-bg);color:var(--accent);border-color:#d4e5f5}
+.example {background:#fafbfd;border-color:var(--line)}
+.given {background:#edf4fa;color:#536f87}
+.answer {background:#edf7f3;color:#24745e}
+.notice {background:#fcf8f0;color:#865b28}
+.levelstack .level {background:#eaf3fa;color:#245b82}
+.times .work {background:#dfebf8;color:#2c6398}
+.times .work.dark {background:#bfdaf2}
+.map-root {background:#eaf3f9;color:#245a80;border:1px solid #cfe0ee;border-left:4px solid var(--teal);border-radius:11px;box-shadow:none}
+.map-chap {background:#edf5fc;border-color:#d5e5f2;color:#28659d}
+.map-chap.on {background:#dcecf8;border-color:#8ab7d6;color:#215e93}
+.map-topic {background:var(--panel);border-color:#e1e8ef;color:#4c6075}
+.map-topic:hover,.map-topic.expanded {background:#f6faff;border-color:#b5d3ed}
+.quick-card p {color:#526577}
+.option {border-color:#dce5ed;color:#3e5267}
+.option:not(:disabled):hover {background:#f1f6fc;border-color:#a1c3e1}
+.option.selected {background:#edf5fe;border-color:#80add5}
+.option.correct {background:#eaf7f1;border-color:#72bea2}
+.option.incorrect {background:#fff1f1;border-color:#daa09b}
+.explain {background:#f1f6fb;border-color:#5a92c7;color:#4a6179}
+.quiz-filter button {background:var(--panel);border-color:#dfe6ed;color:#617386}
+.quiz-filter button.chosen {background:var(--accent-bg);border-color:#a4c6e5;color:var(--accent)}
+.score-card .huge {color:var(--accent)}
+.rail-card .rail-topic.current {color:var(--accent);background:var(--accent-bg);border-color:var(--accent)}
+.rail-card .rail-topic:hover {color:var(--accent)}
+.searchinput {background:var(--panel);border-color:#c9d6e3;color:var(--ink)}
+.sr {background:var(--panel);border-color:var(--line);color:var(--ink)}
+.sr:hover {background:var(--accent-bg);border-color:#aac7e5}
+/* Dark palette is a restrained inversion of the same layout—not the old banner. */
+html[data-theme="dark"] {
+  color-scheme:dark;
+  --bg:#111822;
+  --nav:#121e2b;
+  --nav2:#26394d;
+  --panel:#1b2735;
+  --line:#344456;
+  --ink:#e7eef6;
+  --muted:#b3c2d1;
+  --soft:#96aabf;
+  --accent:#96c4fc;
+  --accent-bg:#223c59;
+  --teal:#6fd0bb;
+  --red:#f7a0a0;
+  --amber:#ecc58d;
+  --card-shadow:0 4px 18px #00000018;
+}
+html[data-theme="dark"] body {background:var(--bg);color:var(--ink)}
+html[data-theme="dark"] .side {background:var(--nav);border-color:#253748}
+html[data-theme="dark"] .brand {border-bottom-color:#ffffff17}
+html[data-theme="dark"] .chap-button:hover,html[data-theme="dark"] .chap-button.active {background:#2a3c50}
+html[data-theme="dark"] .chap-focus-count {background:#344c65;color:#cbdded}
+html[data-theme="dark"] .subnav button.selected {background:#334a64;border-left-color:#8ab9ee}
+html[data-theme="dark"] .subnav button.selected.nav-pr-must {border-left-color:#ff9996}
+html[data-theme="dark"] .subnav button.selected.nav-pr-frequent {border-left-color:#f2c27f}
+html[data-theme="dark"] .focus-toggle {background:#283b4f;border-color:#465e76;color:#d4e1ed}
+html[data-theme="dark"] .focus-toggle[aria-pressed="true"] {background:#344554;border-color:#b6a082;color:#fbe3bc}
+html[data-theme="dark"] .nav-level.must {background:#59373b;border-color:#765154;color:#ffd1cc}
+html[data-theme="dark"] .nav-level.frequent {background:#514638;border-color:#75624c;color:#ffe0ae}
+html[data-theme="dark"] .side-footer {border-color:#ffffff17}
+html[data-theme="dark"] .progressbar>span {background:var(--teal)}
+html[data-theme="dark"] .topbar {background:var(--panel);border-color:var(--line)}
+html[data-theme="dark"] .tabs {background:#14212d}
+html[data-theme="dark"] .tab {color:#a7b9cb}
+html[data-theme="dark"] .tab.on {background:#30485f;color:#d7ebff;box-shadow:none}
+html[data-theme="dark"] .iconbutton,html[data-theme="dark"] .mobile-toggle {background:#233447;border-color:#4b6177;color:#d9e8f6}
+html[data-theme="dark"] .iconbutton:hover,html[data-theme="dark"] .mobile-toggle:hover {background:#2d4860;border-color:#789fc0}
+html[data-theme="dark"] .kicker {color:var(--accent)}
+html[data-theme="dark"] .hero {background:var(--panel);color:var(--ink);border-color:var(--line);border-left-color:var(--teal);box-shadow:var(--card-shadow)}
+html[data-theme="dark"] .hero:after {display:none}
+html[data-theme="dark"] .hero .kicker {color:var(--teal)}
+html[data-theme="dark"] .hero h1 {color:var(--ink)}
+html[data-theme="dark"] .hero p {color:var(--muted)}
+html[data-theme="dark"] .hero-actions .small-button:not(.primary) {background:#233447;border-color:#4b6177;color:#e7eff7}
+html[data-theme="dark"] .hero-actions .small-button:not(.primary):hover {background:#2d4860;border-color:#789fc0}
+html[data-theme="dark"] .small-button.primary,html[data-theme="dark"] .topic-jump button.current {background:#397cb8;border-color:#397cb8;color:#fff}
+html[data-theme="dark"] .small-button.primary:hover {background:#4a8fce;border-color:#4a8fce}
+html[data-theme="dark"] .stat,html[data-theme="dark"] .chap-card,html[data-theme="dark"] .card,html[data-theme="dark"] .quick-card,html[data-theme="dark"] .quiz-card,html[data-theme="dark"] .score-card,html[data-theme="dark"] .rail-card,html[data-theme="dark"] .dialog {background:var(--panel);border-color:var(--line);color:var(--ink);box-shadow:var(--card-shadow)}
+html[data-theme="dark"] .stat b {color:var(--ink)}
+html[data-theme="dark"] .stat small,html[data-theme="dark"] .chap-card p,html[data-theme="dark"] .chap-card .foot span {color:var(--muted)}
+html[data-theme="dark"] .chap-card .num {color:var(--accent)}
+html[data-theme="dark"] .chap-card .foot button,html[data-theme="dark"] .quick-card button {background:#283f57;color:#b6dcff}
+html[data-theme="dark"] .chap-card .foot button:hover,html[data-theme="dark"] .quick-card button:hover {background:#33516c}
+html[data-theme="dark"] .chap-card .bar,html[data-theme="dark"] .quiz-progress {background:#324354}
+html[data-theme="dark"] .chap-card .bar i,html[data-theme="dark"] .quiz-progress i {background:var(--teal)}
+html[data-theme="dark"] .card p,html[data-theme="dark"] .intro-card p {color:var(--muted)}
+html[data-theme="dark"] .intro-card {background:#233c54;border-left-color:#6ca0d4}
+html[data-theme="dark"] .intro-card .head {color:#b4d9ff}
+html[data-theme="dark"] .pill {background:#2c3e51;color:#c8d8e8}
+html[data-theme="dark"] .pill.must {background:#563338;border-color:#7d4c50;color:#ffd1cb}
+html[data-theme="dark"] .pill.frequent {background:#51412d;border-color:#806647;color:#ffe1b6}
+html[data-theme="dark"] .pill.understand {background:#213e5e;color:#bcd9fb}
+html[data-theme="dark"] .point {background:var(--panel);border-color:var(--line)}
+html[data-theme="dark"] .point .ptext {color:var(--ink)}
+html[data-theme="dark"] .point .pnote,html[data-theme="dark"] .source {color:var(--muted)}
+html[data-theme="dark"] .point.must {border-left:3px solid #d68481;background:#2a2935}
+html[data-theme="dark"] .point.frequent {border-left:3px solid #bb9563;background:#2e2b30}
+html[data-theme="dark"] .small-button {background:#233447;border-color:#4b6177;color:#e7eff7}
+html[data-theme="dark"] .small-button:hover {background:#2d4860;border-color:#789fc0}
+html[data-theme="dark"] .small-button.tinted {background:#244364;border-color:#486b8d;color:#b9dbff}
+html[data-theme="dark"] .small-button.done {background:#234537;border-color:#3d806a;color:#bdf0db}
+html[data-theme="dark"] .topic-jump button {background:#233447;border-color:#4b6177;color:#d4e5f7}
+html[data-theme="dark"] .topic-jump button:hover {background:#2d4860;border-color:#789fc0}
+html[data-theme="dark"] .diagram,html[data-theme="dark"] .example {background:var(--panel);border-color:var(--line)}
+html[data-theme="dark"] .diagram-title,html[data-theme="dark"] .d-sub,html[data-theme="dark"] .d-note {color:var(--muted)}
+html[data-theme="dark"] .d-box,html[data-theme="dark"] .d-chip,html[data-theme="dark"] .bit {background:var(--panel2,#202e3d);border-color:#4e6175;color:#d7e8f8}
+html[data-theme="dark"] .d-box.accent,html[data-theme="dark"] .bit.highlight {background:#24455f;border-color:#688ead;color:#c5e5ff}
+html[data-theme="dark"] .d-chip b {color:#dceafa}
+html[data-theme="dark"] .d-chip strong {color:#a5cdf7}
+html[data-theme="dark"] .formula {background:#223c59;color:#c9e5ff}
+html[data-theme="dark"] .formula small {color:#a8bfd6}
+html[data-theme="dark"] .mini-table th {background:#273b50;color:#d6e5f4}
+html[data-theme="dark"] .mini-table td {color:#c6d7e8}
+html[data-theme="dark"] .step-num {background:#264767;color:#bcdcff;border-color:#496a88}
+html[data-theme="dark"] .given {background:#253d53;color:#c6daed}
+html[data-theme="dark"] .answer {background:#25463b;color:#b3ecd5}
+html[data-theme="dark"] .notice {background:#3a3229;color:#f0d8b6}
+html[data-theme="dark"] .map-root {background:#233d50;color:#c9e7f6;border-color:#426075;border-left-color:var(--teal);box-shadow:none}
+html[data-theme="dark"] .map-chap {background:#273d54;border-color:#46637d;color:#d4e9f9}
+html[data-theme="dark"] .map-chap.on {background:#315473;border-color:#6396b7;color:#e6f4ff}
+html[data-theme="dark"] .map-topic {background:var(--panel);border-color:var(--line);color:#d5e4f2}
+html[data-theme="dark"] .map-topic:hover,html[data-theme="dark"] .map-topic.expanded {background:#263a4e;border-color:#5e89ad}
+html[data-theme="dark"] .map-details {border-color:#42566d}
+html[data-theme="dark"] .quick-card p {color:var(--muted)}
+html[data-theme="dark"] .option {background:#223346;border-color:#42566e;color:#d8e8f8}
+html[data-theme="dark"] .option.correct {background:#23483b;border-color:#61a487}
+html[data-theme="dark"] .option.incorrect {background:#523236;border-color:#ac7778}
+html[data-theme="dark"] .explain {background:#243d55;border-color:#6ca0d4;color:#d6e7f6}
+html[data-theme="dark"] .quiz-filter button {background:#233447;border-color:#4b6177;color:#c8d9e8}
+html[data-theme="dark"] .quiz-filter button.chosen {background:#30516e;border-color:#6c98bb;color:#e0f0ff}
+html[data-theme="dark"] .score-card .huge {color:var(--accent)}
+html[data-theme="dark"] .rail-card .rail-topic.current {background:#2b465e;color:#c8e5ff;border-color:#82b6e0}
+html[data-theme="dark"] .searchinput {background:#142333;border-color:#50657c;color:#e7eef6}
+html[data-theme="dark"] .sr {background:#223346;border-color:#42566e;color:#e5eff9}
+html[data-theme="dark"] .sr:hover {background:#2d4860;border-color:#769cbc}
+/* OS chapter diagrams use the same palette tokens. */
+html[data-theme="dark"] .os-pnode,html[data-theme="dark"] .os-operator,html[data-theme="dark"] .os-stack-item,html[data-theme="dark"] .os-tree,html[data-theme="dark"] .os-bitrow span {background:var(--panel);border-color:var(--line);color:var(--ink)}
+html[data-theme="dark"] .os-pnode.main,html[data-theme="dark"] .os-stack-item.mid,html[data-theme="dark"] .os-bitrow span.on {background:var(--accent-bg);color:var(--accent);border-color:#496c90}
+html[data-theme="dark"] .os-equation,html[data-theme="dark"] .os-code,html[data-theme="dark"] .os-stack-arrow {color:var(--accent)}
+html[data-theme="dark"] .os-operator p {color:var(--ink)}
+html[data-theme="dark"] .os-operator small {color:var(--muted)}
+@media(max-width:800px) {
+  .hero {padding:27px 24px 29px}
+  .hero h1 {font-size:26px}
+  .topbar {height:auto}
+  .statbar {gap:9px}
+}
+@media print {
+  .hero {background:#fff!important;color:#222!important;border-color:#ddd!important}
+  .hero h1 {color:#222!important}
+}
+
+
+/* 第 3 章数据库知识：同一视觉设计规范下的专属教学图解 */
+.db-flow{display:flex;align-items:center;justify-content:center;gap:9px;flex-wrap:wrap;margin:8px 0}
+.db-arrow{color:var(--accent);font-size:21px;flex:none;font-weight:800}
+.db-node{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;color:var(--ink);min-width:112px;text-align:center;max-width:255px;flex:1 1 120px}
+.db-node.accent{border-color:var(--accent);background:var(--accent-bg)}
+.db-node strong{display:block;font-size:14px;line-height:1.5}.db-node small{display:block;font-size:12px;color:var(--muted);margin-top:6px;line-height:1.6}
+.db-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:10px}.db-grid .db-node{min-width:0;max-width:none}
+.db-layer{text-align:center}.db-layer>.db-grid{margin-top:12px}
+.db-stair{max-width:640px;margin:5px auto;display:flex;flex-direction:column;align-items:center;gap:5px}.db-stair .db-node{width:100%;max-width:510px;flex:none}.db-stair>span{font-size:12px;color:var(--accent);font-weight:750;padding:6px}
+.db-er-shapes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:center;justify-items:center;gap:15px;padding:12px 3px}
+.db-er-shapes>div{height:130px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:17px;min-width:0}
+.db-er-shapes small{font-size:12px;color:var(--muted)}.db-rectangle,.db-oval,.db-rhombus{display:grid;place-items:center;background:var(--accent-bg);color:var(--ink);font-size:14px;font-weight:800;border:2px solid var(--accent)}
+.db-rectangle{width:95px;height:60px;border-radius:5px}.db-oval{width:100px;height:60px;border-radius:50%}.db-rhombus{width:65px;height:65px;transform:rotate(45deg);border-radius:4px}.db-rhombus b{transform:rotate(-45deg);display:block;font-size:13px}
+.db-math{background:var(--accent-bg);border:1px solid var(--line);border-radius:9px;padding:17px;color:var(--accent);font-weight:800;text-align:center;overflow-wrap:anywhere;font-size:17px;margin-bottom:16px}
+.db-code{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:18px 22px;color:var(--ink);font:14px/2.1 ui-monospace,Consolas,monospace;white-space:normal;margin:0 auto 14px;max-width:660px;overflow-x:auto}.db-code span{font-weight:900;color:var(--accent)}
+.db-note{color:var(--muted);font-size:12px;line-height:1.9;margin-top:13px;text-align:center}
+html[data-theme="dark"] .db-node{background:#1c3046;border-color:#3d5670}
+html[data-theme="dark"] .db-node.accent,html[data-theme="dark"] .db-rectangle,html[data-theme="dark"] .db-oval,html[data-theme="dark"] .db-rhombus{background:#264765;border-color:#75b2e8;color:#e8f3ff}
+html[data-theme="dark"] .db-code{background:#112031;border-color:#3a536c}
+@media(max-width:650px){.db-flow{gap:6px}.db-node{padding:12px 9px;min-width:98px;flex-basis:110px}.db-arrow{font-size:17px}.db-er-shapes{gap:3px}.db-er-shapes small{font-size:10px}.db-rectangle,.db-oval{width:85px;height:55px}.db-rhombus{width:57px;height:57px}.db-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.db-math{font-size:14px}}
+
+
+/* security knowledge diagrams follow the unified palette */
+.sec-cia{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.sec-cia>div{background:var(--panel);border:1px solid var(--line);border-radius:12px;min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:17px 10px}.sec-cia strong{font:800 45px/1 ui-sans-serif,system-ui,sans-serif;color:var(--accent)}.sec-cia b{font-size:15px;color:var(--ink);margin:14px 0 6px}.sec-cia small{font-size:12px;color:var(--muted);text-align:center}
+.sec-two-col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-bottom:14px}.sec-two-col .db-node{max-width:none;height:100%;width:100%}.sec-table-scroll{max-width:100%;overflow-x:auto}.sec-table-scroll th,.sec-table-scroll td{min-width:100px}
+.sec-two-col .db-node strong{overflow-wrap:anywhere}.db-flow .db-node strong{overflow-wrap:anywhere}
+html[data-theme="dark"] .sec-cia>div{background:#1c3046;border-color:#3d5670}
+@media(max-width:680px){.sec-cia{grid-template-columns:1fr;gap:8px}.sec-cia>div{min-height:105px}.sec-cia strong{font-size:33px}.sec-cia b{margin:6px 0 2px}.sec-two-col{grid-template-columns:1fr}.sec-table-scroll th,.sec-table-scroll td{min-width:90px}}
+
+</style></head>
+<body>
+<div class="app">
+  <aside class="side" id="sidebar"><div class="brand"><div class="mono">SOFTWARE DESIGNER · STUDY NOTES</div><h2>知识产权与标准化</h2><p>软件设计师 · 精讲知识库<br>基于 PDF 课件和课程转写整理</p></div><div class="side-head"><span>章节目录</span><span id="sideCount"></span></div><div class="side-priority-tools"><div class="priority-legend"><span class="legend-entry"><i class="legend-dot must"></i>必须掌握 <b id="mustCount">0</b></span><span class="legend-entry"><i class="legend-dot frequent"></i>重点 / 常考 <b id="frequentCount">0</b></span></div><button type="button" class="focus-toggle" id="focusToggle" aria-pressed="false"><span class="focus-icon">★</span><span class="focus-label">只看重点主题</span><span class="focus-indicator" aria-hidden="true"></span></button></div><nav class="nav-list" id="navList"></nav><div class="side-footer"><div class="frow"><span>已掌握知识主题</span><strong id="sideProgress">0 / 0</strong></div><div class="progressbar"><span id="sideProgressBar"></span></div><small>学习进度保存在当前浏览器中。<br>离线文件，不需要登录账号。</small></div></aside>
+  <div class="scrim" id="scrim"></div>
+  <div class="workspace">
+   <header class="topbar"><div class="top-left"><button class="mobile-toggle" id="menuBtn" aria-label="打开章节目录">☰</button><div><div class="toptitle" id="topTitle">软件设计师 · 知识产权与标准化</div><div class="top-small">图文精讲 / 脑图总览 / 考前速记 / 随堂练习</div></div></div><div class="tabs" id="viewTabs"><button class="tab on" data-tab="home">学习首页</button><button class="tab" data-tab="read">图文精讲</button><button class="tab" data-tab="map">知识脑图</button><button class="tab" data-tab="quick">考前速记</button><button class="tab" data-tab="quiz">随堂练习</button></div><div class="top-actions"><button class="iconbutton" title="搜索知识点（Ctrl / ⌘ + K）" id="searchBtn" aria-label="搜索知识点"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button><button class="iconbutton theme-switch" type="button" title="切换夜间模式" id="themeBtn" aria-label="切换为夜间模式" aria-pressed="false"><svg class="moon-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.5 14.2A8.6 8.6 0 0 1 9.8 3.5 8.6 8.6 0 1 0 20.5 14.2Z"/></svg><svg class="sun-icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg></button></div></header>
+   <div class="content-shell" id="contentShell"><main class="content" id="mainContent"></main><aside class="rail" id="rightRail"></aside></div>
+  </div>
+</div>
+<div class="overlay hidden" id="searchOverlay"><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="searchTitle"><div class="dialoghead"><h2 id="searchTitle">查找知识点</h2><button class="iconbutton" id="searchClose" aria-label="关闭搜索">×</button></div><input class="searchinput" id="searchInput" placeholder="试试：署名权、专利、职务作品、GB/T…" autocomplete="off"/><div class="search-results" id="searchResults"></div></div></div>
+<script>
+const DATA = {"chapters":[{"id":0,"number":"00","name":"本章考试定位","subtitle":"PDF 第2页；转写开篇及结尾","topicIds":["0:0","0:1"]},{"id":1,"number":"01","name":"知识产权概述","subtitle":"PDF 第2页；转写第1–2页","topicIds":["1:0","1:1"]},{"id":2,"number":"02","name":"保护期限","subtitle":"PDF 第3页上表；转写第2–4页","topicIds":["2:0","2:1","2:2","2:3","2:4","2:5","2:6"]},{"id":3,"number":"03","name":"知识产权人的确定","subtitle":"PDF 第3页下表、第4页上表；转写第4–7页","topicIds":["3:0","3:1","3:2","3:3","3:4","3:5","3:6","3:7"]},{"id":4,"number":"04","name":"侵权判定","subtitle":"PDF 第4页下表、第5页真题；转写第7–8页","topicIds":["4:0","4:1","4:2","4:3","4:4","4:5"]},{"id":5,"number":"05","name":"标准划分与编号","subtitle":"PDF 第6页；转写第8–10页","topicIds":["5:0","5:1","5:2","5:3"]}],"lessons":[{"id":"0:0","chapter":0,"index":0,"title":"本章考试定位","fullTitle":"本章考试定位","intro":"老师估计本章通常约 2～3 分，主要考知识产权保护期限、归属、侵权判定；标准化较少，重点认识编号。","points":[{"text":"侵权判定是老师认为考查最多的部分。","note":"课程经验，不是固定配分。","priority":"frequent"},{"text":"保护期限和产权人归属是必读对照表。","note":"老师称这几张表是主要考查内容。","priority":"frequent"},{"text":"标准化重点是分类与编号。","note":"无需深入标准协议内容。","priority":"understand"}],"source":"PDF 第2页；转写开篇及结尾","priority":"","memory":"期限 → 归属 → 侵权 → 标准代号。","visual":"table","table":{"headers":["学习板块","学习任务"],"rows":[["概述","认识四属性"],["期限","记住年数和起算点"],["归属","区分职务、委托、合作"],["侵权","判断使用行为与法定条件"],["标准化","识别分类和编号"]]}},{"id":"0:1","chapter":0,"index":1,"title":"资料口径与法规版本","fullTitle":"资料口径与法规版本","intro":"本章以课件五个板块为主；因课程有旧法和口头简化，另行对照现行法规，不把旧答案直接当作现行法律。","points":[{"text":"PDF 第3页：保护期限与职务作品两张表。","note":"","priority":""},{"text":"PDF 第4页：委托、合作、商标专利申请及侵权对照。","note":"","priority":""},{"text":"PDF 第5页：四道课程真题；部分表述绝对化。","note":"","priority":""},{"text":"PDF 第6页：标准划分与编号。","note":"","priority":""},{"text":"法规核对日期：2026年11月25日；2026年新商标法已公布，2027年1月1日施行。","note":"","priority":""}],"source":"PDF 第2页；转写开篇及结尾","priority":"","memory":"遇到法律题先看题干指定的法条版本。","notice":"本页属于备考资料，不是针对实际纠纷的法律意见。正文中的“现行核对”与教师授课重点分开；不进行全面法律更新。"},{"id":"1:0","chapter":1,"index":0,"title":"知识产权的定义与对象","fullTitle":"知识产权的定义与对象","intro":"知识产权是依法对智力成果及经营标记等享有的民事权利。其客体不是承载成果的实物本身。","points":[{"text":"著作权、专利权、商标权是本章主要对象。","note":"老师强调围绕这三类展开。","priority":""},{"text":"商业秘密：补充了解。","note":"老师指出教材相关内容较少。","priority":"understand"},{"text":"其他包括植物新品种、集成电路布图设计、地理标志等。","note":"","priority":""},{"text":"买到软件光盘的实物，不等于获得软件著作权。","note":"","priority":""}],"source":"PDF 第2页；转写第1–2页","priority":"","memory":"智力成果及标记 ≠ 实物载体。","visual":"table","table":{"headers":["权利","主要对象"],"rows":[["著作权","作品的表达"],["专利权","符合法定条件的发明创造"],["商标权","识别商品或服务来源的标志"],["商业秘密","符合法定条件的非公开商业信息"]]}},{"id":"1:1","chapter":1,"index":1,"title":"四大属性：无体性、专有性、地域性、时间性","fullTitle":"四大属性：无体性、专有性、地域性、时间性","intro":"老师特别强调地域性，建议结合含义判断，而不是仅记四个词。","points":[{"text":"无体性：对象是智力成果等抽象财富。","note":"不同于有形物的所有权。","priority":""},{"text":"专有性：原则上未经权利人同意或法定许可，不得擅自行使专有权。","note":"注意法律另有规定的情形。","priority":""},{"text":"地域性：权利的保护与相应法域有关。","note":"老师指出常见考点。","priority":"frequent"},{"text":"时间性：许多权利只在法定期限内受保护。","note":"不是所有权项都有限期。","priority":""}],"source":"PDF 第2页；转写第1–2页","priority":"frequent","memory":"无体、专有、地域、时间。","visual":"table","table":{"headers":["属性","题目关键词"],"rows":[["无体性","智力成果、抽象物"],["专有性","权利人、许可"],["地域性","不同国家、法域"],["时间性","保护期限、到期"]]},"notice":"地域性并不排除依国际条约、优先权等途径在其他国家取得保护；署名权等不受期限限制，商标可依法续展。不要将课堂的绝对化表述视为普遍规则。"},{"id":"2:0","chapter":2,"index":0,"title":"保护期限总表","fullTitle":"保护期限总表","intro":"课件第3页把普通作品、软件、注册商标、专利和商业秘密放在一张表中。本节按类型和起算时间对照。","points":[{"text":"普通作品：自然人的发表权及财产权，终生加死后50年。","note":"到第50年的12月31日。","priority":"frequent"},{"text":"软件：自然人一般终生加50年，法人或其他组织一般50年。","note":"软件著作权自开发完成产生。","priority":"frequent"},{"text":"注册商标：10年，可以依法反复续展。","note":"从核准注册日起算。","priority":"frequent"},{"text":"发明20年、实用新型10年、外观设计现行15年。","note":"三类专利均从申请日起算。","priority":"frequent"},{"text":"商业秘密没有统一固定保护年数，取决于法定条件是否持续满足。","note":"","priority":""}],"source":"PDF 第3页上表；转写第2–4页","priority":"frequent","memory":"著作权多见50；商标10可续；专利20/10/15。","visual":"table","table":{"headers":["对象","期限／起算"],"rows":[["署名、修改、保护作品完整权（著作权法）","不受限制"],["自然人发表权、财产权","终生＋50年"],["单位软件","首次发表后50年（有未发表限制）"],["商标","10年，可续展"],["发明／实用新型／外观设计","20／10／15年（申请日）"],["商业秘密","无统一固定期限"]]},"notice":"旧课件将外观设计与实用新型合写为10年。现行《专利法》第42条规定外观设计15年；详见本章法规链接。"},{"id":"2:1","chapter":2,"index":1,"title":"自然人普通作品：人身权与财产权","fullTitle":"自然人普通作品：人身权与财产权","intro":"老师用李白的诗帮助记忆：过了财产权保护期，作品仍应正确署名。","points":[{"text":"署名权、修改权、保护作品完整权：保护期不受限制。","note":"老师特别要求记住。","priority":"frequent"},{"text":"发表权及法定财产权：作者终生及死亡后50年。","note":"截止死亡后第50年12月31日。","priority":"frequent"},{"text":"合作作品以最后死亡作者的死亡时间计算。","note":"","priority":""}],"source":"PDF 第3页上表；转写第2–4页","priority":"frequent","memory":"李白的诗仍署名李白；终生＋50年，年底截止。","visual":"table","table":{"headers":["权利","期限"],"rows":[["署名、修改、保护完整","不受限制"],["发表、复制、发行等法定财产权","终生＋死后50年"]]},"examples":[{"title":"期限判断练习","given":"某独立自然人作者于2020年去世。","steps":["区分署名权与财产权。","2020＋50＝2070。","财产权截止第50年的12月31日。"],"answer":"2070年12月31日；署名权不受该期限限制。"}]},{"id":"2:2","chapter":2,"index":2,"title":"单位普通作品：50年的起算点","fullTitle":"单位普通作品：50年的起算点","intro":"旧课件将单位作品的发表权、使用权、报酬权统一写为首次发表后50年。现行著作权法区分发表权与财产权。","points":[{"text":"课件记法：单位作品没有“单位终生”，一般50年。","note":"老师重点比较个人与单位。","priority":"frequent"},{"text":"现行法：法人或非法人组织作品的发表权，从创作完成后计50年。","note":"同样适用于著作权（署名权除外）归单位的职务作品。","priority":""},{"text":"相应财产权：首次发表后50年。","note":"创作完成后50年内未发表，不再保护。","priority":""}],"source":"PDF 第3页上表；转写第2–4页","priority":"","memory":"单位作品：发表权看完成；财产权看首次发表。","visual":"table","table":{"headers":["现行法权项","截止"],"rows":[["发表权","创作完成后第50年12月31日"],["财产权","首次发表后第50年12月31日；完成50年内未发表则不再保护"]]},"notice":"现行《著作权法》第23条与旧课件简表有区别，按题目给定法律版本判断。"},{"id":"2:3","chapter":2,"index":3,"title":"计算机软件著作权期限","fullTitle":"计算机软件著作权期限","intro":"普通作品与软件在课程表格中分别列出。软件著作权还包括复制、发行、出租、网络传播、翻译等权利。","points":[{"text":"自然人软件：一般终生＋死亡后50年；合作开发以最后死亡自然人为准。","note":"截止于相应年份12月31日。","priority":"frequent"},{"text":"法人或其他组织软件：首次发表后50年。","note":"开发完成50年内未发表的，不再保护。","priority":"frequent"},{"text":"软件著作权自开发完成之日起产生，不以登记或发表为前提。","note":"","priority":""},{"text":"课件把自然人软件的署名权、修改权单列为无限期；软件条例第14条采用整体保护期表述，复习时注意所问法条及权项。","note":"","priority":""}],"source":"PDF 第3页上表；转写第2–4页","priority":"","memory":"软件：完成即产生；个人终生＋50；单位首次发表后50。","visual":"table","table":{"headers":["软件主体","一般期限"],"rows":[["自然人","终生＋50年"],["合作开发自然人","最后死亡者＋50年"],["法人／其他组织","首次发表＋50年；有未发表限制"]]},"notice":"参考《计算机软件保护条例》第14条及《著作权法》第22条。不要把普通作品全部权项的期限直接套给软件。"},{"id":"2:4","chapter":2,"index":4,"title":"注册商标：10年与续展","fullTitle":"注册商标：10年与续展","intro":"老师强调商标和专利不同，到期后可以续展，不是一次性固定期限。","points":[{"text":"注册商标每一有效期10年，自核准注册日起计算。","note":"依法续展可持续保护。","priority":"frequent"},{"text":"现行法：期满前12个月内办理续展；未办理可有6个月宽展期。","note":"每次续展10年。","priority":""},{"text":"到期未依法办理续展手续，注册商标注销。","note":"不是自动永续。","priority":""}],"source":"PDF 第3页上表；转写第2–4页","priority":"frequent","memory":"商标10年＋期满前12个月＋6个月宽展。","visual":"table","table":{"headers":["时间节点","处理"],"rows":[["核准注册","开始10年有效期"],["期满前12个月","正常续展"],["期满后6个月","宽展期"],["依法续展","再延续10年"]]},"notice":"课件只提到期满后6个月，并提到注册人死亡/终止一年未移转。这里以现行续展条款为主。2026年修订商标法于2027-01-01施行，其第44条保留12＋6个月规则。"},{"id":"2:5","chapter":2,"index":5,"title":"三种专利的保护期限","fullTitle":"三种专利的保护期限","intro":"这是本章最容易被旧资料误导的时间题。老师旧课件把发明与实用新型、外观设计分为20年和10年。","points":[{"text":"发明专利：20年。","note":"从申请日起算。","priority":"frequent"},{"text":"实用新型专利：10年。","note":"从申请日起算。","priority":"frequent"},{"text":"外观设计专利：现行15年。","note":"旧课件为10年；2020年修法后调整。","priority":"frequent"},{"text":"通常期限从申请日起算，不从授权日起算；特殊期限补偿等不作为本章主线。","note":"","priority":""}],"source":"PDF 第3页上表；转写第2–4页","priority":"frequent","memory":"现行专利：发明20、实用10、外观15。","visual":"table","table":{"headers":["种类","旧课件","现行法一般期限"],"rows":[["发明","20年","20年"],["实用新型","10年","10年"],["外观设计","10年","15年"]]},"notice":"现行《专利法》第42条，2020年修正自2021年6月1日起施行；旧申请适用过渡规则，题目未给特殊条件时按现行一般规则。"},{"id":"2:6","chapter":2,"index":6,"title":"商业秘密：无固定保护年数","fullTitle":"商业秘密：无固定保护年数","intro":"老师用企业核心配方说明，企业不一定把全部技术申请专利。商业秘密保护依赖信息保密及法定条件。","points":[{"text":"无统一10年或20年等固定期限。","note":"","priority":""},{"text":"依法公开且不再符合秘密条件的信息，通常不再作为商业秘密保护。","note":"","priority":""},{"text":"专利制度以公开换取一定期限的排他保护。","note":"","priority":""},{"text":"不是权利人单方面称为秘密就一定受保护。","note":"","priority":""}],"source":"PDF 第3页上表；转写第2–4页","priority":"","memory":"商业秘密没有统一固定年限；不是永远自动保护。","notice":"老师将“时间自己说了算”作为口头说明，不是严谨的法律判断；此处只作为课程概念辨析。"},{"id":"3:0","chapter":3,"index":0,"title":"归属判断：先看作品类型和法律关系","fullTitle":"归属判断：先看作品类型和法律关系","intro":"课程的两张归属表分别讲职务作品与委托、合作开发。做题首先识别普通作品、软件或专利。","points":[{"text":"普通职务作品：原则上作者享有，单位有业务范围内的优先使用权。","note":"法定特殊情形除外。","priority":"frequent"},{"text":"职务软件：符合规定情形时单位享有软件著作权。","note":"不能把所有在职期间成果都算单位的。","priority":"frequent"},{"text":"委托创作：按合同确定，未明确约定通常归受托方。","note":"老师反复对比。","priority":"frequent"},{"text":"合作开发：看实际创作贡献及合同。","note":"","priority":""}],"source":"PDF 第3页下表、第4页上表；转写第4–7页","priority":"frequent","memory":"先识别职务/委托/合作，再看作品类型、法定条件与有效约定。","visual":"table","table":{"headers":["关系","先判断"],"rows":[["职务","工作任务及法定例外"],["委托","合同约定；无约定看受托方"],["合作","是否实际创作、能否分割"]]},"notice":"课件第4页“单位默认归单位”是简化总结，普通职务作品不能套用该结论。"},{"id":"3:1","chapter":3,"index":1,"title":"普通职务作品：一般与特殊","fullTitle":"普通职务作品：一般与特殊","intro":"普通职务作品不必然归公司。法定特殊职务作品通常由作者保留署名权，其他著作权归单位。","points":[{"text":"一般职务作品：作者享有著作权。","note":"单位可在业务范围内优先使用；完成两年内同方式对外许可受限制。","priority":"frequent"},{"text":"特殊职务作品：主要利用单位物质技术条件，并由单位承担责任的法定类型作品。","note":"如工程设计图、产品设计图、地图、示意图等。","priority":"frequent"},{"text":"法律、行政法规或合同约定著作权归单位的职务作品，以及法定媒体从业人员的职务作品，适用特殊规则。","note":"现行法第18条。","priority":""},{"text":"个人业余创作与工作任务无关，不因任职身份自动归单位。","note":"","priority":""}],"source":"PDF 第3页下表、第4页上表；转写第4–7页","priority":"frequent","memory":"一般归作者，特殊归单位（作者享署名权）。","visual":"table","table":{"headers":["情形","归属"],"rows":[["一般职务作品","作者；单位优先使用"],["特殊职务作品","署名权归作者，其他权利归单位"],["非职务作品","按实际创作及法律关系判断"]]},"notice":"依据现行《著作权法》第18条；不是只要使用单位电脑就当然属于特殊职务作品。"},{"id":"3:2","chapter":3,"index":2,"title":"职务软件：三个法定情形","fullTitle":"职务软件：三个法定情形","intro":"课件第3页列出三个单位享有软件著作权的条件，判断是否满足其中任一项。","points":[{"text":"本职工作中明确指定的开发目标。","note":"例如公司要求实现某业务模块。","priority":"frequent"},{"text":"本职工作活动所预见或自然产生的结果。","note":"不仅限于书面指定目标。","priority":"frequent"},{"text":"主要使用单位资金、专用设备、未公开专门信息等条件，并由单位承担责任。","note":"这是一组条件，不能只看一个因素。","priority":"frequent"},{"text":"不满足职务软件条件的个人项目，应结合事实及合法约定判断。","note":"","priority":""}],"source":"PDF 第3页下表、第4页上表；转写第4–7页","priority":"frequent","memory":"目标、自然结果、主要资源＋单位担责。","visual":"table","table":{"headers":["条件","典型情境"],"rows":[["明确目标","公司指定开发系统"],["工作自然结果","为岗位任务开发配套工具"],["单位资源且承担责任","依托专用设备及单位责任研发"]]},"examples":[{"title":"情境：公司指定功能","given":"开发人员受公司指派开发订单管理模块。","steps":["判断是软件作品。","开发属于明确指定的岗位目标。","符合职务软件规则。"],"answer":"软件著作权由单位享有。"}]},{"id":"3:3","chapter":3,"index":3,"title":"职务发明与离职后一年","fullTitle":"职务发明与离职后一年","intro":"老师特别强调离职后一年内的相关发明，不要认为离职即当然与原单位无关。","points":[{"text":"本职工作中完成的发明创造属于职务发明情形。","note":"申请专利的权利原则上归单位。","priority":"frequent"},{"text":"履行单位交付的本职工作之外任务所完成的发明创造也包括在内。","note":"不只看岗位名称。","priority":""},{"text":"退休、调离或劳动人事关系终止后1年内，作出的与原单位任务或本职工作有关的发明创造。","note":"老师明确强调这一年和相关性。","priority":"frequent"},{"text":"主要利用单位物质技术条件的发明创造也应考虑专利法第6条；依法约定的情形按规定处理。","note":"","priority":""}],"source":"PDF 第3页下表、第4页上表；转写第4–7页","priority":"frequent","memory":"离职后1年＋与原工作相关，两个条件都看。","visual":"table","table":{"headers":["时间与关联","判断方向"],"rows":[["离职半年，原研发任务相关","可能属于职务发明（法定情形）"],["离职半年，与原任务无关","不能仅凭离职时间认定"],["在职完成本职任务","职务发明"]]},"notice":"依据《专利法实施细则》（2023年修订）第13条。不能把所有离职一年内成果都归原单位。"},{"id":"3:4","chapter":3,"index":4,"title":"委托作品：合同优先与默认归属","fullTitle":"委托作品：合同优先与默认归属","intro":"老师反复说明委托与职务的判断规则不同；委托方付费并不必然取得著作权。","points":[{"text":"委托创作普通作品：合同约定归属。","note":"未明确约定或没有合同，归受托人。","priority":"frequent"},{"text":"委托开发软件：书面合同约定。","note":"无书面合同或合同未明确约定，归受托人。","priority":"frequent"},{"text":"获得交付物不等于取得全部著作权。","note":"","priority":""}],"source":"PDF 第3页下表、第4页上表；转写第4–7页","priority":"frequent","memory":"委托：有约定按有效约定，无约定归受托创作方。","visual":"table","table":{"headers":["合同情况","归属"],"rows":[["约定归委托方","委托方"],["约定归受托方","受托方"],["未明确约定","受托方"]]},"examples":[{"title":"情境：外包软件","given":"甲公司委托乙公司开发软件，合同没有明确著作权归属。","steps":["识别为委托开发而非劳动职务关系。","检查合同是否明确约定。","没有明确约定，采用受托方规则。"],"answer":"乙公司（受托方）享有软件著作权。"}]},{"id":"3:5","chapter":3,"index":5,"title":"合作创作与合作开发","fullTitle":"合作创作与合作开发","intro":"合作创作强调实际创作贡献。仅提供咨询、组织等辅助行为，不能直接成为合作作者。","points":[{"text":"没有参加创作的人不能成为合作作者。","note":"老师明确指出组织、咨询、物质条件等辅助工作不等于创作。","priority":"frequent"},{"text":"共同创作的作品由合作作者共同享有著作权。","note":"具体行使与收益分配看法律和约定。","priority":""},{"text":"可分割使用的成果，各自可以对自己的部分单独享有权利。","note":"不得侵害整体作品的著作权。","priority":""},{"text":"合作开发软件有书面约定按约定，未约定再按是否能分割使用判断。","note":"","priority":""}],"source":"PDF 第3页下表、第4页上表；转写第4–7页","priority":"","memory":"看真实创作，不是看参与人数；可分割再分别行权。","visual":"table","table":{"headers":["参与方式","判断"],"rows":[["仅组织、咨询、辅助","不当然成为合作作者"],["共同实质创作","共同享有"],["可独立分割的创作部分","可对各自部分行权"]]},"notice":"课件“按人头比例”不应理解为必须平均分配，具体权益依合同及法律规定。"},{"id":"3:6","chapter":3,"index":6,"title":"商标申请：申请在先、同日使用在先","fullTitle":"商标申请：申请在先、同日使用在先","intro":"老师强调“同时”就是同一天，不比较当天上午、下午。","points":[{"text":"同种或类似商品的相同或近似商标，通常申请在先。","note":"恶意抢注、在先权利等情形另有规定。","priority":"frequent"},{"text":"同一天申请：看使用在先，并提供证据。","note":"不能按小时比较。","priority":"frequent"},{"text":"同日使用或均未使用：可协商；不愿协商或协商不成，按实施条例抽签。","note":"确定一个申请人。","priority":"frequent"}],"source":"PDF 第3页下表、第4页上表；转写第4–7页","priority":"frequent","memory":"商标：申请先 → 同日看使用 → 协商 → 抽签。","visual":"table","table":{"headers":["判断顺序","规则"],"rows":[["不同日","申请在先"],["同日","使用在先"],["同日使用/均未用","协商"],["协商不成","抽签（现行实施条例）"]]},"notice":"此处适用截至2026-11-25的现行规则（商标法及实施条例第19条）。2027年后应核对配套规则。"},{"id":"3:7","chapter":3,"index":7,"title":"专利申请：申请权与专利权","fullTitle":"专利申请：申请权与专利权","intro":"独立完成同样发明的多方可能都有申请资格，但同样发明创造原则上只能授予一项专利权。","points":[{"text":"不同日提出申请：原则上申请在先。","note":"先完成不等于先获得专利。","priority":"frequent"},{"text":"同日申请同样发明创造：依法协商确定申请人。","note":"不像商标使用抽签。","priority":"frequent"},{"text":"未提出申请时，独立完成者可各有申请专利的权利。","note":"课件第5页阀门题重点区分申请权与专利权。","priority":"frequent"}],"source":"PDF 第3页下表、第4页上表；转写第4–7页","priority":"frequent","memory":"专利看申请先，不看完成先；同日协商不抽签。","visual":"table","table":{"headers":["概念","区别"],"rows":[["申请权","可以提交申请的权利"],["专利权","依法授权后取得"],["同日申请","协商确定申请人"]]},"examples":[{"title":"课件真题思路：阀门","given":"甲先完成、乙后完成，分别独立开发同样主题的阀门，两人尚未申请。","steps":["两人都是独立完成者。","完成先后不是专利授权的决定规则。","题目询问的是申请权，不是已授权的专利权。"],"answer":"甲乙均有专利申请权（课件第5页答案C）。"}]},{"id":"4:0","chapter":4,"index":0,"title":"著作权何时产生：发表与登记","fullTitle":"著作权何时产生：发表与登记","intro":"老师强调不论作品是否发表，都可以依法享有著作权。登记并非权利产生的必要条件。","points":[{"text":"中国公民、法人或非法人组织的作品不论是否发表，依法享有著作权。","note":"满足作品条件。","priority":"frequent"},{"text":"软件著作权自开发完成之日起产生。","note":"不是领取登记证书的日期。","priority":"frequent"},{"text":"登记可用于权属证明，未登记并不等于没有权利。","note":"","priority":""}],"source":"PDF 第4页下表、第5页真题；转写第7–8页","priority":"frequent","memory":"创作完成 ≠ 必须发表或登记。","visual":"table","table":{"headers":["事项","是否为权利产生的必需条件"],"rows":[["作品满足法定条件","是"],["公开发表","否"],["著作权登记","否"]]}},{"id":"4:1","chapter":4,"index":1,"title":"保护表达，不保护思想和通用内容","fullTitle":"保护表达，不保护思想和通用内容","intro":"课程将软件思想、处理过程、操作方法、数学概念，以及法定不适用著作权法的材料作为辨析点。","points":[{"text":"软件著作权不延及思想、处理过程、操作方法、数学概念。","note":"保护具体表达，不是思想本身。","priority":"frequent"},{"text":"法律法规、国家机关具有立法行政司法性质的文件及其官方正式译文不适用著作权法。","note":"不是所有政府发布的内容均无著作权。","priority":""},{"text":"单纯事实消息、历法、通用数表、通用表格、公式不适用。","note":"旧课件称时事新闻，现行法第5条使用“单纯事实消息”。","priority":""},{"text":"自行独立实现同一思想，不等于可以直接复制他人代码。","note":"","priority":""}],"source":"PDF 第4页下表、第5页真题；转写第7–8页","priority":"frequent","memory":"思想、方法、数学概念≠受软件著作权保护的表达。","visual":"table","table":{"headers":["对象","判断"],"rows":[["原创代码和文档表达","可能受保护"],["算法思想、数学概念","软件著作权不延及"],["法律法规及官方译文","法定不适用"],["原创新闻评论","不能仅以新闻为由否定著作权"]]}},{"id":"4:2","chapter":4,"index":2,"title":"合理使用：个人学习与适当引用","fullTitle":"合理使用：个人学习与适当引用","intro":"老师讲侵权判定时把个人学习、研究和适当引用放在“不侵权”一列。它们必须满足法定条件，不能一概而论。","points":[{"text":"为个人学习、研究、欣赏，使用已经发表的作品。","note":"符合规定时可不经许可、不付报酬。","priority":"frequent"},{"text":"为介绍评论作品或说明问题，适当引用已发表作品。","note":"不能把整篇照搬当成适当引用。","priority":"frequent"},{"text":"一般要求标明作者及作品名称，不影响正常使用，不不合理损害权利人权益。","note":"现行法第24条的共同边界。","priority":""},{"text":"查重比例不是合法与侵权的法定固定阈值。","note":"","priority":""}],"source":"PDF 第4页下表、第5页真题；转写第7–8页","priority":"frequent","memory":"合理使用不是“非商用就随便用”。","visual":"table","table":{"headers":["场景","判断要点"],"rows":[["个人学习","已发表、个人目的、法定边界"],["论文引用","说明问题、适量、署名标出处"],["完整复制后公开传播","不能简单套个人学习"]]},"notice":"这里是课程考点的条件化整理，不是对任一实际使用行为的法律结论。"},{"id":"4:3","chapter":4,"index":3,"title":"合理使用：教学、馆藏、公共场所等","fullTitle":"合理使用：教学、馆藏、公共场所等","intro":"课件第4页列出多种不侵权场景，结合现行法律明确使用目的和范围。","points":[{"text":"学校课堂教学或科研：已发表作品的少量复制等，供教学科研人员使用，不得出版发行。","note":"教学不等于任意传播。","priority":""},{"text":"馆藏复制：为陈列或保存版本而复制本馆收藏作品。","note":"特定机构和目的。","priority":""},{"text":"免费表演已发表作品：不向公众收费、不向表演者付报酬且不营利。","note":"需同时符合条件。","priority":""},{"text":"公共场所艺术作品的临摹、绘画、摄影、录像。","note":"按法定情形判断。","priority":""},{"text":"公众集会讲话的媒体刊播、少数民族语言翻译国内出版、阅读障碍者无障碍提供。","note":"各项均有具体适用条件，按第24条核对。","priority":""}],"source":"PDF 第4页下表、第5页真题；转写第7–8页","priority":"","memory":"课堂、馆藏、免费表演等都有限定条件。","visual":"table","table":{"headers":["课件关键词","必须看条件"],"rows":[["教学科研","少量、内部教学科研等，不出版发行"],["馆藏","陈列或保存本馆作品"],["免费表演","不收费、不付表演报酬、不营利"],["无障碍","阅读障碍者可感知方式"]]}},{"id":"4:4","chapter":4,"index":4,"title":"典型侵权行为：署名、复制、传播","fullTitle":"典型侵权行为：署名、复制、传播","intro":"课件的侵权表以未经许可发表、虚假署名、剽窃、歪曲篡改、不付报酬等为主。","points":[{"text":"未经许可发表他人作品。","note":"无适用法定例外时。","priority":"frequent"},{"text":"未参加创作而在他人作品上署名，或将合作作品当作个人独立创作发表。","note":"侵害作者权利。","priority":"frequent"},{"text":"剽窃、歪曲、篡改他人作品。","note":"结合具体权项及事实。","priority":"frequent"},{"text":"依法应支付报酬而未支付，或未经许可使用出版版式设计等。","note":"注意法定例外与许可范围。","priority":""},{"text":"未经许可向公众复制、发行或传播受保护内容，可能构成侵权。","note":"","priority":""}],"source":"PDF 第4页下表、第5页真题；转写第7–8页","priority":"frequent","memory":"看许可、法定例外、使用方式、署名与报酬义务。","visual":"table","table":{"headers":["行为","判断方向"],"rows":[["冒名署名","侵权风险"],["直接照抄代码公开销售","侵权风险"],["适当引用并符合合理使用","可能合法"],["获得明确许可且未超范围","通常可依法使用"]]}},{"id":"4:5","chapter":4,"index":5,"title":"正版软件光盘：所有权与使用权","fullTitle":"正版软件光盘：所有权与使用权","intro":"课件第5页真题：购买有注册商标的应用软件光盘，选项中取得的是该光盘的所有权。","points":[{"text":"购买合法实物载体可取得该载体的所有权。","note":"不等于取得知识产权。","priority":"frequent"},{"text":"不会因购买光盘自动取得注册商标专用权、软件著作权或一般复制发行权。","note":"老师明确辨析。","priority":"frequent"},{"text":"合法软件复制品所有人依法可以安装、必要备份，并在规定条件下必要修改。","note":"备份不得提供他人；修改后软件对外提供受限。","priority":""},{"text":"软件使用还受合法授权条款约束。","note":"","priority":""}],"source":"PDF 第4页下表、第5页真题；转写第7–8页","priority":"frequent","memory":"买光盘≠买著作权；合法使用不等于可任意传播。","visual":"table","table":{"headers":["权利","购买正版光盘后"],"rows":[["载体所有权","取得"],["软件著作权","不会自动取得"],["商标专用权","不会自动取得"],["合法安装／必要备份","按法定及许可条件行使"]]},"notice":"《计算机软件保护条例》第16条规定合法复制品所有人的有限备份等权利；课件“只有使用权，完全不能复制”是简化表达。"},{"id":"5:0","chapter":5,"index":0,"title":"标准的五种课程分类","fullTitle":"标准的五种课程分类","intro":"课件按制定机构和适用范围分为国际、国家、行业、区域/地方、企业五类。老师要求认识类型和编号即可。","points":[{"text":"国际标准：ISO、IEC、ITU 等。","note":"国际组织制定或确认的相关标准。","priority":"understand"},{"text":"国家标准：国家主管机构制定或批准发布。","note":"GB、GB/T 等。","priority":"frequent"},{"text":"行业标准：特定行业业务领域。","note":"如 GA、YD、QC。","priority":""},{"text":"区域/地方标准：如欧洲 EN、中国地方 DB。","note":"区域与地方是课程合并展示。","priority":""},{"text":"企业标准：企业根据生产经营等需要制定；Q 为企业标准代号。","note":"","priority":""},{"text":"现行中国标准化法还明确列出团体标准。","note":"","priority":""}],"source":"PDF 第6页；转写第8–10页","priority":"","memory":"课件五类；中国现行法有国、行、地、团、企。","visual":"table","table":{"headers":["分类","典型代号"],"rows":[["国际","ISO / IEC / ITU"],["国家","GB / GB/T / GB/Z"],["行业","GA / YD / QC"],["区域／地方","EN / DB"],["企业","Q"],["团体（现行国内法补充）","T/…"]]},"notice":"现行《标准化法》第2条列出国家、行业、地方、团体、企业标准；这是国内标准体系，与课件含国际及区域的分类视角不同。"},{"id":"5:1","chapter":5,"index":1,"title":"国际与区域标准：ISO、IEC、ITU、EN","fullTitle":"国际与区域标准：ISO、IEC、ITU、EN","intro":"老师建议看到 I 联想到 International；标准组织与标准代号要分清。","points":[{"text":"ISO：国际标准化组织。","note":"","priority":""},{"text":"IEC：国际电工委员会。","note":"","priority":""},{"text":"ITU：国际电信联盟。","note":"","priority":""},{"text":"EN：欧洲标准；不等于中国国家标准。","note":"","priority":""},{"text":"OSI参考模型与ISO有关；IEEE 802系列属于熟悉的网络标准实例。","note":"","priority":""}],"source":"PDF 第6页；转写第8–10页","priority":"","memory":"I 联想 International；EN 联想欧洲。","visual":"table","table":{"headers":["缩写","对应"],"rows":[["ISO","国际标准化组织"],["IEC","国际电工委员会"],["ITU","国际电信联盟"],["EN","欧洲标准"]]}},{"id":"5:2","chapter":5,"index":2,"title":"中国国家标准：GB、GB/T、GB/Z、GJB","fullTitle":"中国国家标准：GB、GB/T、GB/Z、GJB","intro":"本节是老师特别指出的标准化记忆重点。通过字母和拼音联想，快速区分强制、推荐和指导。","points":[{"text":"GB：强制性国家标准。","note":"国标。","priority":"frequent"},{"text":"GB/T：推荐性国家标准。","note":"老师记忆法：T＝推。","priority":"frequent"},{"text":"GB/Z：国家标准化指导性技术文件。","note":"老师记忆法：Z＝指导。","priority":"frequent"},{"text":"GJB：国家军用标准。","note":"国军标，不等同普通GB。","priority":""},{"text":"ANSI：美国国家标准学会，课程列为国外标准例子。","note":"","priority":""}],"source":"PDF 第6页；转写第8–10页","priority":"frequent","memory":"国标GB，杠推GB/T，杠指导GB/Z，国军标GJB。","visual":"table","table":{"headers":["代号","含义"],"rows":[["GB","强制性国家标准"],["GB/T","推荐性国家标准"],["GB/Z","国家标准化指导性技术文件"],["GJB","国家军用标准"],["ANSI","美国国家标准学会"]]}},{"id":"5:3","chapter":5,"index":3,"title":"行业、地方、企业与团体标准","fullTitle":"行业、地方、企业与团体标准","intro":"课件第6页列举行业、区域/地方与企业编号。课件企业例号与说明有一个序号笔误。","points":[{"text":"GA：公共安全行业标准；YD：通信行业标准；QC：汽车行业标准常见代号。","note":"课程列举GA、YD，老师补充QC。","priority":""},{"text":"IEEE：电气和电子工程师协会，802.3与802.11是网络课程熟悉的例子。","note":"课件将其放入行业例子，不等同中国法定行业标准。","priority":""},{"text":"DB：地方标准；Q：企业标准。","note":"老师用“地标”帮助记忆。","priority":"frequent"},{"text":"企业标准编号依次为企业标准代号、企业代号、顺序号、年代号。","note":"现行企业标准化促进办法规定Q。","priority":"frequent"},{"text":"团体标准是现行国内体系的一类，常见T/代号。","note":"","priority":""}],"source":"PDF 第6页；转写第8–10页","priority":"","memory":"行业GA/YD/QC，地方DB，企业Q。","visual":"table","table":{"headers":["代号","类别"],"rows":[["GA / YD / QC","行业"],["DB","地方"],["Q","企业"],["T/…","团体"]]},"notice":"课件例号 Q/320101 RER 007--2012，文字却写001为序号，按例号应为007。课堂对QC与企业标准的口头说法易混；QC是行业代号，企业标准代号为Q。"}],"quizzes":[{"chapter":1,"topic":"1:0","question":"知识产权的客体主要是什么？","options":["智力成果等无形对象","仅实物载体","所有物理设备","仅有形动产"],"answer":0,"explain":"知识产权客体与承载它的物理载体不同。"},{"chapter":1,"topic":"1:1","question":"各国保护范围和取得规则可能不同，体现什么属性？","options":["无体性","地域性","时间性","共享性"],"answer":1,"explain":"地域性关注不同法域的权利保护。"},{"chapter":1,"topic":"1:1","question":"下列哪项并非知识产权四大课程属性？","options":["时间性","专有性","无体性","并发性"],"answer":3,"explain":"四属性是无体、专有、地域、时间。"},{"chapter":2,"topic":"2:0","question":"下列权利哪一项可以依法反复续展？","options":["发明专利","注册商标","一般作品财产权","实用新型专利"],"answer":1,"explain":"注册商标每次续展10年。"},{"chapter":2,"topic":"2:1","question":"自然人普通作品的署名权保护期限？","options":["20年","50年","不受限制","10年"],"answer":2,"explain":"著作权法第22条。"},{"chapter":2,"topic":"2:1","question":"自然人作者2020年死亡，普通作品财产权一般截止何时？","options":["2070年12月31日","2070年1月1日","2020年12月31日","2050年12月31日"],"answer":0,"explain":"死后第50年的12月31日。"},{"chapter":2,"topic":"2:2","question":"按现行著作权法，法人作品发表权的50年起点？","options":["首次发表","创作完成","登记","单位注销"],"answer":1,"explain":"第23条区分发表权与财产权。"},{"chapter":2,"topic":"2:3","question":"自然人合作开发软件保护期一般以谁为准？","options":["最先死亡者","最早编写代码者","最后死亡者","最早登记者"],"answer":2,"explain":"以最后死亡的自然人死亡后50年计。"},{"chapter":2,"topic":"2:3","question":"软件著作权产生的时间通常是？","options":["登记完成","公开发表","软件开发完成","第一次销售"],"answer":2,"explain":"条例第14条。"},{"chapter":2,"topic":"2:4","question":"注册商标每次续展有效期是？","options":["5年","10年","15年","20年"],"answer":1,"explain":"每次续展10年。"},{"chapter":2,"topic":"2:4","question":"现行商标法正常续展办理窗口？","options":["期满前12个月","期满后12个月","期满前1个月","无任何期限"],"answer":0,"explain":"期满前12个月，另有6个月宽展。"},{"chapter":2,"topic":"2:5","question":"现行发明、实用新型、外观设计一般期限依次为？","options":["20/10/10年","20/10/15年","10/20/15年","50/10/20年"],"answer":1,"explain":"现行专利法第42条。"},{"chapter":2,"topic":"2:5","question":"三种专利的一般期限从哪一天起算？","options":["授权日","公开日","申请日","发明完成日"],"answer":2,"explain":"均从申请日起算。"},{"chapter":2,"topic":"2:6","question":"商业秘密保护期限的正确认识？","options":["固定10年","固定50年","固定20年","无统一固定期限"],"answer":3,"explain":"取决于法定秘密条件是否满足。"},{"chapter":3,"topic":"3:1","question":"一般普通职务作品（不属于特殊情形）著作权通常归谁？","options":["作者","单位一律享有","委托人","任何公众"],"answer":0,"explain":"一般职务作品归作者，单位有业务范围内优先使用权。"},{"chapter":3,"topic":"3:1","question":"法定特殊职务作品通常如何分配？","options":["全归作者","作者署名、其他著作权归单位","所有权利归公众","单位只享署名"],"answer":1,"explain":"第18条特殊职务作品规则。"},{"chapter":3,"topic":"3:2","question":"员工为公司明确指定的开发目标编写软件，软件著作权通常归？","options":["单位","客户一律享有","员工个人","无权利人"],"answer":0,"explain":"符合条例第13条。"},{"chapter":3,"topic":"3:3","question":"离职后一年内，哪类发明符合课件强调的职务发明情形？","options":["任何发明","与原岗位或原单位任务有关的发明","购买的商品","所有业余作品"],"answer":1,"explain":"时间和相关性须同时判断。"},{"chapter":3,"topic":"3:4","question":"甲委托乙开发软件，未明确约定著作权归属，通常归？","options":["甲","甲乙必然各半","乙","任何公众"],"answer":2,"explain":"委托软件无明确约定归受托人。"},{"chapter":3,"topic":"3:5","question":"仅组织会议、提供咨询但未参加创作的人，是否当然为合作作者？","options":["是","否","取决于年龄","只要付费就是"],"answer":1,"explain":"辅助行为不当然构成创作。"},{"chapter":3,"topic":"3:6","question":"同一天上午和下午申请冲突商标，首先看什么？","options":["上午先","注册资本","使用在先证据","抽签立即决定"],"answer":2,"explain":"同日申请先看使用在先。"},{"chapter":3,"topic":"3:6","question":"同日申请商标且均未使用，协商不成，现行实施条例的处理？","options":["比较谁先完成图案","抽签","同时授权","自动归第三人"],"answer":1,"explain":"依实施条例第19条抽签确定申请人。"},{"chapter":3,"topic":"3:7","question":"同样发明同日申请，通常通过什么确定申请人？","options":["抽签","比较上午下午","协商","比较销售量"],"answer":2,"explain":"专利同日申请协商，不适用商标抽签。"},{"chapter":3,"topic":"3:7","question":"甲乙独立开发同样发明，甲完成在先、均未申请。谁有申请权？","options":["仅甲","仅乙","甲乙均可","两者均无"],"answer":2,"explain":"申请权不等于最终授权；完成先后不决定申请权。"},{"chapter":4,"topic":"4:0","question":"原创作品必须登记后才产生著作权吗？","options":["必须","不必","仅登记网站后产生","仅销售后产生"],"answer":1,"explain":"不以登记为前提。"},{"chapter":4,"topic":"4:1","question":"软件著作权不延及哪项？","options":["原创源代码表达","原创说明文档表达","数学概念","程序的具体表达"],"answer":2,"explain":"条例第6条不延及数学概念等。"},{"chapter":4,"topic":"4:1","question":"下列哪类材料属于著作权法明确不适用的对象？","options":["原创小说","原创评论","原创程序","法律法规及其官方正式译文"],"answer":3,"explain":"法定不适用范围。"},{"chapter":4,"topic":"4:2","question":"哪项更符合合理使用的条件？","options":["完整复制课程对外出售","为说明问题适当引用已发表作品并注明出处且符合其他法定条件","非商用即可任意公开传播","删除原作者署名"],"answer":1,"explain":"适当引用需要满足法定条件。"},{"chapter":4,"topic":"4:3","question":"为学校课堂教学复制已发表作品时，哪项说法更准确？","options":["任何数量都可出售","只要课堂就可公开发行","须满足法定范围且不得出版发行","无需任何限制"],"answer":2,"explain":"第24条规定教学科研等有限使用。"},{"chapter":4,"topic":"4:4","question":"未参加创作却在他人作品上署名，属于哪种行为？","options":["合理使用","著作权到期","侵权风险行为","商标续展"],"answer":2,"explain":"虚假署名涉及著作权侵害。"},{"chapter":4,"topic":"4:5","question":"购买正版软件光盘直接取得哪项？","options":["该光盘所有权","软件著作权","注册商标专用权","任意复制发行权"],"answer":0,"explain":"载体所有权与知识产权不同。"},{"chapter":4,"topic":"4:5","question":"合法软件复制品所有人为防止损坏制作必要备份，能否任意提供给他人？","options":["能","不能","只要免费就能","只要联网就能"],"answer":1,"explain":"条例第16条明确限制提供给他人。"},{"chapter":5,"topic":"5:0","question":"按现行中国标准化法，哪类标准也是国内体系的一类？","options":["时序标准","团体标准","应用层标准","通信层标准"],"answer":1,"explain":"现行法列出国家、行业、地方、团体、企业标准。"},{"chapter":5,"topic":"5:1","question":"IEC 对应哪个组织？","options":["国际电工委员会","欧洲商标局","中国版权局","美国专利局"],"answer":0,"explain":"IEC 国际电工委员会。"},{"chapter":5,"topic":"5:1","question":"EN 通常表示什么？","options":["企业标准","欧洲标准","中国国标","军用标准"],"answer":1,"explain":"EN 是欧洲标准。"},{"chapter":5,"topic":"5:2","question":"GB/T 对应哪类？","options":["强制性国标","推荐性国家标准","企业标准","地方标准"],"answer":1,"explain":"老师记忆法：T=推。"},{"chapter":5,"topic":"5:2","question":"GB/Z 对应什么？","options":["国家标准化指导性技术文件","美国国家标准","通信行业标准","地方标准"],"answer":0,"explain":"Z 联想指导。"},{"chapter":5,"topic":"5:2","question":"GJB 对应？","options":["国家军用标准","国际电信联盟","欧洲标准","企业标准"],"answer":0,"explain":"GJB 是国军标。"},{"chapter":5,"topic":"5:3","question":"Q 为哪种标准的代号？","options":["国家标准","地方标准","企业标准","国际标准"],"answer":2,"explain":"企业标准代号为 Q。"},{"chapter":5,"topic":"5:3","question":"YD 常见于哪个行业标准？","options":["通信","公共安全","汽车","食品"],"answer":0,"explain":"YD 为通信行业标准代号。"},{"chapter":5,"topic":"5:3","question":"课件例号 Q/320101 RER 007--2012 中2012是？","options":["地区号","企业名称代号","标准顺序号","年代号"],"answer":3,"explain":"末尾表示年代号。"}]};
+const {chapters,lessons,quizzes}=DATA;
+const lessonMap=new Map(lessons.map(t=>[t.id,t]));
+const totalStudy=lessons.filter(t=>t.chapter>0).length;
+function load(key,def){try{const v=localStorage.getItem(key);return v?JSON.parse(v):def}catch(e){return def}}
+function save(key,value){try{localStorage.setItem(key,JSON.stringify(value))}catch(e){}}
+let mastery=load('sd_ip_v1_mastery',{});
+let savedLast=load('sd_ip_v1_last','1:0');
+let current=lessonMap.has(savedLast)?savedLast:'1:0';
+let view='home';let openedChap=1;let mapOpen=1;let focusOnly=load('sd_ip_v1_focus_only',false)===true;
+let quizState={scope:'all',items:[],index:0,picks:{},completed:false};
+const el=id=>document.getElementById(id);
+const esc=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
+function topicLabel(s){return esc(String(s).replace(/^[🔴🟠🔵]\s*/u,''))}
+function priority(t){if(t.priority)return t.priority;if(t.points.some(p=>p.priority==='must'))return 'must';if(t.points.some(p=>p.priority==='frequent'))return 'frequent';if(t.points.some(p=>p.priority==='understand'))return 'understand';return ''}
+function navPriorityLabel(pr){return pr==='must'?'<span class="nav-level must" title="必须掌握">必掌握</span>':pr==='frequent'?'<span class="nav-level frequent" title="重点 / 常考">常考</span>':''}
+function levelTag(pr){return pr==='must'?'<span class="pill must">必须掌握</span>':pr==='frequent'?'<span class="pill frequent">重点 / 常考</span>':pr==='understand'?'<span class="pill understand">了解即可</span>':''}
+function chapterDone(ci){let ids=chapters[ci].topicIds.filter(id=>ci!==0);return ids.filter(id=>mastery[id]===2).length}
+function masteredCount(){return lessons.filter(t=>t.chapter!==0 && mastery[t.id]===2).length}
+function setStatus(id,s){mastery[id]=s;save('sd_ip_v1_mastery',mastery);render();}
+function markNext(id){let s=mastery[id]||0;setStatus(id,(s+1)%3)}
+function openLesson(id){if(!lessonMap.has(id))return;current=id;openedChap=lessonMap.get(id).chapter;save('sd_ip_v1_last',id);setView('read')}
+function setView(v){view=v;render();el('contentShell').scrollTop=0;hideMobile()}
+function hideMobile(){el('sidebar').classList.remove('open');el('scrim').classList.remove('open')}
+function chapNav(ci){openedChap=ci;openLesson(chapters[ci].topicIds[0])}
+function renderSidebar(){
+ const mustN=lessons.filter(t=>t.chapter>0&&priority(t)==='must').length;
+ const freqN=lessons.filter(t=>t.chapter>0&&priority(t)==='frequent').length;
+ el('sideCount').textContent=`${chapters.length} 个分支`;
+ el('mustCount').textContent=mustN;el('frequentCount').textContent=freqN;
+ el('focusToggle').setAttribute('aria-pressed',String(focusOnly));
+ el('focusToggle').title=focusOnly?'显示全部知识主题':'只显示必须掌握和重点 / 常考的主题';
+ el('navList').innerHTML=chapters.map(c=>{
+  const hotIds=c.topicIds.filter(id=>{const p=priority(lessonMap.get(id));return p==='must'||p==='frequent'});
+  const visibleIds=focusOnly&&c.id!==0?hotIds:c.topicIds;
+  const sub=visibleIds.map(id=>{
+   const t=lessonMap.get(id),pr=priority(t),done=mastery[id]===2;
+   return `<button data-lesson="${id}" class="${current===id&&view==='read'?'selected':''} ${done?'complete':''} ${pr==='must'||pr==='frequent'?'nav-pr-'+pr:''}" title="${esc(t.title)}${pr==='must'?' · 必须掌握':pr==='frequent'?' · 重点 / 常考':''}"><span class="nav-topic-title">${esc(t.title)}</span>${navPriorityLabel(pr)}${done?'<span class="nav-done" title="已掌握">✓</span>':''}</button>`;
+  }).join('');
+  return `<div class="nav-group"><button class="chap-button ${(view==='read'&&openedChap===c.id)?'active':''}" data-chapter="${c.id}" aria-expanded="${openedChap===c.id}"><span class="chap-num">${c.number}</span><span>${esc(c.name)}</span>${hotIds.length?`<span class="chap-focus-count" title="本章 ${hotIds.length} 个重点主题">★${hotIds.length}</span>`:''}<span class="chap-chevron">${openedChap===c.id?'⌄':'›'}</span></button>${openedChap===c.id?`<div class="subnav">${sub||'<div class="nav-empty">本章暂无重点主题</div>'}</div>`:''}</div>`;
+ }).join('');
+ const n=masteredCount();el('sideProgress').textContent=`${n} / ${totalStudy}`;el('sideProgressBar').style.width=(n/totalStudy*100).toFixed(1)+'%';
+}
+
+function renderHome(){el('topTitle').textContent='知识产权与标准化 · 学习首页';let n=masteredCount();
+ let priorityTopics=lessons.filter(t=>t.chapter>0&&priority(t)==='must').length;
+ return `<section class="hero"><div class="kicker">2026 · SOFTWARE DESIGNER</div><h1>把精讲课件，变成真正能复习的知识体系。</h1><p>这是软件设计师第六部分「知识产权与标准化」的完整离线复习知识库。先用对照表记住保护期限、权利归属和侵权判断，再通过脑图、速记与情境题巩固。</p><div class="hero-actions"><button class="small-button primary" data-lesson="${current}">▶ ${n?'继续学习':'开始学习'}</button><button class="small-button" data-view="map">查看知识脑图</button><button class="small-button" data-view="quiz">开始随堂练习</button></div></section><div class="statbar"><div class="stat"><b>5 <small>+ 考试定位</small></b><small>内容章节</small></div><div class="stat"><b>${totalStudy}</b><small>精讲知识主题</small></div><div class="stat"><b>${n} <small>/ ${totalStudy}</small></b><small>已掌握主题</small></div></div><div class="section-label"><h2>章节学习路线</h2><p>按老师课程顺序组织，以课件及转写为主，法规核对单独注明</p></div><div class="chap-grid">${chapters.map(c=>{let cnt=c.topicIds.length,done=chapterDone(c.id);let lead=lessonMap.get(c.topicIds[0]);return `<article class="chap-card"><div class="num">CHAPTER ${c.number}</div><h3>${esc(c.name)}</h3><p>${esc(lead.intro)}</p><div class="bar"><i style="width:${done/Math.max(1,cnt)*100}%"></i></div><div class="foot"><span>${cnt} 个主题 ${c.id>0?`· 已掌握 ${done}`:''}</span><button data-lesson="${c.topicIds[0]}">进入章节 ↗</button></div></article>`}).join('')}</div><div class="card"><h2>这份资料怎么用？</h2><div class="d-grid three"><div class="d-chip"><b>01 · 首次学习</b>打开「图文精讲」，先看概念、对比图和典型判断题，再掌握易混结论。</div><div class="d-chip"><b>02 · 复习回顾</b>打开「知识脑图」，沿分支回忆概念；不熟悉的知识点点击返回精讲。</div><div class="d-chip"><b>03 · 考前冲刺</b>使用「考前速记」和「随堂练习」快速巩固，标记已掌握主题。</div></div><p class="tiny" style="margin-top:15px">说明：教师的“常考/了解/必须掌握”来自课程讲解，属于授课侧重点；并非官方考试大纲中的固定权重。练习题为依据资料编写的自测题，不冒充原题。</p></div>`;
+}
+function renderPoints(t){return `<div class="point-list">${t.points.map(p=>{let pr=p.priority||'';return `<div class="point ${pr}"><span class="point-marker"></span><div><div class="ptext">${topicLabel(p.text)}</div>${p.note?`<div class="pnote">${esc(p.note)}</div>`:''}</div></div>`}).join('')}</div>`}
+function renderExample(t){if(!t.examples?.length)return '';return `<section class="card"><h2>🧩 典型题与解题步骤</h2>${t.examples.map(ex=>`<div class="example"><h3>${esc(ex.title)}</h3><div class="given"><b>已知：</b>${esc(ex.given)}</div>${ex.steps.map((step,i)=>`<div class="step"><span class="step-num">${i+1}</span><div>${esc(step)}</div></div>`).join('')}<div class="answer">结果：${esc(ex.answer)}</div>${ex.warning?`<div class="notice">⚠ ${esc(ex.warning)}</div>`:''}</div>`).join('')}</section>`}
+function renderRead(){const t=lessonMap.get(current);const c=chapters[t.chapter];let same=c.topicIds;let ci=same.indexOf(current),ix=lessons.findIndex(q=>q.id===current),prev=lessons[ix-1],next=lessons[ix+1];let s=mastery[current]||0;el('topTitle').textContent=`${c.name} · 图文精讲`;
+ return `<div class="crumb"><button data-view="home" style="border:0;background:none;color:#73879a;cursor:pointer;padding:0">学习首页</button> / ${esc(c.name)} / 第 ${ci+1} 节</div><div class="title-row"><div><div class="kicker">CHAPTER ${c.number} / SECTION ${String(ci+1).padStart(2,'0')}</div><h1 class="big-title">${esc(t.title)}</h1><div class="smalltags">${levelTag(priority(t))}<span class="pill">${esc(c.name)}</span><span class="pill">${s===2?'✓ 已掌握':s===1?'复习中':'未标记'}</span></div></div><button class="small-button ${s===2?'done':''}" data-master="${current}">${s===2?'✓ 已掌握 · 重置':s===1?'◐ 复习中 · 标记掌握':'○ 未学习 · 标记复习中'}</button></div><div class="topic-jump">${same.map((id,j)=>`<button class="${id===current?'current':''}" data-lesson="${id}">${j+1}. ${esc(lessonMap.get(id).title)}</button>`).join('')}</div><section class="intro-card"><div class="head">📘 先理解这一点</div><p>${esc(t.intro)}</p></section>${renderDiagram(t)}<section class="card"><h2>关键知识与老师强调的考点</h2>${renderPoints(t)}<div class="source">📎 资料来源：${esc(t.source)}。条目主要依据课件与授课转写整理，少量内容做了便于阅读的归纳，并明确标注课程旧说法的适用边界。</div></section>${renderExample(t)}${renderExtra(t)}<section class="card"><h2>一分钟回忆</h2><p style="font-size:15px;font-weight:700;color:#275b94;margin:0 0 12px">${esc(t.memory||t.points.slice(0,2).map(p=>p.text).join('；'))}</p><p class="tiny" style="margin:0">先遮住答案，试着用自己的话复述本节知识。能独立说清楚，再标记为「已掌握」。</p></section><div class="lesson-footer"><button class="small-button" ${!prev?'disabled':''} ${prev?`data-lesson="${prev.id}"`:''}>← 上一个主题</button><div class="lesson-footer-actions" style="display:flex;gap:8px;flex-wrap:wrap"><button class="small-button" data-quiztopic="${current}">练习本章节题目</button><button class="small-button primary" ${!next?'disabled':''} ${next?`data-lesson="${next.id}"`:''}>下一个主题 →</button></div></div>`
+}
+function renderExtra(t){return (t.notice?`<div class="notice"><strong>📌 课程口径 / 现行法规核对：</strong>${esc(t.notice)}</div>`:'')+(t.id==='0:1'?"<section class=\"card\"><h2>法规核对来源（2026-11-25）</h2><p>以下官方来源供联网时核对，离线学习不依赖这些链接。</p><div class=\"point-list\"><a class=\"point\" style=\"color:var(--accent);text-decoration:none\" href=\"https://www.ncac.gov.cn/xxfb/flfg/flfg_532/202103/t20210309_50530.html\" target=\"_blank\" rel=\"noopener noreferrer\">著作权法（2020年修正） ↗</a><a class=\"point\" style=\"color:var(--accent);text-decoration:none\" href=\"https://ipc.court.gov.cn/zh-cn/news/view-407.html\" target=\"_blank\" rel=\"noopener noreferrer\">计算机软件保护条例 ↗</a><a class=\"point\" style=\"color:var(--accent);text-decoration:none\" href=\"https://www.cnipa.gov.cn/art/2020/11/23/art_524_171347.html\" target=\"_blank\" rel=\"noopener noreferrer\">专利法（2020年修正） ↗</a><a class=\"point\" style=\"color:var(--accent);text-decoration:none\" href=\"https://www.cnipa.gov.cn/art/2023/12/21/art_98_189197.html\" target=\"_blank\" rel=\"noopener noreferrer\">专利法实施细则（2023年修订） ↗</a><a class=\"point\" style=\"color:var(--accent);text-decoration:none\" href=\"https://www.samr.gov.cn/zfjcj/tzgg/art/2023/art_cd64845f4ca1434b9f793ef14174f189.html\" target=\"_blank\" rel=\"noopener noreferrer\">商标法（现行2019修正） ↗</a><a class=\"point\" style=\"color:var(--accent);text-decoration:none\" href=\"https://www.samr.gov.cn/zfjcj/tzgg/art/2023/art_ded7a0639f184377ba7b515cb0358db2.html\" target=\"_blank\" rel=\"noopener noreferrer\">商标法实施条例 ↗</a><a class=\"point\" style=\"color:var(--accent);text-decoration:none\" href=\"https://www.cnipa.gov.cn/art/2026/6/26/art_95_206942.html\" target=\"_blank\" rel=\"noopener noreferrer\">商标法（2026修订，2027年施行） ↗</a><a class=\"point\" style=\"color:var(--accent);text-decoration:none\" href=\"https://www.cnipa.gov.cn/art/2019/7/29/art_1391_91781.html\" target=\"_blank\" rel=\"noopener noreferrer\">标准化法 ↗</a><a class=\"point\" style=\"color:var(--accent);text-decoration:none\" href=\"https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2023/art_cd0ac0e159904c65b60c67edf9719c10.html\" target=\"_blank\" rel=\"noopener noreferrer\">企业标准化促进办法 ↗</a></div></section>":'')}
+function renderDiagram(t){if(!t.table)return '';return `<section class="card"><h2>知识对照表</h2><div class="diagram"><div class="sec-table-scroll" style="overflow-x:auto;max-width:100%"><table class="mini-table"><thead><tr>${t.table.headers.map(x=>`<th>${esc(x)}</th>`).join('')}</tr></thead><tbody>${t.table.rows.map(r=>`<tr>${r.map(x=>`<td>${esc(x)}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div></section>`}
+function renderMap(){el('topTitle').textContent='知识产权与标准化 · 知识脑图';return `<div class="kicker">KNOWLEDGE MAP</div><h1 class="big-title">一张图，看懂整章知识结构</h1><p class="lede">按章节展开知识分支。点击右侧主题可以直接跳转到图文精讲；再次点击已展开的章节可以收起。</p><div class="map-root">知识产权与标准化 <span style="font-size:12px;margin-left:13px;opacity:.7;align-self:center">5 组知识主题 · 1 份考试定位</span></div><div class="map-rail">${chapters.map(c=>`<div class="map-branch"><button class="map-chap ${mapOpen===c.id?'on':''}" data-mapchap="${c.id}"><span>${c.number} · ${esc(c.name)}</span><b>${mapOpen===c.id?'−':'+'}</b></button><div class="map-topics">${mapOpen===c.id?c.topicIds.map(id=>{let t=lessonMap.get(id);return `<button class="map-topic" data-lesson="${id}"><b>${esc(t.title)}</b><small>${t.points.length} 个知识条目 · 查看精讲 ↗</small><div class="map-details">${t.points.slice(0,3).map(p=>`<span>• ${topicLabel(p.text)}</span>`).join('')}${t.points.length>3?`<span>… 及其他 ${t.points.length-3} 项</span>`:''}</div></button>`}).join(''):`<div style="color:#92a1b0;font-size:12px;padding:13px">${c.topicIds.length} 个子主题 · 点击左侧展开</div>`}</div></div>`).join('')}</div>`}
+function renderQuick(){el('topTitle').textContent='知识产权与标准化 · 考前速记';
+ const rules=[["四属性", "无体、专有、地域、时间", "1:1"], ["普通作品人身权", "署名、修改、保护完整：不受限", "2:1"], ["自然人期限", "终生＋死后50年，年底截止", "2:1"], ["商标", "10年可续，期满前12个月＋6个月宽展", "2:4"], ["专利（现行）", "发明20／实用10／外观15年", "2:5"], ["普通职务作品", "一般归作者，特殊归单位（作者署名）", "3:1"], ["职务软件", "指定目标、自然结果、主要资源且单位担责", "3:2"], ["职务发明", "离职后1年内＋原工作相关", "3:3"], ["委托", "无明确约定归受托方", "3:4"], ["商标与专利", "商标同日看使用；专利同日协商", "3:6"], ["侵权判断", "许可、合理使用边界、署名和传播", "4:2"], ["国标代号", "GB 强制、GB/T 推荐、GB/Z 指导、GJB 军用", "5:2"]];
+ return `<div class="kicker">QUICK RECALL</div><h1 class="big-title">考前速记 · 核心概念与易混对照</h1><p class="lede">这章以权利期限、归属、侵权与标准编号为主。建议先遮住答案自测，再点击跳回精讲。</p><div class="section-label"><h2>12 条高效判题规则</h2><p>按课件与老师重点整理；现行法规核对另行标明</p></div><div class="qgrid">${rules.map(x=>`<article class="card" style="margin:0"><h3 style="margin:0 0 8px">${x[0]}</h3><div class="formula">${x[1]}</div><button class="small-button tinted" style="margin-top:13px" data-lesson="${x[2]}">查看精讲 ↗</button></article>`).join('')}</div>${chapters.slice(1).map(c=>`<div class="section-label"><h2>${c.number} · ${esc(c.name)}</h2><p>${c.topicIds.length} 个主题</p></div><div class="qgrid">${c.topicIds.map(id=>{let t=lessonMap.get(id);return `<article class="quick-card"><div class="qtag">${esc(c.name)} ${levelTag(priority(t))}</div><h3>${esc(t.title)}</h3><p>${esc(t.memory||t.points.slice(0,2).map(p=>p.text).join('；'))}</p><button data-lesson="${id}">完整精讲 ↗</button></article>`}).join('')}</div>`).join('')}`;
+}
+function getQuizItems(scope){return quizzes.map((q,i)=>({...q,key:i})).filter(q=>scope==='all'||q.chapter===Number(scope)||scope==='wrong'&&load('sd_ip_v1_wrong',[]).includes(q.key));}
+function startQuiz(scope){quizState={scope,items:getQuizItems(scope),index:0,picks:{},completed:false};setView('quiz')}
+function chooseQuiz(idx){const item=quizState.items[quizState.index];if(quizState.picks[item.key]!==undefined)return;quizState.picks[item.key]=idx;render()}
+function nextQuiz(){quizState.index++;if(quizState.index>=quizState.items.length){quizState.completed=true;const errors=quizState.items.filter(q=>quizState.picks[q.key]!==q.answer).map(q=>q.key);let old=new Set(load('sd_ip_v1_wrong',[]));for(let q of quizState.items)old.delete(q.key);for(let k of errors)old.add(k);save('sd_ip_v1_wrong',[...old]);}render();el('contentShell').scrollTop=0}
+function renderQuiz(){el('topTitle').textContent='知识产权与标准化 · 随堂练习';if(!quizState.items.length&&!quizState.completed){quizState.items=getQuizItems(quizState.scope)}let qs=quizState.items,idx=quizState.index;
+ let filters=`<div class="quiz-filter"><button data-quizscope="all" class="${quizState.scope==='all'?'chosen':''}">全章 · ${quizzes.length} 题</button>${chapters.slice(1).map(c=>`<button data-quizscope="${c.id}" class="${quizState.scope===String(c.id)?'chosen':''}">${c.number} ${esc(c.name)} · ${getQuizItems(String(c.id)).length} 题</button>`).join('')}<button data-quizscope="wrong" class="${quizState.scope==='wrong'?'chosen':''}">错题重练 · ${getQuizItems('wrong').length} 题</button></div>`;
+ if(!qs.length)return `<div class="kicker">PRACTICE</div><h1 class="big-title">随堂练习</h1><p class="lede">本组暂无试题或尚未产生错题。选择其他章节继续练习。</p>${filters}`;
+ if(quizState.completed){let score=qs.filter(q=>quizState.picks[q.key]===q.answer).length;return `<div class="kicker">PRACTICE RESULT</div><h1 class="big-title">练习完成</h1><div class="score-card"><div class="huge">${Math.round(score/qs.length*100)}<small style="font-size:20px">分</small></div><h2>${score} / ${qs.length} 题正确</h2><p>${qs.length-score===0?'这组知识点都答对了，可以去精讲中继续学习其他内容。':`有 ${qs.length-score} 道题答错，错题会保存在当前浏览器中，可以单独重练。`}</p><button class="small-button primary" data-quizscope="${quizState.scope}">再做一遍</button><button class="small-button" data-quizscope="wrong">重练错题</button><button class="small-button" data-view="quick">查看考前速记</button></div>${filters}`;}
+ let q=qs[idx],pick=quizState.picks[q.key],answered=pick!==undefined,chapter=chapters[q.chapter];return `<div class="kicker">PRACTICE / SELF TEST</div><h1 class="big-title">随堂练习</h1><p class="lede" style="margin-bottom:11px">按课程内容编写的自测题（非历年真题原文），答题后立即展示正确答案和解析。</p>${filters}<div class="quiz-wrap"><div class="quiz-top"><span class="tiny">${esc(chapter.name)} · 第 ${idx+1} / ${qs.length} 题</span><div class="quiz-progress"><i style="width:${idx/qs.length*100}%"></i></div><b style="font-size:12px;color:#6e8192">${Math.round(idx/qs.length*100)}%</b></div><div class="quiz-card"><span class="pill">单选题</span><h2>${esc(q.question)}</h2><div class="options">${q.options.map((o,j)=>`<button class="option ${answered&&j===q.answer?'correct':''} ${answered&&pick===j&&j!==q.answer?'incorrect':''} ${answered&&pick===j?'selected':''}" data-option="${j}" ${answered?'disabled':''}><i>${'ABCD'[j]}.</i><span>${esc(o)}</span></button>`).join('')}</div>${answered?`<div class="explain"><strong>${pick===q.answer?'✓ 回答正确':'✕ 回答错误'} · 正确答案 ${'ABCD'[q.answer]}</strong><div style="margin-top:5px">${esc(q.explain)}</div><div style="margin-top:10px"><button class="small-button tinted" data-lesson="${q.topic}">返回对应知识点 ↗</button></div></div>`:''}<div class="quiz-bottom"><span class="tiny">请先选择一个答案</span><button class="small-button primary" data-nextquestion ${!answered?'disabled':''}>${idx===qs.length-1?'查看成绩':'下一题 →'}</button></div></div></div>`;}
+function renderRail(){if(view!=='read')return '';let t=lessonMap.get(current),c=chapters[t.chapter];return `<div class="rail-card"><h3>本章目录 · ${c.number}</h3>${c.topicIds.map((id,i)=>`<button class="rail-topic ${id===current?'current':''}" data-lesson="${id}">${String(i+1).padStart(2,'0')} · ${esc(lessonMap.get(id).title)} ${mastery[id]===2?'✓':''}</button>`).join('')}<div class="rail-memory"><strong>本节一句话</strong><p>${esc(t.memory||t.points[0]?.text||'')}</p><div class="tiny">${esc(t.source)}</div></div></div>`}
+function render(){renderSidebar();document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===view));const main=el('mainContent');main.className='content '+(view==='read'?'reading':'');main.innerHTML=({home:renderHome,read:renderRead,map:renderMap,quick:renderQuick,quiz:renderQuiz}[view]||renderHome)();const shell=el('contentShell');shell.classList.toggle('withrail',view==='read');el('rightRail').innerHTML=renderRail()}
+function openSearch(){el('searchOverlay').classList.remove('hidden');el('searchInput').focus();searchResults('')}
+function closeSearch(){el('searchOverlay').classList.add('hidden')}
+function searchResults(term){
+ term=term.trim().toLowerCase();
+ let hits=term?lessons.filter(t=>(t.title+' '+t.intro+' '+t.points.map(p=>p.text+' '+p.note).join(' ')).toLowerCase().includes(term)):lessons.filter(t=>t.chapter>0&&priority(t)==='must').slice(0,8);
+ if(term)hits.sort((a,b)=>{const score=t=>{let name=t.title.toLowerCase();return name===term?0:name.startsWith(term)?1:name.includes(term)?2:3};return score(a)-score(b) || a.chapter-b.chapter || a.index-b.index});
+ let n=hits.length;hits=hits.slice(0,25);
+ el('searchResults').innerHTML=`<div class="tiny">${term?`匹配 ${n} 个知识主题`:'建议重点内容'}</div>`+hits.map(t=>`<button class="sr" data-searchlesson="${t.id}"><strong>${esc(t.title)}</strong><small>${esc(chapters[t.chapter].name)} · ${esc(t.intro.slice(0,66))}…</small></button>`).join('')+(hits.length?'':'<div class="tiny">没有匹配结果，试试其他关键词。</div>');
+}
+document.body.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ if(b.id==='focusToggle'){focusOnly=!focusOnly;save('sd_ip_v1_focus_only',focusOnly);renderSidebar();return}
+ if(b.dataset.view){setView(b.dataset.view);return}
+ if(b.dataset.tab){setView(b.dataset.tab);return}
+ if(b.dataset.chapter!==undefined){let ci=+b.dataset.chapter;if(openedChap===ci){openedChap=-1;renderSidebar()}else{openedChap=ci;renderSidebar()}return}
+ if(b.dataset.lesson){openLesson(b.dataset.lesson);return}
+ if(b.dataset.master){markNext(b.dataset.master);return}
+ if(b.dataset.mapchap!==undefined){let ci=+b.dataset.mapchap;mapOpen=mapOpen===ci?-1:ci;render();return}
+ if(b.dataset.quizscope){startQuiz(b.dataset.quizscope);return}
+ if(b.dataset.quiztopic){const t=lessonMap.get(b.dataset.quiztopic);quizState={scope:String(t.chapter),items:getQuizItems(String(t.chapter)),index:0,picks:{},completed:false};setView('quiz');return}
+ if(b.dataset.option!==undefined){chooseQuiz(+b.dataset.option);return}
+ if(b.hasAttribute('data-nextquestion')){nextQuiz();return}
+ if(b.dataset.searchlesson){closeSearch();openLesson(b.dataset.searchlesson);return}
+});
+el('menuBtn').onclick=()=>{el('sidebar').classList.add('open');el('scrim').classList.add('open')};el('scrim').onclick=hideMobile;
+function refreshThemeButton(){const dark=document.documentElement.dataset.theme==='dark',b=el('themeBtn');b.setAttribute('aria-pressed',String(dark));b.setAttribute('aria-label',dark?'切换为日间模式':'切换为夜间模式');b.title=dark?'切换为日间模式':'切换为夜间模式'}
+el('themeBtn').onclick=()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;save('sd_ip_v1_theme',next);refreshThemeButton()};refreshThemeButton();
+el('searchBtn').onclick=openSearch;el('searchClose').onclick=closeSearch;el('searchInput').oninput=e=>searchResults(e.target.value);
+el('searchOverlay').addEventListener('click',e=>{if(e.target===el('searchOverlay'))closeSearch()});
+window.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSearch();hideMobile()}if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openSearch()}});
+render();
+</script></body></html>
